@@ -43,5 +43,46 @@ void GameMenu::initializeMenu() {
     Chef* chef = Chef::create();
     chef->setPosition(Vec2(chef->getPosition().x + 50, 315)); //TODO: remove x position
     this->addChild(chef, 0);
+    
+    //TODO: move to seporate component
+    conveyorNode = ParallaxNode::create(); //1
+    this->addChild(conveyorNode, 1);
+    
+    visibleSize = Director::getInstance()->getVisibleSize();
+    origin = Director::getInstance()->getVisibleOrigin();
+    
+    Vec2 speed = Vec2(0.05, 0.05);
+    conveyor1 = Sprite::createWithSpriteFrameName("conveyer_1.png");
+    conveyor2 = Sprite::createWithSpriteFrameName("conveyer_1.png");
+    
+    conveyorNode->addChild(conveyor1, 0, speed, Vec2(0, 316-conveyor1->getContentSize().height/2));
+    conveyorNode->addChild(conveyor2, 0, speed, Vec2(conveyor2->getContentSize().width - 1, 316-conveyor2->getContentSize().height/2));
 
+    this->scheduleUpdate();
+}
+
+void GameMenu::update(float dt) {
+    Vec2 pos1 = conveyor1->getPosition();
+    Vec2 pos2 = conveyor2->getPosition();
+    
+    pos1.x -= 5.0f;
+    pos2.x -= 5.0f;
+    
+    
+    
+    if(pos1.x <=-(visibleSize.width*0.5f) )
+    {
+        pos1.x = pos2.x + visibleSize.width;
+    }
+    
+    if(pos2.x <=-(visibleSize.width*0.5f) )
+    {
+        pos2.x = pos1.x + visibleSize.width;
+    }
+    
+    conveyor1->setPosition(pos1);
+    conveyor2->setPosition(pos2);
+    
+    //Vec2 backgroundScrollVert = Vec2(-100, 0);
+    //conveyorNode->setPosition(conveyorNode->getPosition() + backgroundScrollVert *dt);
 }
