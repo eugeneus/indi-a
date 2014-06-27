@@ -18,7 +18,6 @@
 		1AC6FB31180E99EB004C840B /* libcocos2dx-extensions iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB09180E9839004C840B /* libcocos2dx-extensions iOS.a */; };
 		1AC6FB32180E99EB004C840B /* libCocosDenshion iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB0F180E9839004C840B /* libCocosDenshion iOS.a */; };
 		1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */; };
-		1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */; };
 		1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B916D35E4900DB1158 /* CloseNormal.png */; };
 		1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */; };
 		1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */; };
@@ -36,7 +35,6 @@
 		5087E75417EB910900C73F5D /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */; };
 		5087E75517EB910900C73F5D /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */; };
 		5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */; };
-		5087E75817EB910900C73F5D /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */; };
 		5087E76317EB910900C73F5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		5087E76517EB910900C73F5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		5087E76717EB910900C73F5D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -62,6 +60,21 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		AA96A1FB195DB09200C22BC9 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = AA96A1FA195DB09200C22BC9 /* images.png */; };
+		AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */; };
+		AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A204195DB16C00C22BC9 /* SlidingMenuItem.cpp */; };
+		AA96A21C195DB16C00C22BC9 /* SlidingMenuLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A206195DB16C00C22BC9 /* SlidingMenuLayer.cpp */; };
+		AA96A21D195DB16C00C22BC9 /* BaseMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A209195DB16C00C22BC9 /* BaseMenu.cpp */; };
+		AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A20C195DB16C00C22BC9 /* SelectGameLayer.cpp */; };
+		AA96A21F195DB16C00C22BC9 /* GameSelectMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A20E195DB16C00C22BC9 /* GameSelectMenu.cpp */; };
+		AA96A220195DB16C00C22BC9 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A211195DB16C00C22BC9 /* MainMenu.cpp */; };
+		AA96A221195DB16C00C22BC9 /* MainMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A213195DB16C00C22BC9 /* MainMenuPopup.cpp */; };
+		AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A216195DB16C00C22BC9 /* OptionsMenu.cpp */; };
+		AA96A223195DB16C00C22BC9 /* SimpleMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A218195DB16C00C22BC9 /* SimpleMenu.cpp */; };
+		AA96A225195DB25500C22BC9 /* images.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA96A224195DB25500C22BC9 /* images.plist */; };
+		AA96A228195DB52800C22BC9 /* GameMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A226195DB52800C22BC9 /* GameMenu.cpp */; };
+		AA96A22C195DB76F00C22BC9 /* Spritable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A22A195DB76F00C22BC9 /* Spritable.cpp */; };
+		AA96A230195DC39600C22BC9 /* Chef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A22E195DC39600C22BC9 /* Chef.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -107,20 +120,6 @@
 			remoteGlobalIDString = A03F2ED617814268006731B9;
 			remoteInfo = "CocosDenshion Mac";
 		};
-		1AC6FB02180E9839004C840B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A03F31FD1781479B006731B9;
-			remoteInfo = "jsbindings Mac";
-		};
-		1AC6FB04180E9839004C840B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1A6FB53017854BC300CDF010;
-			remoteInfo = "luabindings Mac";
-		};
 		1AC6FB06180E9839004C840B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
@@ -155,20 +154,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = A07A4FB4178387730073F6A7;
 			remoteInfo = "CocosDenshion iOS";
-		};
-		1AC6FB10180E9839004C840B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A07A5030178387750073F6A7;
-			remoteInfo = "jsbindings iOS";
-		};
-		1AC6FB12180E9839004C840B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1A119791178526AA00D62A44;
-			remoteInfo = "luabindings iOS";
 		};
 		1AC6FB15180E9959004C840B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -247,8 +232,6 @@
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		1AFAF8B416D35DE700DB1158 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
-		1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorldScene.cpp; path = ../Classes/HelloWorldScene.cpp; sourceTree = "<group>"; };
-		1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = ../Classes/HelloWorldScene.h; sourceTree = "<group>"; };
 		1AFAF8B916D35E4900DB1158 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
 		1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
@@ -288,6 +271,34 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		AA96A1FA195DB09200C22BC9 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
+		AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlidingMenuDto.cpp; sourceTree = "<group>"; };
+		AA96A203195DB16C00C22BC9 /* SlidingMenuDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuDto.h; sourceTree = "<group>"; };
+		AA96A204195DB16C00C22BC9 /* SlidingMenuItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlidingMenuItem.cpp; sourceTree = "<group>"; };
+		AA96A205195DB16C00C22BC9 /* SlidingMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuItem.h; sourceTree = "<group>"; };
+		AA96A206195DB16C00C22BC9 /* SlidingMenuLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlidingMenuLayer.cpp; sourceTree = "<group>"; };
+		AA96A207195DB16C00C22BC9 /* SlidingMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuLayer.h; sourceTree = "<group>"; };
+		AA96A209195DB16C00C22BC9 /* BaseMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseMenu.cpp; sourceTree = "<group>"; };
+		AA96A20A195DB16C00C22BC9 /* BaseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMenu.h; sourceTree = "<group>"; };
+		AA96A20C195DB16C00C22BC9 /* SelectGameLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SelectGameLayer.cpp; sourceTree = "<group>"; };
+		AA96A20D195DB16C00C22BC9 /* SelectGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectGameLayer.h; sourceTree = "<group>"; };
+		AA96A20E195DB16C00C22BC9 /* GameSelectMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameSelectMenu.cpp; sourceTree = "<group>"; };
+		AA96A20F195DB16C00C22BC9 /* GameSelectMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSelectMenu.h; sourceTree = "<group>"; };
+		AA96A211195DB16C00C22BC9 /* MainMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenu.cpp; sourceTree = "<group>"; };
+		AA96A212195DB16C00C22BC9 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
+		AA96A213195DB16C00C22BC9 /* MainMenuPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuPopup.cpp; sourceTree = "<group>"; };
+		AA96A214195DB16C00C22BC9 /* MainMenuPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuPopup.h; sourceTree = "<group>"; };
+		AA96A216195DB16C00C22BC9 /* OptionsMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OptionsMenu.cpp; sourceTree = "<group>"; };
+		AA96A217195DB16C00C22BC9 /* OptionsMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsMenu.h; sourceTree = "<group>"; };
+		AA96A218195DB16C00C22BC9 /* SimpleMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleMenu.cpp; sourceTree = "<group>"; };
+		AA96A219195DB16C00C22BC9 /* SimpleMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleMenu.h; sourceTree = "<group>"; };
+		AA96A224195DB25500C22BC9 /* images.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = images.plist; sourceTree = "<group>"; };
+		AA96A226195DB52800C22BC9 /* GameMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameMenu.cpp; sourceTree = "<group>"; };
+		AA96A227195DB52800C22BC9 /* GameMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameMenu.h; sourceTree = "<group>"; };
+		AA96A22A195DB76F00C22BC9 /* Spritable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Spritable.cpp; sourceTree = "<group>"; };
+		AA96A22B195DB76F00C22BC9 /* Spritable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spritable.h; sourceTree = "<group>"; };
+		AA96A22E195DC39600C22BC9 /* Chef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Chef.cpp; sourceTree = "<group>"; };
+		AA96A22F195DC39600C22BC9 /* Chef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chef.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -366,8 +377,6 @@
 			children = (
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
-				1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */,
-				1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -390,15 +399,11 @@
 				1AC6FAFD180E9839004C840B /* libchipmunk Mac.a */,
 				1AC6FAFF180E9839004C840B /* libbox2d Mac.a */,
 				1AC6FB01180E9839004C840B /* libCocosDenshion Mac.a */,
-				1AC6FB03180E9839004C840B /* libjsbindings Mac.a */,
-				1AC6FB05180E9839004C840B /* libluabindings Mac.a */,
 				1AC6FB07180E9839004C840B /* libcocos2dx iOS.a */,
 				1AC6FB09180E9839004C840B /* libcocos2dx-extensions iOS.a */,
 				1AC6FB0B180E9839004C840B /* libchipmunk iOS.a */,
 				1AC6FB0D180E9839004C840B /* libbox2d iOS.a */,
 				1AC6FB0F180E9839004C840B /* libCocosDenshion iOS.a */,
-				1AC6FB11180E9839004C840B /* libjsbindings iOS.a */,
-				1AC6FB13180E9839004C840B /* libluabindings iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				AA96A1FE195DB16C00C22BC9 /* common */,
 				1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */,
 				15AA9C4015B7EC450033D6C2 /* Classes */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -487,12 +493,120 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AA96A224195DB25500C22BC9 /* images.plist */,
+				AA96A1FA195DB09200C22BC9 /* images.png */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
 				1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */,
 			);
 			name = Resources;
 			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		AA96A1FE195DB16C00C22BC9 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				AA96A1FF195DB16C00C22BC9 /* ui */,
+			);
+			name = common;
+			path = ../common;
+			sourceTree = "<group>";
+		};
+		AA96A1FF195DB16C00C22BC9 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				AA96A22D195DC38400C22BC9 /* objects */,
+				AA96A200195DB16C00C22BC9 /* component */,
+				AA96A208195DB16C00C22BC9 /* menu */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		AA96A200195DB16C00C22BC9 /* component */ = {
+			isa = PBXGroup;
+			children = (
+				AA96A229195DB75E00C22BC9 /* spriteable */,
+				AA96A201195DB16C00C22BC9 /* slider */,
+			);
+			path = component;
+			sourceTree = "<group>";
+		};
+		AA96A201195DB16C00C22BC9 /* slider */ = {
+			isa = PBXGroup;
+			children = (
+				AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */,
+				AA96A203195DB16C00C22BC9 /* SlidingMenuDto.h */,
+				AA96A204195DB16C00C22BC9 /* SlidingMenuItem.cpp */,
+				AA96A205195DB16C00C22BC9 /* SlidingMenuItem.h */,
+				AA96A206195DB16C00C22BC9 /* SlidingMenuLayer.cpp */,
+				AA96A207195DB16C00C22BC9 /* SlidingMenuLayer.h */,
+			);
+			path = slider;
+			sourceTree = "<group>";
+		};
+		AA96A208195DB16C00C22BC9 /* menu */ = {
+			isa = PBXGroup;
+			children = (
+				AA96A209195DB16C00C22BC9 /* BaseMenu.cpp */,
+				AA96A20A195DB16C00C22BC9 /* BaseMenu.h */,
+				AA96A20B195DB16C00C22BC9 /* games */,
+				AA96A20E195DB16C00C22BC9 /* GameSelectMenu.cpp */,
+				AA96A20F195DB16C00C22BC9 /* GameSelectMenu.h */,
+				AA96A210195DB16C00C22BC9 /* levels */,
+				AA96A211195DB16C00C22BC9 /* MainMenu.cpp */,
+				AA96A212195DB16C00C22BC9 /* MainMenu.h */,
+				AA96A213195DB16C00C22BC9 /* MainMenuPopup.cpp */,
+				AA96A214195DB16C00C22BC9 /* MainMenuPopup.h */,
+				AA96A215195DB16C00C22BC9 /* options */,
+				AA96A216195DB16C00C22BC9 /* OptionsMenu.cpp */,
+				AA96A217195DB16C00C22BC9 /* OptionsMenu.h */,
+				AA96A218195DB16C00C22BC9 /* SimpleMenu.cpp */,
+				AA96A219195DB16C00C22BC9 /* SimpleMenu.h */,
+				AA96A226195DB52800C22BC9 /* GameMenu.cpp */,
+				AA96A227195DB52800C22BC9 /* GameMenu.h */,
+			);
+			path = menu;
+			sourceTree = "<group>";
+		};
+		AA96A20B195DB16C00C22BC9 /* games */ = {
+			isa = PBXGroup;
+			children = (
+				AA96A20C195DB16C00C22BC9 /* SelectGameLayer.cpp */,
+				AA96A20D195DB16C00C22BC9 /* SelectGameLayer.h */,
+			);
+			path = games;
+			sourceTree = "<group>";
+		};
+		AA96A210195DB16C00C22BC9 /* levels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = levels;
+			sourceTree = "<group>";
+		};
+		AA96A215195DB16C00C22BC9 /* options */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = options;
+			sourceTree = "<group>";
+		};
+		AA96A229195DB75E00C22BC9 /* spriteable */ = {
+			isa = PBXGroup;
+			children = (
+				AA96A22A195DB76F00C22BC9 /* Spritable.cpp */,
+				AA96A22B195DB76F00C22BC9 /* Spritable.h */,
+			);
+			path = spriteable;
+			sourceTree = "<group>";
+		};
+		AA96A22D195DC38400C22BC9 /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				AA96A22E195DC39600C22BC9 /* Chef.cpp */,
+				AA96A22F195DC39600C22BC9 /* Chef.h */,
+			);
+			path = objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -617,20 +731,6 @@
 			remoteRef = 1AC6FB00180E9839004C840B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		1AC6FB03180E9839004C840B /* libjsbindings Mac.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libjsbindings Mac.a";
-			remoteRef = 1AC6FB02180E9839004C840B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1AC6FB05180E9839004C840B /* libluabindings Mac.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libluabindings Mac.a";
-			remoteRef = 1AC6FB04180E9839004C840B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		1AC6FB07180E9839004C840B /* libcocos2dx iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -666,20 +766,6 @@
 			remoteRef = 1AC6FB0E180E9839004C840B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		1AC6FB11180E9839004C840B /* libjsbindings iOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libjsbindings iOS.a";
-			remoteRef = 1AC6FB10180E9839004C840B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1AC6FB13180E9839004C840B /* libluabindings iOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libluabindings iOS.a";
-			remoteRef = 1AC6FB12180E9839004C840B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -691,6 +777,7 @@
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				AA96A225195DB25500C22BC9 /* images.plist in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
@@ -698,6 +785,7 @@
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
+				AA96A1FB195DB09200C22BC9 /* images.png in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
@@ -728,10 +816,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				AA96A228195DB52800C22BC9 /* GameMenu.cpp in Sources */,
+				AA96A221195DB16C00C22BC9 /* MainMenuPopup.cpp in Sources */,
+				AA96A21C195DB16C00C22BC9 /* SlidingMenuLayer.cpp in Sources */,
+				AA96A22C195DB76F00C22BC9 /* Spritable.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
+				AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */,
+				AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */,
+				AA96A223195DB16C00C22BC9 /* SimpleMenu.cpp in Sources */,
+				AA96A230195DC39600C22BC9 /* Chef.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
-				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,
+				AA96A220195DB16C00C22BC9 /* MainMenu.cpp in Sources */,
+				AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */,
+				AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */,
+				AA96A21F195DB16C00C22BC9 /* GameSelectMenu.cpp in Sources */,
+				AA96A21D195DB16C00C22BC9 /* BaseMenu.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,7 +840,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */,
-				5087E75817EB910900C73F5D /* HelloWorldScene.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
