@@ -22,12 +22,12 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{1137, 622}, {40, 40}}</string>
+			<string>{{1044, 703}, {40, 40}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
 		
-		<key>cabbage_1.psd</key>
+		<key>cabbage_1.png</key>
 		<dict>
 			<key>aliases</key>
 			<array>
@@ -49,6 +49,28 @@
 			<false/>
 		</dict>
 		
+		<key>cabbage_2.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {91, 79}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{91, 79}</string>
+			<key>spriteSourceSize</key>
+			<string>{91, 79}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{1137, 622}, {91, 79}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
 		<key>chef.psd</key>
 		<dict>
 			<key>aliases</key>
@@ -66,7 +88,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{642, 0}, {519, 516}}</string>
+			<string>{{1163, 0}, {519, 516}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -110,7 +132,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 962}, {519, 516}}</string>
+			<string>{{1684, 0}, {519, 516}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -132,7 +154,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{1684, 0}, {519, 516}}</string>
+			<string>{{642, 0}, {519, 516}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -154,7 +176,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{1163, 0}, {519, 516}}</string>
+			<string>{{0, 962}, {519, 516}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -198,7 +220,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 0}, {640, 960}}</string>
+			<string>{{521, 962}, {640, 960}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -242,7 +264,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{521, 962}, {640, 960}}</string>
+			<string>{{0, 0}, {640, 960}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
