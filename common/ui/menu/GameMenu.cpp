@@ -1,6 +1,8 @@
 
 #include "GameMenu.h"
 #include "Chef.h"
+#include "Conveyor.h"
+#include "ScoreLayer.h"
 
 USING_NS_CC;
 
@@ -44,8 +46,17 @@ void GameMenu::initializeMenu() {
     chef->setPosition(Vec2(chef->getPosition().x + 50, 315)); //TODO: remove x position
     this->addChild(chef, 0);
     
+    
+    Conveyor* conv = Conveyor::create();
+    conv->setPosition(Vec2(0, 315));
+    this->addChild(conv, 1);
+    
+    ScoreLayer* scoreLayer = ScoreLayer::create(2300);
+    scoreLayer->setPosition(Vec2(500, visibleSize.height + origin.y - 100));
+    this->addChild(scoreLayer, 1);
+    
     //TODO: move to seporate component
-    conveyorNode = ParallaxNode::create(); //1
+   /* conveyorNode = ParallaxNode::create(); //1
     this->addChild(conveyorNode, 1);
     
     visibleSize = Director::getInstance()->getVisibleSize();
@@ -58,7 +69,7 @@ void GameMenu::initializeMenu() {
     conveyorNode->addChild(conveyor1, 0, speed, Vec2(0, 316-conveyor1->getContentSize().height/2));
     conveyorNode->addChild(conveyor2, 0, speed, Vec2(conveyor2->getContentSize().width - 1, 316-conveyor2->getContentSize().height/2));
 
-    this->scheduleUpdate();
+    this->scheduleUpdate();*/
 }
 
 void GameMenu::update(float dt) {

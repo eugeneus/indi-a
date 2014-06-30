@@ -60,6 +60,10 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		AA3424811960C74F0067B032 /* ScoreLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA34247F1960C74F0067B032 /* ScoreLayer.cpp */; };
+		AA3424831960CB230067B032 /* RioGrande.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA3424821960CB230067B032 /* RioGrande.ttf */; };
+		AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA4A9D011960227600BB3634 /* Cyclable.cpp */; };
+		AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA4A9D0419605CF400BB3634 /* Conveyor.cpp */; };
 		AA96A1FB195DB09200C22BC9 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = AA96A1FA195DB09200C22BC9 /* images.png */; };
 		AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */; };
 		AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A204195DB16C00C22BC9 /* SlidingMenuItem.cpp */; };
@@ -271,6 +275,13 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		AA34247F1960C74F0067B032 /* ScoreLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScoreLayer.cpp; sourceTree = "<group>"; };
+		AA3424801960C74F0067B032 /* ScoreLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreLayer.h; sourceTree = "<group>"; };
+		AA3424821960CB230067B032 /* RioGrande.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = RioGrande.ttf; path = fonts/RioGrande.ttf; sourceTree = "<group>"; };
+		AA4A9D011960227600BB3634 /* Cyclable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cyclable.cpp; sourceTree = "<group>"; };
+		AA4A9D021960227600BB3634 /* Cyclable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cyclable.h; sourceTree = "<group>"; };
+		AA4A9D0419605CF400BB3634 /* Conveyor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Conveyor.cpp; sourceTree = "<group>"; };
+		AA4A9D0519605CF400BB3634 /* Conveyor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conveyor.h; sourceTree = "<group>"; };
 		AA96A1FA195DB09200C22BC9 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlidingMenuDto.cpp; sourceTree = "<group>"; };
 		AA96A203195DB16C00C22BC9 /* SlidingMenuDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuDto.h; sourceTree = "<group>"; };
@@ -493,6 +504,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AA3424821960CB230067B032 /* RioGrande.ttf */,
 				AA96A224195DB25500C22BC9 /* images.plist */,
 				AA96A1FA195DB09200C22BC9 /* images.png */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
@@ -501,6 +513,24 @@
 			);
 			name = Resources;
 			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		AA34247E1960C7250067B032 /* score */ = {
+			isa = PBXGroup;
+			children = (
+				AA34247F1960C74F0067B032 /* ScoreLayer.cpp */,
+				AA3424801960C74F0067B032 /* ScoreLayer.h */,
+			);
+			path = score;
+			sourceTree = "<group>";
+		};
+		AA4A9CFE1960225B00BB3634 /* cycle */ = {
+			isa = PBXGroup;
+			children = (
+				AA4A9D011960227600BB3634 /* Cyclable.cpp */,
+				AA4A9D021960227600BB3634 /* Cyclable.h */,
+			);
+			path = cycle;
 			sourceTree = "<group>";
 		};
 		AA96A1FE195DB16C00C22BC9 /* common */ = {
@@ -525,6 +555,8 @@
 		AA96A200195DB16C00C22BC9 /* component */ = {
 			isa = PBXGroup;
 			children = (
+				AA34247E1960C7250067B032 /* score */,
+				AA4A9CFE1960225B00BB3634 /* cycle */,
 				AA96A229195DB75E00C22BC9 /* spriteable */,
 				AA96A201195DB16C00C22BC9 /* slider */,
 			);
@@ -605,6 +637,8 @@
 			children = (
 				AA96A22E195DC39600C22BC9 /* Chef.cpp */,
 				AA96A22F195DC39600C22BC9 /* Chef.h */,
+				AA4A9D0419605CF400BB3634 /* Conveyor.cpp */,
+				AA4A9D0519605CF400BB3634 /* Conveyor.h */,
 			);
 			path = objects;
 			sourceTree = "<group>";
@@ -785,6 +819,7 @@
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
+				AA3424831960CB230067B032 /* RioGrande.ttf in Resources */,
 				AA96A1FB195DB09200C22BC9 /* images.png in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
@@ -819,9 +854,11 @@
 				AA96A228195DB52800C22BC9 /* GameMenu.cpp in Sources */,
 				AA96A221195DB16C00C22BC9 /* MainMenuPopup.cpp in Sources */,
 				AA96A21C195DB16C00C22BC9 /* SlidingMenuLayer.cpp in Sources */,
+				AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */,
 				AA96A22C195DB76F00C22BC9 /* Spritable.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
+				AA3424811960C74F0067B032 /* ScoreLayer.cpp in Sources */,
 				AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */,
 				AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */,
 				AA96A223195DB16C00C22BC9 /* SimpleMenu.cpp in Sources */,
@@ -831,6 +868,7 @@
 				AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */,
 				AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */,
 				AA96A21F195DB16C00C22BC9 /* GameSelectMenu.cpp in Sources */,
+				AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */,
 				AA96A21D195DB16C00C22BC9 /* BaseMenu.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
