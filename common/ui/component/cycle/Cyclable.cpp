@@ -41,7 +41,7 @@ bool Cyclable::init(const char* bgSpriteFrameName, float pSpeed, float pLength) 
     bg1->setPosition(prevPos);
     bg1->setAnchorPoint(Vec2(0, 0));
     sprites.pushBack(bg1);
-    this->addChild(bg1);
+    super::addChild(bg1);
     
     float length = bg1->getContentSize().width;
     
@@ -53,7 +53,7 @@ bool Cyclable::init(const char* bgSpriteFrameName, float pSpeed, float pLength) 
         bg->setPosition(prevPos);
         bg->setAnchorPoint(Vec2(0, 0));
         sprites.pushBack(bg);
-        this->addChild(bg);
+        super::addChild(bg);
     }
    
     this->startCycling();
@@ -83,8 +83,12 @@ void Cyclable::update(float dt) {
     
     for(int i=0; i<sprites.size(); i++) {
         Sprite* sp = sprites.at(i);
-       // sp->runAction(MoveTo::create(0,0, <#const cocos2d::Vec2 &position#>));
         sp->setPosition(Vec2(sp->getPosition().x - delta, sp->getPosition().y));
+    }
+    
+    for(int i=0; i<children.size(); i++) {
+        Node* node = children.at(i);
+        node->setPosition(Vec2(node->getPosition().x - delta, node->getPosition().y));
     }
 }
 
@@ -98,4 +102,9 @@ void Cyclable::startCycling() {
 
 void Cyclable::changeCyclingSpeed(float speed) {
     
+}
+
+void Cyclable::addChild(cocos2d::Node* node, int zIndex) {
+    super::addChild(node, zIndex);
+    children.pushBack(node);
 }

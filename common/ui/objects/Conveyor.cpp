@@ -29,7 +29,7 @@ Scene* Conveyor::createScene()
 
 bool Conveyor::init() {
     
-    if(!super::init("conveyer_1.png", 40, 640)) {
+    if(!super::init("conveyer_1.png", 400, 640)) {
         return false;
     }
     

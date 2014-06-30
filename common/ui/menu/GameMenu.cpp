@@ -3,6 +3,8 @@
 #include "Chef.h"
 #include "Conveyor.h"
 #include "ScoreLayer.h"
+#include "FoodFactory.h"
+#include "Food.h"
 
 USING_NS_CC;
 
@@ -51,25 +53,16 @@ void GameMenu::initializeMenu() {
     conv->setPosition(Vec2(0, 315));
     this->addChild(conv, 1);
     
+    Food* foodItem = FoodFactory::createFood(kFoodGabbge);
+    //Gabbage* foodItem = Gabbage::create();
+    foodItem->setPosition(Vec2(visibleSize.width + origin.x, -100));
+    //conv->addChild(foodItem);
+    conv->addChild(foodItem, 10);
+    
     ScoreLayer* scoreLayer = ScoreLayer::create(2300);
     scoreLayer->setPosition(Vec2(500, visibleSize.height + origin.y - 100));
     this->addChild(scoreLayer, 1);
     
-    //TODO: move to seporate component
-   /* conveyorNode = ParallaxNode::create(); //1
-    this->addChild(conveyorNode, 1);
-    
-    visibleSize = Director::getInstance()->getVisibleSize();
-    origin = Director::getInstance()->getVisibleOrigin();
-    
-    Vec2 speed = Vec2(0.05, 0.05);
-    conveyor1 = Sprite::createWithSpriteFrameName("conveyer_1.png");
-    conveyor2 = Sprite::createWithSpriteFrameName("conveyer_1.png");
-    
-    conveyorNode->addChild(conveyor1, 0, speed, Vec2(0, 316-conveyor1->getContentSize().height/2));
-    conveyorNode->addChild(conveyor2, 0, speed, Vec2(conveyor2->getContentSize().width - 1, 316-conveyor2->getContentSize().height/2));
-
-    this->scheduleUpdate();*/
 }
 
 void GameMenu::update(float dt) {
