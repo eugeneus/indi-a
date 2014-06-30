@@ -4,6 +4,7 @@
 
 #include "cocos2d.h"
 #include "SimpleMenu.h"
+#include "Conveyor.h"
 
 class GameMenu : public SimpleMenu
 {
@@ -15,12 +16,17 @@ private:
     cocos2d::Sprite* conveyor2;
     cocos2d::Size visibleSize;
     cocos2d::Vec2 origin;
+    
+    Conveyor* conv;
+    
+    float lastCreatedItem;
+    int nextItemDt;
+protected:
+    void update(float dt);
 public:
     static GameMenu* create();
     static cocos2d::Scene* createScene();
     virtual void initializeMenu();
-
-    void update(float dt);
 };
 
 

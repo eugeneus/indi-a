@@ -32,13 +32,19 @@ Scene* GameMenu::createScene()
     return scene;
 }
 
+
+int getRandomNumber(int from ,int to) {
+    return (int)from + arc4random() % (to-from+1);
+}
+
 void GameMenu::initializeMenu() {
     super::initializeMenu();
 
     CCLOG("Game");
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    visibleSize = Director::getInstance()->getVisibleSize();
+    origin = Director::getInstance()->getVisibleOrigin();
+    
     
     Sprite* bg = Sprite::createWithSpriteFrameName("level_1_bg.png");
     bg->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
@@ -49,7 +55,7 @@ void GameMenu::initializeMenu() {
     this->addChild(chef, 0);
     
     
-    Conveyor* conv = Conveyor::create();
+    conv = Conveyor::create();
     conv->setPosition(Vec2(0, 315));
     this->addChild(conv, 1);
     
@@ -63,30 +69,25 @@ void GameMenu::initializeMenu() {
     scoreLayer->setPosition(Vec2(500, visibleSize.height + origin.y - 100));
     this->addChild(scoreLayer, 1);
     
+    
+    lastCreatedItem = 0;
+    nextItemDt = getRandomNumber(4, 6);
+    this->scheduleUpdate();
+    
 }
 
 void GameMenu::update(float dt) {
-    Vec2 pos1 = conveyor1->getPosition();
-    Vec2 pos2 = conveyor2->getPosition();
     
-    pos1.x -= 5.0f;
-    pos2.x -= 5.0f;
-    
-    
-    
-    if(pos1.x <=-(visibleSize.width*0.5f) )
-    {
-        pos1.x = pos2.x + visibleSize.width;
+    if (lastCreatedItem >= nextItemDt) {
+        int posOffset = getRandomNumber(1, 3);
+        int offset = posOffset == 1 ? 20 : (posOffset == 2 ? 50 : 100);
+        Food* foodItem = FoodFactory::createFood(kFoodGabbge);
+        foodItem->setPosition(Vec2(visibleSize.width + origin.x, -1 * offset));
+        conv->addChild(foodItem, 10);
+        
+        lastCreatedItem = 0;
+        nextItemDt = getRandomNumber(4, 6);
+    } else {
+        lastCreatedItem +=dt;
     }
-    
-    if(pos2.x <=-(visibleSize.width*0.5f) )
-    {
-        pos2.x = pos1.x + visibleSize.width;
-    }
-    
-    conveyor1->setPosition(pos1);
-    conveyor2->setPosition(pos2);
-    
-    //Vec2 backgroundScrollVert = Vec2(-100, 0);
-    //conveyorNode->setPosition(conveyorNode->getPosition() + backgroundScrollVert *dt);
 }
