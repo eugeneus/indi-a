@@ -26,6 +26,7 @@ public:
     void changeCyclingSpeed(float speed);
     
     virtual void addChild(cocos2d::Node* node, int zIndex);
+    cocos2d::Vector<cocos2d::Node*> getChildrenItems();
 };
 
 #endif /* defined(__BlindChef__Cyclable__) */

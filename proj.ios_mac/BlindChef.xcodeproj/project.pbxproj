@@ -62,11 +62,16 @@
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
 		AA3424811960C74F0067B032 /* ScoreLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA34247F1960C74F0067B032 /* ScoreLayer.cpp */; };
 		AA3424831960CB230067B032 /* RioGrande.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA3424821960CB230067B032 /* RioGrande.ttf */; };
-		AA3424871961DF180067B032 /* Gabbage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA3424851961DF180067B032 /* Gabbage.cpp */; };
-		AA34248A1961E0B60067B032 /* FoodFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA3424881961E0B60067B032 /* FoodFactory.cpp */; };
-		AA34248D1961E0E40067B032 /* Food.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA34248B1961E0E30067B032 /* Food.cpp */; };
 		AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA4A9D011960227600BB3634 /* Cyclable.cpp */; };
 		AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA4A9D0419605CF400BB3634 /* Conveyor.cpp */; };
+		AA870FFB196324A50028A4EA /* Food.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA870FF5196324A50028A4EA /* Food.cpp */; };
+		AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA870FF7196324A50028A4EA /* FoodFactory.cpp */; };
+		AA870FFD196324A50028A4EA /* Gabbage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA870FF9196324A50028A4EA /* Gabbage.cpp */; };
+		AA8710011963250E0028A4EA /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA870FFF1963250E0028A4EA /* Item.cpp */; };
+		AA871004196325B50028A4EA /* Garbage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA871002196325B50028A4EA /* Garbage.cpp */; };
+		AA8710071963264D0028A4EA /* Bottle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8710051963264D0028A4EA /* Bottle.cpp */; };
+		AA87100A1963287D0028A4EA /* ItemFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8710081963287D0028A4EA /* ItemFactory.cpp */; };
+		AA87100D196329770028A4EA /* GarbageFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA87100B196329770028A4EA /* GarbageFactory.cpp */; };
 		AA96A1FB195DB09200C22BC9 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = AA96A1FA195DB09200C22BC9 /* images.png */; };
 		AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */; };
 		AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A204195DB16C00C22BC9 /* SlidingMenuItem.cpp */; };
@@ -283,16 +288,26 @@
 		AA34247F1960C74F0067B032 /* ScoreLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScoreLayer.cpp; sourceTree = "<group>"; };
 		AA3424801960C74F0067B032 /* ScoreLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreLayer.h; sourceTree = "<group>"; };
 		AA3424821960CB230067B032 /* RioGrande.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = RioGrande.ttf; path = fonts/RioGrande.ttf; sourceTree = "<group>"; };
-		AA3424851961DF180067B032 /* Gabbage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Gabbage.cpp; sourceTree = "<group>"; };
-		AA3424861961DF180067B032 /* Gabbage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gabbage.h; sourceTree = "<group>"; };
-		AA3424881961E0B60067B032 /* FoodFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FoodFactory.cpp; sourceTree = "<group>"; };
-		AA3424891961E0B60067B032 /* FoodFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodFactory.h; sourceTree = "<group>"; };
-		AA34248B1961E0E30067B032 /* Food.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Food.cpp; sourceTree = "<group>"; };
-		AA34248C1961E0E40067B032 /* Food.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Food.h; sourceTree = "<group>"; };
 		AA4A9D011960227600BB3634 /* Cyclable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cyclable.cpp; sourceTree = "<group>"; };
 		AA4A9D021960227600BB3634 /* Cyclable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cyclable.h; sourceTree = "<group>"; };
 		AA4A9D0419605CF400BB3634 /* Conveyor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Conveyor.cpp; sourceTree = "<group>"; };
 		AA4A9D0519605CF400BB3634 /* Conveyor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conveyor.h; sourceTree = "<group>"; };
+		AA870FF5196324A50028A4EA /* Food.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Food.cpp; sourceTree = "<group>"; };
+		AA870FF6196324A50028A4EA /* Food.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Food.h; sourceTree = "<group>"; };
+		AA870FF7196324A50028A4EA /* FoodFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FoodFactory.cpp; sourceTree = "<group>"; };
+		AA870FF8196324A50028A4EA /* FoodFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodFactory.h; sourceTree = "<group>"; };
+		AA870FF9196324A50028A4EA /* Gabbage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Gabbage.cpp; sourceTree = "<group>"; };
+		AA870FFA196324A50028A4EA /* Gabbage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gabbage.h; sourceTree = "<group>"; };
+		AA870FFF1963250E0028A4EA /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
+		AA8710001963250E0028A4EA /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		AA871002196325B50028A4EA /* Garbage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Garbage.cpp; sourceTree = "<group>"; };
+		AA871003196325B50028A4EA /* Garbage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Garbage.h; sourceTree = "<group>"; };
+		AA8710051963264D0028A4EA /* Bottle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bottle.cpp; sourceTree = "<group>"; };
+		AA8710061963264D0028A4EA /* Bottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bottle.h; sourceTree = "<group>"; };
+		AA8710081963287D0028A4EA /* ItemFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ItemFactory.cpp; sourceTree = "<group>"; };
+		AA8710091963287D0028A4EA /* ItemFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemFactory.h; sourceTree = "<group>"; };
+		AA87100B196329770028A4EA /* GarbageFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GarbageFactory.cpp; sourceTree = "<group>"; };
+		AA87100C196329770028A4EA /* GarbageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GarbageFactory.h; sourceTree = "<group>"; };
 		AA96A1FA195DB09200C22BC9 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlidingMenuDto.cpp; sourceTree = "<group>"; };
 		AA96A203195DB16C00C22BC9 /* SlidingMenuDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuDto.h; sourceTree = "<group>"; };
@@ -539,19 +554,6 @@
 			path = score;
 			sourceTree = "<group>";
 		};
-		AA3424841961DECC0067B032 /* food */ = {
-			isa = PBXGroup;
-			children = (
-				AA3424851961DF180067B032 /* Gabbage.cpp */,
-				AA3424861961DF180067B032 /* Gabbage.h */,
-				AA3424881961E0B60067B032 /* FoodFactory.cpp */,
-				AA3424891961E0B60067B032 /* FoodFactory.h */,
-				AA34248B1961E0E30067B032 /* Food.cpp */,
-				AA34248C1961E0E40067B032 /* Food.h */,
-			);
-			path = food;
-			sourceTree = "<group>";
-		};
 		AA4A9CFE1960225B00BB3634 /* cycle */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,6 +561,45 @@
 				AA4A9D021960227600BB3634 /* Cyclable.h */,
 			);
 			path = cycle;
+			sourceTree = "<group>";
+		};
+		AA870FF3196324A50028A4EA /* items */ = {
+			isa = PBXGroup;
+			children = (
+				AA870FFE196324E20028A4EA /* garbage */,
+				AA870FF4196324A50028A4EA /* food */,
+				AA870FFF1963250E0028A4EA /* Item.cpp */,
+				AA8710001963250E0028A4EA /* Item.h */,
+				AA8710081963287D0028A4EA /* ItemFactory.cpp */,
+				AA8710091963287D0028A4EA /* ItemFactory.h */,
+			);
+			path = items;
+			sourceTree = "<group>";
+		};
+		AA870FF4196324A50028A4EA /* food */ = {
+			isa = PBXGroup;
+			children = (
+				AA870FF5196324A50028A4EA /* Food.cpp */,
+				AA870FF6196324A50028A4EA /* Food.h */,
+				AA870FF7196324A50028A4EA /* FoodFactory.cpp */,
+				AA870FF8196324A50028A4EA /* FoodFactory.h */,
+				AA870FF9196324A50028A4EA /* Gabbage.cpp */,
+				AA870FFA196324A50028A4EA /* Gabbage.h */,
+			);
+			path = food;
+			sourceTree = "<group>";
+		};
+		AA870FFE196324E20028A4EA /* garbage */ = {
+			isa = PBXGroup;
+			children = (
+				AA871002196325B50028A4EA /* Garbage.cpp */,
+				AA871003196325B50028A4EA /* Garbage.h */,
+				AA8710051963264D0028A4EA /* Bottle.cpp */,
+				AA8710061963264D0028A4EA /* Bottle.h */,
+				AA87100B196329770028A4EA /* GarbageFactory.cpp */,
+				AA87100C196329770028A4EA /* GarbageFactory.h */,
+			);
+			path = garbage;
 			sourceTree = "<group>";
 		};
 		AA96A1FE195DB16C00C22BC9 /* common */ = {
@@ -663,8 +704,8 @@
 		AA96A22D195DC38400C22BC9 /* objects */ = {
 			isa = PBXGroup;
 			children = (
+				AA870FF3196324A50028A4EA /* items */,
 				AAB01D9F19629E59002251B1 /* hand */,
-				AA3424841961DECC0067B032 /* food */,
 				AA96A22E195DC39600C22BC9 /* Chef.cpp */,
 				AA96A22F195DC39600C22BC9 /* Chef.h */,
 				AA4A9D0419605CF400BB3634 /* Conveyor.cpp */,
@@ -892,13 +933,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				AA8710071963264D0028A4EA /* Bottle.cpp in Sources */,
 				AA96A228195DB52800C22BC9 /* GameMenu.cpp in Sources */,
+				AA87100A1963287D0028A4EA /* ItemFactory.cpp in Sources */,
 				AA96A221195DB16C00C22BC9 /* MainMenuPopup.cpp in Sources */,
 				AAB01DA219629E84002251B1 /* Hand.cpp in Sources */,
 				AA96A21C195DB16C00C22BC9 /* SlidingMenuLayer.cpp in Sources */,
+				AA871004196325B50028A4EA /* Garbage.cpp in Sources */,
 				AAB01DA51962A1B9002251B1 /* Hands.cpp in Sources */,
 				AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */,
 				AA96A22C195DB76F00C22BC9 /* Spritable.cpp in Sources */,
+				AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				AA3424811960C74F0067B032 /* ScoreLayer.cpp in Sources */,
@@ -906,15 +951,16 @@
 				AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */,
 				AA96A223195DB16C00C22BC9 /* SimpleMenu.cpp in Sources */,
 				AA96A230195DC39600C22BC9 /* Chef.cpp in Sources */,
-				AA3424871961DF180067B032 /* Gabbage.cpp in Sources */,
-				AA34248A1961E0B60067B032 /* FoodFactory.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				AA96A220195DB16C00C22BC9 /* MainMenu.cpp in Sources */,
 				AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */,
 				AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */,
-				AA34248D1961E0E40067B032 /* Food.cpp in Sources */,
+				AA870FFB196324A50028A4EA /* Food.cpp in Sources */,
 				AA96A21F195DB16C00C22BC9 /* GameSelectMenu.cpp in Sources */,
 				AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */,
+				AA870FFD196324A50028A4EA /* Gabbage.cpp in Sources */,
+				AA8710011963250E0028A4EA /* Item.cpp in Sources */,
+				AA87100D196329770028A4EA /* GarbageFactory.cpp in Sources */,
 				AA96A21D195DB16C00C22BC9 /* BaseMenu.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

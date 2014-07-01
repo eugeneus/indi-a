@@ -3,8 +3,8 @@
 #include "Chef.h"
 #include "Conveyor.h"
 #include "ScoreLayer.h"
-#include "FoodFactory.h"
-#include "Food.h"
+#include "Item.h"
+#include "ItemFactory.h"
 
 USING_NS_CC;
 
@@ -63,11 +63,14 @@ void GameMenu::initializeMenu() {
     conv->setPosition(Vec2(0, 315));
     this->addChild(conv, 1);
     
-    Food* foodItem = FoodFactory::createFood(kFoodGabbge);
+    yPosStartGrab = conv->getContentSize().width/2;
+    yPosCheckGrab = yPosStartGrab + 100;
+    
+    Item* item = ItemFactory::createItem(0, 0);
     //Gabbage* foodItem = Gabbage::create();
-    foodItem->setPosition(Vec2(visibleSize.width + origin.x, -100));
+    item->setPosition(Vec2(visibleSize.width + origin.x, -100));
     //conv->addChild(foodItem);
-    conv->addChild(foodItem, 10);
+    conv->addChild(item, 10);
     
     ScoreLayer* scoreLayer = ScoreLayer::create(2300);
     scoreLayer->setPosition(Vec2(500, visibleSize.height + origin.y - 100));
@@ -82,16 +85,25 @@ void GameMenu::initializeMenu() {
 
 void GameMenu::update(float dt) {
     
+    // generation items loop part
     if (lastCreatedItem >= nextItemDt) {
         int posOffset = getRandomNumber(1, 3);
         int offset = posOffset == 1 ? 20 : (posOffset == 2 ? 50 : 100);
-        Food* foodItem = FoodFactory::createFood(kFoodGabbge);
-        foodItem->setPosition(Vec2(visibleSize.width + origin.x, -1 * offset));
-        conv->addChild(foodItem, 10);
+        Item* item = ItemFactory::createItem(getRandomNumber(0, 1), 0);
+        item->setPosition(Vec2(visibleSize.width + origin.x, -1 * offset));
+        conv->addChild(item, 10);
         
         lastCreatedItem = 0;
         nextItemDt = getRandomNumber(4, 6);
     } else {
         lastCreatedItem +=dt;
+    }
+    
+    // grab detecting loop part
+    float yPosFirstItem = conv->getFirstItemPosY();
+    if (yPosFirstItem >= yPosStartGrab) {
+        //hands->startGrab();
+    } else if (yPosFirstItem >= yPosCheckGrab) {
+        //hands->preGrab(conv->getFirst);
     }
 }

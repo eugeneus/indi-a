@@ -21,7 +21,7 @@ Gabbage* Gabbage::create()
 
 bool Gabbage::init() {
     
-    if(!super::initWithSpriteAndPos("cabbage_1.png", "cabbage_%i.png", 2, 0.2)) {
+    if(!super::init("cabbage_1.png", "cabbage_%i.png", 2, 0.2)) {
         return false;
     }
     

@@ -12,7 +12,9 @@ public:
     static Conveyor* create();
     static cocos2d::Scene* createScene();
     
-    bool init();    
+    bool init();
+    
+    float getFirstItemPosY();
 };
 
 #endif /* defined(__BlindChef__Conveyor__) */

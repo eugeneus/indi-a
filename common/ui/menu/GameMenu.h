@@ -23,6 +23,9 @@ private:
     
     float lastCreatedItem;
     int nextItemDt;
+    
+    float yPosCheckGrab;
+    float yPosStartGrab;
 protected:
     void update(float dt);
 public:

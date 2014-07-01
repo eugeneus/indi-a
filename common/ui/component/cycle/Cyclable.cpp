@@ -49,7 +49,7 @@ bool Cyclable::init(const char* bgSpriteFrameName, float pSpeed, float pLength) 
         
     for (int i=0; i<count; i++) {
         Sprite* bg = Sprite::createWithSpriteFrameName(bgSpriteFrameName);
-        prevPos = Vec2(prevPos.x + length, prevPos.y);
+        prevPos = Vec2(prevPos.x + length - 2, prevPos.y);
         bg->setPosition(prevPos);
         bg->setAnchorPoint(Vec2(0, 0));
         sprites.pushBack(bg);
@@ -107,4 +107,8 @@ void Cyclable::changeCyclingSpeed(float speed) {
 void Cyclable::addChild(cocos2d::Node* node, int zIndex) {
     super::addChild(node, zIndex);
     children.pushBack(node);
+}
+
+Vector<Node*> Cyclable::getChildrenItems() {
+    return children;
 }

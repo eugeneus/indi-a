@@ -36,3 +36,10 @@ bool Conveyor::init() {
     
     return true;
 }
+
+float Conveyor::getFirstItemPosY() {
+    Vector<Node*> children = super::getChildrenItems();
+    Node* firstItem = children.front();
+    
+    return firstItem->getPosition().y;
+}
