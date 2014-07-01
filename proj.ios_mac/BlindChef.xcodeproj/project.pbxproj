@@ -82,6 +82,8 @@
 		AA96A228195DB52800C22BC9 /* GameMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A226195DB52800C22BC9 /* GameMenu.cpp */; };
 		AA96A22C195DB76F00C22BC9 /* Spritable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A22A195DB76F00C22BC9 /* Spritable.cpp */; };
 		AA96A230195DC39600C22BC9 /* Chef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A22E195DC39600C22BC9 /* Chef.cpp */; };
+		AAB01DA219629E84002251B1 /* Hand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB01DA019629E84002251B1 /* Hand.cpp */; };
+		AAB01DA51962A1B9002251B1 /* Hands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB01DA31962A1B9002251B1 /* Hands.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -319,6 +321,10 @@
 		AA96A22B195DB76F00C22BC9 /* Spritable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spritable.h; sourceTree = "<group>"; };
 		AA96A22E195DC39600C22BC9 /* Chef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Chef.cpp; sourceTree = "<group>"; };
 		AA96A22F195DC39600C22BC9 /* Chef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chef.h; sourceTree = "<group>"; };
+		AAB01DA019629E84002251B1 /* Hand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hand.cpp; sourceTree = "<group>"; };
+		AAB01DA119629E84002251B1 /* Hand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hand.h; sourceTree = "<group>"; };
+		AAB01DA31962A1B9002251B1 /* Hands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hands.cpp; sourceTree = "<group>"; };
+		AAB01DA41962A1B9002251B1 /* Hands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hands.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -657,6 +663,7 @@
 		AA96A22D195DC38400C22BC9 /* objects */ = {
 			isa = PBXGroup;
 			children = (
+				AAB01D9F19629E59002251B1 /* hand */,
 				AA3424841961DECC0067B032 /* food */,
 				AA96A22E195DC39600C22BC9 /* Chef.cpp */,
 				AA96A22F195DC39600C22BC9 /* Chef.h */,
@@ -664,6 +671,17 @@
 				AA4A9D0519605CF400BB3634 /* Conveyor.h */,
 			);
 			path = objects;
+			sourceTree = "<group>";
+		};
+		AAB01D9F19629E59002251B1 /* hand */ = {
+			isa = PBXGroup;
+			children = (
+				AAB01DA019629E84002251B1 /* Hand.cpp */,
+				AAB01DA119629E84002251B1 /* Hand.h */,
+				AAB01DA31962A1B9002251B1 /* Hands.cpp */,
+				AAB01DA41962A1B9002251B1 /* Hands.h */,
+			);
+			path = hand;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -876,7 +894,9 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				AA96A228195DB52800C22BC9 /* GameMenu.cpp in Sources */,
 				AA96A221195DB16C00C22BC9 /* MainMenuPopup.cpp in Sources */,
+				AAB01DA219629E84002251B1 /* Hand.cpp in Sources */,
 				AA96A21C195DB16C00C22BC9 /* SlidingMenuLayer.cpp in Sources */,
+				AAB01DA51962A1B9002251B1 /* Hands.cpp in Sources */,
 				AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */,
 				AA96A22C195DB76F00C22BC9 /* Spritable.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,

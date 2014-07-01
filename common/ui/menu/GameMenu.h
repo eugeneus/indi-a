@@ -5,6 +5,7 @@
 #include "cocos2d.h"
 #include "SimpleMenu.h"
 #include "Conveyor.h"
+#include "Hands.h"
 
 class GameMenu : public SimpleMenu
 {
@@ -18,6 +19,7 @@ private:
     cocos2d::Vec2 origin;
     
     Conveyor* conv;
+    Hands* hands;
     
     float lastCreatedItem;
     int nextItemDt;

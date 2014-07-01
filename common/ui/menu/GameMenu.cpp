@@ -54,6 +54,10 @@ void GameMenu::initializeMenu() {
     chef->setPosition(Vec2(chef->getPosition().x + 50, 315)); //TODO: remove x position
     this->addChild(chef, 0);
     
+    hands = Hands::create(chef->getContentSize().width);
+    hands->setPosition(Vec2(chef->getPosition().x, chef->getPosition().y));
+    this->addChild(hands, 2);
+    
     
     conv = Conveyor::create();
     conv->setPosition(Vec2(0, 315));
