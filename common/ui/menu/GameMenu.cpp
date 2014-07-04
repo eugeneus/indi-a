@@ -50,17 +50,20 @@ void GameMenu::initializeMenu() {
     bg->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     this->addChild(bg, -1);
     
+    float yOffsetConveyer = 615;
+    
     Chef* chef = Chef::create();
-    chef->setPosition(Vec2(chef->getPosition().x + 50, 315)); //TODO: remove x position
+    chef->setPosition(Vec2(chef->getPosition().x + 200, yOffsetConveyer)); //TODO: remove x offset position
+    chef->setScale(0.5); //TODO: remove scale
     this->addChild(chef, 0);
     
-    hands = Hands::create(chef->getContentSize().width);
-    hands->setPosition(Vec2(chef->getPosition().x, chef->getPosition().y));
+    hands = Hands::create(chef->getContentSize().width/2); //TODO: remove divide 2
+    hands->setPosition(Vec2(chef->getPosition().x, yOffsetConveyer));
     this->addChild(hands, 2);
     
     
     conv = Conveyor::create();
-    conv->setPosition(Vec2(0, 315));
+    conv->setPosition(Vec2(0, yOffsetConveyer));
     this->addChild(conv, 1);
     
     yPosStartGrab = conv->getContentSize().width/2;
