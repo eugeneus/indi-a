@@ -66,7 +66,7 @@ void GameMenu::initializeMenu() {
     yPosStartGrab = conv->getContentSize().width/2;
     yPosCheckGrab = yPosStartGrab + 100;
     
-    Item* item = ItemFactory::createItem(0, 0);
+    Item* item = ItemFactory::createItem(1, 1);
     //Gabbage* foodItem = Gabbage::create();
     item->setPosition(Vec2(visibleSize.width + origin.x, -100));
     //conv->addChild(foodItem);
@@ -89,7 +89,7 @@ void GameMenu::update(float dt) {
     if (lastCreatedItem >= nextItemDt) {
         int posOffset = getRandomNumber(1, 3);
         int offset = posOffset == 1 ? 20 : (posOffset == 2 ? 50 : 100);
-        Item* item = ItemFactory::createItem(getRandomNumber(0, 1), 0);
+        Item* item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 1));
         item->setPosition(Vec2(visibleSize.width + origin.x, -1 * offset));
         conv->addChild(item, 10);
         

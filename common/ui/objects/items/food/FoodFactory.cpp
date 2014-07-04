@@ -15,7 +15,7 @@ Food* FoodFactory::createFood(int food_type)
         
         default:
         {
-            food = NULL;
+            food = Gabbage::create();
             break;
         }
     }
