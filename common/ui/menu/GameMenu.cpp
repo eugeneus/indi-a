@@ -7,6 +7,7 @@
 #include "ItemFactory.h"
 #include "BonusMenu.h"
 #include "MindCloudTips.h"
+#include "Pot.h"
 
 USING_NS_CC;
 
@@ -85,6 +86,10 @@ void GameMenu::initializeMenu() {
     item->setPosition(Vec2(visibleSize.width + origin.x, -100));
     //conv->addChild(foodItem);
     conv->addChild(item, 10);
+    
+    Pot* pot = Pot::create();
+    
+    this->addChild(pot, 0);
     
     ScoreLayer* scoreLayer = ScoreLayer::create(2300);
     scoreLayer->setPosition(Vec2(500, visibleSize.height + origin.y - 100));
