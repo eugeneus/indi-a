@@ -6,6 +6,7 @@
 #include "Item.h"
 #include "ItemFactory.h"
 #include "BonusMenu.h"
+#include "MindCloudTips.h"
 
 USING_NS_CC;
 
@@ -66,6 +67,11 @@ void GameMenu::initializeMenu() {
     hands->setPosition(Vec2(chef->getPosition().x, yOffsetConveyer));
     this->addChild(hands, 2);
     
+    MindCloudTips* cloudTips = MindCloudTips::create("tips_level_1.png");
+    //cloudTips->setPosition(Vec2(chef->getPosition().x - cloudTips->getContentSize().width, chef->getPosition().y + chef->getContentSize().height));
+    cloudTips->setPosition(Vec2(140, yOffsetConveyer + 100));
+    this->addChild(cloudTips, 2);
+    cloudTips->toggleTip();
     
     conv = Conveyor::create();
     conv->setPosition(Vec2(0, yOffsetConveyer));
