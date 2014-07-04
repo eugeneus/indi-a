@@ -88,8 +88,10 @@ void GameMenu::initializeMenu() {
     conv->addChild(item, 10);
     
     Pot* pot = Pot::create();
-    
-    this->addChild(pot, 0);
+    Node* potBack = pot->getBack();
+    this->addChild(potBack, 11);
+    Node* potFront = pot->getFront();
+    this->addChild(potFront, 100);
     
     ScoreLayer* scoreLayer = ScoreLayer::create(2300);
     scoreLayer->setPosition(Vec2(500, visibleSize.height + origin.y - 100));

@@ -27,14 +27,19 @@ bool Pot::init() {
  
     front = Sprite::createWithSpriteFrameName("pot_front_1.png");
     front->setAnchorPoint(Vec2(0,0));
-    this->addChild(front, 1);
     
     back = Sprite::createWithSpriteFrameName("pot_back_1.png");
     back->setAnchorPoint(Vec2(0,0));
-    this->addChild(back, -1);
     
     this->setAnchorPoint(Vec2(0,0));
     
     return true;
 }
 
+Sprite* Pot::getFront() {
+    return front;
+}
+
+Sprite* Pot::getBack() {
+    return back;
+}
