@@ -5,6 +5,7 @@
 #include "ScoreLayer.h"
 #include "Item.h"
 #include "ItemFactory.h"
+#include "BonusMenu.h"
 
 USING_NS_CC;
 
@@ -49,6 +50,10 @@ void GameMenu::initializeMenu() {
     Sprite* bg = Sprite::createWithSpriteFrameName("level_1_bg.png");
     bg->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     this->addChild(bg, -1);
+    
+    BonusMenu* bonusMenu = BonusMenu::create();
+    bonusMenu->setPosition(Vec2(bonusMenu->getPosition().x - (visibleSize.width/2 + origin.x) + 140, visibleSize.height/2 + origin.y - 100));
+    this->addChild(bonusMenu, 0);
     
     float yOffsetConveyer = 615;
     
