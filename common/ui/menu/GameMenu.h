@@ -7,6 +7,8 @@
 #include "Conveyor.h"
 #include "Hands.h"
 
+class MovementController;
+
 class GameMenu : public SimpleMenu
 {
 private:
@@ -26,6 +28,8 @@ private:
     
     float yPosCheckGrab;
     float yPosStartGrab;
+   
+   MovementController* _mover;
 protected:
     void update(float dt);
 public:

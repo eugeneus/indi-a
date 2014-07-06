@@ -5,6 +5,7 @@
 #include "ScoreLayer.h"
 #include "Item.h"
 #include "ItemFactory.h"
+#include "MovementController.h"
 
 USING_NS_CC;
 
@@ -79,6 +80,10 @@ void GameMenu::initializeMenu() {
     
     lastCreatedItem = 0;
     nextItemDt = getRandomNumber(4, 6);
+   
+   _mover = new MovementController();
+   _mover->init();
+   
     this->scheduleUpdate();
     
 }
@@ -92,12 +97,16 @@ void GameMenu::update(float dt) {
         Item* item = ItemFactory::createItem(getRandomNumber(0, 1), 0);
         item->setPosition(Vec2(visibleSize.width + origin.x, -1 * offset));
         conv->addChild(item, 10);
-        
+       
+       _mover->addItem(*item);
+       
         lastCreatedItem = 0;
         nextItemDt = getRandomNumber(4, 6);
     } else {
         lastCreatedItem +=dt;
     }
+   
+   _mover->update(dt);
     
     // grab detecting loop part
     float yPosFirstItem = conv->getFirstItemPosY();
