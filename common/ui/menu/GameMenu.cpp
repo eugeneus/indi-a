@@ -5,13 +5,7 @@
 #include "ScoreLayer.h"
 #include "Item.h"
 #include "ItemFactory.h"
-<<<<<<< HEAD
 #include "MovementController.h"
-=======
-#include "BonusMenu.h"
-#include "MindCloudTips.h"
-#include "Pot.h"
->>>>>>> 66fe63b87041018035495a2104b2afa262df8059
 
 USING_NS_CC;
 
@@ -57,45 +51,27 @@ void GameMenu::initializeMenu() {
     bg->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     this->addChild(bg, -1);
     
-    BonusMenu* bonusMenu = BonusMenu::create();
-    bonusMenu->setPosition(Vec2(bonusMenu->getPosition().x - (visibleSize.width/2 + origin.x) + 140, visibleSize.height/2 + origin.y - 100));
-    this->addChild(bonusMenu, 0);
-    
-    float yOffsetConveyer = 615;
-    
     Chef* chef = Chef::create();
-    chef->setPosition(Vec2(chef->getPosition().x + 200, yOffsetConveyer)); //TODO: remove x offset position
-    chef->setScale(0.5); //TODO: remove scale
+    chef->setPosition(Vec2(chef->getPosition().x + 50, 315)); //TODO: remove x position
     this->addChild(chef, 0);
     
-    hands = Hands::create(chef->getContentSize().width/2); //TODO: remove divide 2
-    hands->setPosition(Vec2(chef->getPosition().x, yOffsetConveyer));
+    hands = Hands::create(chef->getContentSize().width);
+    hands->setPosition(Vec2(chef->getPosition().x, chef->getPosition().y));
     this->addChild(hands, 2);
     
-    MindCloudTips* cloudTips = MindCloudTips::create("tips_level_1.png");
-    //cloudTips->setPosition(Vec2(chef->getPosition().x - cloudTips->getContentSize().width, chef->getPosition().y + chef->getContentSize().height));
-    cloudTips->setPosition(Vec2(140, yOffsetConveyer + 100));
-    this->addChild(cloudTips, 2);
-    cloudTips->toggleTip();
     
     conv = Conveyor::create();
-    conv->setPosition(Vec2(0, yOffsetConveyer));
+    conv->setPosition(Vec2(0, 315));
     this->addChild(conv, 1);
     
     yPosStartGrab = conv->getContentSize().width/2;
     yPosCheckGrab = yPosStartGrab + 100;
     
-    Item* item = ItemFactory::createItem(1, 1);
+    Item* item = ItemFactory::createItem(0, 0);
     //Gabbage* foodItem = Gabbage::create();
     item->setPosition(Vec2(visibleSize.width + origin.x, -100));
     //conv->addChild(foodItem);
     conv->addChild(item, 10);
-    
-    Pot* pot = Pot::create();
-    Node* potBack = pot->getBack();
-    this->addChild(potBack, 11);
-    Node* potFront = pot->getFront();
-    this->addChild(potFront, 100);
     
     ScoreLayer* scoreLayer = ScoreLayer::create(2300);
     scoreLayer->setPosition(Vec2(500, visibleSize.height + origin.y - 100));
@@ -118,7 +94,7 @@ void GameMenu::update(float dt) {
     if (lastCreatedItem >= nextItemDt) {
         int posOffset = getRandomNumber(1, 3);
         int offset = posOffset == 1 ? 20 : (posOffset == 2 ? 50 : 100);
-        Item* item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 1));
+        Item* item = ItemFactory::createItem(getRandomNumber(0, 1), 0);
         item->setPosition(Vec2(visibleSize.width + origin.x, -1 * offset));
         conv->addChild(item, 10);
        
