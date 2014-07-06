@@ -90,7 +90,6 @@
 		AAB01DA219629E84002251B1 /* Hand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB01DA019629E84002251B1 /* Hand.cpp */; };
 		AAB01DA51962A1B9002251B1 /* Hands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB01DA31962A1B9002251B1 /* Hands.cpp */; };
 		AAB58E3D1966BBA600C48611 /* BowlingBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E3B1966BBA600C48611 /* BowlingBall.cpp */; };
-		AAB58E431966C60100C48611 /* ImageLabelMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E411966C60100C48611 /* ImageLabelMenuItem.cpp */; };
 		AAB58E461966CF4900C48611 /* BonusMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E441966CF4900C48611 /* BonusMenu.cpp */; };
 		AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4B1966E64B00C48611 /* TipsFadeble.cpp */; };
 		AAB58E501966E90C00C48611 /* MindCloudTips.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4E1966E90C00C48611 /* MindCloudTips.cpp */; };
@@ -104,6 +103,7 @@
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		E0050DE31967D0FC009E7BA1 /* MovementController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0050DE11967D0FC009E7BA1 /* MovementController.cpp */; };
 		E0050DE61967F31B009E7BA1 /* GameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0050DE41967F31B009E7BA1 /* GameController.cpp */; };
+		E072E1A1196932F5002E4C04 /* ImageLabelMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E072E19D196932F5002E4C04 /* ImageLabelMenuItem.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -350,8 +350,6 @@
 		AAB01DA41962A1B9002251B1 /* Hands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hands.h; sourceTree = "<group>"; };
 		AAB58E3B1966BBA600C48611 /* BowlingBall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BowlingBall.cpp; sourceTree = "<group>"; };
 		AAB58E3C1966BBA600C48611 /* BowlingBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlingBall.h; sourceTree = "<group>"; };
-		AAB58E411966C60100C48611 /* ImageLabelMenuItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelMenuItem.cpp; sourceTree = "<group>"; };
-		AAB58E421966C60100C48611 /* ImageLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLabelMenuItem.h; sourceTree = "<group>"; };
 		AAB58E441966CF4900C48611 /* BonusMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BonusMenu.cpp; sourceTree = "<group>"; };
 		AAB58E451966CF4900C48611 /* BonusMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusMenu.h; sourceTree = "<group>"; };
 		AAB58E4B1966E64B00C48611 /* TipsFadeble.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TipsFadeble.cpp; sourceTree = "<group>"; };
@@ -371,6 +369,8 @@
 		E0050DE21967D0FC009E7BA1 /* MovementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovementController.h; sourceTree = "<group>"; };
 		E0050DE41967F31B009E7BA1 /* GameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameController.cpp; sourceTree = "<group>"; };
 		E0050DE51967F31B009E7BA1 /* GameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameController.h; sourceTree = "<group>"; };
+		E072E19D196932F5002E4C04 /* ImageLabelMenuItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelMenuItem.cpp; sourceTree = "<group>"; };
+		E072E19E196932F5002E4C04 /* ImageLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLabelMenuItem.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -651,8 +651,8 @@
 		AA96A200195DB16C00C22BC9 /* component */ = {
 			isa = PBXGroup;
 			children = (
+				E072E19C196932F5002E4C04 /* imageLabelMenu */,
 				AAB58E4A1966E61400C48611 /* tips */,
-				AAB58E401966C5F300C48611 /* imageLabelMenu */,
 				AA34247E1960C7250067B032 /* score */,
 				AA4A9CFE1960225B00BB3634 /* cycle */,
 				AA96A229195DB75E00C22BC9 /* spriteable */,
@@ -760,6 +760,15 @@
 			path = hand;
 			sourceTree = "<group>";
 		};
+		AAB58E4A1966E61400C48611 /* tips */ = {
+			isa = PBXGroup;
+			children = (
+				AAB58E4B1966E64B00C48611 /* TipsFadeble.cpp */,
+				AAB58E4C1966E64B00C48611 /* TipsFadeble.h */,
+			);
+			path = tips;
+			sourceTree = "<group>";
+		};
 		E0050DE01967D07D009E7BA1 /* core */ = {
 			isa = PBXGroup;
 			children = (
@@ -771,13 +780,13 @@
 			path = core;
 			sourceTree = "<group>";
 		};
-		AAB58E4A1966E61400C48611 /* tips */ = {
+		E072E19C196932F5002E4C04 /* imageLabelMenu */ = {
 			isa = PBXGroup;
 			children = (
-				AAB58E4B1966E64B00C48611 /* TipsFadeble.cpp */,
-				AAB58E4C1966E64B00C48611 /* TipsFadeble.h */,
+				E072E19D196932F5002E4C04 /* ImageLabelMenuItem.cpp */,
+				E072E19E196932F5002E4C04 /* ImageLabelMenuItem.h */,
 			);
-			path = tips;
+			path = imageLabelMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1011,6 +1020,7 @@
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				AA96A220195DB16C00C22BC9 /* MainMenu.cpp in Sources */,
 				E0050DE31967D0FC009E7BA1 /* MovementController.cpp in Sources */,
+				E072E1A1196932F5002E4C04 /* ImageLabelMenuItem.cpp in Sources */,
 				AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */,
 				AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */,
 				AA870FFB196324A50028A4EA /* Food.cpp in Sources */,
@@ -1019,7 +1029,6 @@
 				AAB58E531966F5F600C48611 /* Pot.cpp in Sources */,
 				AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */,
 				AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */,
-				AAB58E431966C60100C48611 /* ImageLabelMenuItem.cpp in Sources */,
 				AA870FFD196324A50028A4EA /* Gabbage.cpp in Sources */,
 				AA8710011963250E0028A4EA /* Item.cpp in Sources */,
 				AA87100D196329770028A4EA /* GarbageFactory.cpp in Sources */,
