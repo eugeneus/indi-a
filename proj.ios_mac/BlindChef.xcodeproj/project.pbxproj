@@ -771,6 +771,15 @@
 			path = core;
 			sourceTree = "<group>";
 		};
+		AAB58E4A1966E61400C48611 /* tips */ = {
+			isa = PBXGroup;
+			children = (
+				AAB58E4B1966E64B00C48611 /* TipsFadeble.cpp */,
+				AAB58E4C1966E64B00C48611 /* TipsFadeble.h */,
+			);
+			path = tips;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */

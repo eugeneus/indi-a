@@ -5,6 +5,9 @@
 #include "ScoreLayer.h"
 #include "Item.h"
 #include "ItemFactory.h"
+#include "BonusMenu.h"
+#include "MindCloudTips.h"
+#include "Pot.h"
 #include "MovementController.h"
 
 USING_NS_CC;
