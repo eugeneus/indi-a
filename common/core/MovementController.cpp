@@ -30,11 +30,11 @@ BezierTo* MovementController::createBezierPath(Vec2 aStartPos)
    visibleSize = Director::getInstance()->getVisibleSize();
    
    
-   bezier.controlPoint_1 = Vec2(aStartPos.x,aStartPos.y);
-   bezier.controlPoint_2 = Vec2(aStartPos.x - 40, visibleSize.height / 2.0f);
-   bezier.endPosition = Vec2(aStartPos.x + 60,-visibleSize.height/ 2.0f);
+   bezier.controlPoint_1 = Vec2(aStartPos.x + 60.0f, 0.0f); //aStartPos.y + 20
+   bezier.controlPoint_2 = Vec2(aStartPos.x + 100.0f, 0.0f); //aStartPos.y + 20
+   bezier.endPosition = Vec2(aStartPos.x + 60.0f, 0.0f);
    
-   return BezierTo::create(10, bezier);
+   return BezierTo::create(1, bezier);
 
 }
 
@@ -77,8 +77,10 @@ void MovementController::processThrowAction()
 	{
 		auto item = _items.at(i);
       Vec2 pos = item->getPosition();
-      if (pos.x > _grabPosX - 40 && pos.x < _grabPosX) {
+      if (pos.x > _grabPosX - 2 && pos.x < _grabPosX) {
          
+         //item->stopAllActions();
+         item->removeFromParentAndCleanup(true);
          item->runAction(this->createBezierPath(pos));
          
       }

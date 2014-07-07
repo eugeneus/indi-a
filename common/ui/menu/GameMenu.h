@@ -8,12 +8,16 @@
 #include "Hands.h"
 
 class MovementController;
+class GameController;
 
 class GameMenu : public SimpleMenu
 {
 private:
     typedef SimpleMenu super;
-    
+   
+    GameController* _theGameController;
+
+   
     cocos2d::ParallaxNode* conveyorNode;
     cocos2d::Sprite* conveyor1;
     cocos2d::Sprite* conveyor2;

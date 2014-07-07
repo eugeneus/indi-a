@@ -10,6 +10,7 @@ class SimpleMenu : public BaseMenu
 {
 private:
     typedef BaseMenu super;
+   
 public:
     virtual void initializeMenu();
     

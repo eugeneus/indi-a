@@ -2,11 +2,21 @@
 #ifndef __BlindChef__GameController__
 #define __BlindChef__GameController__
 
+
+#include "cocos2d.h"
+USING_NS_CC;
+
 class GameController {
 
 private:
 
+   cocos2d::Layer* _gameLayer;
+   
 protected:
+   
+   void populateBackground();
+   
+   void populateGameObjects();
 
 public:
 
@@ -14,9 +24,9 @@ public:
 
    ~GameController();
 
-   static GameController* create();
+   static GameController* createWitLayer(cocos2d::Layer* aGameLayer);
 
-   bool init();
+   bool initWithLayer(cocos2d::Layer* aGameLayer);
    
    void startGame();
    
