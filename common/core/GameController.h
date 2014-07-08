@@ -14,9 +14,9 @@ private:
    
 protected:
    
-   void populateBackground();
+   void arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
    
-   void populateGameObjects();
+   void populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
 
 public:
 

@@ -4,8 +4,6 @@
 
 #include "cocos2d.h"
 #include "SimpleMenu.h"
-#include "Conveyor.h"
-#include "Hands.h"
 
 class MovementController;
 class GameController;
@@ -16,24 +14,8 @@ private:
     typedef SimpleMenu super;
    
     GameController* _theGameController;
-
+    MovementController* _mover;
    
-    cocos2d::ParallaxNode* conveyorNode;
-    cocos2d::Sprite* conveyor1;
-    cocos2d::Sprite* conveyor2;
-    cocos2d::Size visibleSize;
-    cocos2d::Vec2 origin;
-    
-    Conveyor* conv;
-    Hands* hands;
-    
-    float lastCreatedItem;
-    int nextItemDt;
-    
-    float yPosCheckGrab;
-    float yPosStartGrab;
-   
-   MovementController* _mover;
 protected:
     void update(float dt);
 public:
