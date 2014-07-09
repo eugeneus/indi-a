@@ -12,7 +12,13 @@
 #include "MovementController.h"
 
 
-GameController::GameController(){}
+GameController::GameController()
+{
+   _convY = 0.0f;
+   _convVelY = 0.0f;
+   _items = new Vector<cocos2d::Node*>(10);
+
+}
 
 GameController::~GameController() {}
 
@@ -22,7 +28,6 @@ GameController* GameController::createWitLayer(cocos2d::Layer* initWithLayer)
    GameController *pRet = new GameController();
    if (pRet && pRet->initWithLayer(initWithLayer))
    {
-      pRet->_items = new Vector<cocos2d::Node*>(10);
       return pRet;
    }
    else
@@ -73,8 +78,12 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     _gameLayer->addChild(cloudTips, 2);
     cloudTips->toggleTip();
    
-    Conveyor* conv = Conveyor::create();
-    conv->setPosition(Vec2(0, yOffsetConveyer));
+    _convY = yOffsetConveyer;
+    _convVelY = 400.0f;
+    _convLegth = aVisibleSize.width;
+
+    Conveyor* conv = Conveyor::create(_convVelY, _convLegth);
+    conv->setPosition(Vec2(0, _convY));
     _gameLayer->addChild(conv, 1);
     
     Pot* pot = Pot::create();
@@ -92,10 +101,28 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     //_mover->init();
 }
 
+int getRandomNumber(int from ,int to) {
+   return (int)from + arc4random() % (to-from+1);
+}
+
 void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
 {
-   // create items array
-   // array of arrays (each member stores only one typw of item)?
+   Item* item = nullptr;
+   
+   //float tmp = _items->size();
+   Vec2 itemPos = Vec2(anOrigin.x + aVisibleSize.width/2.0f, _convY);
+   
+   //Vec2 itemPos = Vec2(aVisibleSize.width/2.0f + anOrigin.x, anOrigin.y + 100);
+   
+   for (int iItm = 0; iItm < 10; iItm++) {
+      item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 1));
+      item->setPosition(itemPos); //-1 * offset
+      _gameLayer->addChild(item,10);
+      _items->pushBack(item);
+   }
+   
+
+   
    
    // add items toarray
    
@@ -130,6 +157,8 @@ void stopGame()
 
 void GameController::update(float dt)
 {
+   
+   
    
    /*
     // generation items loop part

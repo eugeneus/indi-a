@@ -29,11 +29,6 @@ Scene* GameMenu::createScene()
     return scene;
 }
 
-
-int getRandomNumber(int from ,int to) {
-    return (int)from + arc4random() % (to-from+1);
-}
-
 void GameMenu::initializeMenu() {
     super::initializeMenu();
 

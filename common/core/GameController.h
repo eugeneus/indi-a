@@ -8,18 +8,6 @@ USING_NS_CC;
 
 class GameController {
 
-private:
-
-   cocos2d::Layer* _gameLayer;
-   
-protected:
-   
-   void arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
-   
-   void populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
-   
-   cocos2d::Vector<cocos2d::Node*>* _items;
-
 public:
 
    GameController();
@@ -36,6 +24,21 @@ public:
    
    void update(float dt);
 
+protected:
+   
+   void arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
+   
+   void populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
+   
+   // model
+   cocos2d::Vector<cocos2d::Node*>* _items;
+   float _convY;
+   float _convVelY;
+   float _convLegth;
+   
+private:
+   
+   cocos2d::Layer* _gameLayer;
 
 };
 #endif /* defined(__BlindChef__GameController__) */
