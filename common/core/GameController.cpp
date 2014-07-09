@@ -22,7 +22,7 @@ GameController* GameController::createWitLayer(cocos2d::Layer* initWithLayer)
    GameController *pRet = new GameController();
    if (pRet && pRet->initWithLayer(initWithLayer))
    {
-      //pRet->autorelease();
+      pRet->_items = new Vector<cocos2d::Node*>(10);
       return pRet;
    }
    else
@@ -69,7 +69,6 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     
    
     MindCloudTips* cloudTips = MindCloudTips::create("tips_level_1.png");
-    //cloudTips->setPosition(Vec2(chef->getPosition().x - cloudTips->getContentSize().width, chef->getPosition().y + chef->getContentSize().height));
     cloudTips->setPosition(Vec2(140, yOffsetConveyer + 100));
     _gameLayer->addChild(cloudTips, 2);
     cloudTips->toggleTip();
@@ -77,9 +76,6 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     Conveyor* conv = Conveyor::create();
     conv->setPosition(Vec2(0, yOffsetConveyer));
     _gameLayer->addChild(conv, 1);
-    
-    //yPosStartGrab = conv->getContentSize().width/2;
-    //yPosCheckGrab = yPosStartGrab + 100;
     
     Pot* pot = Pot::create();
     Node* potBack = pot->getBack();
@@ -92,16 +88,21 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     _gameLayer->addChild(scoreLayer, 1);
     
    
-    //lastCreatedItem = 0;
-    //nextItemDt = getRandomNumber(4, 6);
-    
     //_mover = new MovementController();
     //_mover->init();
 }
 
 void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
 {
-/*
+   // create items array
+   // array of arrays (each member stores only one typw of item)?
+   
+   // add items toarray
+   
+   // conv shuld have velocity  property
+   // get velocity to start moving items
+   
+ /*
    Hands* hands;
    
    hands = Hands::create(chef->getContentSize().width/2); //TODO: remove divide 2
@@ -113,9 +114,7 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
    item->setPosition(Vec2(aVisibleSize.width + anOrigin.x, -100));
    //conv->addChild(foodItem);
    conv->addChild(item, 10);
-   
-*/
-
+  */
 }
 
 void startGame()

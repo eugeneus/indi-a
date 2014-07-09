@@ -17,6 +17,8 @@ protected:
    void arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
    
    void populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
+   
+   cocos2d::Vector<cocos2d::Node*>* _items;
 
 public:
 
