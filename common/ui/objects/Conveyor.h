@@ -9,10 +9,10 @@ class Conveyor : public Cyclable {
 private:
     typedef Cyclable super;
 public:
-    static Conveyor* create();
-    static cocos2d::Scene* createScene();
+    static Conveyor* create(float aSpeed, float aLength);
+    static cocos2d::Scene* createScene(float aSpeed, float aLength);
     
-    bool init();
+    bool init(float aSpeed, float aLength);
     
     float getFirstItemPosY();
 };

@@ -3,10 +3,10 @@
 
 USING_NS_CC;
 
-Conveyor* Conveyor::create()
+Conveyor* Conveyor::create(float aSpeed, float aLength)
 {
     Conveyor *pRet = new Conveyor();
-    if (pRet && pRet->init())
+    if (pRet && pRet->init(aSpeed, aLength))
     {
         pRet->autorelease();
         return pRet;
@@ -19,17 +19,17 @@ Conveyor* Conveyor::create()
     }
 }
 
-Scene* Conveyor::createScene()
+Scene* Conveyor::createScene(float aSpeed, float aLength)
 {
     auto scene = Scene::create();
-    auto layer = Conveyor::create();
+    auto layer = Conveyor::create(aSpeed, aLength);
     scene->addChild(layer);
     return scene;
 }
 
-bool Conveyor::init() {
+bool Conveyor::init(float aSpeed, float aLength) {
     
-    if(!super::init("conveyer_1.png", 400, 640)) {
+    if(!super::init("conveyer_1.png", aSpeed, aLength)) {
         return false;
     }
     

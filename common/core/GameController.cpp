@@ -12,7 +12,13 @@
 #include "MovementController.h"
 
 
-GameController::GameController(){}
+GameController::GameController()
+{
+   _convY = 0.0f;
+   _convVelY = 0.0f;
+   _items = new Vector<cocos2d::Node*>(10);
+
+}
 
 GameController::~GameController() {}
 
@@ -22,7 +28,6 @@ GameController* GameController::createWitLayer(cocos2d::Layer* initWithLayer)
    GameController *pRet = new GameController();
    if (pRet && pRet->initWithLayer(initWithLayer))
    {
-      //pRet->autorelease();
       return pRet;
    }
    else
@@ -35,85 +40,108 @@ GameController* GameController::createWitLayer(cocos2d::Layer* initWithLayer)
 
 bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
 {
-   _gameLayer = aGameLayer;
-   this->populateBackground();
-   this->populateGameObjects();
-   return true;
-}
-
-void GameController::populateBackground()
-{
    cocos2d::Size visibleSize;
    cocos2d::Vec2 origin;
 
+   _gameLayer = aGameLayer;
+   
    visibleSize = Director::getInstance()->getVisibleSize();
    origin = Director::getInstance()->getVisibleOrigin();
+   
+   this->arrangeBackground(origin,visibleSize);
+   this->populateGameObjects(origin,visibleSize);
+   
+   return true;
+}
+
+void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
+{
 
    Sprite* bg = Sprite::createWithSpriteFrameName("level_1_bg.png");
-   bg->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+   bg->setPosition(Vec2(aVisibleSize.width/2 + anOrigin.x, aVisibleSize.height/2 + anOrigin.y));
    _gameLayer->addChild(bg, -1);
    
-   /*
     BonusMenu* bonusMenu = BonusMenu::create();
-    bonusMenu->setPosition(Vec2(bonusMenu->getPosition().x - (visibleSize.width/2 + origin.x) + 140, visibleSize.height/2 + origin.y - 100));
-    this->addChild(bonusMenu, 0);
+    bonusMenu->setPosition(Vec2(bonusMenu->getPosition().x - (aVisibleSize.width/2 + anOrigin.x) + 140, aVisibleSize.height/2 + anOrigin.y - 100));
+    _gameLayer->addChild(bonusMenu, 0);
     
     float yOffsetConveyer = 615;
     
     Chef* chef = Chef::create();
     chef->setPosition(Vec2(chef->getPosition().x + 200, yOffsetConveyer)); //TODO: remove x offset position
     chef->setScale(0.5); //TODO: remove scale
-    this->addChild(chef, 0);
+    _gameLayer->addChild(chef, 0);
     
-    hands = Hands::create(chef->getContentSize().width/2); //TODO: remove divide 2
-    hands->setPosition(Vec2(chef->getPosition().x, yOffsetConveyer));
-    this->addChild(hands, 2);
-    
+   
     MindCloudTips* cloudTips = MindCloudTips::create("tips_level_1.png");
-    //cloudTips->setPosition(Vec2(chef->getPosition().x - cloudTips->getContentSize().width, chef->getPosition().y + chef->getContentSize().height));
     cloudTips->setPosition(Vec2(140, yOffsetConveyer + 100));
-    this->addChild(cloudTips, 2);
+    _gameLayer->addChild(cloudTips, 2);
     cloudTips->toggleTip();
-    
-    conv = Conveyor::create();
-    conv->setPosition(Vec2(0, yOffsetConveyer));
-    this->addChild(conv, 1);
-    
-    yPosStartGrab = conv->getContentSize().width/2;
-    yPosCheckGrab = yPosStartGrab + 100;
-    
-    Item* item = ItemFactory::createItem(1, 1);
-    //Gabbage* foodItem = Gabbage::create();
-    item->setPosition(Vec2(visibleSize.width + origin.x, -100));
-    //conv->addChild(foodItem);
-    conv->addChild(item, 10);
+   
+    _convY = yOffsetConveyer;
+    _convVelY = 400.0f;
+    _convLegth = aVisibleSize.width;
+
+    Conveyor* conv = Conveyor::create(_convVelY, _convLegth);
+    conv->setPosition(Vec2(0, _convY));
+    _gameLayer->addChild(conv, 1);
     
     Pot* pot = Pot::create();
     Node* potBack = pot->getBack();
-    this->addChild(potBack, 11);
+    _gameLayer->addChild(potBack, 11);
     Node* potFront = pot->getFront();
-    this->addChild(potFront, 100);
+    _gameLayer->addChild(potFront, 100);
     
     ScoreLayer* scoreLayer = ScoreLayer::create(2300);
-    scoreLayer->setPosition(Vec2(500, visibleSize.height + origin.y - 100));
-    this->addChild(scoreLayer, 1);
+    scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
+    _gameLayer->addChild(scoreLayer, 1);
     
-    
-    lastCreatedItem = 0;
-    nextItemDt = getRandomNumber(4, 6);
-    
+   
     //_mover = new MovementController();
     //_mover->init();
-    
-    this->scheduleUpdate();
-
-    */
-
 }
 
-void GameController::populateGameObjects()
-{
+int getRandomNumber(int from ,int to) {
+   return (int)from + arc4random() % (to-from+1);
+}
 
+void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
+{
+   Item* item = nullptr;
+   
+   //float tmp = _items->size();
+   Vec2 itemPos = Vec2(anOrigin.x + aVisibleSize.width/2.0f, _convY);
+   
+   //Vec2 itemPos = Vec2(aVisibleSize.width/2.0f + anOrigin.x, anOrigin.y + 100);
+   
+   for (int iItm = 0; iItm < 10; iItm++) {
+      item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 1));
+      item->setPosition(itemPos); //-1 * offset
+      _gameLayer->addChild(item,10);
+      _items->pushBack(item);
+   }
+   
+
+   
+   
+   // add items toarray
+   
+   // conv shuld have velocity  property
+   // get velocity to start moving items
+   
+ /*
+   Hands* hands;
+   
+   hands = Hands::create(chef->getContentSize().width/2); //TODO: remove divide 2
+   hands->setPosition(Vec2(chef->getPosition().x, yOffsetConveyer));
+   _gameLayer->addChild(hands, 2);
+
+   Item* item = ItemFactory::createItem(1, 1);
+   //Gabbage* foodItem = Gabbage::create();
+   item->setPosition(Vec2(aVisibleSize.width + anOrigin.x, -100));
+   //conv->addChild(foodItem);
+   conv->addChild(item, 10);
+  */
 }
 
 void startGame()
@@ -129,6 +157,37 @@ void stopGame()
 
 void GameController::update(float dt)
 {
+   
+   
+   
+   /*
+    // generation items loop part
+    if (lastCreatedItem >= nextItemDt) {
+    int posOffset = getRandomNumber(1, 3);
+    int offset = posOffset == 1 ? 20 : (posOffset == 2 ? 50 : 100);
+    Item* item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 1));
+    item->setPosition(Vec2(visibleSize.width + origin.x, -1 * offset));
+    conv->addChild(item, 10);
+    
+    _mover->addItem(*item);
+    
+    lastCreatedItem = 0;
+    nextItemDt = getRandomNumber(4, 6);
+    } else {
+    lastCreatedItem +=dt;
+    }
+    
+    _mover->update(dt);
+    
+    // grab detecting loop part
+    float yPosFirstItem = conv->getFirstItemPosY();
+    if (yPosFirstItem >= yPosStartGrab) {
+    //hands->startGrab();
+    } else if (yPosFirstItem >= yPosCheckGrab) {
+    //hands->preGrab(conv->getFirst);
+    }
+    */
+
 
 }
 
