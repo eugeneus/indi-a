@@ -22,6 +22,8 @@ public:
     static GameMenu* create();
     static cocos2d::Scene* createScene();
     virtual void initializeMenu();
+    //virtual void draw();
+   virtual void draw(cocos2d::Renderer* renderer, const cocos2d::kmMat4& transform, bool transformUpdated);
 };
 
 
