@@ -16,6 +16,13 @@ GameController::GameController()
 {
    _convY = 0.0f;
    _convVelY = 0.0f;
+
+   _convY = 0.0f;
+   _convVelY = 0.0f;
+   _convLegth = 0.0f;
+   
+   _putNextItemDt = 2.0f;
+   
    _items = new Vector<cocos2d::Node*>(10);
 
 }
@@ -49,7 +56,10 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
    origin = Director::getInstance()->getVisibleOrigin();
    
    this->arrangeBackground(origin,visibleSize);
+   _itemIdlePos = Vec2(visibleSize.width, _convY - 50.0f);
    this->populateGameObjects(origin,visibleSize);
+   
+
    
    return true;
 }
@@ -116,7 +126,8 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
    
    for (int iItm = 0; iItm < 10; iItm++) {
       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 1));
-      item->setPosition(itemPos); //-1 * offset
+      item->setPosition(_itemIdlePos); //-1 * offset
+      item->setScale(0.5);
       _gameLayer->addChild(item,10);
       _items->pushBack(item);
    }
@@ -155,10 +166,83 @@ void stopGame()
 }
 
 
+void GameController::startLinearMove(Item* anItem)
+{
+	float actionDuration = Director::getInstance()->getVisibleSize().width/(_convVelY/10); // todo correct velocity of conv/items
+	FiniteTimeAction* actionMove =
+   MoveTo::create(actionDuration,
+                    Vec2(0.0f - (anItem->getContentSize().width + 1), _itemIdlePos.y) );
+	// add action to
+   actionMove->setTag(1001);
+	anItem->runAction(actionMove);
+   
+}
+
+void GameController::tryPutNextItem(float dt, Item* anItem)
+{
+   Vec2 pos = anItem->getPosition();
+	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x){
+      this->startLinearMove(anItem);
+		_putNextItemDt = getRandomNumber(3, 6);
+	}
+   
+   
+}
+
+void GameController::setItemIdle(float dt, Item* anItem)
+{
+	if(anItem->getPosition().x + anItem->getContentSize().width + 1 <= Director::getInstance()->getVisibleOrigin().x){
+		
+		anItem->setPosition(_itemIdlePos);
+	}
+}
+
+BezierTo* GameController::createBezierPath(Vec2 aStartPos)
+{
+   ccBezierConfig bezier;
+   
+   bezier.controlPoint_1 = Point(aStartPos.x + 50.0f, aStartPos.y + 150.0f); //aStartPos.y + 20
+   bezier.controlPoint_2 = Point(aStartPos.x + 100.0f, aStartPos.y + 150.0f); //aStartPos.y + 20
+   bezier.endPosition = Point(aStartPos.x + 120.0f,aStartPos.y - 150.0f); //730.0f
+   
+
+   return BezierTo::create(3, bezier);
+   
+}
+
+
+void GameController::throwItemSimple(Item* anItem)
+{
+   float xThrow = 200.0f;
+   
+   if (anItem->getPosition().x >= xThrow &&  anItem->getPosition().x <= xThrow + 5.0f){
+      
+      anItem->stopActionByTag(1001);
+      anItem->runAction(this->createBezierPath(anItem->getPosition()));
+      anItem->runAction(cocos2d::ScaleBy::create(3, 3.0f));
+      
+   }
+
+}
+
+
+
+
 void GameController::update(float dt)
 {
    
-   
+   Item* item = nullptr;
+   Vec2 itemPos;
+   Size itemSize;
+   for(Node* nitem : *_items){
+      item = (Item*)nitem;
+      //itemPos = item->getPosition();
+      //itemSize = item->getContentSize();
+      this->setItemIdle(dt, item);
+      this->tryPutNextItem(dt, item);
+      this->throwItemSimple(item);
+   }
+   _putNextItemDt -= dt;
    
    /*
     // generation items loop part
