@@ -28,76 +28,76 @@ Cyclable* Cyclable::create(const char* bgSpriteFrameName, float speed, float len
 
 bool Cyclable::init(const char* bgSpriteFrameName, float pSpeed, float pLength) {
     
-    if ( !Layer::init() )
+    if ( !LayerColor::initWithColor(ccc4(255, 255, 255, 255)) )
     {
         return false;
     }
-    
-    endPoint = pLength;
-    cyclingSpeed = pSpeed;
-    
-    Sprite* bg1 = Sprite::createWithSpriteFrameName(bgSpriteFrameName);
-    Vec2 prevPos = Vec2(0, bg1->getPosition().y - bg1->getContentSize().height);
-    bg1->setPosition(prevPos);
-    bg1->setAnchorPoint(Vec2(0, 0));
-    sprites.pushBack(bg1);
-    super::addChild(bg1);
-    
-    float length = bg1->getContentSize().width;
-    
-    int count = (int)round(pLength/length + 1.5);
-        
+   
+   this->setColor(ccc3(255, 255, 255));
+   
+   this->setAnchorPoint(Vec2(0,0));
+
+   Sprite* bg1 = Sprite::createWithSpriteFrameName(bgSpriteFrameName);
+   this->setContentSize(bg1->getContentSize());
+   
+   endPoint = pLength;
+   cyclingSpeed = pSpeed;
+   
+   float imgLen = bg1->getContentSize().width;
+   
+   Vec2 posOffset = Vec2(imgLen, 0);
+   
+   Vec2 prevPos = Vec2(0, 0);
+   bg1->setAnchorPoint(Vec2(0, 0));
+   bg1->setPosition(prevPos);
+
+   sprites.pushBack(bg1);
+   super::addChild(bg1);
+
+   Sprite* bg2 = Sprite::createWithSpriteFrameName(bgSpriteFrameName);
+   bg2->setAnchorPoint(Vec2(0, 0));
+   bg2->setPosition(Vec2(prevPos.x+imgLen-2,prevPos.y));
+   
+   sprites.pushBack(bg2);
+   super::addChild(bg2);
+/*
+    int count = (int)round(pLength/imgLen + 1.5);
+   
     for (int i=0; i<count; i++) {
         Sprite* bg = Sprite::createWithSpriteFrameName(bgSpriteFrameName);
-        prevPos = Vec2(prevPos.x + length - 2, prevPos.y);
+        prevPos = Vec2(prevPos.x + imgLen - 2, prevPos.y);
         bg->setPosition(prevPos);
         bg->setAnchorPoint(Vec2(0, 0));
         sprites.pushBack(bg);
         super::addChild(bg);
     }
+*/
+    actionLength = imgLen;
+    actionDuration = actionLength/cyclingSpeed;
    
     this->startCycling();
     
     return true;
 }
 
-void Cyclable::update(float dt) {
-    Sprite* first = sprites.front();
-    Sprite* last = sprites.back();
-    
-    float delta = endPoint/cyclingSpeed; //TODO: speed
-    
-    if (last->getPosition().x - endPoint <= delta ) {
-        first->setPosition(Vec2(last->getPosition().x + last->getContentSize().width, last->getPosition().y));
-        
-        Vector<Sprite*> tmpSprites;
-        for(int i=1; i<sprites.size(); i++) {
-            Sprite* sp = sprites.at(i);
-            tmpSprites.pushBack(sp);
-        }
-        
-        tmpSprites.pushBack(first);
-        sprites.clear();
-        sprites.pushBack(tmpSprites);
-    }
-    
-    for(int i=0; i<sprites.size(); i++) {
-        Sprite* sp = sprites.at(i);
-        sp->setPosition(Vec2(sp->getPosition().x - delta, sp->getPosition().y));
-    }
-    
-    for(int i=0; i<children.size(); i++) {
-        Node* node = children.at(i);
-        node->setPosition(Vec2(node->getPosition().x - delta, node->getPosition().y));
-    }
-}
-
 void Cyclable::stopCycling() {
+   
+   //stopActions
 
 }
 
 void Cyclable::startCycling() {
-    this->scheduleUpdate();
+   
+   FiniteTimeAction* actionMoveBy = nullptr;
+   FiniteTimeAction* actionPlase = nullptr;
+   Vec2 v;
+   for(Sprite* nSprite : sprites){
+      actionMoveBy = CCMoveBy::create(actionDuration,Vec2(-actionLength, 0.0f));
+      v = Vec2(nSprite->getPosition().x,nSprite->getPosition().y);
+      actionPlase = Place::create(v);
+      nSprite->runAction(RepeatForever::create(Sequence::create(actionMoveBy,actionPlase, NULL)));
+   }
+   
 }
 
 void Cyclable::changeCyclingSpeed(float speed) {

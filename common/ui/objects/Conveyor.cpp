@@ -19,14 +19,6 @@ Conveyor* Conveyor::create(float aSpeed, float aLength)
     }
 }
 
-Scene* Conveyor::createScene(float aSpeed, float aLength)
-{
-    auto scene = Scene::create();
-    auto layer = Conveyor::create(aSpeed, aLength);
-    scene->addChild(layer);
-    return scene;
-}
-
 bool Conveyor::init(float aSpeed, float aLength) {
     
     if(!super::init("conveyer_1.png", aSpeed, aLength)) {
