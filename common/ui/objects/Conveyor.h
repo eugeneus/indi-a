@@ -10,7 +10,6 @@ private:
     typedef Cyclable super;
 public:
     static Conveyor* create(float aSpeed, float aLength);
-    static cocos2d::Scene* createScene(float aSpeed, float aLength);
     
     bool init(float aSpeed, float aLength);
     

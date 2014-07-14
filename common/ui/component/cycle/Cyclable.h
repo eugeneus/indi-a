@@ -4,17 +4,19 @@
 
 #include "cocos2d.h"
 
-class Cyclable : public cocos2d::Layer {
+class Cyclable : public cocos2d::LayerColor {
     
 private:
-    typedef  cocos2d::Layer super;
+    typedef  cocos2d::LayerColor super;
     cocos2d::Vector<cocos2d::Sprite*> sprites;
     cocos2d::Vector<cocos2d::Node*> children;
     float endPoint;
     float cyclingSpeed;
+    float actionDuration;
+   float actionLength;
 protected:
     bool init(const char* bgSpriteFrameName, float speed, float length);
-    void update(float dt);
+    virtual void update(float dt);
 public:
     Cyclable();
     virtual ~Cyclable();

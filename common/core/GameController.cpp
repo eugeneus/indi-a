@@ -56,7 +56,7 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
    origin = Director::getInstance()->getVisibleOrigin();
    
    this->arrangeBackground(origin,visibleSize);
-   _itemIdlePos = Vec2(visibleSize.width, _convY - 50.0f);
+   _itemIdlePos = Vec2(visibleSize.width, _convY);
    this->populateGameObjects(origin,visibleSize);
    
 
@@ -88,12 +88,12 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     _gameLayer->addChild(cloudTips, 2);
     cloudTips->toggleTip();
    
-    _convY = yOffsetConveyer;
-    _convVelY = 400.0f;
+    _convY = yOffsetConveyer - 102;
+    _convVelY = 50;
     _convLegth = aVisibleSize.width;
 
     Conveyor* conv = Conveyor::create(_convVelY, _convLegth);
-    conv->setPosition(Vec2(0, _convY));
+   conv->setPosition(Vec2(0, _convY));
     _gameLayer->addChild(conv, 1);
     
     Pot* pot = Pot::create();
@@ -104,7 +104,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     
     ScoreLayer* scoreLayer = ScoreLayer::create(2300);
     scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
-    _gameLayer->addChild(scoreLayer, 1);
+    //_gameLayer->addChild(scoreLayer, 1);
     
    
     //_mover = new MovementController();
@@ -120,14 +120,14 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
    Item* item = nullptr;
    
    //float tmp = _items->size();
-   Vec2 itemPos = Vec2(anOrigin.x + aVisibleSize.width/2.0f, _convY);
+   //Vec2 itemPos = Vec2(anOrigin.x, _convY);
    
    //Vec2 itemPos = Vec2(aVisibleSize.width/2.0f + anOrigin.x, anOrigin.y + 100);
    
    for (int iItm = 0; iItm < 10; iItm++) {
       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 1));
       item->setPosition(_itemIdlePos); //-1 * offset
-      item->setScale(0.5);
+      item->setScale(0.7);
       _gameLayer->addChild(item,10);
       _items->pushBack(item);
    }
@@ -168,10 +168,12 @@ void stopGame()
 
 void GameController::startLinearMove(Item* anItem)
 {
-	float actionDuration = Director::getInstance()->getVisibleSize().width/(_convVelY/10); // todo correct velocity of conv/items
-	FiniteTimeAction* actionMove =
-   MoveTo::create(actionDuration,
-                    Vec2(0.0f - (anItem->getContentSize().width + 1), _itemIdlePos.y) );
+   float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
+   Vec2 targetPoint = Vec2(_itemIdlePos.x -  actionOffsetX, _itemIdlePos.y);
+   
+	float actionDuration = actionOffsetX/_convVelY; // todo correct velocity of conv/items
+   
+	FiniteTimeAction* actionMove = MoveTo::create(actionDuration,targetPoint);
 	// add action to
    actionMove->setTag(1001);
 	anItem->runAction(actionMove);
