@@ -7,6 +7,7 @@
 USING_NS_CC;
 
 class Item;
+class Hand;
 
 class GameController : public cocos2d::Ref {
 
@@ -47,9 +48,18 @@ protected:
    float _convLegth;
    float _putNextItemDt;
    float _itemTimer;
+   cocos2d::Point _chefOrigin;
+   cocos2d::Size  _chefSize;
    cocos2d::Vec2 _itemIdlePos;
    int _idxRotated;
    Vec2 _impulse;
+   
+   Hand* _leftHand;
+   Hand* _rightHand;
+   cocos2d::Point _ptLeftHand;
+   cocos2d::Point _ptRightHand;
+   bool _rightHandIdle;
+   
 private:
    
    cocos2d::Layer* _gameLayer;

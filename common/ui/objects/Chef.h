@@ -10,7 +10,7 @@ private:
     typedef Spritable super;
 public:
     static Chef* create();
-    static cocos2d::Scene* createScene();
+    //static cocos2d::Scene* createScene();
     
     bool init();
  //   virtual void initializeMenu();

@@ -10,7 +10,8 @@
 #include "MindCloudTips.h"
 #include "Pot.h"
 #include "MovementController.h"
-#include "Hands.h"
+
+#include "Hand.h"
 
 
 GameController::GameController()
@@ -25,6 +26,12 @@ GameController::GameController()
    _putNextItemDt = 2.0f;
    _idxRotated = 0;
    _impulse = Vec2(1.0f,1.0f);
+   
+   _chefOrigin = Point(0.0,0.0);
+   _chefSize = Size(0.0,0.0);
+   
+   _rightHandIdle = true;
+
    
    _items = new Vector<cocos2d::Node*>(10);
 
@@ -81,10 +88,25 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     float yOffsetConveyer = 615;
     
     Chef* chef = Chef::create();
-    chef->setPosition(Vec2(chef->getPosition().x + 200, yOffsetConveyer)); //TODO: remove x offset position
-    chef->setScale(0.5); //TODO: remove scale
+   float scaleFactor = 0.5f; // just for temporary
+   chef->setScale(scaleFactor);
+   _chefSize = chef->getContentSize();
+   _chefOrigin = Point((aVisibleSize.width - (_chefSize.width*scaleFactor))/2.0f, yOffsetConveyer);
+
+    chef->setPosition(_chefOrigin);
     _gameLayer->addChild(chef, 0);
-    
+
+   _leftHand = Hand::create();
+   _ptLeftHand = _chefOrigin;
+   _ptLeftHand.x = _chefOrigin.x + _chefSize.width*scaleFactor - _leftHand->getContentSize().width/2.0f;
+   _leftHand->setPosition(_ptLeftHand);
+   _gameLayer->addChild(_leftHand, 2);
+   
+   _rightHand = Hand::create();
+   _ptRightHand = _chefOrigin;
+   _rightHand->setPosition(_ptRightHand);
+   _rightHand->mirrorImg();
+   _gameLayer->addChild(_rightHand, 2);
    
     MindCloudTips* cloudTips = MindCloudTips::create("tips_level_1.png");
     cloudTips->setPosition(Vec2(140, yOffsetConveyer + 100));
@@ -108,11 +130,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     ScoreLayer* scoreLayer = ScoreLayer::create(2300);
     scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
 
-   Hands* hands;
-   
-   hands = Hands::create(chef->getContentSize().width/2); //TODO: remove divide 2
-   hands->setPosition(Vec2(chef->getPosition().x, _convY));
-   _gameLayer->addChild(hands, 2);
+
    
 }
 
@@ -150,7 +168,7 @@ void GameController::startLinearMove(Item* anItem)
    float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
    Vec2 targetPoint = Vec2(_itemIdlePos.x -  actionOffsetX, _itemIdlePos.y);
    
-	float actionDuration = actionOffsetX/_convVelY; // todo correct velocity of conv/items
+	float actionDuration = actionOffsetX/_convVelY;
    
 	FiniteTimeAction* actionMove = MoveTo::create(actionDuration,targetPoint);
 	// add action to
@@ -188,7 +206,7 @@ ccBezierConfig bezierConfigBouncePathForParams(Item* anItem, float aWeight, Vec2
    Point cp1 = itemPos;
    Point cp2 = itemPos;
    Point endPoint = itemPos;
-   Size visibleSize = Director::sharedDirector()->getVisibleSize();
+   Size visibleSize = Director::getInstance()->getVisibleSize();
    
    cp1.y = cp1.y + ((visibleSize.height - cp1.y) * anImpulse.y);
    cp1.x = cp1.x + ((visibleSize.width - cp1.x) * anImpulse.x);
@@ -220,7 +238,7 @@ BezierTo* GameController::bounceItemAction(Item* anItem, float aWeight, Vec2 anI
 
 void GameController::throwItemSimple(Item* anItem, Vec2 anImpulse)
 {
-   float xThrow = 200.0f;
+   float xThrow = _rightHand->getPosition().x;
    Point ptItem = anItem->getPosition();
    
    if (ptItem.x >= xThrow &&
@@ -279,6 +297,19 @@ void GameController::update(float dt)
       this->tryPutNextItem(dt, item);
       
    }
+   _putNextItemDt -= dt;
+   
+   float wantedActionDuration = 1.0f;
+   float handsSector = wantedActionDuration * _convVelY;
+   float grabDistance = 0.0f;
+   Size handSize = _rightHand->getContentSize();
+   
+   Point ptH1 = _ptRightHand;
+   Point ptH2 = ptH1;
+   ptH2.y += 50.f;
+
+   FiniteTimeAction* actionHand;
+   FiniteTimeAction* rActionHand;
    
    for(Node* nitem : *_items){
       
@@ -292,14 +323,38 @@ void GameController::update(float dt)
          item->setDefaultSize();
       }
       
+      
+      if((itemPos.x - handsSector) <= (_ptRightHand.x + _rightHand->getContentSize().width) &&
+         itemPos.x - handsSector > _ptRightHand.x &&
+         itemPos.y >= _itemIdlePos.y - 20.0f &&
+         itemPos.y <= _itemIdlePos.y + 20.0f
+         ){
+         
+         if (_rightHandIdle) {
+            _rightHandIdle = false;
+            CCLOG("RUN ACTION!");
+            grabDistance = itemPos.x - _ptRightHand.x;
+            wantedActionDuration = grabDistance/_convVelY;
+            actionHand = MoveTo::create(wantedActionDuration/2.0f, Vec2(_ptRightHand.x,_ptRightHand.y + grabDistance));
+            actionHand->setTag(1);
+            rActionHand = MoveTo::create(wantedActionDuration/2.0f, Vec2(_ptRightHand.x,_ptRightHand.y));
+            rActionHand->setTag(2);
+            
+            _rightHand->runAction(Sequence::create(actionHand,rActionHand,NULL));
+         }
+         else if (_rightHand->getNumberOfRunningActions() == 0){
+            _rightHandIdle = true;
+         }
+         
+      }
+      
       this->throwItemSimple(item,_impulse);
       
-      _impulse.x -= 0.05f;
+      _impulse.x -= 0.09f;
       _impulse.x  = _impulse.x > -1.0 ? _impulse.x : 1.0f;
       
-      
    }
-   _putNextItemDt -= dt;
+   
 
 
 }

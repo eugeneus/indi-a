@@ -19,6 +19,7 @@ Chef* Chef::create()
     }
 }
 
+/*
 Scene* Chef::createScene()
 {
     auto scene = Scene::create();
@@ -26,6 +27,7 @@ Scene* Chef::createScene()
     scene->addChild(layer);
     return scene;
 }
+*/
 
 bool Chef::init() {
     
