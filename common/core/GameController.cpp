@@ -10,6 +10,7 @@
 #include "MindCloudTips.h"
 #include "Pot.h"
 #include "MovementController.h"
+#include "Hands.h"
 
 
 GameController::GameController()
@@ -58,7 +59,7 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
    origin = Director::getInstance()->getVisibleOrigin();
    
    this->arrangeBackground(origin,visibleSize);
-   _itemIdlePos = Vec2(visibleSize.width, _convY);
+   _itemIdlePos = Vec2(visibleSize.width, _convY + 40.0f);
    this->populateGameObjects(origin,visibleSize);
    
 
@@ -106,11 +107,13 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     
     ScoreLayer* scoreLayer = ScoreLayer::create(2300);
     scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
-    //_gameLayer->addChild(scoreLayer, 1);
-    
+
+   Hands* hands;
    
-    //_mover = new MovementController();
-    //_mover->init();
+   hands = Hands::create(chef->getContentSize().width/2); //TODO: remove divide 2
+   hands->setPosition(Vec2(chef->getPosition().x, _convY));
+   _gameLayer->addChild(hands, 2);
+   
 }
 
 int getRandomNumber(int from ,int to) {
@@ -121,11 +124,6 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
 {
    Item* item = nullptr;
    
-   //float tmp = _items->size();
-   //Vec2 itemPos = Vec2(anOrigin.x, _convY);
-   
-   //Vec2 itemPos = Vec2(aVisibleSize.width/2.0f + anOrigin.x, anOrigin.y + 100);
-   
    for (int iItm = 0; iItm < 10; iItm++) {
       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 1));
       item->setPosition(_itemIdlePos); //-1 * offset
@@ -133,28 +131,7 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
       _gameLayer->addChild(item,10);
       _items->pushBack(item);
    }
-   
 
-   
-   
-   // add items toarray
-   
-   // conv shuld have velocity  property
-   // get velocity to start moving items
-   
- /*
-   Hands* hands;
-   
-   hands = Hands::create(chef->getContentSize().width/2); //TODO: remove divide 2
-   hands->setPosition(Vec2(chef->getPosition().x, yOffsetConveyer));
-   _gameLayer->addChild(hands, 2);
-
-   Item* item = ItemFactory::createItem(1, 1);
-   //Gabbage* foodItem = Gabbage::create();
-   item->setPosition(Vec2(aVisibleSize.width + anOrigin.x, -100));
-   //conv->addChild(foodItem);
-   conv->addChild(item, 10);
-  */
 }
 
 void startGame()
@@ -201,35 +178,6 @@ void GameController::setItemIdle(float dt, Item* anItem)
 	}
    
    
-}
-
-void GameController::wipeItems()
-{
-   //anItem->setPosition(_itemIdlePos);
-}
-
-BezierTo* GameController::createBezierPath(Vec2 aStartPos)
-{
-   ccBezierConfig bezier;
-   
-   bezier.controlPoint_1 = Point(aStartPos.x + 50.0f, aStartPos.y + 150.0f); //aStartPos.y + 20
-   bezier.controlPoint_2 = Point(aStartPos.x + 100.0f, aStartPos.y + 150.0f); //aStartPos.y + 20
-   bezier.endPosition = Point(aStartPos.x + 120.0f,aStartPos.y - 150.0f); //730.0f
-   
-   
-   return BezierTo::create(3, bezier);
-   
-}
-
-BezierTo* GameController::createBezierPath(Vec2 aStartPos, float aWeight, Vec2 anImpulse)
-{
-   ccBezierConfig bezier;
-   
-   bezier.controlPoint_1 = Point(aStartPos.x + 50.0f, aStartPos.y + 150.0f); //aStartPos.y + 20
-   bezier.controlPoint_2 = Point(aStartPos.x + 100.0f, aStartPos.y + 150.0f); //aStartPos.y + 20
-   bezier.endPosition = Point(aStartPos.x + 120.0f,aStartPos.y - 150.0f); //730.0f
-   
-   return BezierTo::create(3, bezier);
 }
 
 ccBezierConfig bezierConfigBouncePathForParams(Item* anItem, float aWeight, Vec2 anImpulse)
@@ -333,11 +281,23 @@ void GameController::update(float dt)
    }
    
    for(Node* nitem : *_items){
+      
       item = (Item*)nitem;
+      itemPos = item->getPosition();
+      itemSize = item->getContentSize();
+      if (itemPos.x < 0.0) { //+ itemSize.width + 1
+         item->stopAllActions();
+         item->setPosition(_itemIdlePos);
+         item->setScale(0.7f);
+         item->setDefaultSize();
+      }
+      
       this->throwItemSimple(item,_impulse);
       
       _impulse.x -= 0.05f;
       _impulse.x  = _impulse.x > -1.0 ? _impulse.x : 1.0f;
+      
+      
    }
    _putNextItemDt -= dt;
 

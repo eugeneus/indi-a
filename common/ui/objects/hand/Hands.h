@@ -8,9 +8,9 @@
 class Hands : public cocos2d::Layer {
 private:
     typedef Layer super;
+public:
     Hand *leftHand;
     Hand *rightHand;
-public:
     static Hands* create(float dist);
     
     bool init(float dist);

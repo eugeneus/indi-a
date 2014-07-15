@@ -35,11 +35,10 @@ protected:
    void startLinearMove(Item* anItem);
    void tryPutNextItem(float dt, Item* anItem);
    void setItemIdle(float dt, Item* anItem);
-   void wipeItems();
    
-   BezierTo* createBezierPath(Vec2 aStartPos);
+   //BezierTo* createBezierPath(Vec2 aStartPos);
    void throwItemSimple(Item* anItem, Vec2 anImpulse);
-   BezierTo* createBezierPath(Vec2 aStartPos, float aWeight, Vec2 anImpulse);
+   //BezierTo* createBezierPath(Vec2 aStartPos, float aWeight, Vec2 anImpulse);
    BezierTo* bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse);
    // model
    cocos2d::Vector<cocos2d::Node*>* _items;

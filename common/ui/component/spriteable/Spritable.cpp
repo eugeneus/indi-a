@@ -38,7 +38,8 @@ bool Spritable::initWithSpriteAndPos(string spriteFrameName, const char* framesP
     animatedSprite->setAnchorPoint(Vec2(0, 0));
     
     this->setAnchorPoint(Vec2(0, 0));
-    this->setContentSize(animatedSprite->getContentSize());
+    this->_defaultContentSize = animatedSprite->getContentSize();
+    this->setContentSize(_defaultContentSize);
     this->addChild(animatedSprite);
     
     Vector<SpriteFrame*> frames;
@@ -75,3 +76,25 @@ void Spritable::createWalkAnimFrames(Vector<SpriteFrame*>& animateFrames, int st
         animFrame->release();
     }
 }
+
+Size Spritable::getDefaultContentSize()
+{
+   return _defaultContentSize;
+}
+
+void Spritable::setDefaultSize()
+{
+   this->animatedSprite->setContentSize(_defaultContentSize);
+   this->setContentSize(_defaultContentSize);
+   
+}
+
+
+void Spritable::setSpriteSize(Size aSize)
+{
+   this->_defaultContentSize = aSize;
+   this->animatedSprite->setContentSize(_defaultContentSize);
+   this->setContentSize(_defaultContentSize);
+}
+
+
