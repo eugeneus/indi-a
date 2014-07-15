@@ -24,7 +24,8 @@ bool Gabbage::init() {
     if(!super::init("cabbage_1.png", "cabbage_%i.png", 2, 0.2)) {
         return false;
     }
-    
-    
+   _weightRatio = 0.5;
+   _bounceRatio = 0.2;
+   
     return true;
 }

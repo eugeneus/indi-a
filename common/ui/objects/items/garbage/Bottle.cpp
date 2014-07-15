@@ -24,7 +24,8 @@ bool Bottle::init() {
     if(!super::init("bottle_1.png", "bottle_%i.png", 1, 0.2)) {
         return false;
     }
-    
-    
+   _weightRatio = 0.7;
+   _bounceRatio = 0.5;
+   
     return true;
 }

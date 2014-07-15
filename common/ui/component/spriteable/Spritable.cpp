@@ -29,7 +29,7 @@ Spritable* Spritable::create(string spriteFrameName, const char* framesPattern, 
 bool Spritable::initWithSpriteAndPos(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime)
 {
     
-    if ( !Layer::init() )
+    if ( !Layer::init() ) //!LayerColor::initWithColor(ccc4(255, 255, 255, 255))
     {
         return false;
     }

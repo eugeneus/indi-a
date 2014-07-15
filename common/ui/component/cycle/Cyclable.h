@@ -16,7 +16,7 @@ private:
    float actionLength;
 protected:
     bool init(const char* bgSpriteFrameName, float speed, float length);
-    virtual void update(float dt);
+    
 public:
     Cyclable();
     virtual ~Cyclable();

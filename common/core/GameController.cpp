@@ -22,6 +22,8 @@ GameController::GameController()
    _convLegth = 0.0f;
    
    _putNextItemDt = 2.0f;
+   _idxRotated = 0;
+   _impulse = Vec2(1.0f,1.0f);
    
    _items = new Vector<cocos2d::Node*>(10);
 
@@ -197,6 +199,13 @@ void GameController::setItemIdle(float dt, Item* anItem)
 		
 		anItem->setPosition(_itemIdlePos);
 	}
+   
+   
+}
+
+void GameController::wipeItems()
+{
+   //anItem->setPosition(_itemIdlePos);
 }
 
 BezierTo* GameController::createBezierPath(Vec2 aStartPos)
@@ -207,27 +216,105 @@ BezierTo* GameController::createBezierPath(Vec2 aStartPos)
    bezier.controlPoint_2 = Point(aStartPos.x + 100.0f, aStartPos.y + 150.0f); //aStartPos.y + 20
    bezier.endPosition = Point(aStartPos.x + 120.0f,aStartPos.y - 150.0f); //730.0f
    
-
+   
    return BezierTo::create(3, bezier);
    
 }
 
-
-void GameController::throwItemSimple(Item* anItem)
+BezierTo* GameController::createBezierPath(Vec2 aStartPos, float aWeight, Vec2 anImpulse)
 {
-   float xThrow = 200.0f;
+   ccBezierConfig bezier;
    
-   if (anItem->getPosition().x >= xThrow &&  anItem->getPosition().x <= xThrow + 5.0f){
-      
-      anItem->stopActionByTag(1001);
-      anItem->runAction(this->createBezierPath(anItem->getPosition()));
-      anItem->runAction(cocos2d::ScaleBy::create(3, 3.0f));
-      
-   }
+   bezier.controlPoint_1 = Point(aStartPos.x + 50.0f, aStartPos.y + 150.0f); //aStartPos.y + 20
+   bezier.controlPoint_2 = Point(aStartPos.x + 100.0f, aStartPos.y + 150.0f); //aStartPos.y + 20
+   bezier.endPosition = Point(aStartPos.x + 120.0f,aStartPos.y - 150.0f); //730.0f
+   
+   return BezierTo::create(3, bezier);
+}
+
+ccBezierConfig bezierConfigBouncePathForParams(Item* anItem, float aWeight, Vec2 anImpulse)
+{
+   ccBezierConfig bezier;
+
+   Point itemPos = anItem->getPosition();
+   Point cp1 = itemPos;
+   Point cp2 = itemPos;
+   Point endPoint = itemPos;
+   Size visibleSize = Director::sharedDirector()->getVisibleSize();
+   
+   cp1.y = cp1.y + ((visibleSize.height - cp1.y) * anImpulse.y);
+   cp1.x = cp1.x + ((visibleSize.width - cp1.x) * anImpulse.x);
+   
+   endPoint.y = endPoint.y - (endPoint.y * anImpulse.y);
+   endPoint.x = endPoint.x + ((visibleSize.width - cp1.x) * anImpulse.x);  //the same as cp1 x
+   
+   cp2 = endPoint;
+   
+   bezier.controlPoint_1 = cp1;
+   bezier.controlPoint_2 = cp2;
+   bezier.endPosition = endPoint;
+   
+   return bezier;
 
 }
 
+BezierTo* GameController::bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse)
+{
+   
+   ccBezierConfig bouncePathConfig = bezierConfigBouncePathForParams(anItem, aWeight, anImpulse);
+   
+   float actionDuration = 3; //TODO: chould be calculated based on impulse and weight
+   
+   BezierTo* bounceAction = BezierTo::create(actionDuration, bouncePathConfig);
+   
+   return bounceAction;
+}
 
+void GameController::throwItemSimple(Item* anItem, Vec2 anImpulse)
+{
+   float xThrow = 200.0f;
+   Point ptItem = anItem->getPosition();
+   
+   if (ptItem.x >= xThrow &&
+       ptItem.x <= xThrow + 3.0f &&
+       ptItem.y >= _itemIdlePos.y - 20.0f &&
+       ptItem.y <= _itemIdlePos.y + 20.0f
+       ){
+      
+      //CCLOG("Item Pos %f")
+      
+      FiniteTimeAction* actionBezier = this->bounceItemAction(anItem, 1.0f, anImpulse);
+      FiniteTimeAction* actionRotate = nullptr; // plaseholder rotate
+      
+      FiniteTimeAction* actionMoveTo = nullptr; // plaseholder for floor action
+      FiniteTimeAction* actionDelay = DelayTime::create(2);
+      FiniteTimeAction* actionPlase = Place::create(_itemIdlePos);
+      FiniteTimeAction* scaleBy1 = cocos2d::ScaleBy::create(2.5, 2.5f);
+      FiniteTimeAction* scaleRev1 = scaleBy1->reverse();
+      FiniteTimeAction* scaleBy2 = cocos2d::ScaleBy::create(0.5, 0.8f);
+      FiniteTimeAction* scaleRev2 = scaleBy2->reverse();
+      scaleRev1->setDuration(0.1);
+      scaleRev2->setDuration(0.1);
+      
+      anItem->stopActionByTag(1001);
+      
+      //actionMoveBy =
+      //CCMoveBy::create(actionDuration,Vec2(-actionLength, 0.0f));
+      //v = Vec2(nSprite->getPosition().x,nSprite->getPosition().y);
+      
+      anItem->runAction(Sequence::create(actionBezier,
+                                          actionDelay,
+                                          actionPlase,
+                                          //scaleRev1,
+                                                               NULL));
+      // number of simultaneous actions
+      anItem->runAction(Sequence::create(scaleBy1,scaleBy2,scaleRev1,scaleRev2,NULL));
+      // rotate
+      // screw
+      
+   }
+   
+}
 
 
 void GameController::update(float dt)
@@ -236,43 +323,23 @@ void GameController::update(float dt)
    Item* item = nullptr;
    Vec2 itemPos;
    Size itemSize;
-   for(Node* nitem : *_items){
-      item = (Item*)nitem;
-      //itemPos = item->getPosition();
-      //itemSize = item->getContentSize();
+   _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
+   
+   for (int i = _idxRotated; i < _items->size(); i++) {
+      item = (Item*)_items->at(i);
       this->setItemIdle(dt, item);
       this->tryPutNextItem(dt, item);
-      this->throwItemSimple(item);
+      
+   }
+   
+   for(Node* nitem : *_items){
+      item = (Item*)nitem;
+      this->throwItemSimple(item,_impulse);
+      
+      _impulse.x -= 0.05f;
+      _impulse.x  = _impulse.x > -1.0 ? _impulse.x : 1.0f;
    }
    _putNextItemDt -= dt;
-   
-   /*
-    // generation items loop part
-    if (lastCreatedItem >= nextItemDt) {
-    int posOffset = getRandomNumber(1, 3);
-    int offset = posOffset == 1 ? 20 : (posOffset == 2 ? 50 : 100);
-    Item* item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 1));
-    item->setPosition(Vec2(visibleSize.width + origin.x, -1 * offset));
-    conv->addChild(item, 10);
-    
-    _mover->addItem(*item);
-    
-    lastCreatedItem = 0;
-    nextItemDt = getRandomNumber(4, 6);
-    } else {
-    lastCreatedItem +=dt;
-    }
-    
-    _mover->update(dt);
-    
-    // grab detecting loop part
-    float yPosFirstItem = conv->getFirstItemPosY();
-    if (yPosFirstItem >= yPosStartGrab) {
-    //hands->startGrab();
-    } else if (yPosFirstItem >= yPosCheckGrab) {
-    //hands->preGrab(conv->getFirst);
-    }
-    */
 
 
 }

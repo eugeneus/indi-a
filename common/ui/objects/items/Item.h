@@ -7,11 +7,14 @@
 
 class Item : public Spritable {
 private:
-    typedef Spritable super;
+   typedef Spritable super;
 public:
     
-    bool init(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime);
-    //   virtual void initializeMenu();
+   bool init(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime);
+   //   virtual void initializeMenu();
+   
+   float _weightRatio;
+   float _bounceRatio;
     
 };
 
