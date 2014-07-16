@@ -8,6 +8,7 @@ USING_NS_CC;
 
 class Item;
 class Hand;
+class Chef;
 
 class GameController : public cocos2d::Ref {
 
@@ -54,6 +55,7 @@ protected:
    int _idxRotated;
    Vec2 _impulse;
    
+   Chef* _theChef;
    Hand* _leftHand;
    Hand* _rightHand;
    cocos2d::Point _ptLeftHand;

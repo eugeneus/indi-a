@@ -87,26 +87,35 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     
     float yOffsetConveyer = 615;
     
-    Chef* chef = Chef::create();
+   _theChef = Chef::create(_gameLayer);
+   Size chefSize = _theChef->getSize();
+   Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer);
+   _theChef->setOrigin(chefOrigin);
+   
+   /*
+   Chef* chef = _theChef;
+   // _chefSize = chef->getContentSize();
+   
    float scaleFactor = 0.5f; // just for temporary
    chef->setScale(scaleFactor);
-   _chefSize = chef->getContentSize();
-   _chefOrigin = Point((aVisibleSize.width - (_chefSize.width*scaleFactor))/2.0f, yOffsetConveyer);
+   
+   
 
-    chef->setPosition(_chefOrigin);
-    _gameLayer->addChild(chef, 0);
+    //chef->setPosition(_chefOrigin);
+    //_gameLayer->addChild(chef, 0);
 
    _leftHand = Hand::create();
    _ptLeftHand = _chefOrigin;
    _ptLeftHand.x = _chefOrigin.x + _chefSize.width*scaleFactor - _leftHand->getContentSize().width/2.0f;
    _leftHand->setPosition(_ptLeftHand);
-   _gameLayer->addChild(_leftHand, 2);
+   //_gameLayer->addChild(_leftHand, 2);
    
    _rightHand = Hand::create();
    _ptRightHand = _chefOrigin;
    _rightHand->setPosition(_ptRightHand);
    _rightHand->mirrorImg();
-   _gameLayer->addChild(_rightHand, 2);
+   //_gameLayer->addChild(_rightHand, 2);
+   */
    
     MindCloudTips* cloudTips = MindCloudTips::create("tips_level_1.png");
     cloudTips->setPosition(Vec2(140, yOffsetConveyer + 100));
@@ -298,7 +307,8 @@ void GameController::update(float dt)
       
    }
    _putNextItemDt -= dt;
-   
+
+   /*
    float wantedActionDuration = 1.0f;
    float handsSector = wantedActionDuration * _convVelY;
    float grabDistance = 0.0f;
@@ -354,7 +364,7 @@ void GameController::update(float dt)
       _impulse.x  = _impulse.x > -1.0 ? _impulse.x : 1.0f;
       
    }
-   
+   */
 
 
 }

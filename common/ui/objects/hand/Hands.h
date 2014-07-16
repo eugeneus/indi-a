@@ -5,6 +5,9 @@
 #include "cocos2d.h"
 #include "Hand.h"
 
+
+//TODO: obsoete
+
 class Hands : public cocos2d::Layer {
 private:
     typedef Layer super;
