@@ -11,24 +11,16 @@
 #include "Pot.h"
 #include "MovementController.h"
 
-#include "Hand.h"
-
 
 GameController::GameController()
 {
    _convY = 0.0f;
    _convVelY = 0.0f;
    _convLegth = 0.0f;
-   
    _putNextItemDt = 2.0f;
    _idxRotated = 0;
-   _impulse = Vec2(1.0f,1.0f);
-   
    _chefOrigin = Point(0.0,0.0);
    _chefSize = Size(0.0,0.0);
-   
-   _rightHandIdle = true;
-
    
    _items = new Vector<cocos2d::Node*>(10);
 
@@ -217,9 +209,9 @@ BezierTo* GameController::bounceItemAction(Item* anItem, float aWeight, Vec2 anI
    return bounceAction;
 }
 
-void GameController::throwItemSimple(Item* anItem, Vec2 anImpulse)
+void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
 {
-   float xThrow = _rightHand->getPosition().x;
+   float xThrow = throwX;
    Point ptItem = anItem->getPosition();
    
    if (ptItem.x >= xThrow &&
@@ -291,56 +283,8 @@ void GameController::update(float dt)
       
       // chef/item collision
       _theChef->chefWathItem(item);
+      //try to throw item
+      this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
    }
-   
-   
-/*
-   float wantedActionDuration = 1.0f;
-   float handsSector = wantedActionDuration * _convVelY;
-   float grabDistance = 0.0f;
-   Size handSize = _rightHand->getContentSize();
-   
-   Point ptH1 = _ptRightHand;
-   Point ptH2 = ptH1;
-   ptH2.y += 50.f;
-
-   FiniteTimeAction* actionHand;
-   FiniteTimeAction* rActionHand;
-   
-    
-      
-      if((itemPos.x - handsSector) <= (_ptRightHand.x + _rightHand->getContentSize().width) &&
-         itemPos.x - handsSector > _ptRightHand.x &&
-         itemPos.y >= _itemIdlePos.y - 20.0f &&
-         itemPos.y <= _itemIdlePos.y + 20.0f
-         ){
-         
-         if (_rightHandIdle) {
-            _rightHandIdle = false;
-            CCLOG("RUN ACTION!");
-            grabDistance = itemPos.x - _ptRightHand.x;
-            wantedActionDuration = grabDistance/_convVelY;
-            actionHand = MoveTo::create(wantedActionDuration/2.0f, Vec2(_ptRightHand.x,_ptRightHand.y + grabDistance));
-            actionHand->setTag(1);
-            rActionHand = MoveTo::create(wantedActionDuration/2.0f, Vec2(_ptRightHand.x,_ptRightHand.y));
-            rActionHand->setTag(2);
-            
-            _rightHand->runAction(Sequence::create(actionHand,rActionHand,NULL));
-         }
-         else if (_rightHand->getNumberOfRunningActions() == 0){
-            _rightHandIdle = true;
-         }
-         
-      }
-      
-      this->throwItemSimple(item,_impulse);
-      
-      _impulse.x -= 0.09f;
-      _impulse.x  = _impulse.x > -1.0 ? _impulse.x : 1.0f;
-      
-   }
-   */
-
-
 }
 

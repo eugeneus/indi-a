@@ -4,10 +4,10 @@
 
 USING_NS_CC;
 
-
 Chef::Chef()
 {
    _rightHandRect = Rect(0.0f, 0.0f, 0.0f, 0.0f);
+   _bounceImpulse = Vec2(1.0f, 1.0f);
 }
  
 Chef::~Chef(){}
@@ -112,6 +112,7 @@ void Chef::setWatchSector(cocos2d::Size aSectorSize)
    _szWatchSector = aSectorSize;
 }
 
+
 void Chef::chefWathItem(Item* anItem)
 {
    Point itemPos = anItem->getPosition();
@@ -120,13 +121,18 @@ void Chef::chefWathItem(Item* anItem)
    cocos2d::MoveTo* grabActionUp = nullptr;
    cocos2d::MoveTo* grabActionDown = nullptr;
    
-   bool isLeftHandSeep = true; //TODO: implement random genetation of sleeping
+   bool isLeftHandSeep = (((int)0 + arc4random() % (2)) > 0);
+   
+   //if(getRandomNumber(0,1) > 0)
+   //   isLeftHandSeep = false;
+      
    Sprite* activeHand = _leftHand;
-
    Rect activeHandRect = Rect(_leftHandRect);
+   _activeBouncePoint = _leftHandRect.origin;
    if (isLeftHandSeep) {
       activeHand = _rightHand;
       activeHandRect = Rect(_rightHandRect);
+      _activeBouncePoint = _rightHandRect.origin;
    }
    
  
@@ -149,9 +155,14 @@ void Chef::chefWathItem(Item* anItem)
          grabActionDown = MoveTo::create(actionGrabDuration/2.0f, Vec2(activeHandRect.origin.x,activeHandRect.origin.y));
          grabActionDown->setTag(2);
          activeHand->runAction(Sequence::create(grabActionUp,grabActionDown,NULL));
+         
+
       }
       else if (activeHand->getNumberOfRunningActions() == 0){
          _isHandIdle = true;
+         this->updateBounceImpulse();
+         // here throw animation sould be
+
       }
 
       // after that run hands "throw animation" simultaneously with item "throw" animation
@@ -160,4 +171,25 @@ void Chef::chefWathItem(Item* anItem)
    
 
 }
+
+void Chef::updateBounceImpulse()
+{
+   _bounceImpulse.x -= 0.09f;
+   _bounceImpulse.x  = _bounceImpulse.x > -1.0 ? _bounceImpulse.x : 1.0f;
+
+}
+
+Point Chef::getActiveBouncePoint()
+{
+   return _activeBouncePoint;
+}
+
+
+Vec2 Chef::getBounceImpulse()
+{
+   return _bounceImpulse;
+}
+
+
+
 

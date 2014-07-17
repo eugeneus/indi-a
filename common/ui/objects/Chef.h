@@ -21,12 +21,18 @@ public:
    void setOrigin(cocos2d::Point anOrigin);
    void setWatchSector(cocos2d::Size aSectroSize);
    
+   cocos2d::Point getActiveBouncePoint();
+   cocos2d::Vec2 getBounceImpulse();
+   
+   
    void chefWathItem(Item* anItem);
-
+protected:
+   void updateBounceImpulse();
 private:
    //typedef cocos2d::Ref super;
    cocos2d::Rect _chefRect;
    
+   cocos2d::Vec2 _bounceImpulse;
    cocos2d::Rect _leftHandRect;
    cocos2d::Rect _rightHandRect;
    
@@ -36,7 +42,7 @@ private:
    cocos2d::Sprite* _rightHand;
    
    cocos2d::Size _szWatchSector;
-   
+   cocos2d::Point _activeBouncePoint;
    bool _isHandIdle;
 };
 
