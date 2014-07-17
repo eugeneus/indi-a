@@ -18,9 +18,6 @@ GameController::GameController()
 {
    _convY = 0.0f;
    _convVelY = 0.0f;
-
-   _convY = 0.0f;
-   _convVelY = 0.0f;
    _convLegth = 0.0f;
    
    _putNextItemDt = 2.0f;
@@ -91,31 +88,6 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
    Size chefSize = _theChef->getSize();
    Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer);
    _theChef->setOrigin(chefOrigin);
-   
-   /*
-   Chef* chef = _theChef;
-   // _chefSize = chef->getContentSize();
-   
-   float scaleFactor = 0.5f; // just for temporary
-   chef->setScale(scaleFactor);
-   
-   
-
-    //chef->setPosition(_chefOrigin);
-    //_gameLayer->addChild(chef, 0);
-
-   _leftHand = Hand::create();
-   _ptLeftHand = _chefOrigin;
-   _ptLeftHand.x = _chefOrigin.x + _chefSize.width*scaleFactor - _leftHand->getContentSize().width/2.0f;
-   _leftHand->setPosition(_ptLeftHand);
-   //_gameLayer->addChild(_leftHand, 2);
-   
-   _rightHand = Hand::create();
-   _ptRightHand = _chefOrigin;
-   _rightHand->setPosition(_ptRightHand);
-   _rightHand->mirrorImg();
-   //_gameLayer->addChild(_rightHand, 2);
-   */
    
     MindCloudTips* cloudTips = MindCloudTips::create("tips_level_1.png");
     cloudTips->setPosition(Vec2(140, yOffsetConveyer + 100));
@@ -256,8 +228,6 @@ void GameController::throwItemSimple(Item* anItem, Vec2 anImpulse)
        ptItem.y <= _itemIdlePos.y + 20.0f
        ){
       
-      //CCLOG("Item Pos %f")
-      
       FiniteTimeAction* actionBezier = this->bounceItemAction(anItem, 1.0f, anImpulse);
       FiniteTimeAction* actionRotate = nullptr; // plaseholder rotate
       
@@ -272,10 +242,6 @@ void GameController::throwItemSimple(Item* anItem, Vec2 anImpulse)
       scaleRev2->setDuration(0.1);
       
       anItem->stopActionByTag(1001);
-      
-      //actionMoveBy =
-      //CCMoveBy::create(actionDuration,Vec2(-actionLength, 0.0f));
-      //v = Vec2(nSprite->getPosition().x,nSprite->getPosition().y);
       
       anItem->runAction(Sequence::create(actionBezier,
                                           actionDelay,
@@ -308,19 +274,9 @@ void GameController::update(float dt)
    }
    _putNextItemDt -= dt;
 
-   /*
-   float wantedActionDuration = 1.0f;
-   float handsSector = wantedActionDuration * _convVelY;
-   float grabDistance = 0.0f;
-   Size handSize = _rightHand->getContentSize();
-   
-   Point ptH1 = _ptRightHand;
-   Point ptH2 = ptH1;
-   ptH2.y += 50.f;
 
-   FiniteTimeAction* actionHand;
-   FiniteTimeAction* rActionHand;
-   
+   // do not want to let item fall out of screen, lef and right
+   // TODO: adjust bounce so that any trajectory does not lead out of screen
    for(Node* nitem : *_items){
       
       item = (Item*)nitem;
@@ -333,6 +289,25 @@ void GameController::update(float dt)
          item->setDefaultSize();
       }
       
+      // chef/item collision
+      _theChef->chefWathItem(item);
+   }
+   
+   
+/*
+   float wantedActionDuration = 1.0f;
+   float handsSector = wantedActionDuration * _convVelY;
+   float grabDistance = 0.0f;
+   Size handSize = _rightHand->getContentSize();
+   
+   Point ptH1 = _ptRightHand;
+   Point ptH2 = ptH1;
+   ptH2.y += 50.f;
+
+   FiniteTimeAction* actionHand;
+   FiniteTimeAction* rActionHand;
+   
+    
       
       if((itemPos.x - handsSector) <= (_ptRightHand.x + _rightHand->getContentSize().width) &&
          itemPos.x - handsSector > _ptRightHand.x &&

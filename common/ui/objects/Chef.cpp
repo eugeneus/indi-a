@@ -1,17 +1,24 @@
 
 #include "Chef.h"
+#include "Item.h"
 
 USING_NS_CC;
 
-Chef::Chef(){}
+
+Chef::Chef()
+{
+   _rightHandRect = Rect(0.0f, 0.0f, 0.0f, 0.0f);
+}
+ 
 Chef::~Chef(){}
+
 
 Chef* Chef::create(cocos2d::Layer* aLayer)
 {
     Chef *pRet = new Chef();
     if (pRet && pRet->init(aLayer))
     {
-        pRet->autorelease();
+        //pRet->autorelease();
         return pRet;
     }
     else
@@ -25,6 +32,8 @@ Chef* Chef::create(cocos2d::Layer* aLayer)
 bool Chef::init(cocos2d::Layer* aLayer) {
    
 //"chef_1.png", "chef_%i.png", 4, 0.9
+   _szWatchSector = Size(40.0f,140.0f);
+   _isHandIdle = true;
    
    Size visibleSize = Director::getInstance()->getVisibleSize();
    this->_layer = aLayer;
@@ -60,10 +69,11 @@ bool Chef::init(cocos2d::Layer* aLayer) {
    _leftHand->setAnchorPoint(Point(0,0));
    _leftHand->setScale(HscaleFactor);
    
-   float xPos = chefOrigin.x + _chefRect.size.width - (handSize.width)/2.0f;
+   float xPos = chefOrigin.x + _chefRect.size.width - ((handSize.width)/2.0f + 50.0f);
    _leftHandRect = Rect(_rightHandRect);
    _leftHandRect.origin.x = xPos;
    _leftHand->setPosition(_leftHandRect.origin);
+   
    
    return true;
 }
@@ -81,17 +91,73 @@ cocos2d::Size Chef::getSize()
 
 void Chef::setOrigin(cocos2d::Point anOrigin)
 {
+
    _chefRect.origin.x = anOrigin.x;
    _chefRect.origin.y = anOrigin.y;
    _rightHandRect.origin.x = anOrigin.x;
    _rightHandRect.origin.y = anOrigin.y;
 
-   float xPos = anOrigin.x + _chefRect.size.width - (_leftHandRect.size.width)/2.0f;
+   float xPos = anOrigin.x + _chefRect.size.width - ((_leftHandRect.size.width)/2.0f + 50.0f);
    _leftHandRect.origin.x = xPos;
    _leftHandRect.origin.y = anOrigin.y;
 
    _chef->setPosition(_chefRect.origin);
    _leftHand->setPosition(_leftHandRect.origin);
    _rightHand->setPosition(_rightHandRect.origin);
+
+}
+
+void Chef::setWatchSector(cocos2d::Size aSectorSize)
+{
+   _szWatchSector = aSectorSize;
+}
+
+void Chef::chefWathItem(Item* anItem)
+{
+   Point itemPos = anItem->getPosition();
+   float actionGrabDistanceActual = 0.0f;
+   float actionGrabDuration = 0.0f;
+   cocos2d::MoveTo* grabActionUp = nullptr;
+   cocos2d::MoveTo* grabActionDown = nullptr;
+   
+   bool isLeftHandSeep = true; //TODO: implement random genetation of sleeping
+   Sprite* activeHand = _leftHand;
+
+   Rect activeHandRect = Rect(_leftHandRect);
+   if (isLeftHandSeep) {
+      activeHand = _rightHand;
+      activeHandRect = Rect(_rightHandRect);
+   }
+   
+ 
+   if((itemPos.x - _szWatchSector.width) <= (activeHandRect.origin.x + activeHandRect.size.width) &&
+      itemPos.x - _szWatchSector.width > activeHandRect.origin.x &&
+      itemPos.y >= activeHandRect.origin.y - _szWatchSector.height &&
+      itemPos.y <= activeHandRect.origin.y
+      ){
+      //calulate parametes and start hands "grab" animation
+      if (_isHandIdle) {
+         _isHandIdle = false;
+         
+         CCLOG("RUN Active Hand Grab Action ACTION!");
+         
+         actionGrabDistanceActual = itemPos.x - activeHandRect.origin.x;
+         actionGrabDuration = actionGrabDistanceActual/50; // TODO: get actual conveyor velocity
+         grabActionUp = MoveTo::create(actionGrabDuration/2.0f,
+                                       Vec2(activeHandRect.origin.x,activeHandRect.origin.y + actionGrabDistanceActual));
+         grabActionUp->setTag(1);
+         grabActionDown = MoveTo::create(actionGrabDuration/2.0f, Vec2(activeHandRect.origin.x,activeHandRect.origin.y));
+         grabActionDown->setTag(2);
+         activeHand->runAction(Sequence::create(grabActionUp,grabActionDown,NULL));
+      }
+      else if (activeHand->getNumberOfRunningActions() == 0){
+         _isHandIdle = true;
+      }
+
+      // after that run hands "throw animation" simultaneously with item "throw" animation
+   }
+
+   
+
 }
 
