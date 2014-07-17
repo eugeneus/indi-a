@@ -24,7 +24,9 @@ bool BowlingBall::init() {
     if(!super::init("bowling_ball_1.png", "bowling_ball_%i.png", 1, 0.2)) {
         return false;
     }
-    
-    
+   _weightRatio = 0.9;
+   _bounceRatio = 0.5;
+
+   
     return true;
 }

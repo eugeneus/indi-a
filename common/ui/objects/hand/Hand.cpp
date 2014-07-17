@@ -26,6 +26,8 @@ bool Hand::init() {
     }
     
     handImg = Sprite::createWithSpriteFrameName("hand_left_1.png");
+    this->setContentSize(handImg->getContentSize());
+    this->setScale(0.7f);
     this->addChild(handImg, 0);
     
     

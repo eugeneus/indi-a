@@ -5,16 +5,45 @@
 #include "cocos2d.h"
 #include "Spritable.h"
 
-class Chef : public Spritable {
-private:
-    typedef Spritable super;
-public:
-    static Chef* create();
-    static cocos2d::Scene* createScene();
-    
-    bool init();
- //   virtual void initializeMenu();
+class Item;
 
+class Chef  {  //public cocos2d::Ref
+public:
+   Chef();
+   ~Chef();
+    static Chef* create(cocos2d::Layer* aLayer);
+    //static cocos2d::Scene* createScene();
+    
+    bool init(cocos2d::Layer* aLayer);
+ 
+   void setScale(float aScaleFactor);
+   cocos2d::Size getSize();
+   void setOrigin(cocos2d::Point anOrigin);
+   void setWatchSector(cocos2d::Size aSectroSize);
+   
+   cocos2d::Point getActiveBouncePoint();
+   cocos2d::Vec2 getBounceImpulse();
+   
+   
+   void chefWathItem(Item* anItem);
+protected:
+   void updateBounceImpulse();
+private:
+   //typedef cocos2d::Ref super;
+   cocos2d::Rect _chefRect;
+   
+   cocos2d::Vec2 _bounceImpulse;
+   cocos2d::Rect _leftHandRect;
+   cocos2d::Rect _rightHandRect;
+   
+   cocos2d::Layer* _layer;
+   cocos2d::Sprite* _chef;
+   cocos2d::Sprite* _leftHand;
+   cocos2d::Sprite* _rightHand;
+   
+   cocos2d::Size _szWatchSector;
+   cocos2d::Point _activeBouncePoint;
+   bool _isHandIdle;
 };
 
 #endif /* defined(__BlindChef__Chef__) */

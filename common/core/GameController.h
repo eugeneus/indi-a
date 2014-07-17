@@ -7,8 +7,9 @@
 USING_NS_CC;
 
 class Item;
+class Chef;
 
-class GameController {
+class GameController : public cocos2d::Ref {
 
 public:
 
@@ -35,8 +36,9 @@ protected:
    void startLinearMove(Item* anItem);
    void tryPutNextItem(float dt, Item* anItem);
    void setItemIdle(float dt, Item* anItem);
-   BezierTo* createBezierPath(Vec2 aStartPos);
-   void throwItemSimple(Item* anItem);
+   
+   void throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse);
+   BezierTo* bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse);
    // model
    cocos2d::Vector<cocos2d::Node*>* _items;
    float _convY;
@@ -44,7 +46,14 @@ protected:
    float _convLegth;
    float _putNextItemDt;
    float _itemTimer;
+   cocos2d::Point _chefOrigin;
+   cocos2d::Size  _chefSize;
    cocos2d::Vec2 _itemIdlePos;
+   int _idxRotated;
+   
+   
+   Chef* _theChef;
+   
 private:
    
    cocos2d::Layer* _gameLayer;
