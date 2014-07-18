@@ -24,10 +24,11 @@ public:
    cocos2d::Point getActiveBouncePoint();
    cocos2d::Vec2 getBounceImpulse();
    
-   
+   void startChefBodyAnimation();
    void chefWathItem(Item* anItem);
 protected:
    void updateBounceImpulse();
+   
 private:
    //typedef cocos2d::Ref super;
    cocos2d::Rect _chefRect;

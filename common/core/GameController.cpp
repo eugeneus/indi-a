@@ -65,6 +65,9 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
 
 void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
 {
+   
+   SpriteFrameCache* cache = SpriteFrameCache::getInstance();
+   cache->addSpriteFramesWithFile("images.plist");
 
    Sprite* bg = Sprite::createWithSpriteFrameName("level_1_bg.png");
    bg->setPosition(Vec2(aVisibleSize.width/2 + anOrigin.x, aVisibleSize.height/2 + anOrigin.y));
@@ -103,7 +106,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     ScoreLayer* scoreLayer = ScoreLayer::create(2300);
     scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
 
-
+    _theChef->startChefBodyAnimation();
    
 }
 

@@ -32,7 +32,7 @@ Chef* Chef::create(cocos2d::Layer* aLayer)
 bool Chef::init(cocos2d::Layer* aLayer) {
    
 //"chef_1.png", "chef_%i.png", 4, 0.9
-   _szWatchSector = Size(40.0f,140.0f);
+   _szWatchSector = Size(10.0f,140.0f);
    _isHandIdle = true;
    
    Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -167,10 +167,34 @@ void Chef::chefWathItem(Item* anItem)
 
       // after that run hands "throw animation" simultaneously with item "throw" animation
    }
-
    
-
 }
+
+void  Chef::startChefBodyAnimation()
+{
+   Vector<SpriteFrame*> animFrames(15);
+   char imageFileName[100] = {0};
+   auto cache = SpriteFrameCache::getInstance();
+   for(int i = 1; i < 5; i++)
+   {
+      sprintf(imageFileName, "chef_%d.png", i);
+      SpriteFrame* frame = cache->getSpriteFrameByName(imageFileName);
+      animFrames.pushBack(frame);
+   }
+   
+   Animation* animation = Animation::createWithSpriteFrames(animFrames, 2.5f);
+   _chef->runAction(RepeatForever::create(Animate::create(animation)));
+   
+/*
+   auto cache = AnimationCache::getInstance();
+   cache->addAnimationsWithFile("images.plist");
+   auto animation = cache->getAnimation("chef");
+   auto animate = Animate::create(animation);
+   _chef->runAction(animate);
+*/
+   
+}
+
 
 void Chef::updateBounceImpulse()
 {
