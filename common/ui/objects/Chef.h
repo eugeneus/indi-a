@@ -25,6 +25,7 @@ public:
    cocos2d::Vec2 getBounceImpulse();
    
    void startChefBodyAnimation();
+   void startHandBounceAnimation();
    void chefWathItem(Item* anItem);
 protected:
    void updateBounceImpulse();
@@ -44,7 +45,7 @@ private:
    
    cocos2d::Size _szWatchSector;
    cocos2d::Point _activeBouncePoint;
-   bool _isHandIdle;
+   int _sleepCounter;
 };
 
 #endif /* defined(__BlindChef__Chef__) */

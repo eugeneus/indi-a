@@ -33,7 +33,7 @@ bool Chef::init(cocos2d::Layer* aLayer) {
    
 //"chef_1.png", "chef_%i.png", 4, 0.9
    _szWatchSector = Size(10.0f,140.0f);
-   _isHandIdle = true;
+   _sleepCounter = 0;
    
    Size visibleSize = Director::getInstance()->getVisibleSize();
    this->_layer = aLayer;
@@ -122,10 +122,11 @@ void Chef::chefWathItem(Item* anItem)
    cocos2d::MoveTo* grabActionDown = nullptr;
    
    bool isLeftHandSeep = (((int)0 + arc4random() % (2)) > 0);
+   if(_sleepCounter > 5){
+      isLeftHandSeep = true;
+   }
    
-   //if(getRandomNumber(0,1) > 0)
-   //   isLeftHandSeep = false;
-      
+   
    Sprite* activeHand = _leftHand;
    Rect activeHandRect = Rect(_leftHandRect);
    _activeBouncePoint = _leftHandRect.origin;
@@ -133,6 +134,9 @@ void Chef::chefWathItem(Item* anItem)
       activeHand = _rightHand;
       activeHandRect = Rect(_rightHandRect);
       _activeBouncePoint = _rightHandRect.origin;
+      _sleepCounter = 0;
+   }else{
+      _sleepCounter++;
    }
    
  
@@ -142,13 +146,10 @@ void Chef::chefWathItem(Item* anItem)
       itemPos.y <= activeHandRect.origin.y
       ){
       //calulate parametes and start hands "grab" animation
-      if (_isHandIdle) {
-         _isHandIdle = false;
-         
-         CCLOG("RUN Active Hand Grab Action ACTION!");
+      if (activeHand->getNumberOfRunningActions() == 0) {
          
          actionGrabDistanceActual = itemPos.x - activeHandRect.origin.x;
-         actionGrabDuration = actionGrabDistanceActual/50; // TODO: get actual conveyor velocity
+         actionGrabDuration = actionGrabDistanceActual/50.0; // TODO: get actual conveyor velocity
          grabActionUp = MoveTo::create(actionGrabDuration/2.0f,
                                        Vec2(activeHandRect.origin.x,activeHandRect.origin.y + actionGrabDistanceActual));
          grabActionUp->setTag(1);
@@ -156,13 +157,7 @@ void Chef::chefWathItem(Item* anItem)
          grabActionDown->setTag(2);
          activeHand->runAction(Sequence::create(grabActionUp,grabActionDown,NULL));
          
-
-      }
-      else if (activeHand->getNumberOfRunningActions() == 0){
-         _isHandIdle = true;
          this->updateBounceImpulse();
-         // here throw animation sould be
-
       }
 
       // after that run hands "throw animation" simultaneously with item "throw" animation
@@ -195,12 +190,21 @@ void  Chef::startChefBodyAnimation()
    
 }
 
+void Chef::startHandBounceAnimation()
+{
+
+}
+
 
 void Chef::updateBounceImpulse()
 {
-   _bounceImpulse.x -= 0.09f;
-   _bounceImpulse.x  = _bounceImpulse.x > -1.0 ? _bounceImpulse.x : 1.0f;
-
+   //TODO: do it random
+   _bounceImpulse.x -= 0.2f;
+   _bounceImpulse.x  = _bounceImpulse.x < -1.0 ? _bounceImpulse.x : 1.0f;
+   
+   _bounceImpulse.y -= 0.3f;
+   _bounceImpulse.y  = _bounceImpulse.y < 0.2 ? _bounceImpulse.x : 1.0f;
+   
 }
 
 Point Chef::getActiveBouncePoint()

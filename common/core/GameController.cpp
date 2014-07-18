@@ -158,7 +158,7 @@ void GameController::tryPutNextItem(float dt, Item* anItem)
    Vec2 pos = anItem->getPosition();
 	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x){
       this->startLinearMove(anItem);
-		_putNextItemDt = getRandomNumber(3, 6);
+		_putNextItemDt = getRandomNumber(1.2, 2.5);
 	}
    
    
@@ -178,13 +178,18 @@ ccBezierConfig bezierConfigBouncePathForParams(Item* anItem, float aWeight, Vec2
 {
    ccBezierConfig bezier;
 
+   //TODO: calculate initial bezier parameters based on visible screen size,
+   //      so that even with impulce (1,1) item fall into screen area
+   Size visibleSize = Director::getInstance()->getVisibleSize();
+   Point visibleOrigin = Director::getInstance()->getVisibleOrigin();
    Point itemPos = anItem->getPosition();
    Point cp1 = itemPos;
    Point cp2 = itemPos;
    Point endPoint = itemPos;
-   Size visibleSize = Director::getInstance()->getVisibleSize();
    
-   cp1.y = cp1.y + ((visibleSize.height - cp1.y) * anImpulse.y);
+   
+   // assume start point of impulse always (0,0)
+   cp1.y = cp1.y + ((visibleSize.height) * anImpulse.y);
    cp1.x = cp1.x + ((visibleSize.width - cp1.x) * anImpulse.x);
    
    endPoint.y = endPoint.y - (endPoint.y * anImpulse.y);
@@ -208,6 +213,7 @@ BezierTo* GameController::bounceItemAction(Item* anItem, float aWeight, Vec2 anI
    float actionDuration = 3; //TODO: chould be calculated based on impulse and weight
    
    BezierTo* bounceAction = BezierTo::create(actionDuration, bouncePathConfig);
+   bounceAction->setTag(1);
    
    return bounceAction;
 }
@@ -217,12 +223,14 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
    float xThrow = throwX;
    Point ptItem = anItem->getPosition();
    
+   //
+   
    if (ptItem.x >= xThrow &&
        ptItem.x <= xThrow + 3.0f &&
        ptItem.y >= _itemIdlePos.y - 20.0f &&
        ptItem.y <= _itemIdlePos.y + 20.0f
        ){
-      
+     
       FiniteTimeAction* actionBezier = this->bounceItemAction(anItem, 1.0f, anImpulse);
       FiniteTimeAction* actionRotate = nullptr; // plaseholder rotate
       
@@ -259,6 +267,7 @@ void GameController::update(float dt)
    Item* item = nullptr;
    Vec2 itemPos;
    Size itemSize;
+   Action* chekAction = nullptr;
    _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
    
    for (int i = _idxRotated; i < _items->size(); i++) {
@@ -284,10 +293,19 @@ void GameController::update(float dt)
          item->setDefaultSize();
       }
       
+      ;
+      
       // chef/item collision
-      _theChef->chefWathItem(item);
-      //try to throw item
-      this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
+      chekAction = nullptr;
+      if (item->getNumberOfRunningActions() > 0) {
+         chekAction = item->getActionByTag(1001);
+      }
+      
+      if (chekAction) { // this should be updated
+         _theChef->chefWathItem(item);
+         //try to throw item
+         this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
+      }
    }
 }
 
