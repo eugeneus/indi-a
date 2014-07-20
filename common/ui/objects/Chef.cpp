@@ -13,10 +13,10 @@ Chef::Chef()
 Chef::~Chef(){}
 
 
-Chef* Chef::create(cocos2d::Layer* aLayer)
+Chef* Chef::create(cocos2d::Layer* aLayer, int aZOrder)
 {
     Chef *pRet = new Chef();
-    if (pRet && pRet->init(aLayer))
+    if (pRet && pRet->init(aLayer,aZOrder))
     {
         //pRet->autorelease();
         return pRet;
@@ -29,7 +29,7 @@ Chef* Chef::create(cocos2d::Layer* aLayer)
     }
 }
 
-bool Chef::init(cocos2d::Layer* aLayer) {
+bool Chef::init(cocos2d::Layer* aLayer, int aZOrder) {
    
 //"chef_1.png", "chef_%i.png", 4, 0.9
    _szWatchSector = Size(10.0f,140.0f);
@@ -40,7 +40,7 @@ bool Chef::init(cocos2d::Layer* aLayer) {
    
    _chef = Sprite::createWithSpriteFrameName("chef_1.png");
    _chef->setAnchorPoint(Point(0,0));
-   aLayer->addChild(_chef,1);
+   aLayer->addChild(_chef,aZOrder - 10);
    
    // just temporary scale
    float scaleFactor = 0.5f;
@@ -53,7 +53,7 @@ bool Chef::init(cocos2d::Layer* aLayer) {
    float HscaleFactor = 0.7f;
    
    _rightHand = Sprite::createWithSpriteFrameName("hand_left_1.png");
-   aLayer->addChild(_rightHand,1);
+   aLayer->addChild(_rightHand,aZOrder);
    _rightHand->setAnchorPoint(Point(0,0));
    _rightHand->setScale(HscaleFactor);
    _rightHand->setFlippedX(true);
@@ -65,7 +65,7 @@ bool Chef::init(cocos2d::Layer* aLayer) {
    _rightHand->setPosition(_rightHandRect.origin);
    
    _leftHand = Sprite::createWithSpriteFrameName("hand_left_1.png");
-   aLayer->addChild(_leftHand,1);
+   aLayer->addChild(_leftHand,aZOrder);
    _leftHand->setAnchorPoint(Point(0,0));
    _leftHand->setScale(HscaleFactor);
    
@@ -216,6 +216,11 @@ Point Chef::getActiveBouncePoint()
 Vec2 Chef::getBounceImpulse()
 {
    return _bounceImpulse;
+}
+
+void Chef::setZOrder(int aZOrder)
+{
+   
 }
 
 

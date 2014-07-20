@@ -12,7 +12,6 @@ public:
     
    bool init(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime);
    //   virtual void initializeMenu();
-   
    float _weightRatio;
    float _bounceRatio;
     

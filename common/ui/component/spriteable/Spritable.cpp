@@ -33,7 +33,9 @@ bool Spritable::initWithSpriteAndPos(string spriteFrameName, const char* framesP
     {
         return false;
     }
-    
+   
+   
+   _defaultScale = 1.0f;
     animatedSprite = Sprite::createWithSpriteFrameName(spriteFrameName.c_str());
     animatedSprite->setAnchorPoint(Vec2(0, 0));
     
@@ -82,10 +84,16 @@ Size Spritable::getDefaultContentSize()
    return _defaultContentSize;
 }
 
+void Spritable::applyDefaultScale()
+{
+   this->setScale(_defaultScale);
+}
+
 void Spritable::setDefaultSize()
 {
    this->animatedSprite->setContentSize(_defaultContentSize);
    this->setContentSize(_defaultContentSize);
+   this->applyDefaultScale();
    
 }
 

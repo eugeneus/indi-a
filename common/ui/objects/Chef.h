@@ -11,10 +11,10 @@ class Chef  {  //public cocos2d::Ref
 public:
    Chef();
    ~Chef();
-    static Chef* create(cocos2d::Layer* aLayer);
+    static Chef* create(cocos2d::Layer* aLayer, int aZOrder);
     //static cocos2d::Scene* createScene();
     
-    bool init(cocos2d::Layer* aLayer);
+    bool init(cocos2d::Layer* aLayer, int aZOrder);
  
    void setScale(float aScaleFactor);
    cocos2d::Size getSize();
@@ -27,6 +27,7 @@ public:
    void startChefBodyAnimation();
    void startHandBounceAnimation();
    void chefWathItem(Item* anItem);
+   void setZOrder(int aZOrder);
 protected:
    void updateBounceImpulse();
    
