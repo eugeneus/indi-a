@@ -11,10 +11,10 @@ class Chef  {  //public cocos2d::Ref
 public:
    Chef();
    ~Chef();
-    static Chef* create(cocos2d::Layer* aLayer);
+    static Chef* create(cocos2d::Layer* aLayer, int aZOrder);
     //static cocos2d::Scene* createScene();
     
-    bool init(cocos2d::Layer* aLayer);
+    bool init(cocos2d::Layer* aLayer, int aZOrder);
  
    void setScale(float aScaleFactor);
    cocos2d::Size getSize();
@@ -24,10 +24,13 @@ public:
    cocos2d::Point getActiveBouncePoint();
    cocos2d::Vec2 getBounceImpulse();
    
-   
+   void startChefBodyAnimation();
+   void startHandBounceAnimation();
    void chefWathItem(Item* anItem);
+   void setZOrder(int aZOrder);
 protected:
    void updateBounceImpulse();
+   
 private:
    //typedef cocos2d::Ref super;
    cocos2d::Rect _chefRect;
@@ -43,7 +46,7 @@ private:
    
    cocos2d::Size _szWatchSector;
    cocos2d::Point _activeBouncePoint;
-   bool _isHandIdle;
+   int _sleepCounter;
 };
 
 #endif /* defined(__BlindChef__Chef__) */

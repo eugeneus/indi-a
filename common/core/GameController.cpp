@@ -11,6 +11,16 @@
 #include "Pot.h"
 #include "MovementController.h"
 
+#define kWallZO 0
+#define kConveyurZO 10
+#define kItemZO1 20
+#define kChefZO 30
+#define kCloudZO 40
+#define kFloorZO 50
+#define kPotBackZO 60
+#define kItemZO2 70
+#define kPotFrontZO 80
+
 
 GameController::GameController()
 {
@@ -65,25 +75,28 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
 
 void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
 {
+   
+   SpriteFrameCache* cache = SpriteFrameCache::getInstance();
+   cache->addSpriteFramesWithFile("images.plist");
 
    Sprite* bg = Sprite::createWithSpriteFrameName("level_1_bg.png");
    bg->setPosition(Vec2(aVisibleSize.width/2 + anOrigin.x, aVisibleSize.height/2 + anOrigin.y));
-   _gameLayer->addChild(bg, -1);
+   _gameLayer->addChild(bg, kWallZO);
    
     BonusMenu* bonusMenu = BonusMenu::create();
     bonusMenu->setPosition(Vec2(bonusMenu->getPosition().x - (aVisibleSize.width/2 + anOrigin.x) + 140, aVisibleSize.height/2 + anOrigin.y - 100));
-    _gameLayer->addChild(bonusMenu, 0);
+    _gameLayer->addChild(bonusMenu, kWallZO);
     
     float yOffsetConveyer = 615;
     
-   _theChef = Chef::create(_gameLayer);
+   _theChef = Chef::create(_gameLayer, kChefZO);
    Size chefSize = _theChef->getSize();
    Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer);
    _theChef->setOrigin(chefOrigin);
    
     MindCloudTips* cloudTips = MindCloudTips::create("tips_level_1.png");
     cloudTips->setPosition(Vec2(140, yOffsetConveyer + 100));
-    _gameLayer->addChild(cloudTips, 2);
+    _gameLayer->addChild(cloudTips, kCloudZO);
     cloudTips->toggleTip();
    
     _convY = yOffsetConveyer - 102;
@@ -92,18 +105,18 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
 
     Conveyor* conv = Conveyor::create(_convVelY, _convLegth);
    conv->setPosition(Vec2(0, _convY));
-    _gameLayer->addChild(conv, 1);
+    _gameLayer->addChild(conv, kConveyurZO);
     
     Pot* pot = Pot::create();
     Node* potBack = pot->getBack();
-    _gameLayer->addChild(potBack, 11);
+    _gameLayer->addChild(potBack, kPotBackZO);
     Node* potFront = pot->getFront();
-    _gameLayer->addChild(potFront, 100);
+    _gameLayer->addChild(potFront, kPotFrontZO);
     
     ScoreLayer* scoreLayer = ScoreLayer::create(2300);
     scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
 
-
+    _theChef->startChefBodyAnimation();
    
 }
 
@@ -119,7 +132,7 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 1));
       item->setPosition(_itemIdlePos); //-1 * offset
       item->setScale(0.7);
-      _gameLayer->addChild(item,10);
+      _gameLayer->addChild(item,kItemZO1);
       _items->pushBack(item);
    }
 
@@ -138,6 +151,7 @@ void stopGame()
 
 void GameController::startLinearMove(Item* anItem)
 {
+   anItem->setLocalZOrder(kItemZO1);
    float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
    Vec2 targetPoint = Vec2(_itemIdlePos.x -  actionOffsetX, _itemIdlePos.y);
    
@@ -155,7 +169,7 @@ void GameController::tryPutNextItem(float dt, Item* anItem)
    Vec2 pos = anItem->getPosition();
 	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x){
       this->startLinearMove(anItem);
-		_putNextItemDt = getRandomNumber(3, 6);
+		_putNextItemDt = getRandomNumber(1.2, 2.5);
 	}
    
    
@@ -163,25 +177,30 @@ void GameController::tryPutNextItem(float dt, Item* anItem)
 
 void GameController::setItemIdle(float dt, Item* anItem)
 {
-	if(anItem->getPosition().x + anItem->getContentSize().width + 1 <= Director::getInstance()->getVisibleOrigin().x){
-		
-		anItem->setPosition(_itemIdlePos);
-	}
    
-   
+   anItem->stopAllActions();
+   anItem->setPosition(_itemIdlePos);
+   anItem->setDefaultSize();
+   anItem->setZOrder(kItemZO1);
+
 }
 
 ccBezierConfig bezierConfigBouncePathForParams(Item* anItem, float aWeight, Vec2 anImpulse)
 {
    ccBezierConfig bezier;
 
+   //TODO: calculate initial bezier parameters based on visible screen size,
+   //      so that even with impulce (1,1) item fall into screen area
+   Size visibleSize = Director::getInstance()->getVisibleSize();
+   Point visibleOrigin = Director::getInstance()->getVisibleOrigin();
    Point itemPos = anItem->getPosition();
    Point cp1 = itemPos;
    Point cp2 = itemPos;
    Point endPoint = itemPos;
-   Size visibleSize = Director::getInstance()->getVisibleSize();
    
-   cp1.y = cp1.y + ((visibleSize.height - cp1.y) * anImpulse.y);
+   
+   // assume start point of impulse always (0,0)
+   cp1.y = cp1.y + ((visibleSize.height) * anImpulse.y);
    cp1.x = cp1.x + ((visibleSize.width - cp1.x) * anImpulse.x);
    
    endPoint.y = endPoint.y - (endPoint.y * anImpulse.y);
@@ -205,6 +224,7 @@ BezierTo* GameController::bounceItemAction(Item* anItem, float aWeight, Vec2 anI
    float actionDuration = 3; //TODO: chould be calculated based on impulse and weight
    
    BezierTo* bounceAction = BezierTo::create(actionDuration, bouncePathConfig);
+   bounceAction->setTag(1);
    
    return bounceAction;
 }
@@ -214,12 +234,16 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
    float xThrow = throwX;
    Point ptItem = anItem->getPosition();
    
+   //
+   
    if (ptItem.x >= xThrow &&
        ptItem.x <= xThrow + 3.0f &&
        ptItem.y >= _itemIdlePos.y - 20.0f &&
-       ptItem.y <= _itemIdlePos.y + 20.0f
+       ptItem.y <= _itemIdlePos.y + 20.0f &&
+       anItem->getLocalZOrder() == kItemZO1
        ){
-      
+     
+      anItem->setLocalZOrder(kItemZO2);
       FiniteTimeAction* actionBezier = this->bounceItemAction(anItem, 1.0f, anImpulse);
       FiniteTimeAction* actionRotate = nullptr; // plaseholder rotate
       
@@ -256,35 +280,40 @@ void GameController::update(float dt)
    Item* item = nullptr;
    Vec2 itemPos;
    Size itemSize;
+   Action* chekAction = nullptr;
    _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
    
+   // set items idle/put them on the conveuir
    for (int i = _idxRotated; i < _items->size(); i++) {
       item = (Item*)_items->at(i);
-      this->setItemIdle(dt, item);
+      if(item->getPosition().x + item->getContentSize().width + 1 <= Director::getInstance()->getVisibleOrigin().x){
+         this->setItemIdle(dt, item);
+      }
       this->tryPutNextItem(dt, item);
-      
    }
    _putNextItemDt -= dt;
 
 
    // do not want to let item fall out of screen, lef and right
    // TODO: adjust bounce so that any trajectory does not lead out of screen
+   // Incorporate z-index for collisions
+   //
+   
    for(Node* nitem : *_items){
       
       item = (Item*)nitem;
       itemPos = item->getPosition();
       itemSize = item->getContentSize();
       if (itemPos.x < 0.0) { //+ itemSize.width + 1
-         item->stopAllActions();
-         item->setPosition(_itemIdlePos);
-         item->setScale(0.7f);
-         item->setDefaultSize();
+         this->setItemIdle(dt, item);
+         item->setZOrder(kItemZO1);
       }
       
-      // chef/item collision
-      _theChef->chefWathItem(item);
-      //try to throw item
-      this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
+      if (item->getLocalZOrder() == kItemZO1) { // this should be updated
+         _theChef->chefWathItem(item);
+         //try to throw item
+         this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
+      }
    }
 }
 
