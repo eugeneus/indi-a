@@ -114,6 +114,19 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
 
     _theChef->startChefBodyAnimation();
    
+   _points = PointArray::create(7);
+   _points->retain();
+   _points->addControlPoint(Vec2(480.0f,220.0f)); // left pot
+   _points->addControlPoint(Vec2(80.0f,200.0f)); // right floor
+   _points->addControlPoint(Vec2(60.0f,250.0f)); // right floor
+   _points->addControlPoint(Vec2(120.0f,200.0f)); // right pot
+   _points->addControlPoint(Vec2(280.0f,0.0f)); // about center pot
+   _points->addControlPoint(Vec2(300.0f,0.0f)); // about center pot
+   _points->addControlPoint(Vec2(540.0f,200.0f)); // right floor
+   _points->addControlPoint(Vec2(520.0f,250.0f)); // right floor
+   
+   
+   
 }
 
 int getRandomNumber(int from ,int to) {
@@ -181,6 +194,7 @@ void GameController::setItemIdle(float dt, Item* anItem)
 
 }
 
+// based on impulse
 ccBezierConfig bezierConfigBouncePathForParams(Item* anItem, float aWeight, Vec2 anImpulse)
 {
    ccBezierConfig bezier;
@@ -194,6 +208,7 @@ ccBezierConfig bezierConfigBouncePathForParams(Item* anItem, float aWeight, Vec2
    Point cp2 = itemPos;
    Point endPoint = itemPos;
    
+   int randomPointIdx = getRandomNumber(0,2);
    
    // assume start point of impulse always (0,0)
    cp1.y = cp1.y + ((visibleSize.height) * anImpulse.y);
@@ -212,12 +227,42 @@ ccBezierConfig bezierConfigBouncePathForParams(Item* anItem, float aWeight, Vec2
 
 }
 
+// based on predefined end points
+ccBezierConfig bezierConfigBouncePathToEndPoint(Point anEndPoint, Item* anItem, float aWeight, Vec2 anImpulse)
+{
+   ccBezierConfig bezier;
+   
+   Size visibleSize = Director::getInstance()->getVisibleSize();
+   Point visibleOrigin = Director::getInstance()->getVisibleOrigin();
+   Point itemPos = anItem->getPosition();
+   Point cp1 = itemPos;
+   
+   // assume start point of impulse always (0,0)
+   cp1.y = itemPos.y + ((visibleSize.height) * anImpulse.y);
+   cp1.x = itemPos.x + ((anEndPoint.x - itemPos.x) * anImpulse.x);
+   
+   bezier.controlPoint_1 = cp1;
+   bezier.controlPoint_2 = anEndPoint;
+   bezier.endPosition = anEndPoint;
+   
+   return bezier;
+   
+}
+
+
 BezierTo* GameController::bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse)
 {
    
-   ccBezierConfig bouncePathConfig = bezierConfigBouncePathForParams(anItem, aWeight, anImpulse);
+   Point endPoint = Point(0.0f, 100.0f);
+   if (_points->count() > 0) {
+      int randomPointIdx = getRandomNumber(0,(_points->count()-1));
+      endPoint = _points->getControlPointAtIndex(randomPointIdx);
+   }
+ 
+   //ccBezierConfig bouncePathConfig = bezierConfigBouncePathForParams(anItem, aWeight, anImpulse);
+   ccBezierConfig bouncePathConfig = bezierConfigBouncePathToEndPoint(endPoint,anItem, aWeight, anImpulse);
    
-   float actionDuration = 3; //TODO: chould be calculated based on impulse and weight
+   float actionDuration = 3; //TODO: chould be calsculated based on impulse and weight
    
    BezierTo* bounceAction = BezierTo::create(actionDuration, bouncePathConfig);
    bounceAction->setTag(1);
