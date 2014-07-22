@@ -8,6 +8,7 @@ USING_NS_CC;
 
 class Item;
 class Chef;
+class Pot;
 
 class GameController : public cocos2d::Ref {
 
@@ -46,12 +47,11 @@ protected:
    float _convLegth;
    float _putNextItemDt;
    float _itemTimer;
-   cocos2d::Point _chefOrigin;
-   cocos2d::Size  _chefSize;
+
    cocos2d::Vec2 _itemIdlePos;
    int _idxRotated;
    
-   
+   Pot* _thePot;
    Chef* _theChef;
    
 private:

@@ -29,8 +29,6 @@ GameController::GameController()
    _convLegth = 0.0f;
    _putNextItemDt = 2.0f;
    _idxRotated = 0;
-   _chefOrigin = Point(0.0,0.0);
-   _chefSize = Size(0.0,0.0);
    
    _items = new Vector<cocos2d::Node*>(10);
 
@@ -107,12 +105,10 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
    conv->setPosition(Vec2(0, _convY));
     _gameLayer->addChild(conv, kConveyurZO);
     
-    Pot* pot = Pot::create();
-    Node* potBack = pot->getBack();
-    _gameLayer->addChild(potBack, kPotBackZO);
-    Node* potFront = pot->getFront();
-    _gameLayer->addChild(potFront, kPotFrontZO);
-    
+    _thePot = Pot::create(_gameLayer,kPotFrontZO,kPotBackZO);
+   Size sz = _thePot->getFrontRect().size;
+   Point potOrigin = Point(0,0);//Point(aVisibleSize.width/2.0f - sz.width/2.0f, 0.0f);
+   _thePot->setOriginPos(potOrigin);
     ScoreLayer* scoreLayer = ScoreLayer::create(2300);
     scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
 
@@ -280,7 +276,6 @@ void GameController::update(float dt)
    Item* item = nullptr;
    Vec2 itemPos;
    Size itemSize;
-   Action* chekAction = nullptr;
    _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
    
    // set items idle/put them on the conveuir
@@ -296,8 +291,6 @@ void GameController::update(float dt)
 
    // do not want to let item fall out of screen, lef and right
    // TODO: adjust bounce so that any trajectory does not lead out of screen
-   // Incorporate z-index for collisions
-   //
    
    for(Node* nitem : *_items){
       
@@ -309,9 +302,8 @@ void GameController::update(float dt)
          item->setZOrder(kItemZO1);
       }
       
-      if (item->getLocalZOrder() == kItemZO1) { // this should be updated
+      if (item->getLocalZOrder() == kItemZO1) {
          _theChef->chefWathItem(item);
-         //try to throw item
          this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
       }
    }
