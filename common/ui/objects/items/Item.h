@@ -10,7 +10,7 @@ public:
     
    bool init(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime);
    
-   virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aTimeInterval, cocos2d::Point anImpulse);
+   virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse);
    //   virtual void initializeMenu();
    float _weightRatio;
    float _bounceRatio;
