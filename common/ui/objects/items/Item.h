@@ -6,15 +6,17 @@
 #include "Spritable.h"
 
 class Item : public Spritable {
-private:
-   typedef Spritable super;
 public:
     
    bool init(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime);
+   
+   virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aTimeInterval, cocos2d::Point anImpulse);
    //   virtual void initializeMenu();
    float _weightRatio;
    float _bounceRatio;
-    
+private:
+   typedef Spritable super;
+   
 };
 
 #endif /* defined(__BlindChef__Item__) */

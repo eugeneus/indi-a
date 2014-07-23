@@ -12,6 +12,7 @@ public:
     static Gabbage* create();
     
     bool init();
+   virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aTimeInterval, cocos2d::Point anImpulse);
 };
 
 

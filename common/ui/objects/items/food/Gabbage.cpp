@@ -29,3 +29,8 @@ bool Gabbage::init() {
    
     return true;
 }
+
+FiniteTimeAction* Gabbage::getFloorBumpAction(float aTimeInterval, cocos2d::Point anImpulse)
+{
+   return nullptr;
+}

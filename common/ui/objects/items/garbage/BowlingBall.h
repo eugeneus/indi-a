@@ -12,6 +12,7 @@ public:
     static BowlingBall* create();
     
     bool init();
+   virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aTimeInterval, cocos2d::Point anImpulse);
 };
 
 #endif /* defined(__BlindChef__BowlingBall__) */

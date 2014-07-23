@@ -14,3 +14,7 @@ bool Item::init(string spriteFrameName, const char* framesPattern, int spriteCou
     return true;
 }
 
+FiniteTimeAction* getFloorBumpAction(float aTimeInterval, cocos2d::Point anImpulse)
+{
+   return nullptr;
+}

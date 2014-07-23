@@ -208,8 +208,6 @@ ccBezierConfig bezierConfigBouncePathForParams(Item* anItem, float aWeight, Vec2
    Point cp2 = itemPos;
    Point endPoint = itemPos;
    
-   int randomPointIdx = getRandomNumber(0,2);
-   
    // assume start point of impulse always (0,0)
    cp1.y = cp1.y + ((visibleSize.height) * anImpulse.y);
    cp1.x = cp1.x + ((visibleSize.width - cp1.x) * anImpulse.x);
@@ -259,7 +257,6 @@ BezierTo* GameController::bounceItemAction(Item* anItem, float aWeight, Vec2 anI
       endPoint = _points->getControlPointAtIndex(randomPointIdx);
    }
  
-   //ccBezierConfig bouncePathConfig = bezierConfigBouncePathForParams(anItem, aWeight, anImpulse);
    ccBezierConfig bouncePathConfig = bezierConfigBouncePathToEndPoint(endPoint,anItem, aWeight, anImpulse);
    
    float actionDuration = 3; //TODO: chould be calsculated based on impulse and weight
@@ -278,7 +275,7 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
    //
    
    if (ptItem.x >= xThrow &&
-       ptItem.x <= xThrow + 3.0f &&
+       ptItem.x <= xThrow + 10.0f &&
        ptItem.y >= _itemIdlePos.y - 20.0f &&
        ptItem.y <= _itemIdlePos.y + 20.0f &&
        anItem->getLocalZOrder() == kItemZO1
