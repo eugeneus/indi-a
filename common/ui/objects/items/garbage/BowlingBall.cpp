@@ -30,3 +30,8 @@ bool BowlingBall::init() {
    
     return true;
 }
+
+FiniteTimeAction* BowlingBall::getFloorBumpAction(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse)
+{
+   return nullptr;
+}

@@ -29,3 +29,8 @@ bool Bottle::init() {
    
     return true;
 }
+
+FiniteTimeAction* Bottle::getFloorBumpAction(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse)
+{
+   return nullptr;
+}

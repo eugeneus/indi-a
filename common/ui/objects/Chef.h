@@ -7,12 +7,11 @@
 
 class Item;
 
-class Chef  {  //public cocos2d::Ref
+class Chef  {
 public:
    Chef();
    ~Chef();
     static Chef* create(cocos2d::Layer* aLayer, int aZOrder);
-    //static cocos2d::Scene* createScene();
     
     bool init(cocos2d::Layer* aLayer, int aZOrder);
  

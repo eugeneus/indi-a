@@ -64,6 +64,7 @@
 		AA3424831960CB230067B032 /* RioGrande.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA3424821960CB230067B032 /* RioGrande.ttf */; };
 		AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA4A9D011960227600BB3634 /* Cyclable.cpp */; };
 		AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA4A9D0419605CF400BB3634 /* Conveyor.cpp */; };
+		AA7E7103197E53BE0019CBDD /* TouchController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7E7101197E53BE0019CBDD /* TouchController.cpp */; };
 		AA870FFB196324A50028A4EA /* Food.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA870FF5196324A50028A4EA /* Food.cpp */; };
 		AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA870FF7196324A50028A4EA /* FoodFactory.cpp */; };
 		AA870FFD196324A50028A4EA /* Gabbage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA870FF9196324A50028A4EA /* Gabbage.cpp */; };
@@ -300,6 +301,8 @@
 		AA4A9D021960227600BB3634 /* Cyclable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cyclable.h; sourceTree = "<group>"; };
 		AA4A9D0419605CF400BB3634 /* Conveyor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Conveyor.cpp; sourceTree = "<group>"; };
 		AA4A9D0519605CF400BB3634 /* Conveyor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conveyor.h; sourceTree = "<group>"; };
+		AA7E7101197E53BE0019CBDD /* TouchController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TouchController.cpp; sourceTree = "<group>"; };
+		AA7E7102197E53BE0019CBDD /* TouchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchController.h; sourceTree = "<group>"; };
 		AA870FF5196324A50028A4EA /* Food.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Food.cpp; sourceTree = "<group>"; };
 		AA870FF6196324A50028A4EA /* Food.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Food.h; sourceTree = "<group>"; };
 		AA870FF7196324A50028A4EA /* FoodFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FoodFactory.cpp; sourceTree = "<group>"; };
@@ -776,6 +779,8 @@
 				E0050DE51967F31B009E7BA1 /* GameController.h */,
 				E0050DE11967D0FC009E7BA1 /* MovementController.cpp */,
 				E0050DE21967D0FC009E7BA1 /* MovementController.h */,
+				AA7E7101197E53BE0019CBDD /* TouchController.cpp */,
+				AA7E7102197E53BE0019CBDD /* TouchController.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1003,6 +1008,7 @@
 				AA87100A1963287D0028A4EA /* ItemFactory.cpp in Sources */,
 				AA96A221195DB16C00C22BC9 /* MainMenuPopup.cpp in Sources */,
 				AAB01DA219629E84002251B1 /* Hand.cpp in Sources */,
+				AA7E7103197E53BE0019CBDD /* TouchController.cpp in Sources */,
 				AA96A21C195DB16C00C22BC9 /* SlidingMenuLayer.cpp in Sources */,
 				AA871004196325B50028A4EA /* Garbage.cpp in Sources */,
 				AAB01DA51962A1B9002251B1 /* Hands.cpp in Sources */,
