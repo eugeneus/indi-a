@@ -178,7 +178,7 @@ void GameController::tryPutNextItem(float dt, Item* anItem)
    Vec2 pos = anItem->getPosition();
 	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x){
       this->startLinearMove(anItem);
-		_putNextItemDt = getRandomNumber(1.2, 2.5);
+		_putNextItemDt = getRandomNumber(1.5, 2.5);
 	}
    
    
@@ -248,7 +248,7 @@ ccBezierConfig bezierConfigBouncePathToEndPoint(Point anEndPoint, Item* anItem, 
 }
 
 
-BezierTo* GameController::bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse)
+FiniteTimeAction* GameController::bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse)
 {
    
    Point endPoint = Point(0.0f, 100.0f);
@@ -259,12 +259,23 @@ BezierTo* GameController::bounceItemAction(Item* anItem, float aWeight, Vec2 anI
  
    ccBezierConfig bouncePathConfig = bezierConfigBouncePathToEndPoint(endPoint,anItem, aWeight, anImpulse);
    
-   float actionDuration = 3; //TODO: chould be calsculated based on impulse and weight
+   float actionDuration = 3; //TODO: chould be calculated based on impulse and weight
    
    BezierTo* bounceAction = BezierTo::create(actionDuration, bouncePathConfig);
    bounceAction->setTag(1);
    
-   return bounceAction;
+   FiniteTimeAction* itemFallAction = anItem->getFloorBumpAction(1.0, endPoint, anImpulse);
+   
+   FiniteTimeAction* finalAction = nullptr;
+
+   if (itemFallAction) {
+      finalAction = Sequence::create(bounceAction,itemFallAction,NULL);
+   }
+   else{
+      finalAction = Sequence::create(bounceAction, NULL);
+   }
+  
+   return finalAction;
 }
 
 void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
@@ -296,6 +307,7 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
       scaleRev2->setDuration(0.1);
       
       anItem->stopActionByTag(1001);
+      
       
       anItem->runAction(Sequence::create(actionBezier,
                                           actionDelay,
