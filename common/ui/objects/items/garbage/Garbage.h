@@ -12,6 +12,7 @@ public:
     
     bool init(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime);
     //   virtual void initializeMenu();
+   //virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse);
     
 };
 
