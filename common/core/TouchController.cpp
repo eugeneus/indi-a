@@ -1,6 +1,8 @@
 
 #include "TouchController.h"
 #include "Item.h"
+#include "GameMenu.h"
+#include "GameController.h"
 
 TouchController::TouchController()
 {
@@ -89,6 +91,8 @@ void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches
                         
                         if(isTouchingItem(location, item)) {
                             log("item detected with z-index: %i", item->getLocalZOrder());
+                            GameController* gameController = ((GameMenu *)_gameLayer)->getGameController();
+                            gameController->changeItemPath(item, 0.1f, Vec2(0, 0));
                         }
                     }
                 }

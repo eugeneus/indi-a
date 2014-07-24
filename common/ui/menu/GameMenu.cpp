@@ -66,6 +66,10 @@ void GameMenu::update(float dt) {
    this->_theGameController->update(dt);
 }
 
+GameController* GameMenu::getGameController() {
+    return _theGameController;
+}
+
 void GameMenu::onTouchesBegan(const std::vector<Touch*>& touches, Event *unused_event) {
     CCLOG("touch onTouchesBegan");
     _touchController->onTouchesBegan(touches, unused_event);

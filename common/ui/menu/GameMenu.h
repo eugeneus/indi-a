@@ -27,7 +27,7 @@ public:
     //virtual void draw();
     virtual void draw(cocos2d::Renderer* renderer, const cocos2d::kmMat4& transform, bool transformUpdated);
     
-    
+    GameController* getGameController();
     
     virtual void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event::Event *unused_event);
     virtual void onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event::Event *unused_event);

@@ -26,6 +26,8 @@ public:
    void stopGame();
    
    void update(float dt);
+    
+    void changeItemPath(Item* anItem, float throwX, Vec2 anImpulse);
 
 protected:
    

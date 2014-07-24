@@ -317,3 +317,8 @@ void GameController::update(float dt)
    }
 }
 
+void GameController::changeItemPath(Item *anItem, float throwX, cocos2d::Vec2 anImpulse) {
+    //throwItemSimple(anItem, throwX, anImpulse);
+    anItem->stopAllActions();
+}
+
