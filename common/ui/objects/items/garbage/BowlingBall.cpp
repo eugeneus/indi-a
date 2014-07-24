@@ -33,5 +33,8 @@ bool BowlingBall::init() {
 
 FiniteTimeAction* BowlingBall::getFloorBumpAction(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse)
 {
-   return nullptr;
+   Point endPoint = Point(aStartPoint.x + (100.0f * anImpulse.x), aStartPoint.y + (100.0f * anImpulse.y));
+   FiniteTimeAction* moveTo = MoveTo::create(aTimeInterval, endPoint);
+   return moveTo;
+
 }

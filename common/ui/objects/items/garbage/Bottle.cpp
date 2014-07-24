@@ -32,5 +32,20 @@ bool Bottle::init() {
 
 FiniteTimeAction* Bottle::getFloorBumpAction(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse)
 {
+   /*
+   Vector<SpriteFrame*> animateFrames(6);
+   char frameName[100] = {0};
+   SpriteFrame* animFrame = nullptr;
+   
+   for(int i = 1; i < 7; i++)
+   {
+      sprintf(frameName, "bottle_crash_%1d.png", i);
+      animFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
+      animateFrames.pushBack(animFrame);
+      animFrame->release();
+   }
+   Animation* a = Animation::createWithSpriteFrames(animateFrames, 0.3f);
+   a->autorelease();
+    */
    return nullptr;
 }
