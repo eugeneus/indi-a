@@ -122,7 +122,7 @@ void Chef::chefWathItem(Item* anItem)
    cocos2d::MoveTo* grabActionDown = nullptr;
    
    bool isLeftHandSeep = (((int)0 + arc4random() % (2)) > 0);
-   if(_sleepCounter > 5){
+   if(_sleepCounter > 2){
       isLeftHandSeep = true;
    }
    
@@ -157,6 +157,7 @@ void Chef::chefWathItem(Item* anItem)
          grabActionDown->setTag(2);
          activeHand->runAction(Sequence::create(grabActionUp,grabActionDown,NULL));
          
+         this->runGrabAnimation(actionGrabDuration);
          this->updateBounceImpulse();
       }
 
@@ -192,6 +193,24 @@ void  Chef::startChefBodyAnimation()
 
 void Chef::startHandBounceAnimation()
 {
+
+}
+
+void Chef::runGrabAnimation(float aDuration)
+{
+
+   Vector<SpriteFrame*> animFrames(3);
+   char imageFileName[100] = {0};
+   auto cache = SpriteFrameCache::getInstance();
+   for(int i = 1; i < 4; i++)
+   {
+      sprintf(imageFileName, "hand_left_%d.png", i);
+      SpriteFrame* frame = cache->getSpriteFrameByName(imageFileName);
+      animFrames.pushBack(frame);
+   }
+   
+   Animation* animation = Animation::createWithSpriteFrames(animFrames, aDuration);
+   _leftHand->runAction(Animate::create(animation));
 
 }
 

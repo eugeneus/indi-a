@@ -29,6 +29,7 @@ public:
    void setZOrder(int aZOrder);
 protected:
    void updateBounceImpulse();
+   void runGrabAnimation(float aDuration);
    
 private:
    //typedef cocos2d::Ref super;
