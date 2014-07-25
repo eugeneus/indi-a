@@ -118,10 +118,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
 
     _theChef->startChefBodyAnimation();
    
-   //_points = PointArray::create(7);
-   //_points->retain();
-   
-   _cntPoints->pushBack(ControlPointDef::create(Point(480.0f,220.0f),kControlPointTypeFloor)); // left floor
+   _cntPoints->pushBack(ControlPointDef::create(Point(480.0f,220.0f),kControlPointTypePotMargin)); // left floor
    _cntPoints->pushBack(ControlPointDef::create(Point(80.0f,200.0f),kControlPointTypeFloor)); // right floor
    _cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // right floor
    _cntPoints->pushBack(ControlPointDef::create(Point(120.0f,200.0f),kControlPointTypePotMargin)); // margin
@@ -178,10 +175,10 @@ void GameController::startLinearMove(Item* anItem)
 void GameController::tryPutNextItem(float dt, Item* anItem)
 {
    Vec2 pos = anItem->getPosition();
-	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x){
+	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x && anItem->getLocalZOrder() == kItemZO1){
       
       this->startLinearMove(anItem);
-		_putNextItemDt = getRandomNumber(1.8, 2.5);
+		_putNextItemDt = getRandomNumber(1.9, 2.5);
 	}
    
    
@@ -249,6 +246,10 @@ void GameController::update(float dt)
       }
 
       if ((itemPos.x + item->getContentSize().width + 10.0f) < 0.0) {
+         this->setItemIdle(dt, item);
+      }
+      
+      if (itemPos.x == _itemIdlePos.x && item->getLocalZOrder() != kItemZO1) {
          this->setItemIdle(dt, item);
       }
       

@@ -116,29 +116,29 @@ void Chef::setWatchSector(cocos2d::Size aSectorSize)
 void Chef::chefWathItem(Item* anItem)
 {
    Point itemPos = anItem->getPosition();
-   float actionGrabDistanceActual = 0.0f;
-   float actionGrabDuration = 0.0f;
-   cocos2d::MoveTo* grabActionUp = nullptr;
-   cocos2d::MoveTo* grabActionDown = nullptr;
+   //float actionGrabDistanceActual = 0.0f;
+   //float actionGrabDuration = 0.0f;
+   //cocos2d::MoveTo* grabActionUp = nullptr;
+   //cocos2d::MoveTo* grabActionDown = nullptr;
    
-   bool isLeftHandSeep = (((int)0 + arc4random() % (2)) > 0);
+   bool isLeftHandSeep = false;//(((int)0 + arc4random() % (2)) > 0);
    if(_sleepCounter > 2){
       isLeftHandSeep = true;
+       _sleepCounter = 0;
    }
-   
-   
+   else
+      _sleepCounter++;
+
    Sprite* activeHand = _leftHand;
    Rect activeHandRect = Rect(_leftHandRect);
    _activeBouncePoint = _leftHandRect.origin;
+   
    if (isLeftHandSeep) {
       activeHand = _rightHand;
       activeHandRect = Rect(_rightHandRect);
       _activeBouncePoint = _rightHandRect.origin;
-      _sleepCounter = 0;
-   }else{
-      _sleepCounter++;
    }
-   
+
  
    if((itemPos.x - _szWatchSector.width) <= (activeHandRect.origin.x + activeHandRect.size.width) &&
       itemPos.x - _szWatchSector.width > activeHandRect.origin.x &&
@@ -148,16 +148,8 @@ void Chef::chefWathItem(Item* anItem)
       //calulate parametes and start hands "grab" animation
       if (activeHand->getNumberOfRunningActions() == 0) {
          
-         actionGrabDistanceActual = itemPos.x - activeHandRect.origin.x;
-         actionGrabDuration = actionGrabDistanceActual/50.0; // TODO: get actual conveyor velocity
-         grabActionUp = MoveTo::create(actionGrabDuration/2.0f,
-                                       Vec2(activeHandRect.origin.x,activeHandRect.origin.y + actionGrabDistanceActual));
-         grabActionUp->setTag(1);
-         grabActionDown = MoveTo::create(actionGrabDuration/2.0f, Vec2(activeHandRect.origin.x,activeHandRect.origin.y));
-         grabActionDown->setTag(2);
-         activeHand->runAction(Sequence::create(grabActionUp,grabActionDown,NULL));
-         
-         this->runGrabAnimation(actionGrabDuration);
+         this->runGrabAnimation(activeHand, itemPos, activeHandRect);
+
          this->updateBounceImpulse();
       }
 
@@ -178,7 +170,8 @@ void  Chef::startChefBodyAnimation()
       animFrames.pushBack(frame);
    }
    
-   Animation* animation = Animation::createWithSpriteFrames(animFrames, 2.5f);
+   Animation* animation = Animation::createWithSpriteFrames(animFrames, 2.5);
+
    _chef->runAction(RepeatForever::create(Animate::create(animation)));
    
 /*
@@ -196,9 +189,27 @@ void Chef::startHandBounceAnimation()
 
 }
 
-void Chef::runGrabAnimation(float aDuration)
+void Chef::runGrabAnimation(Sprite* activeHand, Point itemPos, Rect activeHandRect)
 {
+   float actionGrabDistanceActual = 0.0f;
+   float actionGrabDuration = 0.0f;
+   cocos2d::MoveTo* grabActionUp = nullptr;
+   cocos2d::MoveTo* grabActionDown = nullptr;
 
+   actionGrabDistanceActual = itemPos.x - activeHandRect.origin.x;
+   float convVelocity = 50.0; TODO: // get actual conveyor velocity
+   actionGrabDuration = actionGrabDistanceActual/convVelocity; //
+   grabActionUp = MoveTo::create(actionGrabDuration * 0.15,
+                                 Vec2(activeHandRect.origin.x,activeHandRect.origin.y + actionGrabDistanceActual/2.0));
+   
+   
+   grabActionUp->setTag(1);
+   grabActionDown = MoveTo::create(actionGrabDuration * 0.15, Vec2(activeHandRect.origin.x,activeHandRect.origin.y));
+   grabActionDown->setTag(2);
+   
+   cocos2d::MoveTo* grabActionDown1 = MoveTo::create(actionGrabDuration * 0.15, Vec2(activeHandRect.origin.x,activeHandRect.origin.y - 50.0f));
+   grabActionDown1->setTag(3);
+   
    Vector<SpriteFrame*> animFrames(3);
    char imageFileName[100] = {0};
    auto cache = SpriteFrameCache::getInstance();
@@ -208,9 +219,23 @@ void Chef::runGrabAnimation(float aDuration)
       SpriteFrame* frame = cache->getSpriteFrameByName(imageFileName);
       animFrames.pushBack(frame);
    }
+
+   Animation* animation = Animation::createWithSpriteFrames(animFrames, actionGrabDuration * 0.15);
    
-   Animation* animation = Animation::createWithSpriteFrames(animFrames, aDuration);
-   _leftHand->runAction(Animate::create(animation));
+   
+   cocos2d::MoveTo* grabActionDown2 = MoveTo::create(actionGrabDuration * 0.15,
+                                                     Vec2(activeHandRect.origin.x,
+                                                          activeHandRect.origin.y +actionGrabDistanceActual));
+   grabActionDown2->setTag(5);
+   
+   cocos2d::MoveTo* grabActionDown3 = MoveTo::create(actionGrabDuration * 0.15,
+                                                     Vec2(activeHandRect.origin.x,
+                                                          activeHandRect.origin.y));
+   
+   activeHand->runAction(Sequence::create(grabActionUp,grabActionDown,
+                                          Spawn::create(grabActionDown1,
+                                                        Animate::create(animation),NULL),
+                                          grabActionDown2,grabActionDown3,NULL));
 
 }
 
