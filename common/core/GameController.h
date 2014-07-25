@@ -10,6 +10,27 @@ class Item;
 class Chef;
 class Pot;
 
+class ControlPointDef : public cocos2d::Ref {
+   
+public:
+   ControlPointDef(cocos2d::Point aControlPoint, int aControlPointType)
+   {
+      _controlPoint = Point(aControlPoint);
+      _controlPointType = aControlPointType;
+   };
+   
+   static ControlPointDef* create(cocos2d::Point aControlPoint, int aControlPointType)
+   {
+      return new ControlPointDef(aControlPoint, aControlPointType);
+   }
+   
+   ~ControlPointDef(){};
+   
+   Point _controlPoint;
+   int _controlPointType;
+};
+
+
 class GameController : public cocos2d::Ref {
 
 public:
@@ -39,10 +60,10 @@ protected:
    void setItemIdle(float dt, Item* anItem);
 
    void throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse);
-   FiniteTimeAction* bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse);
+   //FiniteTimeAction* bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse);
    // model
    cocos2d::Vector<cocos2d::Node*>* _items;
-   cocos2d::PointArray* _points;
+   cocos2d::Vector<ControlPointDef*>* _cntPoints;
    
    float _convY;
    float _convVelY;
