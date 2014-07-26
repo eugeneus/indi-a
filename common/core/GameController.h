@@ -49,7 +49,7 @@ public:
    
    void update(float dt);
     
-    void changeItemPath(Item* anItem, float throwX, Vec2 anImpulse);
+    void changeItemPath(Item* anItem, float angle, Vec2 anImpulse);
 
 protected:
    
@@ -62,6 +62,7 @@ protected:
    void setItemIdle(float dt, Item* anItem);
 
    void throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse);
+    ControlPointDef* findControlPointDefByPointType(int pointType);
    //FiniteTimeAction* bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse);
    // model
    cocos2d::Vector<cocos2d::Node*>* _items;
