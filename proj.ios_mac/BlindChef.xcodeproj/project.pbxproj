@@ -95,6 +95,8 @@
 		AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4B1966E64B00C48611 /* TipsFadeble.cpp */; };
 		AAB58E501966E90C00C48611 /* MindCloudTips.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4E1966E90C00C48611 /* MindCloudTips.cpp */; };
 		AAB58E531966F5F600C48611 /* Pot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E511966F5F600C48611 /* Pot.cpp */; };
+		AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AACAB432198AC40400F8AE01 /* LevelProvider.cpp */; };
+		AACAB438198AC41F00F8AE01 /* level_1.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAB437198AC41F00F8AE01 /* level_1.plist */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -361,6 +363,9 @@
 		AAB58E4F1966E90C00C48611 /* MindCloudTips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MindCloudTips.h; sourceTree = "<group>"; };
 		AAB58E511966F5F600C48611 /* Pot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pot.cpp; sourceTree = "<group>"; };
 		AAB58E521966F5F600C48611 /* Pot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pot.h; sourceTree = "<group>"; };
+		AACAB432198AC40400F8AE01 /* LevelProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelProvider.cpp; sourceTree = "<group>"; };
+		AACAB433198AC40400F8AE01 /* LevelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelProvider.h; sourceTree = "<group>"; };
+		AACAB437198AC41F00F8AE01 /* level_1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level_1.plist; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -561,6 +566,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AACAB437198AC41F00F8AE01 /* level_1.plist */,
 				AA3424821960CB230067B032 /* RioGrande.ttf */,
 				AA96A224195DB25500C22BC9 /* images.plist */,
 				AA96A1FA195DB09200C22BC9 /* images.png */,
@@ -634,6 +640,7 @@
 		AA96A1FE195DB16C00C22BC9 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				AACAB431198AC40400F8AE01 /* util */,
 				E0050DE01967D07D009E7BA1 /* core */,
 				AA96A1FF195DB16C00C22BC9 /* ui */,
 			);
@@ -770,6 +777,15 @@
 				AAB58E4C1966E64B00C48611 /* TipsFadeble.h */,
 			);
 			path = tips;
+			sourceTree = "<group>";
+		};
+		AACAB431198AC40400F8AE01 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				AACAB432198AC40400F8AE01 /* LevelProvider.cpp */,
+				AACAB433198AC40400F8AE01 /* LevelProvider.h */,
+			);
+			path = util;
 			sourceTree = "<group>";
 		};
 		E0050DE01967D07D009E7BA1 /* core */ = {
@@ -964,6 +980,7 @@
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				AA96A225195DB25500C22BC9 /* images.plist in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
+				AACAB438198AC41F00F8AE01 /* level_1.plist in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
@@ -1030,6 +1047,7 @@
 				AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */,
 				AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */,
 				AA870FFB196324A50028A4EA /* Food.cpp in Sources */,
+				AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */,
 				AAB58E3D1966BBA600C48611 /* BowlingBall.cpp in Sources */,
 				AA96A21F195DB16C00C22BC9 /* GameSelectMenu.cpp in Sources */,
 				AAB58E531966F5F600C48611 /* Pot.cpp in Sources */,
