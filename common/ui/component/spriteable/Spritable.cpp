@@ -28,12 +28,12 @@ Spritable* Spritable::create(string spriteFrameName, const char* framesPattern, 
 
 bool Spritable::initWithSpriteAndPos(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime)
 {
-    
+
     if ( !Layer::init() ) //!LayerColor::initWithColor(ccc4(255, 255, 255, 255))
     {
         return false;
     }
-   
+
    
    _defaultScale = 1.0f;
     animatedSprite = Sprite::createWithSpriteFrameName(spriteFrameName.c_str());

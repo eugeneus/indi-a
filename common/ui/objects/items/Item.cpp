@@ -54,6 +54,97 @@ ccBezierConfig Item::bezierConfigTouchPathToEndPoint(Point anEndPoint, Vec2 anIm
     
 }
 
+cocos2d::FiniteTimeAction* Item::runConveyourAction(float aDuration, cocos2d::Point anEndPoint)
+{
+   
+   FiniteTimeAction* actionMove = MoveTo::create(aDuration,anEndPoint);
+   // add action to
+   actionMove->setTag(1001);
+   
+   this->runAction(actionMove);
+   
+   return nullptr;
+   
+}
+
+
+cocos2d::FiniteTimeAction* Item::runTossAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse)
+{
+   this->stopActionByTag(1001);
+   
+   ccBezierConfig bouncePathConfig = this->bezierConfigBouncePathToEndPoint(anEndPoint, anImpulse);
+   BezierTo* bezierBounceAction = nullptr; //BezierTo::create(aDuration, bouncePathConfig);
+
+   FiniteTimeAction* actionRotate = nullptr; // plaseholder rotate
+   
+   
+   FiniteTimeAction* actionDelay = DelayTime::create(2);
+   FiniteTimeAction* actionPlase = Place::create(_idleItemPosition);
+   
+   Point nextStartPoint = Point(anEndPoint);
+   float durationPart = aDuration;
+   Point endPoint = Point(anEndPoint);
+   FiniteTimeAction* fullAction = NULL;
+   FiniteTimeAction* jumpAction = NULL;
+   
+   durationPart = aDuration * 0.2f;
+   float dir = nextStartPoint.x > 320.0f ? 1.0f : -1.0f;
+   endPoint = Point(nextStartPoint.x + (100.0f * anImpulse.x * dir), nextStartPoint.y - (50.0f * anImpulse.y));
+   float jumpHeight = (50.0f * anImpulse.y);
+   int jumpsCount = 2;
+   jumpAction = JumpTo::create(durationPart, endPoint, jumpHeight, jumpsCount);
+   durationPart = aDuration - durationPart;
+   bezierBounceAction = BezierTo::create(durationPart, bouncePathConfig);
+   fullAction =  Sequence::create(bezierBounceAction,
+                                  //jumpAction,
+                                  //actionDelay,
+                                  //actionPlase,
+                                  NULL);
+   
+   durationPart = durationPart - 0.7;
+   FiniteTimeAction* scaleBy1 = cocos2d::ScaleBy::create(durationPart, 2.5f);
+   FiniteTimeAction* scaleRev1 = scaleBy1->reverse();
+   FiniteTimeAction* scaleBy2 = cocos2d::ScaleBy::create(0.5f, 0.8f);
+   FiniteTimeAction* scaleRev2 = scaleBy2->reverse();
+   scaleRev1->setDuration(0.1);
+   scaleRev2->setDuration(0.1);
+   
+   FiniteTimeAction* act = Sequence::create(scaleBy1,scaleBy2,scaleRev1,scaleRev2,NULL);
+   this->runAction(Spawn::create(fullAction, act,NULL));
+   
+   return nullptr;
+   
+}
+
+cocos2d::FiniteTimeAction* Item::getPotEdgeBumpAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse)
+{
+   
+   return nullptr;
+   
+}
+
+cocos2d::FiniteTimeAction* Item::getFloorBumpAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse)
+{
+   
+   return nullptr;
+   
+}
+
+cocos2d::FiniteTimeAction* Item::runFingerKickAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse)
+{
+   
+   return nullptr;
+   
+}
+
+cocos2d::FiniteTimeAction* Item::runVanishAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse)
+{
+   
+   return nullptr;
+   
+}
+
+
 void Item::runBounceAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse, int aCollisionType)
 {
 

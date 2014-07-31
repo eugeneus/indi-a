@@ -30,7 +30,7 @@ GameController::GameController()
    _convY = 0.0f;
    _convVelY = 0.0f;
    _convLegth = 0.0f;
-   _putNextItemDt = 2.0f;
+   _putNextItemDt = 0.0f;
    _idxRotated = 0;
    
    _items = new Vector<cocos2d::Node*>(10);
@@ -156,32 +156,22 @@ void stopGame()
 
 }
 
-
-void GameController::startLinearMove(Item* anItem)
-{
-   anItem->setLocalZOrder(kItemZO1);
-   float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
-   Vec2 targetPoint = Vec2(_itemIdlePos.x -  actionOffsetX, _itemIdlePos.y);
-   
-	float actionDuration = actionOffsetX/_convVelY;
-   
-	FiniteTimeAction* actionMove = MoveTo::create(actionDuration,targetPoint);
-	// add action to
-   actionMove->setTag(1001);
-	anItem->runAction(actionMove);
-   
-}
-
-void GameController::tryPutNextItem(float dt, Item* anItem)
+void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
 {
    Vec2 pos = anItem->getPosition();
-	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x && anItem->getLocalZOrder() == kItemZO1){
+	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x && anItem->getLocalZOrder() == kItemZO1){ //
       
-      this->startLinearMove(anItem);
-		_putNextItemDt = getRandomNumber(1.9, 2.5);
+      anItem->setLocalZOrder(kItemZO1);
+      float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
+      Vec2 targetPoint = Vec2(_itemIdlePos.x -  actionOffsetX, _itemIdlePos.y);
+      float actionDuration = actionOffsetX/_convVelY;
+
+      anItem->runConveyourAction(actionDuration, targetPoint);
+		_putNextItemDt = getRandomNumber(1.9, 3.0);
 	}
    
-   
+
+
 }
 
 void GameController::setItemIdle(float dt, Item* anItem)
@@ -207,10 +197,15 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
          collisionEndPointDef = _cntPoints->at(randomPointIdx);
        }
       float totalActionDuration = 3.0f;
+      
+      anItem->runTossAction(totalActionDuration, collisionEndPointDef->_controlPoint, anImpulse);
+      /*
       anItem->runBounceAction(totalActionDuration,
                               collisionEndPointDef->_controlPoint,
                               anImpulse,
                               collisionEndPointDef->_controlPointType);
+      */
+      
       anItem->setLocalZOrder(kItemZO2);
    }
    
@@ -228,7 +223,7 @@ void GameController::update(float dt)
    // set items idle/put them on the conveuir
    for (int i = _idxRotated; i < _items->size(); i++) {
       item = (Item*)_items->at(i);
-      this->tryPutNextItem(dt, item);
+      this->putIdleItemOnConveyour(dt, item);
    }
    _putNextItemDt -= dt;
 
@@ -257,6 +252,8 @@ void GameController::update(float dt)
          _theChef->chefWathItem(item);
          this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
       }
+      
+      
    }
 }
 
