@@ -205,14 +205,14 @@ void Item::runTouchAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::P
     }
     
     durationPart = durationPart - 0.7;
-    FiniteTimeAction* scaleBy1 = cocos2d::ScaleBy::create(durationPart, 2.5f);
+    FiniteTimeAction* scaleBy1 = cocos2d::ScaleBy::create(2*durationPart, this->getScale());
     FiniteTimeAction* scaleRev1 = scaleBy1->reverse();
-    FiniteTimeAction* scaleBy2 = cocos2d::ScaleBy::create(0.5f, 0.8f);
+    FiniteTimeAction* scaleBy2 = cocos2d::ScaleBy::create(0.2f, 0.8f);
     FiniteTimeAction* scaleRev2 = scaleBy2->reverse();
-    scaleRev1->setDuration(0.1);
+   // scaleRev1->setDuration(0.1);
     scaleRev2->setDuration(0.1);
     
-    FiniteTimeAction* act = Sequence::create(scaleBy1,scaleBy2,scaleRev1,scaleRev2,NULL);
+    FiniteTimeAction* act = Sequence::create(scaleRev1, scaleBy2,scaleRev2,NULL);
     this->runAction(Spawn::create(fullAction, act,NULL));
 }
 

@@ -89,6 +89,11 @@ void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches
         location = CCDirector::sharedDirector()->convertToGL(location);
     //    long currTime = millisecondNow();
         
+        
+        
+        float angle1 = calculateAngle(currTouch->getPreviousLocation(), location);
+        log("---------------: %f", angle1);
+        
     
         if (false) { // distance < 0 no move
             // reset start
@@ -116,11 +121,11 @@ void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches
                                 frontItem = item;
                             }*/
                             frontItem = item;
-                            float angle = calculateAngle(_startPos, location);
+                            float angle = calculateAngle(currTouch->getPreviousLocation(), location);
                             log("item detected angle: %f", angle);
                             
                             GameController* gameController = ((GameMenu *)_gameLayer)->getGameController();
-                            gameController->changeItemPath(frontItem, angle, Vec2(0, 0));
+                            gameController->changeItemPath(frontItem, angle, Vec2(0.8, 0.3));
                         }
                     }
                 }
