@@ -63,6 +63,9 @@ protected:
    void setItemIdle(float dt, Item* anItem);
 
    void throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse);
+   
+   void runBumpAction(Item* anItem);
+   
     ControlPointDef* findControlPointDefByAngle(float angle);
    //FiniteTimeAction* bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse);
    // model

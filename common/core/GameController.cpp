@@ -18,9 +18,11 @@
 #define kChefZO 30
 #define kCloudZO 40
 #define kFloorZO 50
+#define kItemZO3 51
 #define kPotBackZO 60
 #define kItemZO2 70
 #define kPotFrontZO 80
+
 
 #define kControlPointTypeFloor 1
 #define kControlPointTypePotMargin 2
@@ -164,7 +166,8 @@ void stopGame()
 void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
 {
    Vec2 pos = anItem->getPosition();
-	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x && anItem->getLocalZOrder() == kItemZO1){ //
+   int zOrder = anItem->getLocalZOrder();
+	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x && zOrder == kItemZO1){ //
       
       anItem->setLocalZOrder(kItemZO1);
       float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
@@ -201,9 +204,10 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
          int randomPointIdx = getRandomNumber(0,(_cntPoints->size()-1));
          collisionEndPointDef = _cntPoints->at(randomPointIdx);
        }
-      float totalActionDuration = 3.0f;
+      float totalActionDuration = 1.5f;
       
-      anItem->runTossAction(totalActionDuration, collisionEndPointDef->_controlPoint, anImpulse);
+      anItem->runTossAction(totalActionDuration, collisionEndPointDef->_controlPoint,
+                            collisionEndPointDef->_controlPointType,anImpulse);
       /*
       anItem->runBounceAction(totalActionDuration,
                               collisionEndPointDef->_controlPoint,
@@ -214,6 +218,27 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
       anItem->setLocalZOrder(kItemZO2);
    }
    
+}
+
+
+void GameController::runBumpAction(Item* anItem)
+{
+   int currentCollisionType = anItem->_currentTargetType;
+   float actionDuration = 0.6f;
+
+   Point impulse = Point(0.5f, 0.7f);
+   if (currentCollisionType == kControlPointTypePotMargin) {
+      actionDuration = 1.2f;
+      anItem->runPotEdgeBumpAction(actionDuration, impulse);
+   }else
+      if(currentCollisionType == kControlPointTypeFloor){
+         anItem->runFloorBumpAction(actionDuration, impulse);
+   }else
+      if (currentCollisionType == kControlPointTypePotCenter){
+      }
+   
+   anItem->setLocalZOrder(kItemZO3);
+
 }
 
 
@@ -233,9 +258,6 @@ void GameController::update(float dt)
    _putNextItemDt -= dt;
 
 
-   // do not want to let item fall out of screen, lef and right
-   // TODO: adjust bounce so that any trajectory does not lead out of screen
-   
    for(Node* nitem : *_items){
       
       item = (Item*)nitem;
@@ -253,11 +275,18 @@ void GameController::update(float dt)
          this->setItemIdle(dt, item);
       }
       
-      if (item->getLocalZOrder() == kItemZO1) {
+      if (item->getLocalZOrder() == kItemZO1) { //toss
          _theChef->chefWathItem(item);
          this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
-      }
-      
+      } else
+      if (item->getLocalZOrder() == kItemZO2 && item->isItemInCurrentTargetPoint()) {
+         this->runBumpAction(item);
+      } else
+         if (item->getLocalZOrder() == kItemZO3 && item->isItemInCurrentTargetPoint()) {
+            float actionDuration = 1.0f;
+            Point impulse = Point(1.0f,1.0f);
+            item->runVanishAction(actionDuration, _itemIdlePos, impulse);
+         }
       
    }
 }
