@@ -67,7 +67,7 @@ protected:
    void runBumpAction(Item* anItem);
    
     ControlPointDef* findControlPointDefByAngle(float angle);
-   //FiniteTimeAction* bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse);
+
    // model
    cocos2d::Vector<cocos2d::Node*>* _items;
    cocos2d::Vector<ControlPointDef*>* _cntPoints;

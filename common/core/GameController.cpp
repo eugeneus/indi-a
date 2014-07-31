@@ -208,13 +208,6 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
       
       anItem->runTossAction(totalActionDuration, collisionEndPointDef->_controlPoint,
                             collisionEndPointDef->_controlPointType,anImpulse);
-      /*
-      anItem->runBounceAction(totalActionDuration,
-                              collisionEndPointDef->_controlPoint,
-                              anImpulse,
-                              collisionEndPointDef->_controlPointType);
-      */
-      
       anItem->setLocalZOrder(kItemZO2);
    }
    
@@ -303,9 +296,9 @@ ControlPointDef* GameController::findControlPointDefByAngle(float angle) {
 }
 
 void GameController::changeItemPath(Item *anItem, float angle, cocos2d::Vec2 anImpulse) {
-    //throwItemSimple(anItem, throwX, anImpulse);
+    
     anItem->stopAllActions();
-    //anItem->setZOrder(kItemZO2);
+   
     ControlPointDef* collisionEndPointDef = findControlPointDefByAngle(angle);
     anItem->runTouchAction(0.5, collisionEndPointDef->_controlPoint,
                            anImpulse,
