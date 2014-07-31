@@ -10,6 +10,7 @@
 #include "MindCloudTips.h"
 #include "Pot.h"
 #include "MovementController.h"
+#include "LevelProvider.h"
 
 #define kWallZO 0
 #define kConveyurZO 10
@@ -66,11 +67,15 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
    visibleSize = Director::getInstance()->getVisibleSize();
    origin = Director::getInstance()->getVisibleOrigin();
    
+    _levelInfo = LevelProvider::createForLevel(1);
+    float speed = _levelInfo->getSpeed();
+    std::vector<int> requiredFroodItems = _levelInfo->getRequiredItems();
+    std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
+    std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
+    
    this->arrangeBackground(origin,visibleSize);
    _itemIdlePos = Vec2(visibleSize.width, _convY + 40.0f);
    this->populateGameObjects(origin,visibleSize);
-   
-
    
    return true;
 }

@@ -63,15 +63,15 @@ std::vector<int> getAllowedItems(ValueMap map, const char* key) {
 
 std::vector<int> LevelProvider::getAllowedFoodItems() {
 
-    return getAllowedItems(_levelMap, "foodItems");
+    return getAllowedItems(_levelMap, "allowedFoodItems");
 }
 
 std::vector<int> LevelProvider::getAllowedGarbageItems() {
     
-    return getAllowedItems(_levelMap, "garbageItems");
+    return getAllowedItems(_levelMap, "allowedGarbageItems");
 }
 
 std::vector<int> LevelProvider::getRequiredItems() {
     
-    return getAllowedItems(_levelMap, "todo");
+    return getAllowedItems(_levelMap, "requiredFoodItems");
 }

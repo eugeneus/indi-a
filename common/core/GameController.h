@@ -9,6 +9,7 @@ USING_NS_CC;
 class Item;
 class Chef;
 class Pot;
+class LevelProvider;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -79,6 +80,8 @@ protected:
    
    Pot* _thePot;
    Chef* _theChef;
+    
+    LevelProvider* _levelInfo;
    
 private:
    

@@ -4,15 +4,15 @@
 <dict>
 	<key>items</key>
 	<dict>
-		<key>todo</key>
+		<key>requiredFoodItems</key>
 		<array>
 			<string>1</string>
 		</array>
-		<key>foodItems</key>
+		<key>allowedFoodItems</key>
 		<array>
 			<string>1</string>
 		</array>
-		<key>garbageItems</key>
+		<key>allowedGarbageItems</key>
 		<array>
 			<string>1</string>
 		</array>
