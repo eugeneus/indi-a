@@ -1,6 +1,8 @@
 
 #include "TouchController.h"
 #include "Item.h"
+#include "GameMenu.h"
+#include "GameController.h"
 
 TouchController::TouchController()
 {
@@ -49,12 +51,30 @@ void TouchController::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches
         Touch* currTouch = touches.front();
        // _startTime = millisecondNow();
         //_startPos = [currTouch locationInView: _gameLayer];
+        
+        _startPos = currTouch->getLocationInView();
         log("You touched %f, %f", currTouch->getLocationInView().x, currTouch->getLocationInView().y);
     }
 }
 
+bool isCoordinateOnLine(float coordinate, float posCoordinate, float size, float anchor) {
+    return posCoordinate - size*anchor < coordinate && coordinate < posCoordinate + size - size*anchor;
+}
+
 bool isTouchingItem(Vec2 touchPoint, Item* item) {
-    return (item->getPosition().getDistance(touchPoint) < 100.0f);
+    Vec2 position = item->getPosition();
+    Vec2 anchor = item->getAnchorPoint();
+    Size size = item->getContentSize();
+    
+    return isCoordinateOnLine(touchPoint.x, position.x, size.width, anchor.x) && isCoordinateOnLine(touchPoint.y, position.y, size.height, anchor.y);
+    //return (item->getPosition().getDistance(touchPoint) < 100.0f);
+}
+
+float calculateAngle(Vec2 pos1, Vec2 pos2) {
+    float diffX = pos2.x - pos1.x;
+    float diffY = pos2.y - pos1.y;
+    
+    return CC_RADIANS_TO_DEGREES(atan2(diffY, diffX));
 }
 
 void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event::Event *unused_event) {
@@ -69,6 +89,11 @@ void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches
         location = CCDirector::sharedDirector()->convertToGL(location);
     //    long currTime = millisecondNow();
         
+        
+        
+        float angle1 = calculateAngle(currTouch->getPreviousLocation(), location);
+        log("---------------: %f", angle1);
+        
     
         if (false) { // distance < 0 no move
             // reset start
@@ -78,6 +103,7 @@ void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches
         if (true) { // curr touch detect item
             // calculate vector
             //for (  _gameLayer->getChildren();
+            Item* frontItem = NULL;
             Vector<Node*> children = _gameLayer->getChildren();
             for (auto iter = children.begin(); iter != children.end(); ++iter)
             {
@@ -85,14 +111,30 @@ void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches
                 if (dynamic_cast<Item*>(child)) {
                     Item *item = (Item *) child;
                     
-                    if (item->getLocalZOrder() > 20) { //TODO: make a global const
+                    if (20 < item->getLocalZOrder()) { //TODO: make a global const
                         
                         if(isTouchingItem(location, item)) {
                             log("item detected with z-index: %i", item->getLocalZOrder());
+                            log("item detected pos x: %g, y:%f, w:%f, h:%f", item->getPosition().x, item->getPosition().y, item->getContentSize().width, item->getContentSize().height);
+                            
+                            /*if (frontItem == NULL || (frontItem != NULL && frontItem->getLocalZOrder() < item->getLocalZOrder())) {
+                                frontItem = item;
+                            }*/
+                            frontItem = item;
+                            float angle = calculateAngle(currTouch->getPreviousLocation(), location);
+                            log("item detected angle: %f", angle);
+                            
+                            GameController* gameController = ((GameMenu *)_gameLayer)->getGameController();
+                            gameController->changeItemPath(frontItem, angle, Vec2(0.8, 0.3));
                         }
                     }
                 }
             }
+            
+            /*if (frontItem != NULL) {
+                GameController* gameController = ((GameMenu *)_gameLayer)->getGameController();
+                gameController->changeItemPath(frontItem, 0.1f, Vec2(0, 0));
+            }*/
         }
     }
 }

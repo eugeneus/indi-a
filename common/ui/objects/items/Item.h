@@ -11,6 +11,7 @@ public:
    bool init(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime);
    
    virtual void runBounceAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse, int aCollisionType);
+    virtual void runTouchAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse, int aCollisionType);
    virtual void setIdle(cocos2d::Point anIdleItemPosition);
    virtual void stopActions();
    //   virtual void initializeMenu();
@@ -20,6 +21,7 @@ public:
 protected:
    cocos2d::ccBezierConfig bezierConfigBouncePathToEndPoint(cocos2d::Point anEndPoint,
                                                             cocos2d::Vec2 anImpulse);
+    cocos2d::ccBezierConfig bezierConfigTouchPathToEndPoint(cocos2d::Point anEndPoint, cocos2d::Vec2 anImpulse);
 private:
    typedef Spritable super;
    

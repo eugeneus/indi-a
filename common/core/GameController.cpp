@@ -260,95 +260,24 @@ void GameController::update(float dt)
    }
 }
 
+ControlPointDef* GameController::findControlPointDefByAngle(float angle) {
+    angle = abs(angle);
+    if (0 < angle && angle < 46 ) {
+        return ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor); //right
+    } else if (135 < angle && angle < 225) {
+        return ControlPointDef::create(Point(60.0f,250.0f), kControlPointTypeFloor); //left
+    } else {
+        return ControlPointDef::create(Point(280.0f,0.0f), kControlPointTypePotCenter);
+    }
+}
 
-
-
-
-/*
- // based on impulse
- ccBezierConfig bezierConfigBouncePathForParams(Item* anItem, float aWeight, Vec2 anImpulse)
- {
- ccBezierConfig bezier;
- 
- //TODO: calculate initial bezier parameters based on visible screen size,
- //      so that even with impulce (1,1) item fall into screen area
- Size visibleSize = Director::getInstance()->getVisibleSize();
- Point visibleOrigin = Director::getInstance()->getVisibleOrigin();
- Point itemPos = anItem->getPosition();
- Point cp1 = itemPos;
- Point cp2 = itemPos;
- Point endPoint = itemPos;
- 
- // assume start point of impulse always (0,0)
- cp1.y = cp1.y + ((visibleSize.height) * anImpulse.y);
- cp1.x = cp1.x + ((visibleSize.width - cp1.x) * anImpulse.x);
- 
- endPoint.y = endPoint.y - (endPoint.y * anImpulse.y);
- endPoint.x = endPoint.x + ((visibleSize.width - cp1.x) * anImpulse.x);  //the same as cp1 x
- 
- cp2 = endPoint;
- 
- bezier.controlPoint_1 = cp1;
- bezier.controlPoint_2 = cp2;
- bezier.endPosition = endPoint;
- 
- return bezier;
- 
- }
- 
- // based on predefined end points
- ccBezierConfig bezierConfigBouncePathToEndPoint(Point anEndPoint, Item* anItem, float aWeight, Vec2 anImpulse)
- {
- ccBezierConfig bezier;
- 
- Size visibleSize = Director::getInstance()->getVisibleSize();
- Point visibleOrigin = Director::getInstance()->getVisibleOrigin();
- Point itemPos = anItem->getPosition();
- Point cp1 = itemPos;
- 
- // assume start point of impulse always (0,0)
- cp1.y = itemPos.y + ((visibleSize.height) * anImpulse.y);
- cp1.x = itemPos.x + ((anEndPoint.x - itemPos.x) * anImpulse.x);
- 
- bezier.controlPoint_1 = cp1;
- bezier.controlPoint_2 = anEndPoint;
- bezier.endPosition = anEndPoint;
- 
- return bezier;
- 
- }
- 
- */
-
-/*
- FiniteTimeAction* GameController::bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse)
- {
- 
- Point endPoint = Point(0.0f, 100.0f);
- if (_points->count() > 0) {
- int randomPointIdx = getRandomNumber(0,(_points->count()-1));
- endPoint = _points->getControlPointAtIndex(randomPointIdx);
- }
- 
- ccBezierConfig bouncePathConfig = bezierConfigBouncePathToEndPoint(endPoint,anItem, aWeight, anImpulse);
- 
- float actionDuration = 3; //TODO: chould be calculated based on impulse and weight
- 
- BezierTo* bounceAction = BezierTo::create(actionDuration, bouncePathConfig);
- bounceAction->setTag(1);
- 
- FiniteTimeAction* itemFallAction = anItem->getFloorBumpAction(1.0, endPoint, anImpulse);
- 
- FiniteTimeAction* finalAction = nullptr;
- 
- if (itemFallAction) {
- finalAction = Sequence::create(bounceAction,itemFallAction,NULL);
- }
- else{
- finalAction = Sequence::create(bounceAction, NULL);
- }
- 
- return finalAction;
- }
- */
+void GameController::changeItemPath(Item *anItem, float angle, cocos2d::Vec2 anImpulse) {
+    //throwItemSimple(anItem, throwX, anImpulse);
+    anItem->stopAllActions();
+    //anItem->setZOrder(kItemZO2);
+    ControlPointDef* collisionEndPointDef = findControlPointDefByAngle(angle);
+    anItem->runTouchAction(0.5, collisionEndPointDef->_controlPoint,
+                           anImpulse,
+                           collisionEndPointDef->_controlPointType);
+}
 
