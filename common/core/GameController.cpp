@@ -10,6 +10,7 @@
 #include "MindCloudTips.h"
 #include "Pot.h"
 #include "MovementController.h"
+#include "LevelProvider.h"
 
 #define kWallZO 0
 #define kConveyurZO 10
@@ -17,9 +18,11 @@
 #define kChefZO 30
 #define kCloudZO 40
 #define kFloorZO 50
+#define kItemZO3 51
 #define kPotBackZO 60
 #define kItemZO2 70
 #define kPotFrontZO 80
+
 
 #define kControlPointTypeFloor 1
 #define kControlPointTypePotMargin 2
@@ -30,7 +33,7 @@ GameController::GameController()
    _convY = 0.0f;
    _convVelY = 0.0f;
    _convLegth = 0.0f;
-   _putNextItemDt = 2.0f;
+   _putNextItemDt = 0.0f;
    _idxRotated = 0;
    
    _items = new Vector<cocos2d::Node*>(10);
@@ -66,11 +69,15 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
    visibleSize = Director::getInstance()->getVisibleSize();
    origin = Director::getInstance()->getVisibleOrigin();
    
+    _levelInfo = LevelProvider::createForLevel(1);
+    float speed = _levelInfo->getSpeed();
+    std::vector<int> requiredFroodItems = _levelInfo->getRequiredItems();
+    std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
+    std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
+    
    this->arrangeBackground(origin,visibleSize);
    _itemIdlePos = Vec2(visibleSize.width, _convY + 40.0f);
    this->populateGameObjects(origin,visibleSize);
-   
-
    
    return true;
 }
@@ -156,32 +163,23 @@ void stopGame()
 
 }
 
-
-void GameController::startLinearMove(Item* anItem)
-{
-   anItem->setLocalZOrder(kItemZO1);
-   float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
-   Vec2 targetPoint = Vec2(_itemIdlePos.x -  actionOffsetX, _itemIdlePos.y);
-   
-	float actionDuration = actionOffsetX/_convVelY;
-   
-	FiniteTimeAction* actionMove = MoveTo::create(actionDuration,targetPoint);
-	// add action to
-   actionMove->setTag(1001);
-	anItem->runAction(actionMove);
-   
-}
-
-void GameController::tryPutNextItem(float dt, Item* anItem)
+void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
 {
    Vec2 pos = anItem->getPosition();
-	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x && anItem->getLocalZOrder() == kItemZO1){
+   int zOrder = anItem->getLocalZOrder();
+	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x && zOrder == kItemZO1){ //
       
-      this->startLinearMove(anItem);
-		_putNextItemDt = getRandomNumber(1.9, 2.5);
+      anItem->setLocalZOrder(kItemZO1);
+      float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
+      Vec2 targetPoint = Vec2(_itemIdlePos.x -  actionOffsetX, _itemIdlePos.y);
+      float actionDuration = actionOffsetX/_convVelY;
+
+      anItem->runConveyourAction(actionDuration, targetPoint);
+		_putNextItemDt = getRandomNumber(1.9, 3.0);
 	}
    
-   
+
+
 }
 
 void GameController::setItemIdle(float dt, Item* anItem)
@@ -206,14 +204,34 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
          int randomPointIdx = getRandomNumber(0,(_cntPoints->size()-1));
          collisionEndPointDef = _cntPoints->at(randomPointIdx);
        }
-      float totalActionDuration = 3.0f;
-      anItem->runBounceAction(totalActionDuration,
-                              collisionEndPointDef->_controlPoint,
-                              anImpulse,
-                              collisionEndPointDef->_controlPointType);
+      float totalActionDuration = 1.5f;
+      
+      anItem->runTossAction(totalActionDuration, collisionEndPointDef->_controlPoint,
+                            collisionEndPointDef->_controlPointType,anImpulse);
       anItem->setLocalZOrder(kItemZO2);
    }
    
+}
+
+
+void GameController::runBumpAction(Item* anItem)
+{
+   int currentCollisionType = anItem->_currentTargetType;
+   float actionDuration = 0.6f;
+
+   Point impulse = Point(0.5f, 0.7f);
+   if (currentCollisionType == kControlPointTypePotMargin) {
+      actionDuration = 1.2f;
+      anItem->runPotEdgeBumpAction(actionDuration, impulse);
+   }else
+      if(currentCollisionType == kControlPointTypeFloor){
+         anItem->runFloorBumpAction(actionDuration, impulse);
+   }else
+      if (currentCollisionType == kControlPointTypePotCenter){
+      }
+   
+   anItem->setLocalZOrder(kItemZO3);
+
 }
 
 
@@ -228,14 +246,11 @@ void GameController::update(float dt)
    // set items idle/put them on the conveuir
    for (int i = _idxRotated; i < _items->size(); i++) {
       item = (Item*)_items->at(i);
-      this->tryPutNextItem(dt, item);
+      this->putIdleItemOnConveyour(dt, item);
    }
    _putNextItemDt -= dt;
 
 
-   // do not want to let item fall out of screen, lef and right
-   // TODO: adjust bounce so that any trajectory does not lead out of screen
-   
    for(Node* nitem : *_items){
       
       item = (Item*)nitem;
@@ -253,10 +268,19 @@ void GameController::update(float dt)
          this->setItemIdle(dt, item);
       }
       
-      if (item->getLocalZOrder() == kItemZO1) {
+      if (item->getLocalZOrder() == kItemZO1) { //toss
          _theChef->chefWathItem(item);
          this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
-      }
+      } else
+      if (item->getLocalZOrder() == kItemZO2 && item->isItemInCurrentTargetPoint()) {
+         this->runBumpAction(item);
+      } else
+         if (item->getLocalZOrder() == kItemZO3 && item->isItemInCurrentTargetPoint()) {
+            float actionDuration = 1.0f;
+            Point impulse = Point(1.0f,1.0f);
+            item->runVanishAction(actionDuration, _itemIdlePos, impulse);
+         }
+      
    }
 }
 
@@ -272,9 +296,9 @@ ControlPointDef* GameController::findControlPointDefByAngle(float angle) {
 }
 
 void GameController::changeItemPath(Item *anItem, float angle, cocos2d::Vec2 anImpulse) {
-    //throwItemSimple(anItem, throwX, anImpulse);
+    
     anItem->stopAllActions();
-    //anItem->setZOrder(kItemZO2);
+   
     ControlPointDef* collisionEndPointDef = findControlPointDefByAngle(angle);
     anItem->runTouchAction(0.5, collisionEndPointDef->_controlPoint,
                            anImpulse,

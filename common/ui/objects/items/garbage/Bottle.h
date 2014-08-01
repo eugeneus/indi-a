@@ -12,7 +12,9 @@ public:
     static Bottle* create();
     
     bool init();
-   virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse);
+   virtual cocos2d::FiniteTimeAction* runFloorBumpAction(float aDuration, cocos2d::Point anImpulse);
+   
+   cocos2d::FiniteTimeAction* getFloorBumpAction(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse);
 };
 
 

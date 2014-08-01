@@ -9,6 +9,7 @@ USING_NS_CC;
 class Item;
 class Chef;
 class Pot;
+class LevelProvider;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -57,13 +58,16 @@ protected:
    
    void populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
    
-   void startLinearMove(Item* anItem);
-   void tryPutNextItem(float dt, Item* anItem);
+   void putIdleItemOnConveyour(float dt, Item* anItem);
+   
    void setItemIdle(float dt, Item* anItem);
 
    void throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse);
+   
+   void runBumpAction(Item* anItem);
+   
     ControlPointDef* findControlPointDefByAngle(float angle);
-   //FiniteTimeAction* bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse);
+
    // model
    cocos2d::Vector<cocos2d::Node*>* _items;
    cocos2d::Vector<ControlPointDef*>* _cntPoints;
@@ -79,6 +83,8 @@ protected:
    
    Pot* _thePot;
    Chef* _theChef;
+    
+    LevelProvider* _levelInfo;
    
 private:
    
