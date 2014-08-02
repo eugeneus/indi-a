@@ -9,7 +9,7 @@ bool Item::init(string spriteFrameName, const char* framesPattern, int spriteCou
         return false;
     }
    
-   _defaultScale = 0.7;
+   _defaultScale = 1.0;
     
     return true;
 }
@@ -54,21 +54,22 @@ ccBezierConfig Item::bezierConfigTouchPathToEndPoint(Point anEndPoint, Vec2 anIm
     
 }
 
-cocos2d::FiniteTimeAction* Item::runConveyourAction(float aDuration, cocos2d::Point anEndPoint)
+cocos2d::FiniteTimeAction* Item::getConveyourAction(float aDuration, cocos2d::Point anEndPoint)
 {
+
+   this->_currentTargetPoint = anEndPoint;
+   this->_currentTargetType = 0;
    
    FiniteTimeAction* actionMove = MoveTo::create(aDuration,anEndPoint);
    // add action to
    actionMove->setTag(1001);
    
-   this->runAction(actionMove);
-   
-   return nullptr;
+   return actionMove;
    
 }
 
 
-cocos2d::FiniteTimeAction* Item::runTossAction(float aDuration, cocos2d::Point anEndPoint,
+cocos2d::FiniteTimeAction* Item::getTossAction(float aDuration, cocos2d::Point anEndPoint,
                                                int aCollisionType, cocos2d::Point anImpulse)
 {
    this->stopActionByTag(1001);
@@ -76,17 +77,17 @@ cocos2d::FiniteTimeAction* Item::runTossAction(float aDuration, cocos2d::Point a
    this->_currentTargetPoint = anEndPoint;
    this->_currentTargetType = aCollisionType;
    
-   float durationPart = aDuration;
+//   float durationPart = aDuration;
    
    ccBezierConfig bouncePathConfig = this->bezierConfigBouncePathToEndPoint(anEndPoint, anImpulse);
    BezierTo* bezierBounceAction = BezierTo::create(aDuration, bouncePathConfig);
 
    Point endPoint = Point(anEndPoint);
    FiniteTimeAction* fullAction = NULL;
-   
    fullAction =  Sequence::create(bezierBounceAction,
                                   NULL);
-   
+
+/*
    durationPart = durationPart - 0.7;
    FiniteTimeAction* scaleBy1 = cocos2d::ScaleBy::create(durationPart, 2.5f);
    FiniteTimeAction* scaleRev1 = scaleBy1->reverse();
@@ -96,13 +97,14 @@ cocos2d::FiniteTimeAction* Item::runTossAction(float aDuration, cocos2d::Point a
    scaleRev2->setDuration(0.1);
    
    FiniteTimeAction* act = Sequence::create(scaleBy1,scaleBy2,scaleRev1,scaleRev2,NULL);
-   this->runAction(Spawn::create(fullAction, act,NULL));
+*/
+   FiniteTimeAction* combinedAction = Spawn::create(fullAction, NULL);
    
-   return nullptr;
+   return combinedAction;
    
 }
 
-cocos2d::FiniteTimeAction* Item::runPotEdgeBumpAction(float aDuration, cocos2d::Point anImpulse)
+cocos2d::FiniteTimeAction* Item::getPotEdgeBumpAction(float aDuration, cocos2d::Point anImpulse)
 {
    
    // 1 next EndPoint calc
@@ -110,44 +112,47 @@ cocos2d::FiniteTimeAction* Item::runPotEdgeBumpAction(float aDuration, cocos2d::
    
    float direction = currentPoint.x > 320.0f ? 1.0f : -1.0f;
    _currentTargetPoint = Point(currentPoint.x + (100.0f * anImpulse.x * direction), currentPoint.y - (50.0f * anImpulse.y));
+   _currentTargetType = 1; // fall on floor
    // calc path
    ccBezierConfig bouncePathConfig = this->bezierConfigBouncePathToEndPoint(_currentTargetPoint, anImpulse);
    FiniteTimeAction* moveAction = BezierTo::create(aDuration, bouncePathConfig);
    
    FiniteTimeAction* combinedAction = Spawn::create(moveAction, NULL);
-   this->runAction(combinedAction);
    
    return combinedAction;
 }
 
-cocos2d::FiniteTimeAction* Item::runFloorBumpAction(float aDuration, cocos2d::Point anImpulse)
+cocos2d::FiniteTimeAction* Item::getFloorBumpAction(float aDuration, cocos2d::Point anImpulse)
 {
    
    Point currentPoint = this->getPosition();
    
    float direction = currentPoint.x > 320.0f ? 1.0f : -1.0f;
    _currentTargetPoint = Point(currentPoint.x + (100.0f * anImpulse.x * direction), currentPoint.y - (50.0f * anImpulse.y));
+   _currentTargetType = 1;
    // calc path
    float jumpHeight = (50.0f * anImpulse.y);
    int jumpsCount = 2;
    FiniteTimeAction* jumpAction = JumpTo::create(aDuration, _currentTargetPoint, jumpHeight, jumpsCount);
 
    FiniteTimeAction* combinedAction = Spawn::create(jumpAction, NULL);
-   this->runAction(combinedAction);
    
    return combinedAction;
    
 }
 
-cocos2d::FiniteTimeAction* Item::runFingerKickAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse)
+cocos2d::FiniteTimeAction* Item::getFingerKickAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse)
 {
    
    return nullptr;
    
 }
 
-cocos2d::FiniteTimeAction* Item::runVanishAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse)
+cocos2d::FiniteTimeAction* Item::getVanishAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse)
 {
+   
+   _currentTargetPoint = _idleItemPosition;
+   _currentTargetType = 0;
    
    FiniteTimeAction* actionDelay = DelayTime::create(2);
    FiniteTimeAction* actionPlase = Place::create(_idleItemPosition);
@@ -156,7 +161,6 @@ cocos2d::FiniteTimeAction* Item::runVanishAction(float aDuration, cocos2d::Point
                                                    actionPlase,
                                                    NULL);
 
-   this->runAction(fullAction);
    return fullAction;
    
 }

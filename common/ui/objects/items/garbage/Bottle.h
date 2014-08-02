@@ -13,7 +13,7 @@ public:
     
    bool init();
    
-   virtual cocos2d::FiniteTimeAction* runFloorBumpAction(float aDuration, cocos2d::Point anImpulse) override;
+   virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aDuration, cocos2d::Point anImpulse) override;
    
    virtual void setIdle(cocos2d::Point anIdleItemPosition) override;
    

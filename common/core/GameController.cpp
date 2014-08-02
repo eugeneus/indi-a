@@ -125,14 +125,14 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
 
     _theChef->startChefBodyAnimation();
    
-   _cntPoints->pushBack(ControlPointDef::create(Point(480.0f,220.0f),kControlPointTypePotMargin)); // left floor
-   _cntPoints->pushBack(ControlPointDef::create(Point(80.0f,200.0f),kControlPointTypeFloor)); // right floor
-   _cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // right floor
-   _cntPoints->pushBack(ControlPointDef::create(Point(120.0f,200.0f),kControlPointTypePotMargin)); // margin
-   _cntPoints->pushBack(ControlPointDef::create(Point(280.0f,0.0f),kControlPointTypePotCenter)); // center
+   _cntPoints->pushBack(ControlPointDef::create(Point(470.0f,220.0f),kControlPointTypePotMargin)); // left floor
+   //_cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // right floor
+   //_cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // right floor
+   //_cntPoints->pushBack(ControlPointDef::create(Point(145.0f,210.0f),kControlPointTypePotMargin)); // margin
+   //_cntPoints->pushBack(ControlPointDef::create(Point(280.0f,0.0f),kControlPointTypePotCenter)); // center
    _cntPoints->pushBack(ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter)); // center
-   _cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
-   _cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
+   //_cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
+   //_cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
 }
 
 int getRandomNumber(int from ,int to) {
@@ -146,7 +146,8 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
    for (int iItm = 0; iItm < 10; iItm++) {
       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 1));
       item->setIdle(_itemIdlePos); //-1 * offset
-      item->setScale(0.7);
+      
+      item->setScale(1.0);
       _gameLayer->addChild(item,kItemZO1);
       _items->pushBack(item);
    }
@@ -174,7 +175,11 @@ void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
       Vec2 targetPoint = Vec2(_itemIdlePos.x -  actionOffsetX, _itemIdlePos.y);
       float actionDuration = actionOffsetX/_convVelY;
 
-      anItem->runConveyourAction(actionDuration, targetPoint);
+      FiniteTimeAction* itemAction = anItem->getConveyourAction(actionDuration, targetPoint);
+      float scaleFactor = this->getScaleFactor(_itemIdlePos, 0);
+      anItem->setScale(scaleFactor);
+      anItem->runAction(itemAction);
+      
 		_putNextItemDt = getRandomNumber(1.9, 3.0);
 	}
    
@@ -187,6 +192,7 @@ void GameController::setItemIdle(float dt, Item* anItem)
    anItem->setIdle(_itemIdlePos);
    anItem->setZOrder(kItemZO1);
 }
+
 void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
 {
    float xThrow = throwX;
@@ -206,8 +212,14 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
        }
       float totalActionDuration = 1.5f;
       
-      anItem->runTossAction(totalActionDuration, collisionEndPointDef->_controlPoint,
-                            collisionEndPointDef->_controlPointType,anImpulse);
+      FiniteTimeAction* itemAction = anItem->getTossAction(totalActionDuration, collisionEndPointDef->_controlPoint,
+                                                           collisionEndPointDef->_controlPointType,anImpulse);
+      float scaleFactor = this->getScaleFactor(collisionEndPointDef->_controlPoint,collisionEndPointDef->_controlPointType);
+
+      ScaleTo* scaleAction = ScaleTo::create(totalActionDuration, scaleFactor);
+      Spawn* cobinedAction = Spawn::create(itemAction, scaleAction, NULL);
+      anItem->runAction(cobinedAction);
+      
       anItem->setLocalZOrder(kItemZO2);
    }
    
@@ -218,14 +230,26 @@ void GameController::runBumpAction(Item* anItem)
 {
    int currentCollisionType = anItem->_currentTargetType;
    float actionDuration = 0.6f;
-
+   float scaleFactor;
+   
    Point impulse = Point(0.5f, 0.7f);
    if (currentCollisionType == kControlPointTypePotMargin) {
       actionDuration = 1.2f;
-      anItem->runPotEdgeBumpAction(actionDuration, impulse);
+      FiniteTimeAction* itemAction = anItem->getPotEdgeBumpAction(actionDuration, impulse);
+      scaleFactor = this->getScaleFactor(anItem->_currentTargetPoint,anItem->_currentTargetType);
+      
+      ScaleTo* scaleAction = ScaleTo::create(actionDuration, scaleFactor);
+      Spawn* cobinedAction = Spawn::create(itemAction, scaleAction, NULL);
+      anItem->runAction(cobinedAction);
+      
    }else
       if(currentCollisionType == kControlPointTypeFloor){
-         anItem->runFloorBumpAction(actionDuration, impulse);
+         FiniteTimeAction* itemAction = anItem->getFloorBumpAction(actionDuration, impulse);
+         scaleFactor = this->getScaleFactor(anItem->_currentTargetPoint,anItem->_currentTargetType);
+         
+         ScaleTo* scaleAction = ScaleTo::create(actionDuration, scaleFactor);
+         Spawn* cobinedAction = Spawn::create(itemAction, scaleAction, NULL);
+         anItem->runAction(cobinedAction);
    }else
       if (currentCollisionType == kControlPointTypePotCenter){
       }
@@ -278,7 +302,14 @@ void GameController::update(float dt)
          if (item->getLocalZOrder() == kItemZO3 && item->isItemInCurrentTargetPoint()) {
             float actionDuration = 1.0f;
             Point impulse = Point(1.0f,1.0f);
-            item->runVanishAction(actionDuration, _itemIdlePos, impulse);
+            FiniteTimeAction* itemAction = item->getVanishAction(actionDuration, _itemIdlePos, impulse);
+            
+            float scaleFactor = this->getScaleFactor(item->_currentTargetPoint,item->_currentTargetType);
+            
+            ScaleTo* scaleAction = ScaleTo::create(actionDuration, scaleFactor);
+            Sequence* cobinedAction = Sequence::create(itemAction, scaleAction, NULL);
+            item->runAction(cobinedAction);
+
          }
       
    }
@@ -303,5 +334,37 @@ void GameController::changeItemPath(Item *anItem, float angle, cocos2d::Vec2 anI
     anItem->runTouchAction(0.5, collisionEndPointDef->_controlPoint,
                            anImpulse,
                            collisionEndPointDef->_controlPointType);
+}
+
+float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPointType)
+{
+   float visibleHeight = Director::getInstance()->getVisibleSize().height;
+   float floorOffset = aControlPointType < 2 ? 200.0f : 0.0f;
+   float scaleFactor = 1.0f;
+   float checkPointY = anEndPoint.y + floorOffset;
+
+   if (checkPointY > -100.0f && checkPointY <= 250.0f ) {
+      scaleFactor = 2.0f;
+   }
+   else  if (checkPointY > 250.0f && checkPointY <= 300.0f ) {
+      scaleFactor = 0.9f;
+   }
+   else if (checkPointY > 300.0f && checkPointY <= 450.0f ) {
+      scaleFactor = 0.9f;
+   }
+   else if (checkPointY > 450.0f && checkPointY <= 900.0f ) {
+      scaleFactor = 0.7f;
+   }
+
+   //float scaleFactor = exp((visibleHeight - (anEndPoint.y + floorOffset))/visibleHeight);
+   
+   //float scaleFactor = cbrt((visibleHeight - (anEndPoint.y + floorOffset))/visibleHeight);
+   //float scaleFactor = acos((visibleHeight - (anEndPoint.y + floorOffset))/visibleHeight);
+   //scaleFactor = atan((visibleHeight - (anEndPoint.y + floorOffset))/visibleHeight);
+   //float
+   //scaleFactor = asin((visibleHeight - checkPointY)/visibleHeight);
+   
+   //scaleFactor += 0.3f;
+   return scaleFactor;
 }
 

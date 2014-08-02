@@ -48,7 +48,7 @@ FiniteTimeAction* Bottle::getFloorBumpAction(float aTimeInterval, cocos2d::Point
    return Animate::create(animation);
 }
 
-FiniteTimeAction* Bottle::runFloorBumpAction(float aDuration, cocos2d::Point anImpulse)
+FiniteTimeAction* Bottle::getFloorBumpAction(float aDuration, cocos2d::Point anImpulse)
 {
    Point pos = this->getPosition();
    FiniteTimeAction* action =getFloorBumpAction(aDuration/2.0f, pos, Point(0.0f,0.0f));
