@@ -109,7 +109,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     cloudTips->toggleTip();
    
     _convY = yOffsetConveyer - 102;
-    _convVelY = 100;
+    _convVelY = 50;
     _convLegth = aVisibleSize.width;
 
     Conveyor* conv = Conveyor::create(_convVelY, _convLegth);
@@ -125,14 +125,14 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
 
     _theChef->startChefBodyAnimation();
    
-   //_cntPoints->pushBack(ControlPointDef::create(Point(470.0f,300.0f),kControlPointTypePotMargin)); // left floor
+   _cntPoints->pushBack(ControlPointDef::create(Point(470.0f,300.0f),kControlPointTypePotMargin)); // left floor
    _cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // right floor
-   //_cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // right floor
-   //_cntPoints->pushBack(ControlPointDef::create(Point(145.0f,210.0f),kControlPointTypePotMargin)); // margin
-   //_cntPoints->pushBack(ControlPointDef::create(Point(280.0f,0.0f),kControlPointTypePotCenter)); // center
-   //s_cntPoints->pushBack(ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter)); // center
-   //_cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
-   //_cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
+   _cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // right floor
+   _cntPoints->pushBack(ControlPointDef::create(Point(145.0f,210.0f),kControlPointTypePotMargin)); // margin
+   _cntPoints->pushBack(ControlPointDef::create(Point(280.0f,0.0f),kControlPointTypePotCenter)); // center
+   _cntPoints->pushBack(ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter)); // center
+   _cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
+   _cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
 }
 
 int getRandomNumber(int from ,int to) {
@@ -239,8 +239,20 @@ void GameController::runBumpAction(Item* anItem)
       scaleFactor = this->getScaleFactor(anItem->_currentTargetPoint,anItem->_currentTargetType);
       
       ScaleTo* scaleAction = ScaleTo::create(actionDuration, scaleFactor);
-      Spawn* cobinedAction = Spawn::create(itemAction, scaleAction, NULL);
-      anItem->runAction(cobinedAction);
+      Spawn* cobinedPotBump = Spawn::create(itemAction, scaleAction, NULL);
+      
+      actionDuration = 0.6f;
+      FiniteTimeAction* itemAction1 = anItem->getFloorBumpAction(actionDuration, impulse);
+      
+      scaleFactor = this->getScaleFactor(anItem->_currentTargetPoint,anItem->_currentTargetType);
+      
+      ScaleTo* scaleAction1 = ScaleTo::create(actionDuration, scaleFactor);
+      Spawn* cobinedFloorBump = Spawn::create(itemAction1, scaleAction1, NULL);
+      
+ 
+      Sequence* seqAction = Sequence::create(cobinedPotBump, cobinedFloorBump,NULL); //, cobinedFloorBump
+      
+      anItem->runAction(seqAction);
       
    }else
       if(currentCollisionType == kControlPointTypeFloor){

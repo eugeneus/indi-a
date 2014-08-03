@@ -109,8 +109,15 @@ cocos2d::FiniteTimeAction* Item::getPotEdgeBumpAction(float aDuration, cocos2d::
    // calc path
    ccBezierConfig bouncePathConfig = this->bezierConfigBouncePathToEndPoint(_currentTargetPoint, anImpulse);
    FiniteTimeAction* moveAction = BezierTo::create(aDuration, bouncePathConfig);
+
+   RotateTo* r1 = RotateTo::create(aDuration/12.0f, 120.0f);
+   RotateTo* r2 = RotateTo::create(aDuration/12.0f, 240.0f);
+   RotateTo* r3 = RotateTo::create(aDuration/12.0f, 360.0f);
    
-   FiniteTimeAction* combinedAction = Spawn::create(moveAction, NULL);
+   Sequence* rt = Sequence::create(r1, r2, r3, NULL);
+   Repeat* repeatedRotation = Repeat::create(rt, 4);
+   
+   FiniteTimeAction* combinedAction = Spawn::create(moveAction, repeatedRotation, NULL);
    
    return combinedAction;
 }

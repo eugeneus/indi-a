@@ -30,7 +30,7 @@ bool Bottle::init() {
     return true;
 }
 
-FiniteTimeAction* Bottle::getFloorBumpAction(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse)
+FiniteTimeAction* Bottle::getFloorBumpAnimation(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse)
 {
    
    Vector<SpriteFrame*> animateFrames(6);
@@ -51,8 +51,7 @@ FiniteTimeAction* Bottle::getFloorBumpAction(float aTimeInterval, cocos2d::Point
 FiniteTimeAction* Bottle::getFloorBumpAction(float aDuration, cocos2d::Point anImpulse)
 {
    Point pos = this->getPosition();
-   FiniteTimeAction* action =getFloorBumpAction(aDuration/2.0f, pos, Point(0.0f,0.0f));
-   this->runAction(action);
+   FiniteTimeAction* action =getFloorBumpAnimation(aDuration/2.0f, pos, Point(0.0f,0.0f));
    return action;
 }
 
