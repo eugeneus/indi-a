@@ -76,7 +76,7 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
     std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
     
    this->arrangeBackground(origin,visibleSize);
-   _itemIdlePos = Vec2(visibleSize.width, _convY + 40.0f);
+   _itemIdlePos = Vec2(visibleSize.width + 50.0f, _convY + 70.0f);
    this->populateGameObjects(origin,visibleSize);
    
    return true;
@@ -109,7 +109,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     cloudTips->toggleTip();
    
     _convY = yOffsetConveyer - 102;
-    _convVelY = 50;
+    _convVelY = 100;
     _convLegth = aVisibleSize.width;
 
     Conveyor* conv = Conveyor::create(_convVelY, _convLegth);
@@ -125,12 +125,12 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
 
     _theChef->startChefBodyAnimation();
    
-   _cntPoints->pushBack(ControlPointDef::create(Point(470.0f,220.0f),kControlPointTypePotMargin)); // left floor
-   //_cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // right floor
+   //_cntPoints->pushBack(ControlPointDef::create(Point(470.0f,300.0f),kControlPointTypePotMargin)); // left floor
+   _cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // right floor
    //_cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // right floor
    //_cntPoints->pushBack(ControlPointDef::create(Point(145.0f,210.0f),kControlPointTypePotMargin)); // margin
    //_cntPoints->pushBack(ControlPointDef::create(Point(280.0f,0.0f),kControlPointTypePotCenter)); // center
-   _cntPoints->pushBack(ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter)); // center
+   //s_cntPoints->pushBack(ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter)); // center
    //_cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
    //_cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
 }
@@ -338,21 +338,21 @@ void GameController::changeItemPath(Item *anItem, float angle, cocos2d::Vec2 anI
 
 float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPointType)
 {
-   float visibleHeight = Director::getInstance()->getVisibleSize().height;
+   //float visibleHeight = Director::getInstance()->getVisibleSize().height;
    float floorOffset = aControlPointType < 2 ? 200.0f : 0.0f;
    float scaleFactor = 1.0f;
    float checkPointY = anEndPoint.y + floorOffset;
 
-   if (checkPointY > -100.0f && checkPointY <= 250.0f ) {
+   if (checkPointY > -100.0f && checkPointY <= 310.0f ) {
       scaleFactor = 2.0f;
    }
-   else  if (checkPointY > 250.0f && checkPointY <= 300.0f ) {
+   else  if (checkPointY > 310.0f && checkPointY <= 400.0f ) {
       scaleFactor = 0.9f;
    }
-   else if (checkPointY > 300.0f && checkPointY <= 450.0f ) {
+   else if (checkPointY > 400.0f && checkPointY <= 500.0f ) {
       scaleFactor = 0.9f;
    }
-   else if (checkPointY > 450.0f && checkPointY <= 900.0f ) {
+   else if (checkPointY > 500.0f && checkPointY <= 900.0f ) {
       scaleFactor = 0.7f;
    }
 

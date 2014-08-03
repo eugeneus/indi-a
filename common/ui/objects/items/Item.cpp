@@ -77,28 +77,21 @@ cocos2d::FiniteTimeAction* Item::getTossAction(float aDuration, cocos2d::Point a
    this->_currentTargetPoint = anEndPoint;
    this->_currentTargetType = aCollisionType;
    
-//   float durationPart = aDuration;
-   
    ccBezierConfig bouncePathConfig = this->bezierConfigBouncePathToEndPoint(anEndPoint, anImpulse);
    BezierTo* bezierBounceAction = BezierTo::create(aDuration, bouncePathConfig);
+   
+   RotateTo* r1 = RotateTo::create(aDuration/9.0f, 120.0f);
+   RotateTo* r2 = RotateTo::create(aDuration/9.0f, 240.0f);
+   RotateTo* r3 = RotateTo::create(aDuration/9.0f, 360.0f);
+   
+   Sequence* rt = Sequence::create(r1, r2, r3, NULL);
+   Repeat* repeated = Repeat::create(rt, 3);
 
-   Point endPoint = Point(anEndPoint);
    FiniteTimeAction* fullAction = NULL;
    fullAction =  Sequence::create(bezierBounceAction,
                                   NULL);
-
-/*
-   durationPart = durationPart - 0.7;
-   FiniteTimeAction* scaleBy1 = cocos2d::ScaleBy::create(durationPart, 2.5f);
-   FiniteTimeAction* scaleRev1 = scaleBy1->reverse();
-   FiniteTimeAction* scaleBy2 = cocos2d::ScaleBy::create(0.5f, 0.8f);
-   FiniteTimeAction* scaleRev2 = scaleBy2->reverse();
-   scaleRev1->setDuration(0.1);
-   scaleRev2->setDuration(0.1);
    
-   FiniteTimeAction* act = Sequence::create(scaleBy1,scaleBy2,scaleRev1,scaleRev2,NULL);
-*/
-   FiniteTimeAction* combinedAction = Spawn::create(fullAction, NULL);
+   FiniteTimeAction* combinedAction = Spawn::create(fullAction, repeated, NULL);
    
    return combinedAction;
    
@@ -135,7 +128,13 @@ cocos2d::FiniteTimeAction* Item::getFloorBumpAction(float aDuration, cocos2d::Po
    int jumpsCount = 2;
    FiniteTimeAction* jumpAction = JumpTo::create(aDuration, _currentTargetPoint, jumpHeight, jumpsCount);
 
-   FiniteTimeAction* combinedAction = Spawn::create(jumpAction, NULL);
+   RotateTo* r1 = RotateTo::create(aDuration/6.0f, 60.0f);
+   RotateTo* r2 = RotateTo::create(aDuration/6.0f, 0.0f);
+   Sequence* rt = Sequence::create(r1, r2, NULL);
+
+   Repeat* repeatedRotation = Repeat::create(rt, 2);
+
+   FiniteTimeAction* combinedAction = Spawn::create(jumpAction, repeatedRotation, NULL);
    
    return combinedAction;
    
@@ -156,9 +155,12 @@ cocos2d::FiniteTimeAction* Item::getVanishAction(float aDuration, cocos2d::Point
    
    FiniteTimeAction* actionDelay = DelayTime::create(2);
    FiniteTimeAction* actionPlase = Place::create(_idleItemPosition);
+   FiniteTimeAction* actionFadeOut = FadeOut::create(2);
+   FiniteTimeAction* actionFadeIn = FadeIn::create(2);
    
-   FiniteTimeAction* fullAction = Sequence::create(actionDelay,
+   FiniteTimeAction* fullAction = Sequence::create(actionFadeOut, //actionDelay,
                                                    actionPlase,
+                                                   actionFadeIn,
                                                    NULL);
 
    return fullAction;
@@ -259,6 +261,7 @@ void Item::setIdle(cocos2d::Point anIdleItemPosition)
    this->setPosition(_idleItemPosition);
    this->stopAllActions();
    this->setDefaultSize();
+   this->setOpacity(255);
    
 }
 
