@@ -190,10 +190,8 @@ void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
       anItem->setScale(scaleFactor);
       anItem->runAction(itemAction);
       
-		_putNextItemDt = getRandomFloat(0.8f, 2.0f);
+		_putNextItemDt = getRandomNumber(1, 3);
 	}
-   
-
 
 }
 
@@ -245,7 +243,6 @@ void GameController::runBumpAction(Item* anItem)
    float impulseX = (float)((float)getRandomNumber(0,10))/10.0f;
    float impulseY = (float)((float)getRandomNumber(0,10))/10.0f;
    
-   CCLOG("impulseX = %d",getRandomNumber(0, 1));
    Point impulse = Point(impulseX, impulseY);
    if (currentCollisionType == kControlPointTypePotMargin) {
       actionDuration = 1.2f;
@@ -306,11 +303,15 @@ void GameController::update(float dt)
       item = (Item*)nitem;
       itemPos = item->getPosition();
       itemSize = item->getContentSize();
+      
+      // item moves behind the screen width
       if(item->getPosition().x + item->getContentSize().width + 10.0 <= Director::getInstance()->getVisibleOrigin().x){
          this->setItemIdle(dt, item);
       }
 
-      if ((itemPos.x + item->getContentSize().width + 10.0f) < 0.0) {
+      // item left on coveyor belt till disappear
+      if (itemPos.x  < 0.0f &&
+          item->isItemInCurrentTargetPoint() && item->getLocalZOrder() == kItemZO1) {
          this->setItemIdle(dt, item);
       }
       
@@ -319,8 +320,14 @@ void GameController::update(float dt)
       }
       
       if (item->getLocalZOrder() == kItemZO1) { //toss
-         _theChef->chefWathItem(item);
+         //_theChef->setConveyorVelocity(_convVelY);
+         //_theChef->chefWathItem(item);
+         if (_theChef->tryToCatchItem(item, _convVelY)) {
+            //this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
+            this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
+         }
          this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
+         
       } else
       if (item->getLocalZOrder() == kItemZO2 && item->isItemInCurrentTargetPoint()) {
          this->runBumpAction(item);
