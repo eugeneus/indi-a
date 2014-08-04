@@ -12,6 +12,8 @@
 #include "MovementController.h"
 #include "LevelProvider.h"
 
+#include "time.h"
+
 #define kWallZO 0
 #define kConveyurZO 10
 #define kItemZO1 20
@@ -128,7 +130,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
    _cntPoints->pushBack(ControlPointDef::create(Point(470.0f,300.0f),kControlPointTypePotMargin)); // left floor
    _cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // right floor
    _cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // right floor
-   _cntPoints->pushBack(ControlPointDef::create(Point(145.0f,210.0f),kControlPointTypePotMargin)); // margin
+   _cntPoints->pushBack(ControlPointDef::create(Point(145.0f,300.0f),kControlPointTypePotMargin)); // margin
    _cntPoints->pushBack(ControlPointDef::create(Point(280.0f,0.0f),kControlPointTypePotCenter)); // center
    _cntPoints->pushBack(ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter)); // center
    _cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
@@ -136,7 +138,15 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
 }
 
 int getRandomNumber(int from ,int to) {
-   return (int)from + arc4random() % (to-from+1);
+   return (int)from + arc4random() % (to + 1);
+}
+
+float getRandomFloat(float from ,float to) {
+   // seed the random
+   srand (static_cast <unsigned> (time(0)));
+   
+   return from + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(to-from)));
+
 }
 
 void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
@@ -168,7 +178,7 @@ void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
 {
    Vec2 pos = anItem->getPosition();
    int zOrder = anItem->getLocalZOrder();
-	if(_putNextItemDt < 0 && pos.x == _itemIdlePos.x && zOrder == kItemZO1){ //
+	if(_putNextItemDt < 0.0f && pos.x == _itemIdlePos.x && zOrder == kItemZO1){ //
       
       anItem->setLocalZOrder(kItemZO1);
       float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
@@ -180,7 +190,7 @@ void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
       anItem->setScale(scaleFactor);
       anItem->runAction(itemAction);
       
-		_putNextItemDt = getRandomNumber(1.9, 3.0);
+		_putNextItemDt = getRandomFloat(0.8f, 2.0f);
 	}
    
 
@@ -232,7 +242,11 @@ void GameController::runBumpAction(Item* anItem)
    float actionDuration = 0.6f;
    float scaleFactor;
    
-   Point impulse = Point(0.5f, 0.7f);
+   float impulseX = (float)((float)getRandomNumber(0,10))/10.0f;
+   float impulseY = (float)((float)getRandomNumber(0,10))/10.0f;
+   
+   CCLOG("impulseX = %d",getRandomNumber(0, 1));
+   Point impulse = Point(impulseX, impulseY);
    if (currentCollisionType == kControlPointTypePotMargin) {
       actionDuration = 1.2f;
       FiniteTimeAction* itemAction = anItem->getPotEdgeBumpAction(actionDuration, impulse);
