@@ -19,12 +19,14 @@ public:
    cocos2d::Size getSize();
    void setOrigin(cocos2d::Point anOrigin);
    void setWatchSector(cocos2d::Size aSectroSize);
+   void setConveyorVelocity(float aConveyorVelocity);
    
    cocos2d::Point getActiveBouncePoint();
    cocos2d::Vec2 getBounceImpulse();
    
    void startChefBodyAnimation();
    void startHandBounceAnimation();
+   bool tryToCatchItem(Item* anItem, float aConveyorVelocity);
    void chefWathItem(Item* anItem);
    void setZOrder(int aZOrder);
 protected:
@@ -47,6 +49,8 @@ private:
    cocos2d::Size _szWatchSector;
    cocos2d::Point _activeBouncePoint;
    int _sleepCounter;
+   float _conveyorVelocity;
+   
 };
 
 #endif /* defined(__BlindChef__Chef__) */

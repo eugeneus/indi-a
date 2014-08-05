@@ -15,7 +15,7 @@ Spritable* Spritable::create(string spriteFrameName, const char* framesPattern, 
     
     if (pRet && pRet->initWithSpriteAndPos(spriteFrameName, framesPattern, spriteCount, deleayTime))
     {
-        pRet->autorelease();
+       pRet->autorelease();
     }
     else
     {
@@ -28,21 +28,21 @@ Spritable* Spritable::create(string spriteFrameName, const char* framesPattern, 
 
 bool Spritable::initWithSpriteAndPos(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime)
 {
-    
-    if ( !Layer::init() ) //!LayerColor::initWithColor(ccc4(255, 255, 255, 255))
+
+   if ( !Sprite::initWithSpriteFrameName(spriteFrameName) ) //!LayerColor::initWithColor(ccc4(255, 255, 255, 255))
     {
         return false;
     }
-   
+
    
    _defaultScale = 1.0f;
-    animatedSprite = Sprite::createWithSpriteFrameName(spriteFrameName.c_str());
-    animatedSprite->setAnchorPoint(Vec2(0, 0));
+    //animatedSprite = Sprite::createWithSpriteFrameName(spriteFrameName.c_str());
+    //animatedSprite->setAnchorPoint(Vec2(0, 0));
     
-    this->setAnchorPoint(Vec2(0, 0));
-    this->_defaultContentSize = animatedSprite->getContentSize();
+    this->setAnchorPoint(Vec2(0.5, 0.5));
+    this->_defaultContentSize = this->getContentSize();
     this->setContentSize(_defaultContentSize);
-    this->addChild(animatedSprite);
+    //this->addChild(animatedSprite);
     
     Vector<SpriteFrame*> frames;
     
@@ -57,12 +57,14 @@ void Spritable::animateSpriteFrames(Vector<SpriteFrame*>& animateFrames, float d
     Animation *animation = Animation::createWithSpriteFrames(animateFrames, delayTime);
     RepeatForever *repeatAction = RepeatForever::create(Animate::create(animation));
     repeatAction->setTag(333);
-    animatedSprite->runAction(repeatAction);
+    //animatedSprite->runAction(repeatAction);
+   this->runAction(repeatAction);
 }
 
 void Spritable::changeSpriteFramesAnimation(Vector<SpriteFrame*>& animateFrames, float delayTime)
 {
-    animatedSprite->stopActionByTag(333);
+    //animatedSprite->stopActionByTag(333);
+   this->stopActionByTag(333);
     
     this->animateSpriteFrames(animateFrames, delayTime);
 }
@@ -75,7 +77,7 @@ void Spritable::createWalkAnimFrames(Vector<SpriteFrame*>& animateFrames, int st
         
         //auto animFrame = SpriteFrame::create(frameName, animatedSprite->getBoundingBox()); //Rect(0,0,40,40));
         animateFrames.pushBack(animFrame);
-        animFrame->release();
+        //animFrame->release(); // causes an retain count accert!
     }
 }
 
@@ -91,7 +93,9 @@ void Spritable::applyDefaultScale()
 
 void Spritable::setDefaultSize()
 {
-   this->animatedSprite->setContentSize(_defaultContentSize);
+   //this->animatedSprite->setContentSize(_defaultContentSize);
+   
+   this->setContentSize(_defaultContentSize);
    this->setContentSize(_defaultContentSize);
    this->applyDefaultScale();
    
@@ -101,7 +105,8 @@ void Spritable::setDefaultSize()
 void Spritable::setSpriteSize(Size aSize)
 {
    this->_defaultContentSize = aSize;
-   this->animatedSprite->setContentSize(_defaultContentSize);
+   //this->animatedSprite->setContentSize(_defaultContentSize);
+   this->setContentSize(_defaultContentSize);
    this->setContentSize(_defaultContentSize);
 }
 

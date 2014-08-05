@@ -6,15 +6,16 @@
 
 using namespace std;
 
-class Spritable : public cocos2d::Layer {
+class Spritable : public cocos2d::Sprite {
     
 private:
-    cocos2d::Sprite *animatedSprite;
+    //cocos2d::Sprite *animatedSprite;
     cocos2d::Size _defaultContentSize;
    
    
 protected:
     bool initWithSpriteAndPos(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime);
+   
     void createWalkAnimFrames(cocos2d::Vector<cocos2d::SpriteFrame*>& frames, int start, int spriteCount, const char *framesPattern, float delayTime);
     void animateSpriteFrames(cocos2d::Vector<cocos2d::SpriteFrame*>& animateFrames, float delayTime);
    

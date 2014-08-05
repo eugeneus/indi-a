@@ -58,8 +58,8 @@ protected:
    
    void populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
    
-   void startLinearMove(Item* anItem);
-   void tryPutNextItem(float dt, Item* anItem);
+   void putIdleItemOnConveyour(float dt, Item* anItem);
+   
    void setItemIdle(float dt, Item* anItem);
 
    void throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse);

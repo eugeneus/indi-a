@@ -11,8 +11,13 @@ private:
 public:
     static Bottle* create();
     
-    bool init();
-   virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse);
+   bool init();
+   
+   virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aDuration, cocos2d::Point anImpulse) override;
+   
+   virtual void setIdle(cocos2d::Point anIdleItemPosition) override;
+   
+   cocos2d::FiniteTimeAction* getFloorBumpAnimation(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse);
 };
 
 
