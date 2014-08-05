@@ -254,6 +254,13 @@ void GameController::runBumpAction(Item* anItem)
       
       actionDuration = 0.6f;
       FiniteTimeAction* itemAction1 = anItem->getFloorBumpAction(actionDuration, impulse);
+     
+       /* Sprite* crack = anItem->createCrack();
+       if (crack != NULL) {
+           crack->setPosition(anItem->getPosition());
+           this->_gameLayer->addChild(crack);
+           crack->runAction(FadeOut::create(3));
+       }*/
       
       scaleFactor = this->getScaleFactor(anItem->_currentTargetPoint,anItem->_currentTargetType);
       
@@ -268,6 +275,14 @@ void GameController::runBumpAction(Item* anItem)
    }else
       if(currentCollisionType == kControlPointTypeFloor){
          FiniteTimeAction* itemAction = anItem->getFloorBumpAction(actionDuration, impulse);
+          Sprite* crack = anItem->createCrack();
+          if (crack != NULL) {
+              crack->setPosition(anItem->getPosition());
+              this->_gameLayer->addChild(crack);
+              crack->runAction(FadeOut::create(3));
+          }
+          
+          
          scaleFactor = this->getScaleFactor(anItem->_currentTargetPoint,anItem->_currentTargetType);
          
          ScaleTo* scaleAction = ScaleTo::create(actionDuration, scaleFactor);
@@ -348,8 +363,12 @@ void GameController::update(float dt)
    }
 }
 
-ControlPointDef* GameController::findControlPointDefByAngle(float angle, float xImpulse) {
-    angle = abs(angle);
+ControlPointDef* GameController::findControlPointDefByAngle(Item* anItem, float angle, float xImpulse) {
+   // angle = abs(angle);
+    
+    int currentTargetType = anItem->_currentTargetType;
+    Point currentTargetPoint = anItem->_currentTargetPoint;
+    float currentTargetPointX = currentTargetPoint.x;
     
     float offsetX = 0;
     if (xImpulse > 0 && xImpulse < 0.3) {
@@ -360,11 +379,15 @@ ControlPointDef* GameController::findControlPointDefByAngle(float angle, float x
         offsetX = 480;
     }
     
-    if (0 < angle && angle < 46 ) {
-        return ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor); //right
-    } else if (135 < angle && angle < 225) {
-        return ControlPointDef::create(Point(60.0f,250.0f), kControlPointTypeFloor); //left
-    } else {
+    if (60 < angle && angle < 135 ) { //bottom
+        return ControlPointDef::create(Point(280.0f,0.0f), kControlPointTypePotCenter);
+    } else if (135 < angle && angle < 180) { //left
+        return ControlPointDef::create(Point(60.0f,250.0f), kControlPointTypeFloor);
+    } else if (-45 < angle && angle < 60) { //right
+        return ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor);
+    } else if (- 180 < angle && angle < -135) { //left
+        return ControlPointDef::create(Point(60.0f,250.0f), kControlPointTypeFloor);
+    } else { //top
         return ControlPointDef::create(Point(280.0f,0.0f), kControlPointTypePotCenter);
     }
 }
@@ -372,8 +395,14 @@ ControlPointDef* GameController::findControlPointDefByAngle(float angle, float x
 void GameController::changeItemPath(Item *anItem, float angle, cocos2d::Vec2 anImpulse) {
     
     anItem->stopAllActions();
-    //anItem->setZOrder(kItemZO2);
-    ControlPointDef* collisionEndPointDef = findControlPointDefByAngle(angle, anImpulse.x);
+    
+    //anItem->setZOrder(kItemZO1);
+    
+    ControlPointDef* collisionEndPointDef = findControlPointDefByAngle(anItem, angle, anImpulse.x);
+    //anItem->_currentTargetType = collisionEndPointDef->_controlPointType;
+    //anItem->_currentTargetPoint = collisionEndPointDef->_controlPoint;
+    
+    //this->throwItemSimple(anItem, anItem->getPosition().x, anImpulse);
     anItem->runTouchAction(0.5, collisionEndPointDef->_controlPoint,
                            anImpulse,
                            collisionEndPointDef->_controlPointType);

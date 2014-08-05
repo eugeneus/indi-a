@@ -25,7 +25,25 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
+    
+    auto screenSize = glview->getFrameSize();
+    
+    if (2048 == screenSize.width || 2048 == screenSize.height) {
+        log("-- res = 2048");
+        glview->setDesignResolutionSize(1536, 2048, ResolutionPolicy::NO_BORDER);
+    } else if (1024 == screenSize.width || 1024 == screenSize.height) {
+        log("-- res = 1024");
+        glview->setDesignResolutionSize(768, 1024, ResolutionPolicy::NO_BORDER);
+    } else if (1136 == screenSize.width || 1136 == screenSize.height) {
+        log("-- res = 1136");
+        glview->setDesignResolutionSize(640, 960, ResolutionPolicy::SHOW_ALL);
+    } else if (960 == screenSize.width || 960 == screenSize.height) {
+        log("-- res = 960");
+        glview->setDesignResolutionSize(640, 960, ResolutionPolicy::NO_BORDER);
+    }
 
+   // glview->setDesignResolutionSize(960, 640, ResolutionPolicy::NO_BORDER);
+    
     // create a scene. it's an autorelease object
     auto scene = MainMenu::createScene();
 

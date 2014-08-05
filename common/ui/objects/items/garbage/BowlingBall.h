@@ -13,6 +13,7 @@ public:
     
     bool init();
    virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse);
+    virtual cocos2d::Sprite* createCrack();
 };
 
 #endif /* defined(__BlindChef__BowlingBall__) */
