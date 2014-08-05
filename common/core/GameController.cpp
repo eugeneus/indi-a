@@ -201,6 +201,21 @@ void GameController::setItemIdle(float dt, Item* anItem)
    anItem->setZOrder(kItemZO1);
 }
 
+void GameController::runTossActionWithScale(Item* anItem, ControlPointDef* aPointDef, float aDuration, Point anImpulse)
+{
+   FiniteTimeAction* itemAction = anItem->getTossAction(aDuration,
+                                                        aPointDef->_controlPoint,
+                                                        aPointDef->_controlPointType,
+                                                        anImpulse);
+   float scaleFactor = this->getScaleFactor(aPointDef->_controlPoint,aPointDef->_controlPointType);
+   
+   ScaleTo* scaleAction = ScaleTo::create(aDuration, scaleFactor);
+   Spawn* cobinedAction = Spawn::create(itemAction, scaleAction, NULL);
+   anItem->setLocalZOrder(kItemZO2);
+
+   anItem->runAction(cobinedAction);
+}
+
 void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
 {
    float xThrow = throwX;
@@ -219,16 +234,7 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
          collisionEndPointDef = _cntPoints->at(randomPointIdx);
        }
       float totalActionDuration = 1.5f;
-      
-      FiniteTimeAction* itemAction = anItem->getTossAction(totalActionDuration, collisionEndPointDef->_controlPoint,
-                                                           collisionEndPointDef->_controlPointType,anImpulse);
-      float scaleFactor = this->getScaleFactor(collisionEndPointDef->_controlPoint,collisionEndPointDef->_controlPointType);
-
-      ScaleTo* scaleAction = ScaleTo::create(totalActionDuration, scaleFactor);
-      Spawn* cobinedAction = Spawn::create(itemAction, scaleAction, NULL);
-      anItem->runAction(cobinedAction);
-      
-      anItem->setLocalZOrder(kItemZO2);
+      this->runTossActionWithScale(anItem, collisionEndPointDef, totalActionDuration, anImpulse);
    }
    
 }
@@ -251,27 +257,8 @@ void GameController::runBumpAction(Item* anItem)
       
       ScaleTo* scaleAction = ScaleTo::create(actionDuration, scaleFactor);
       Spawn* cobinedPotBump = Spawn::create(itemAction, scaleAction, NULL);
-      
-      actionDuration = 0.6f;
-      FiniteTimeAction* itemAction1 = anItem->getFloorBumpAction(actionDuration, impulse);
-     
-       /* Sprite* crack = anItem->createCrack();
-       if (crack != NULL) {
-           crack->setPosition(anItem->getPosition());
-           this->_gameLayer->addChild(crack);
-           crack->runAction(FadeOut::create(3));
-       }*/
-      
-      scaleFactor = this->getScaleFactor(anItem->_currentTargetPoint,anItem->_currentTargetType);
-      
-      ScaleTo* scaleAction1 = ScaleTo::create(actionDuration, scaleFactor);
-      Spawn* cobinedFloorBump = Spawn::create(itemAction1, scaleAction1, NULL);
-      
- 
-      Sequence* seqAction = Sequence::create(cobinedPotBump, cobinedFloorBump,NULL); //, cobinedFloorBump
-      
-      anItem->runAction(seqAction);
-      
+      anItem->setLocalZOrder(kItemZO2);
+      anItem->runAction(cobinedPotBump);
    }else
       if(currentCollisionType == kControlPointTypeFloor){
          FiniteTimeAction* itemAction = anItem->getFloorBumpAction(actionDuration, impulse);
@@ -281,18 +268,19 @@ void GameController::runBumpAction(Item* anItem)
               this->_gameLayer->addChild(crack);
               crack->runAction(FadeOut::create(3));
           }
-          
-          
+         
          scaleFactor = this->getScaleFactor(anItem->_currentTargetPoint,anItem->_currentTargetType);
          
          ScaleTo* scaleAction = ScaleTo::create(actionDuration, scaleFactor);
          Spawn* cobinedAction = Spawn::create(itemAction, scaleAction, NULL);
+         anItem->setLocalZOrder(kItemZO3);
          anItem->runAction(cobinedAction);
    }else
       if (currentCollisionType == kControlPointTypePotCenter){
+         anItem->setLocalZOrder(kItemZO3);
       }
    
-   anItem->setLocalZOrder(kItemZO3);
+   
 
 }
 
@@ -392,20 +380,13 @@ ControlPointDef* GameController::findControlPointDefByAngle(Item* anItem, float 
     }
 }
 
-void GameController::changeItemPath(Item *anItem, float angle, cocos2d::Vec2 anImpulse) {
+void GameController::changeItemPath(Item *anItem, float angle, cocos2d::Vec2 anImpulse)
+{
     
-    anItem->stopAllActions();
-    
-    //anItem->setZOrder(kItemZO1);
-    
-    ControlPointDef* collisionEndPointDef = findControlPointDefByAngle(anItem, angle, anImpulse.x);
-    //anItem->_currentTargetType = collisionEndPointDef->_controlPointType;
-    //anItem->_currentTargetPoint = collisionEndPointDef->_controlPoint;
-    
-    //this->throwItemSimple(anItem, anItem->getPosition().x, anImpulse);
-    anItem->runTouchAction(0.5, collisionEndPointDef->_controlPoint,
-                           anImpulse,
-                           collisionEndPointDef->_controlPointType);
+   anItem->stopAllActions();
+   float actionDuration = 1.5f;
+   ControlPointDef* collisionEndPointDef = findControlPointDefByAngle(anItem, angle, anImpulse.x);
+   runTossActionWithScale(anItem, collisionEndPointDef, actionDuration, anImpulse);
 }
 
 float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPointType)

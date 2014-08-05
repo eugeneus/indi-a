@@ -23,8 +23,6 @@ public:
    
    virtual cocos2d::FiniteTimeAction* getVanishAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse);
    
-   virtual void runTouchAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse, int aCollisionType);
-   
    virtual void setIdle(cocos2d::Point anIdleItemPosition);
    
    virtual void stopActions();

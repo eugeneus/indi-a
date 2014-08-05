@@ -179,7 +179,9 @@ bool Chef::tryToCatchItem(Item* anItem, float aConveyorVelocity)
          RotateTo* tossRt = RotateTo::create(0.1, -90.0f);
          Spawn* tossAction = Spawn::create(tossMv,tossRt,NULL);
          
-         activeHand->runAction(Sequence::create(catchAction,tossAction, NULL));
+         //activeHand->runAction(Sequence::create(catchAction,tossAction, NULL));
+         
+         activeHand->runAction(this->getHandGrabAnimation());
          
          //this->runGrabAnimation(activeHand, itemPos, activeHandRect);
          this->updateBounceImpulse();
@@ -220,7 +222,7 @@ void Chef::chefWathItem(Item* anItem)
       ){
       if (activeHand->getNumberOfRunningActions() == 0) {
          
-         this->runGrabAnimation(activeHand, itemPos, activeHandRect);
+         //this->runGrabAnimation(activeHand, itemPos, activeHandRect);
 
          this->updateBounceImpulse();
       }
@@ -249,6 +251,24 @@ void  Chef::startChefBodyAnimation()
 void Chef::startHandBounceAnimation()
 {
 
+}
+
+Animate* Chef::getHandGrabAnimation()
+{
+   Vector<SpriteFrame*> animFrames(4);
+   char imageFileName[100] = {0};
+   auto cache = SpriteFrameCache::getInstance();
+   for(int i = 1; i < 5; i++)
+   {
+      sprintf(imageFileName, "hand_left_%d.png", i);
+      SpriteFrame* frame = cache->getSpriteFrameByName(imageFileName);
+      animFrames.pushBack(frame);
+   }
+   
+   Animation* animation = Animation::createWithSpriteFrames(animFrames, 1.0f);
+   
+   return Animate::create(animation);
+   
 }
 
 void Chef::runGrabAnimation(Sprite* activeHand, Point itemPos, Rect activeHandRect)
@@ -292,11 +312,13 @@ void Chef::runGrabAnimation(Sprite* activeHand, Point itemPos, Rect activeHandRe
    cocos2d::MoveTo* grabActionDown3 = MoveTo::create(actionGrabDuration * 0.15,
                                                      Vec2(activeHandRect.origin.x,
                                                           activeHandRect.origin.y));
-   
+   /*
    activeHand->runAction(Sequence::create(grabActionUp,grabActionDown,
                                           Spawn::create(grabActionDown1,
                                                         Animate::create(animation),NULL),
                                           grabActionDown2,grabActionDown3,NULL));
+   */
+   activeHand->runAction(Animate::create(animation));
 
 }
 /*

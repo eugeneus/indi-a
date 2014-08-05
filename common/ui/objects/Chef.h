@@ -32,6 +32,7 @@ public:
 protected:
    void updateBounceImpulse();
    void runGrabAnimation(cocos2d::Sprite* activeHand, cocos2d::Point itemPos, cocos2d::Rect activeHandRect);
+   cocos2d::Animate* getHandGrabAnimation();
    
 private:
    //typedef cocos2d::Ref super;
