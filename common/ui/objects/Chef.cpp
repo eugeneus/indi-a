@@ -271,10 +271,10 @@ void Chef::runGrabAnimation(Sprite* activeHand, Point itemPos, Rect activeHandRe
    cocos2d::MoveTo* grabActionDown1 = MoveTo::create(actionGrabDuration * 0.15, Vec2(activeHandRect.origin.x,activeHandRect.origin.y - 50.0f));
    grabActionDown1->setTag(3);
    
-   Vector<SpriteFrame*> animFrames(3);
+   Vector<SpriteFrame*> animFrames(4);
    char imageFileName[100] = {0};
    auto cache = SpriteFrameCache::getInstance();
-   for(int i = 1; i < 4; i++)
+   for(int i = 1; i < 5; i++)
    {
       sprintf(imageFileName, "hand_left_%d.png", i);
       SpriteFrame* frame = cache->getSpriteFrameByName(imageFileName);

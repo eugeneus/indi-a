@@ -279,5 +279,9 @@ void Item::stopActions()
    
 }
 
+Sprite* Item::createCrack() {
+    return NULL;
+}
+
 
 

@@ -67,8 +67,9 @@ protected:
    void runBumpAction(Item* anItem);
    
    float getScaleFactor(cocos2d::Point anEndPoint, int aControlPointType);
-    ControlPointDef* findControlPointDefByAngle(float angle);
 
+    ControlPointDef* findControlPointDefByAngle(Item* anItem, float angle, float xImpulse);
+   
    // model
    cocos2d::Vector<cocos2d::Node*>* _items;
    cocos2d::Vector<ControlPointDef*>* _cntPoints;

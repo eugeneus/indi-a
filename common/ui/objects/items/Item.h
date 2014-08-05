@@ -28,6 +28,8 @@ public:
    virtual void setIdle(cocos2d::Point anIdleItemPosition);
    
    virtual void stopActions();
+    
+    virtual cocos2d::Sprite* createCrack();
    
    bool isItemInCurrentTargetPoint();
    

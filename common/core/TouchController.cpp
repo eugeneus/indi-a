@@ -4,6 +4,11 @@
 #include "GameMenu.h"
 #include "GameController.h"
 
+#define kTouchAngleTop 1
+#define kTouchAngleRight 2
+#define kTouchAngleBottom 3
+#define kTouchAngleLeft 4
+
 TouchController::TouchController()
 {
     _startTime = 0.0f;
@@ -37,28 +42,9 @@ bool TouchController::initWithLayer(cocos2d::Layer* aGameLayer)
     return true;
 }
 
-/*static inline long millisecondNow()
-{
-    struct cc_timeval now;
-    Time::gettimeofdayCocos2d(&now, NULL);
-    return (now.tv_sec * 1000 + now.tv_usec / 1000);
-}*/
-
-void TouchController::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event::Event *unused_event) {
-    CCLOG("TouchController::onTouchesBegan");
-    
-    if (touches.size() > 0) {
-        Touch* currTouch = touches.front();
-       // _startTime = millisecondNow();
-        //_startPos = [currTouch locationInView: _gameLayer];
-        
-        _startPos = currTouch->getLocationInView();
-        log("You touched %f, %f", currTouch->getLocationInView().x, currTouch->getLocationInView().y);
-    }
-}
-
 bool isCoordinateOnLine(float coordinate, float posCoordinate, float size, float anchor) {
-    return posCoordinate - size*anchor < coordinate && coordinate < posCoordinate + size - size*anchor;
+    float delta = 50;
+    return posCoordinate - size*anchor - delta < coordinate && coordinate < posCoordinate + size - size*anchor + delta;
 }
 
 bool isTouchingItem(Vec2 touchPoint, Item* item) {
@@ -74,7 +60,22 @@ float calculateAngle(Vec2 pos1, Vec2 pos2) {
     float diffX = pos2.x - pos1.x;
     float diffY = pos2.y - pos1.y;
     
-    return CC_RADIANS_TO_DEGREES(atan2(diffY, diffX));
+    return CC_RADIANS_TO_DEGREES(atan2(diffY, diffX));//CC_RADIANS_TO_DEGREES(atan2(diffY, diffX));
+}
+
+void TouchController::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event::Event *unused_event) {
+    CCLOG("TouchController::onTouchesBegan");
+    
+    if (touches.size() > 0) {
+        Touch* currTouch = touches.front();
+        _isItemDetected = false;
+       // _startTime = millisecondNow();
+        //_startPos = [currTouch locationInView: _gameLayer];
+        
+        _startPos = currTouch->getLocationInView();
+        _startPos = CCDirector::getInstance()->convertToGL(_startPos);
+        log("You touched %f, %f", currTouch->getLocationInView().x, currTouch->getLocationInView().y);
+    }
 }
 
 void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event::Event *unused_event) {
@@ -84,15 +85,15 @@ void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches
         Touch* currTouch = touches.front();
         //  CGPoint currPoint = [currTouch locationInView: _gameLayer];
         
-        log("You touched %f, %f", currTouch->getLocationInView().x, currTouch->getLocationInView().y);
+        // log("You touched %f, %f", currTouch->getLocationInView().x, currTouch->getLocationInView().y);
         Vec2 location = currTouch->getLocationInView();
-        location = CCDirector::sharedDirector()->convertToGL(location);
+        location = CCDirector::getInstance()->convertToGL(location);
     //    long currTime = millisecondNow();
         
         
         
-        float angle1 = calculateAngle(currTouch->getPreviousLocation(), location);
-        log("---------------: %f", angle1);
+        //float angle1 = calculateAngle(currTouch->getPreviousLocation(), location);
+        //log("---------------: %f", angle1);
         
     
         if (false) { // distance < 0 no move
@@ -100,7 +101,7 @@ void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches
             //  break;
         }
     
-        if (true) { // curr touch detect item
+        if (!_isItemDetected) { // curr touch detect item
             // calculate vector
             //for (  _gameLayer->getChildren();
             Item* frontItem = NULL;
@@ -108,7 +109,7 @@ void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches
             for (auto iter = children.begin(); iter != children.end(); ++iter)
             {
                 auto child = *iter;
-                if (dynamic_cast<Item*>(child)) {
+                if (!_isItemDetected && dynamic_cast<Item*>(child)) {
                     Item *item = (Item *) child;
                     
                     if (20 < item->getLocalZOrder()) { //TODO: make a global const
@@ -117,11 +118,12 @@ void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches
                             log("item detected with z-index: %i", item->getLocalZOrder());
                             log("item detected pos x: %g, y:%f, w:%f, h:%f", item->getPosition().x, item->getPosition().y, item->getContentSize().width, item->getContentSize().height);
                             
+                            _isItemDetected = true;
                             /*if (frontItem == NULL || (frontItem != NULL && frontItem->getLocalZOrder() < item->getLocalZOrder())) {
                                 frontItem = item;
                             }*/
                             frontItem = item;
-                            float angle = calculateAngle(currTouch->getPreviousLocation(), location);
+                            float angle = calculateAngle(_startPos, location);//currTouch->getPreviousLocation(), location);
                             log("item detected angle: %f", angle);
                             
                             GameController* gameController = ((GameMenu *)_gameLayer)->getGameController();
@@ -143,8 +145,9 @@ void TouchController::onTouchesEnded(const std::vector<cocos2d::Touch*>& touches
     CCLOG("TouchController::onTouchesEnded");
     
     _startTime = 0;//millisecondNow();
-    _startPos = Vec2(0,0);
+  //  _startPos = Vec2(0,0);
     _moveSpeed = 0;
+    _isItemDetected = false;
 }
 
 void TouchController::onTouchesCancelled(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event::Event *unused_event) {
