@@ -63,7 +63,7 @@ protected:
    void setItemIdle(float dt, Item* anItem);
 
    void throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse);
-    ControlPointDef* findControlPointDefByAngle(float angle);
+    ControlPointDef* findControlPointDefByAngle(float angle, float xImpulse);
    //FiniteTimeAction* bounceItemAction(Item* anItem, float aWeight, Vec2 anImpulse);
    // model
    cocos2d::Vector<cocos2d::Node*>* _items;

@@ -265,8 +265,18 @@ void GameController::update(float dt)
    }
 }
 
-ControlPointDef* GameController::findControlPointDefByAngle(float angle) {
+ControlPointDef* GameController::findControlPointDefByAngle(float angle, float xImpulse) {
     angle = abs(angle);
+    
+    float offsetX = 0;
+    if (xImpulse > 0 && xImpulse < 0.3) {
+        offsetX = 40;
+    } else if (xImpulse > 0.6) {
+        offsetX = 220;
+    } else if (xImpulse > 0.8) {
+        offsetX = 480;
+    }
+    
     if (0 < angle && angle < 46 ) {
         return ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor); //right
     } else if (135 < angle && angle < 225) {
@@ -280,7 +290,7 @@ void GameController::changeItemPath(Item *anItem, float angle, cocos2d::Vec2 anI
     //throwItemSimple(anItem, throwX, anImpulse);
     anItem->stopAllActions();
     //anItem->setZOrder(kItemZO2);
-    ControlPointDef* collisionEndPointDef = findControlPointDefByAngle(angle);
+    ControlPointDef* collisionEndPointDef = findControlPointDefByAngle(angle, anImpulse.x);
     anItem->runTouchAction(0.5, collisionEndPointDef->_controlPoint,
                            anImpulse,
                            collisionEndPointDef->_controlPointType);
