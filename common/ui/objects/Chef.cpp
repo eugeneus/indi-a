@@ -112,13 +112,24 @@ void Chef::setWatchSector(cocos2d::Size aSectorSize)
    _szWatchSector = aSectorSize;
 }
 
+/* Improve Grab Animation:
+ 1) Check the Item in Watch Area
+ 2) Get arbitrary point between wa.origin.x - wa.size.width = grapPoint
+ 3) get actoin Duration as (Item->currPos - grabPoint.x)/conveyrVelocity
+ 4) buld bezier, construct BezierTo
+ 5) build rotateTo(90)
+ 6) spawn BezierTo+rotate(90). this is "grab part"
+ 7) toss part?
+ 8)
+ 
+ */
+
 bool Chef::tryToCatchItem(Item* anItem, float aConveyorVelocity)
 {
    bool isItemCatch = false;
    _conveyorVelocity = aConveyorVelocity;
 
    Point itemPos = anItem->getPosition();
-   
    bool isLeftHandSeep = false;
    if(_sleepCounter > 2){
       isLeftHandSeep = true;
@@ -137,7 +148,6 @@ bool Chef::tryToCatchItem(Item* anItem, float aConveyorVelocity)
       _activeBouncePoint = _rightHandRect.origin;
    }
    
-   
    if((itemPos.x - _szWatchSector.width) <= (activeHandRect.origin.x + activeHandRect.size.width) &&
       itemPos.x - _szWatchSector.width > activeHandRect.origin.x &&
       itemPos.y >= activeHandRect.origin.y - _szWatchSector.height &&
@@ -145,7 +155,33 @@ bool Chef::tryToCatchItem(Item* anItem, float aConveyorVelocity)
       ){
       //calulate parametes and start hands "grab" animation
       if (activeHand->getNumberOfRunningActions() == 0) {
-         this->runGrabAnimation(activeHand, itemPos, activeHandRect);
+         
+         
+         float catchPosX = itemPos.x + _szWatchSector.width * (((float)(0.0f + arc4random() % 11))/10.0f);
+         catchPosX = catchPosX < itemPos.x ? catchPosX : itemPos.x - 1;
+         
+         float actualDuration = (itemPos.x - catchPosX)/_conveyorVelocity;
+
+         ccBezierConfig bezier;
+         Point cp1 = activeHandRect.origin;
+         cp1.y = itemPos.y + 50.0f;
+         cp1.x = itemPos.x + (itemPos.x - catchPosX)/2.0f;
+         Point endPoint = Point(catchPosX,itemPos.y);
+         bezier.controlPoint_1 = cp1;
+         bezier.controlPoint_2 = endPoint;
+         bezier.endPosition = endPoint;
+         
+         BezierTo* catchBz = BezierTo::create(actualDuration, bezier);
+         RotateTo* catchRt = RotateTo::create(actualDuration, 90.0f);
+         Spawn* catchAction = Spawn::create(catchBz,catchRt,NULL);
+         
+         MoveTo* tossMv = MoveTo::create(0.1, activeHandRect.origin);
+         RotateTo* tossRt = RotateTo::create(0.1, -90.0f);
+         Spawn* tossAction = Spawn::create(tossMv,tossRt,NULL);
+         
+         activeHand->runAction(Sequence::create(catchAction,tossAction, NULL));
+         
+         //this->runGrabAnimation(activeHand, itemPos, activeHandRect);
          this->updateBounceImpulse();
          isItemCatch = true;
       }
@@ -263,7 +299,56 @@ void Chef::runGrabAnimation(Sprite* activeHand, Point itemPos, Rect activeHandRe
                                           grabActionDown2,grabActionDown3,NULL));
 
 }
-
+/*
+void Chef::runGrabAnimation(Sprite* activeHand, Point itemPos, Rect activeHandRect)
+{
+   float actionGrabDistanceActual = 0.0f;
+   float actionGrabDuration = 0.0f;
+   cocos2d::MoveTo* grabActionUp = nullptr;
+   cocos2d::MoveTo* grabActionDown = nullptr;
+   
+   actionGrabDistanceActual = itemPos.x - activeHandRect.origin.x;
+   actionGrabDuration = actionGrabDistanceActual/_conveyorVelocity; //
+   grabActionUp = MoveTo::create(actionGrabDuration * 0.15,
+                                 Vec2(activeHandRect.origin.x,activeHandRect.origin.y + actionGrabDistanceActual/2.0));
+   
+   
+   grabActionUp->setTag(1);
+   grabActionDown = MoveTo::create(actionGrabDuration * 0.15, Vec2(activeHandRect.origin.x,activeHandRect.origin.y));
+   grabActionDown->setTag(2);
+   
+   cocos2d::MoveTo* grabActionDown1 = MoveTo::create(actionGrabDuration * 0.15, Vec2(activeHandRect.origin.x,activeHandRect.origin.y - 50.0f));
+   grabActionDown1->setTag(3);
+   
+   Vector<SpriteFrame*> animFrames(3);
+   char imageFileName[100] = {0};
+   auto cache = SpriteFrameCache::getInstance();
+   for(int i = 1; i < 4; i++)
+   {
+      sprintf(imageFileName, "hand_left_%d.png", i);
+      SpriteFrame* frame = cache->getSpriteFrameByName(imageFileName);
+      animFrames.pushBack(frame);
+   }
+   
+   Animation* animation = Animation::createWithSpriteFrames(animFrames, actionGrabDuration * 0.15);
+   
+   
+   cocos2d::MoveTo* grabActionDown2 = MoveTo::create(actionGrabDuration * 0.15,
+                                                     Vec2(activeHandRect.origin.x,
+                                                          activeHandRect.origin.y +actionGrabDistanceActual));
+   grabActionDown2->setTag(5);
+   
+   cocos2d::MoveTo* grabActionDown3 = MoveTo::create(actionGrabDuration * 0.15,
+                                                     Vec2(activeHandRect.origin.x,
+                                                          activeHandRect.origin.y));
+   
+   activeHand->runAction(Sequence::create(grabActionUp,grabActionDown,
+                                          Spawn::create(grabActionDown1,
+                                                        Animate::create(animation),NULL),
+                                          grabActionDown2,grabActionDown3,NULL));
+   
+}
+*/
 
 void Chef::updateBounceImpulse()
 {
