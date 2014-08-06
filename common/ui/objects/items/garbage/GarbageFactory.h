@@ -9,7 +9,8 @@ enum
 {
     kGarbageBottle = 0,
     kGarbageBowlingBall,
-    kGarbageDuck
+    kGarbageDuck,
+    kGarbagePants
 };
 
 class GarbageFactory {

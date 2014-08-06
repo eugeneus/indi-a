@@ -3,6 +3,7 @@
 #include "Bottle.h"
 #include "BowlingBall.h"
 #include "Duck.h"
+#include "Pants.h"
 
 Garbage* GarbageFactory::createGarbage(int garbage_type)
 {
@@ -24,7 +25,11 @@ Garbage* GarbageFactory::createGarbage(int garbage_type)
             garbage = Duck::create();
             break;
         }
-        
+        case kGarbagePants:
+        {
+            garbage = Pants::create();
+            break;
+        }
             
         default:
         {

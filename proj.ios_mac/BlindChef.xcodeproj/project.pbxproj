@@ -103,6 +103,7 @@
 		AAF0620F19923ACB008563CA /* item_fall.caf in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620B19923ACB008563CA /* item_fall.caf */; };
 		AAF0621019923ACB008563CA /* pressbutton.caf in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620C19923ACB008563CA /* pressbutton.caf */; };
 		AAF0621119923ACB008563CA /* bgmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620D19923ACB008563CA /* bgmusic.mp3 */; };
+		AAF0621419924539008563CA /* Pants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621219924539008563CA /* Pants.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -380,6 +381,8 @@
 		AAF0620B19923ACB008563CA /* item_fall.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = item_fall.caf; path = sound/item_fall.caf; sourceTree = "<group>"; };
 		AAF0620C19923ACB008563CA /* pressbutton.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = pressbutton.caf; path = sound/pressbutton.caf; sourceTree = "<group>"; };
 		AAF0620D19923ACB008563CA /* bgmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bgmusic.mp3; path = sound/bgmusic.mp3; sourceTree = "<group>"; };
+		AAF0621219924539008563CA /* Pants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pants.cpp; sourceTree = "<group>"; };
+		AAF0621319924539008563CA /* Pants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pants.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -655,6 +658,8 @@
 				AAB58E3C1966BBA600C48611 /* BowlingBall.h */,
 				AAF0620719923645008563CA /* Duck.cpp */,
 				AAF0620819923645008563CA /* Duck.h */,
+				AAF0621219924539008563CA /* Pants.cpp */,
+				AAF0621319924539008563CA /* Pants.h */,
 			);
 			path = garbage;
 			sourceTree = "<group>";
@@ -1075,6 +1080,7 @@
 				AA870FFB196324A50028A4EA /* Food.cpp in Sources */,
 				AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */,
 				AAF06204199232D0008563CA /* Potatoe.cpp in Sources */,
+				AAF0621419924539008563CA /* Pants.cpp in Sources */,
 				AAB58E3D1966BBA600C48611 /* BowlingBall.cpp in Sources */,
 				AA96A21F195DB16C00C22BC9 /* GameSelectMenu.cpp in Sources */,
 				AAB58E531966F5F600C48611 /* Pot.cpp in Sources */,

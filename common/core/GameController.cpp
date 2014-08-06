@@ -153,8 +153,8 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
 {
    Item* item = nullptr;
    
-   for (int iItm = 0; iItm < 10; iItm++) {
-      item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 2));
+   for (int iItm = 0; iItm < 20; iItm++) {
+       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 3));
       item->setIdle(_itemIdlePos); //-1 * offset
       
       item->setScale(1.0);
