@@ -99,6 +99,10 @@
 		AACAB438198AC41F00F8AE01 /* level_1.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAB437198AC41F00F8AE01 /* level_1.plist */; };
 		AAF06204199232D0008563CA /* Potatoe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF06202199232D0008563CA /* Potatoe.cpp */; };
 		AAF0620919923645008563CA /* Duck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0620719923645008563CA /* Duck.cpp */; };
+		AAF0620E19923ACB008563CA /* levelcompleted.caf in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620A19923ACB008563CA /* levelcompleted.caf */; };
+		AAF0620F19923ACB008563CA /* item_fall.caf in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620B19923ACB008563CA /* item_fall.caf */; };
+		AAF0621019923ACB008563CA /* pressbutton.caf in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620C19923ACB008563CA /* pressbutton.caf */; };
+		AAF0621119923ACB008563CA /* bgmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620D19923ACB008563CA /* bgmusic.mp3 */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -372,6 +376,10 @@
 		AAF06203199232D0008563CA /* Potatoe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Potatoe.h; sourceTree = "<group>"; };
 		AAF0620719923645008563CA /* Duck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Duck.cpp; sourceTree = "<group>"; };
 		AAF0620819923645008563CA /* Duck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Duck.h; sourceTree = "<group>"; };
+		AAF0620A19923ACB008563CA /* levelcompleted.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = levelcompleted.caf; path = sound/levelcompleted.caf; sourceTree = "<group>"; };
+		AAF0620B19923ACB008563CA /* item_fall.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = item_fall.caf; path = sound/item_fall.caf; sourceTree = "<group>"; };
+		AAF0620C19923ACB008563CA /* pressbutton.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = pressbutton.caf; path = sound/pressbutton.caf; sourceTree = "<group>"; };
+		AAF0620D19923ACB008563CA /* bgmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bgmusic.mp3; path = sound/bgmusic.mp3; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -572,6 +580,10 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AAF0620A19923ACB008563CA /* levelcompleted.caf */,
+				AAF0620B19923ACB008563CA /* item_fall.caf */,
+				AAF0620C19923ACB008563CA /* pressbutton.caf */,
+				AAF0620D19923ACB008563CA /* bgmusic.mp3 */,
 				AACAB437198AC41F00F8AE01 /* level_1.plist */,
 				AA3424821960CB230067B032 /* RioGrande.ttf */,
 				AA96A224195DB25500C22BC9 /* images.plist */,
@@ -994,7 +1006,9 @@
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
+				AAF0620F19923ACB008563CA /* item_fall.caf in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
+				AAF0621019923ACB008563CA /* pressbutton.caf in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				AA3424831960CB230067B032 /* RioGrande.ttf in Resources */,
@@ -1007,6 +1021,8 @@
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
+				AAF0620E19923ACB008563CA /* levelcompleted.caf in Resources */,
+				AAF0621119923ACB008563CA /* bgmusic.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
