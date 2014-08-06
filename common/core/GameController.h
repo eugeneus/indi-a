@@ -10,6 +10,9 @@ class Item;
 class Chef;
 class Pot;
 class LevelProvider;
+class UserDataProvider;
+class ScoreLayer;
+class Multiplier;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -69,6 +72,8 @@ protected:
    void runBumpAction(Item* anItem);
    
    float getScaleFactor(cocos2d::Point anEndPoint, int aControlPointType);
+    
+    void checkGameProgress(Item* anItem);
 
     ControlPointDef* findControlPointDefByAngle(Item* anItem, float angle, float xImpulse);
    
@@ -89,7 +94,9 @@ protected:
    Chef* _theChef;
     
     LevelProvider* _levelInfo;
-   
+    UserDataProvider* _userData;
+    ScoreLayer* _scoreLayer;
+    Multiplier* _multiplier;
 private:
    
    cocos2d::Layer* _gameLayer;

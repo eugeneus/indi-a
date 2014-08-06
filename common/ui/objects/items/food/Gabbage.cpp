@@ -26,7 +26,7 @@ bool Gabbage::init() {
     }
    _weightRatio = 0.5;
    _bounceRatio = 0.2;
-   
+    _itemId = 0;
     return true;
 }
 

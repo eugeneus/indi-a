@@ -32,6 +32,11 @@ bool LevelProvider::initForLevel(int levelId)
         const char *levelFileName = CCString::createWithFormat("level_%i.plist", levelId)->getCString();
         _levelMap = FileUtils::getInstance()->getValueMapFromFile(levelFileName);
         
+        
+        _allowedFoodItems = getAllowedFoodItems();
+        _allowedGarbageItems = getAllowedGarbageItems();
+        _requiredItems = getRequiredItems();
+        
         return true;
     }
     
@@ -74,4 +79,17 @@ std::vector<int> LevelProvider::getAllowedGarbageItems() {
 std::vector<int> LevelProvider::getRequiredItems() {
     
     return getAllowedItems(_levelMap, "requiredFoodItems");
+}
+
+bool LevelProvider::isRequiredItem(int itemId) {
+    if (itemId > -1 ) {
+        for (int i = 0; i < _requiredItems.size(); i++) {
+            int reqId = _requiredItems.at(i);
+            if (reqId == itemId) {
+                return true;
+            }
+        }
+    }
+    
+    return false;
 }

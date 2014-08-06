@@ -27,6 +27,6 @@ bool Tomato::init() {
     }
     _weightRatio = 0.1;
     _bounceRatio = 0.1;
-    
+    _itemId = 3;
     return true;
 }

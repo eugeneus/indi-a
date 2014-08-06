@@ -10,6 +10,8 @@ bool Item::init(string spriteFrameName, const char* framesPattern, int spriteCou
     }
    
    _defaultScale = 1.0;
+    _itemType = -1;
+    _itemId = -1;
     
     return true;
 }

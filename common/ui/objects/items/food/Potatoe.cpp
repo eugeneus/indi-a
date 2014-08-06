@@ -26,6 +26,6 @@ bool Potatoe::init() {
     }
     _weightRatio = 0.1;
     _bounceRatio = 0.2;
-    
+    _itemId = 1;
     return true;
 }

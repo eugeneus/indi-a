@@ -26,7 +26,7 @@ bool Pants::init() {
     }
     _weightRatio = 0.01;
     _bounceRatio = 0.01;
-    
+    _itemId = 3;
     
     return true;
 }

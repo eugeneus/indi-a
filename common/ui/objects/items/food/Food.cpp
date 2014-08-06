@@ -9,6 +9,6 @@ bool Food::init(string spriteFrameName, const char* framesPattern, int spriteCou
         return false;
     }
     
-    
+    _itemType = 0;
     return true;
 }

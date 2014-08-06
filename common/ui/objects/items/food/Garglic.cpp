@@ -26,6 +26,6 @@ bool Garglic::init() {
     }
     _weightRatio = 0.1;
     _bounceRatio = 0.1;
-    
+    _itemId = 2;
     return true;
 }

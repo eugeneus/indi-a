@@ -6,15 +6,15 @@
 	<dict>
 		<key>requiredFoodItems</key>
 		<array>
-			<string>1</string>
+			<integer>0</integer>
 		</array>
 		<key>allowedFoodItems</key>
 		<array>
-			<string>1</string>
+			<integer>1</integer>
 		</array>
 		<key>allowedGarbageItems</key>
 		<array>
-			<string>1</string>
+			<integer>1</integer>
 		</array>
 	</dict>
 	<key>speed</key>

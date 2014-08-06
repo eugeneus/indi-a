@@ -106,6 +106,8 @@
 		AAF0621419924539008563CA /* Pants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621219924539008563CA /* Pants.cpp */; };
 		AAF06217199254BF008563CA /* Garglic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF06215199254BF008563CA /* Garglic.cpp */; };
 		AAF0621A19925596008563CA /* Tomato.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621819925596008563CA /* Tomato.cpp */; };
+		AAF0621D19926025008563CA /* UserDataProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621B19926025008563CA /* UserDataProvider.cpp */; };
+		AAF06220199279EE008563CA /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621E199279EE008563CA /* Multiplier.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -389,6 +391,10 @@
 		AAF06216199254BF008563CA /* Garglic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Garglic.h; sourceTree = "<group>"; };
 		AAF0621819925596008563CA /* Tomato.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tomato.cpp; sourceTree = "<group>"; };
 		AAF0621919925596008563CA /* Tomato.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tomato.h; sourceTree = "<group>"; };
+		AAF0621B19926025008563CA /* UserDataProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserDataProvider.cpp; sourceTree = "<group>"; };
+		AAF0621C19926025008563CA /* UserDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataProvider.h; sourceTree = "<group>"; };
+		AAF0621E199279EE008563CA /* Multiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Multiplier.cpp; sourceTree = "<group>"; };
+		AAF0621F199279EE008563CA /* Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Multiplier.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -610,6 +616,8 @@
 			children = (
 				AA34247F1960C74F0067B032 /* ScoreLayer.cpp */,
 				AA3424801960C74F0067B032 /* ScoreLayer.h */,
+				AAF0621E199279EE008563CA /* Multiplier.cpp */,
+				AAF0621F199279EE008563CA /* Multiplier.h */,
 			);
 			path = score;
 			sourceTree = "<group>";
@@ -821,6 +829,8 @@
 			children = (
 				AACAB432198AC40400F8AE01 /* LevelProvider.cpp */,
 				AACAB433198AC40400F8AE01 /* LevelProvider.h */,
+				AAF0621B19926025008563CA /* UserDataProvider.cpp */,
+				AAF0621C19926025008563CA /* UserDataProvider.h */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -1076,6 +1086,7 @@
 				AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
+				AAF06220199279EE008563CA /* Multiplier.cpp in Sources */,
 				AA3424811960C74F0067B032 /* ScoreLayer.cpp in Sources */,
 				AAB58E461966CF4900C48611 /* BonusMenu.cpp in Sources */,
 				AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */,
@@ -1098,6 +1109,7 @@
 				AAB58E531966F5F600C48611 /* Pot.cpp in Sources */,
 				AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */,
 				AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */,
+				AAF0621D19926025008563CA /* UserDataProvider.cpp in Sources */,
 				AAF0620919923645008563CA /* Duck.cpp in Sources */,
 				AA870FFD196324A50028A4EA /* Gabbage.cpp in Sources */,
 				AA8710011963250E0028A4EA /* Item.cpp in Sources */,

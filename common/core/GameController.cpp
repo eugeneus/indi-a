@@ -11,6 +11,10 @@
 #include "Pot.h"
 #include "MovementController.h"
 #include "LevelProvider.h"
+#include "UserDataProvider.h"
+#include "Garbage.h"
+#include "Food.h"
+#include "Multiplier.h"
 
 #include "time.h"
 
@@ -72,6 +76,8 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
    origin = Director::getInstance()->getVisibleOrigin();
    
     _levelInfo = LevelProvider::createForLevel(1);
+    _userData = UserDataProvider::create();
+    
     float speed = _levelInfo->getSpeed();
     std::vector<int> requiredFroodItems = _levelInfo->getRequiredItems();
     std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
@@ -122,9 +128,15 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
    Size sz = _thePot->getFrontRect().size;
    Point potOrigin = Point(0,0);//Point(aVisibleSize.width/2.0f - sz.width/2.0f, 0.0f);
    _thePot->setOriginPos(potOrigin);
-    ScoreLayer* scoreLayer = ScoreLayer::create(2300);
-    scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
+    
+    _scoreLayer = ScoreLayer::create(_userData->getUserScore());
+    _scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
+    _gameLayer->addChild(_scoreLayer, kCloudZO);
 
+    _multiplier = Multiplier::create();
+    _multiplier->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 60));
+    _gameLayer->addChild(_multiplier, kCloudZO);
+    
     _theChef->startChefBodyAnimation();
    
    _cntPoints->pushBack(ControlPointDef::create(Point(470.0f,300.0f),kControlPointTypePotMargin)); // left floor
@@ -278,10 +290,9 @@ void GameController::runBumpAction(Item* anItem)
    }else
       if (currentCollisionType == kControlPointTypePotCenter){
          anItem->setLocalZOrder(kItemZO3);
+          
+          this->checkGameProgress(anItem);
       }
-   
-   
-
 }
 
 
@@ -419,5 +430,24 @@ float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPoin
    
    //scaleFactor += 0.3f;
    return scaleFactor;
+}
+
+void GameController::checkGameProgress(Item* anItem) {
+    if (anItem->_itemType == 1) {
+        _multiplier->reset();
+       // this->stopGame(); //TODO:
+    } else {
+        if (_levelInfo->isRequiredItem(anItem->_itemId)) {
+            _scoreLayer->updateScore(10);
+            int multiCount = _multiplier->update(anItem->_itemId);
+            if (multiCount > 4) {
+                _scoreLayer->updateScore(50);
+                _multiplier->reset();
+            }
+        } else {
+            //_scoreLayer->updateScore(0);
+            _multiplier->reset();
+        }
+    }
 }
 
