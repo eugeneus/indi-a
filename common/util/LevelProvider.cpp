@@ -24,30 +24,6 @@ LevelProvider* LevelProvider::createForLevel(int levelId)
     }
 }
 
-bool LevelProvider::initForLevel(int levelId)
-{
-    _levelId = levelId;
-    if (_levelId > 0) {
-    
-        const char *levelFileName = CCString::createWithFormat("level_%i.plist", levelId)->getCString();
-        _levelMap = FileUtils::getInstance()->getValueMapFromFile(levelFileName);
-        
-        
-        _allowedFoodItems = getAllowedFoodItems();
-        _allowedGarbageItems = getAllowedGarbageItems();
-        _requiredItems = getRequiredItems();
-        
-        return true;
-    }
-    
-    return false;
-}
-
-float LevelProvider::getSpeed() {
-    Value speed = _levelMap.at("speed");
-    return speed.asFloat();
-}
-
 std::vector<int> getAllowedItems(ValueMap map, const char* key) {
     std::vector<int> result;
     
@@ -66,19 +42,44 @@ std::vector<int> getAllowedItems(ValueMap map, const char* key) {
     return result;
 }
 
+bool LevelProvider::initForLevel(int levelId)
+{
+    _levelId = levelId;
+    if (_levelId > 0) {
+    
+        const char *levelFileName = CCString::createWithFormat("level_%i.plist", levelId)->getCString();
+        _levelMap = FileUtils::getInstance()->getValueMapFromFile(levelFileName);
+        
+        
+        _allowedFoodItems = getAllowedItems(_levelMap, "allowedFoodItems");
+        _allowedGarbageItems = getAllowedItems(_levelMap, "allowedGarbageItems");
+        _requiredItems = getAllowedItems(_levelMap, "requiredFoodItems");
+        
+        return true;
+    }
+    
+    return false;
+}
+
+float LevelProvider::getSpeed() {
+    Value speed = _levelMap.at("speed");
+    return speed.asFloat();
+}
+
+
 std::vector<int> LevelProvider::getAllowedFoodItems() {
 
-    return getAllowedItems(_levelMap, "allowedFoodItems");
+    return _allowedFoodItems;
 }
 
 std::vector<int> LevelProvider::getAllowedGarbageItems() {
     
-    return getAllowedItems(_levelMap, "allowedGarbageItems");
+    return _allowedGarbageItems;
 }
 
 std::vector<int> LevelProvider::getRequiredItems() {
     
-    return getAllowedItems(_levelMap, "requiredFoodItems");
+    return _requiredItems;
 }
 
 bool LevelProvider::isRequiredItem(int itemId) {
