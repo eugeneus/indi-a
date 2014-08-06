@@ -7,7 +7,9 @@
 enum
 {
     kFoodGabbge = 0,
-    kFoodPotatoe = 1
+    kFoodPotatoe,
+    kFoodGarglic,
+    kFoodTomato
 };
 
 class FoodFactory {
