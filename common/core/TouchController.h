@@ -12,6 +12,8 @@ private:
     float _moveSpeed;
     float _startTime;
     cocos2d::Vec2 _startPos;
+    
+    bool _isItemDetected = false;
 
 public:
     TouchController();

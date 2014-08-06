@@ -62,12 +62,16 @@ protected:
    
    void setItemIdle(float dt, Item* anItem);
 
+   void runTossActionWithScale(Item* anItem, ControlPointDef* aPointDef, float aDuration, cocos2d::Point anImpulse);
+
    void throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse);
    
    void runBumpAction(Item* anItem);
    
-    ControlPointDef* findControlPointDefByAngle(float angle);
+   float getScaleFactor(cocos2d::Point anEndPoint, int aControlPointType);
 
+    ControlPointDef* findControlPointDefByAngle(Item* anItem, float angle, float xImpulse);
+   
    // model
    cocos2d::Vector<cocos2d::Node*>* _items;
    cocos2d::Vector<ControlPointDef*>* _cntPoints;

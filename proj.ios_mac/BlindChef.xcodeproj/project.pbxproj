@@ -97,6 +97,13 @@
 		AAB58E531966F5F600C48611 /* Pot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E511966F5F600C48611 /* Pot.cpp */; };
 		AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AACAB432198AC40400F8AE01 /* LevelProvider.cpp */; };
 		AACAB438198AC41F00F8AE01 /* level_1.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAB437198AC41F00F8AE01 /* level_1.plist */; };
+		AAF06204199232D0008563CA /* Potatoe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF06202199232D0008563CA /* Potatoe.cpp */; };
+		AAF0620919923645008563CA /* Duck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0620719923645008563CA /* Duck.cpp */; };
+		AAF0620E19923ACB008563CA /* levelcompleted.caf in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620A19923ACB008563CA /* levelcompleted.caf */; };
+		AAF0620F19923ACB008563CA /* item_fall.caf in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620B19923ACB008563CA /* item_fall.caf */; };
+		AAF0621019923ACB008563CA /* pressbutton.caf in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620C19923ACB008563CA /* pressbutton.caf */; };
+		AAF0621119923ACB008563CA /* bgmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620D19923ACB008563CA /* bgmusic.mp3 */; };
+		AAF0621419924539008563CA /* Pants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621219924539008563CA /* Pants.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -366,6 +373,16 @@
 		AACAB432198AC40400F8AE01 /* LevelProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelProvider.cpp; sourceTree = "<group>"; };
 		AACAB433198AC40400F8AE01 /* LevelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelProvider.h; sourceTree = "<group>"; };
 		AACAB437198AC41F00F8AE01 /* level_1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level_1.plist; sourceTree = "<group>"; };
+		AAF06202199232D0008563CA /* Potatoe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Potatoe.cpp; sourceTree = "<group>"; };
+		AAF06203199232D0008563CA /* Potatoe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Potatoe.h; sourceTree = "<group>"; };
+		AAF0620719923645008563CA /* Duck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Duck.cpp; sourceTree = "<group>"; };
+		AAF0620819923645008563CA /* Duck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Duck.h; sourceTree = "<group>"; };
+		AAF0620A19923ACB008563CA /* levelcompleted.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = levelcompleted.caf; path = sound/levelcompleted.caf; sourceTree = "<group>"; };
+		AAF0620B19923ACB008563CA /* item_fall.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = item_fall.caf; path = sound/item_fall.caf; sourceTree = "<group>"; };
+		AAF0620C19923ACB008563CA /* pressbutton.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = pressbutton.caf; path = sound/pressbutton.caf; sourceTree = "<group>"; };
+		AAF0620D19923ACB008563CA /* bgmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bgmusic.mp3; path = sound/bgmusic.mp3; sourceTree = "<group>"; };
+		AAF0621219924539008563CA /* Pants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pants.cpp; sourceTree = "<group>"; };
+		AAF0621319924539008563CA /* Pants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pants.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -566,6 +583,10 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AAF0620A19923ACB008563CA /* levelcompleted.caf */,
+				AAF0620B19923ACB008563CA /* item_fall.caf */,
+				AAF0620C19923ACB008563CA /* pressbutton.caf */,
+				AAF0620D19923ACB008563CA /* bgmusic.mp3 */,
 				AACAB437198AC41F00F8AE01 /* level_1.plist */,
 				AA3424821960CB230067B032 /* RioGrande.ttf */,
 				AA96A224195DB25500C22BC9 /* images.plist */,
@@ -618,6 +639,8 @@
 				AA870FF8196324A50028A4EA /* FoodFactory.h */,
 				AA870FF9196324A50028A4EA /* Gabbage.cpp */,
 				AA870FFA196324A50028A4EA /* Gabbage.h */,
+				AAF06202199232D0008563CA /* Potatoe.cpp */,
+				AAF06203199232D0008563CA /* Potatoe.h */,
 			);
 			path = food;
 			sourceTree = "<group>";
@@ -633,6 +656,10 @@
 				AA87100C196329770028A4EA /* GarbageFactory.h */,
 				AAB58E3B1966BBA600C48611 /* BowlingBall.cpp */,
 				AAB58E3C1966BBA600C48611 /* BowlingBall.h */,
+				AAF0620719923645008563CA /* Duck.cpp */,
+				AAF0620819923645008563CA /* Duck.h */,
+				AAF0621219924539008563CA /* Pants.cpp */,
+				AAF0621319924539008563CA /* Pants.h */,
 			);
 			path = garbage;
 			sourceTree = "<group>";
@@ -984,7 +1011,9 @@
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
+				AAF0620F19923ACB008563CA /* item_fall.caf in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
+				AAF0621019923ACB008563CA /* pressbutton.caf in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				AA3424831960CB230067B032 /* RioGrande.ttf in Resources */,
@@ -997,6 +1026,8 @@
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
+				AAF0620E19923ACB008563CA /* levelcompleted.caf in Resources */,
+				AAF0621119923ACB008563CA /* bgmusic.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1048,11 +1079,14 @@
 				AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */,
 				AA870FFB196324A50028A4EA /* Food.cpp in Sources */,
 				AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */,
+				AAF06204199232D0008563CA /* Potatoe.cpp in Sources */,
+				AAF0621419924539008563CA /* Pants.cpp in Sources */,
 				AAB58E3D1966BBA600C48611 /* BowlingBall.cpp in Sources */,
 				AA96A21F195DB16C00C22BC9 /* GameSelectMenu.cpp in Sources */,
 				AAB58E531966F5F600C48611 /* Pot.cpp in Sources */,
 				AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */,
 				AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */,
+				AAF0620919923645008563CA /* Duck.cpp in Sources */,
 				AA870FFD196324A50028A4EA /* Gabbage.cpp in Sources */,
 				AA8710011963250E0028A4EA /* Item.cpp in Sources */,
 				AA87100D196329770028A4EA /* GarbageFactory.cpp in Sources */,

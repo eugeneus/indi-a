@@ -39,7 +39,7 @@ bool Spritable::initWithSpriteAndPos(string spriteFrameName, const char* framesP
     //animatedSprite = Sprite::createWithSpriteFrameName(spriteFrameName.c_str());
     //animatedSprite->setAnchorPoint(Vec2(0, 0));
     
-    this->setAnchorPoint(Vec2(0, 0));
+    this->setAnchorPoint(Vec2(0.5, 0.5));
     this->_defaultContentSize = this->getContentSize();
     this->setContentSize(_defaultContentSize);
     //this->addChild(animatedSprite);

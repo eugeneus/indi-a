@@ -1,6 +1,7 @@
 
 #include "FoodFactory.h"
 #include "Gabbage.h"
+#include "Potatoe.h"
 
 Food* FoodFactory::createFood(int food_type)
 {
@@ -12,10 +13,16 @@ Food* FoodFactory::createFood(int food_type)
             food = Gabbage::create();
             break;
         }
+            
+        case kFoodPotatoe:
+        {
+            food = Potatoe::create();
+            break;
+        }
         
         default:
         {
-            food = Gabbage::create();
+            food = Potatoe::create();
             break;
         }
     }

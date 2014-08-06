@@ -30,7 +30,7 @@ bool Bottle::init() {
     return true;
 }
 
-FiniteTimeAction* Bottle::getFloorBumpAction(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse)
+FiniteTimeAction* Bottle::getFloorBumpAnimation(float aTimeInterval, cocos2d::Point aStartPoint, cocos2d::Point anImpulse)
 {
    
    Vector<SpriteFrame*> animateFrames(6);
@@ -42,17 +42,21 @@ FiniteTimeAction* Bottle::getFloorBumpAction(float aTimeInterval, cocos2d::Point
       sprintf(frameName, "bottle_crash_%1d.png", i);
       animFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
       animateFrames.pushBack(animFrame);
-      //animFrame->release();
    }
+   
    Animation* animation = Animation::createWithSpriteFrames(animateFrames, 0.3f);
    return Animate::create(animation);
 }
 
-FiniteTimeAction* Bottle::runFloorBumpAction(float aDuration, cocos2d::Point anImpulse)
+FiniteTimeAction* Bottle::getFloorBumpAction(float aDuration, cocos2d::Point anImpulse)
 {
    Point pos = this->getPosition();
-   
-   FiniteTimeAction* action =getFloorBumpAction(aDuration/2.0f, pos, Point(0.0f,0.0f));
-   this->runAction(action);
+   FiniteTimeAction* action =getFloorBumpAnimation(aDuration/2.0f, pos, Point(0.0f,0.0f));
    return action;
+}
+
+void Bottle::setIdle(cocos2d::Point anIdleItemPosition)
+{
+   Item::setIdle(anIdleItemPosition);
+   this->setDisplayFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("bottle_1.png"));
 }

@@ -2,6 +2,8 @@
 #include "GarbageFactory.h"
 #include "Bottle.h"
 #include "BowlingBall.h"
+#include "Duck.h"
+#include "Pants.h"
 
 Garbage* GarbageFactory::createGarbage(int garbage_type)
 {
@@ -16,6 +18,16 @@ Garbage* GarbageFactory::createGarbage(int garbage_type)
         case kGarbageBowlingBall:
         {
             garbage = BowlingBall::create();
+            break;
+        }
+        case kGarbageDuck:
+        {
+            garbage = Duck::create();
+            break;
+        }
+        case kGarbagePants:
+        {
+            garbage = Pants::create();
             break;
         }
             

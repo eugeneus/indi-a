@@ -38,3 +38,7 @@ FiniteTimeAction* BowlingBall::getFloorBumpAction(float aTimeInterval, cocos2d::
    return moveTo;
 
 }
+
+Sprite* BowlingBall::createCrack() {
+    return Sprite::createWithSpriteFrameName("bowling_ball_crack_land_1.png");
+}

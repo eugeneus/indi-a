@@ -1,11 +1,11 @@
 
-#include "Gabbage.h"
+#include "Potatoe.h"
 
 USING_NS_CC;
 
-Gabbage* Gabbage::create()
+Potatoe* Potatoe::create()
 {
-    Gabbage *pRet = new Gabbage();
+    Potatoe *pRet = new Potatoe();
     if (pRet && pRet->init())
     {
         pRet->autorelease();
@@ -19,14 +19,13 @@ Gabbage* Gabbage::create()
     }
 }
 
-bool Gabbage::init() {
+bool Potatoe::init() {
     
-    if(!super::init("cabbage_1.png", "cabbage_%i.png", 2, 0.2)) {
+    if(!super::init("potatoe_1.png", "potatoe_%i.png", 1, 0.2)) {
         return false;
     }
-   _weightRatio = 0.5;
-   _bounceRatio = 0.2;
-   
+    _weightRatio = 0.1;
+    _bounceRatio = 0.2;
+    
     return true;
 }
-
