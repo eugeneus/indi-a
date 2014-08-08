@@ -9,6 +9,6 @@ bool Garbage::init(string spriteFrameName, const char* framesPattern, int sprite
         return false;
     }
     
-    
+    _itemType = 1;
     return true;
 }

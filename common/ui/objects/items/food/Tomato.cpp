@@ -1,11 +1,12 @@
 
-#include "Potatoe.h"
+#include "Tomato.h"
+
 
 USING_NS_CC;
 
-Potatoe* Potatoe::create()
+Tomato* Tomato::create()
 {
-    Potatoe *pRet = new Potatoe();
+    Tomato *pRet = new Tomato();
     if (pRet && pRet->init())
     {
         pRet->autorelease();
@@ -19,13 +20,13 @@ Potatoe* Potatoe::create()
     }
 }
 
-bool Potatoe::init() {
+bool Tomato::init() {
     
-    if(!super::init("potatoe_1.png", "potatoe_%i.png", 1, 0.2)) {
+    if(!super::init("tomato_1.png", "tomato_%i.png", 1, 0.2)) {
         return false;
     }
     _weightRatio = 0.1;
-    _bounceRatio = 0.2;
-    _itemId = 1;
+    _bounceRatio = 0.1;
+    _itemId = 3;
     return true;
 }

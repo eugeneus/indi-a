@@ -26,7 +26,7 @@ bool BowlingBall::init() {
     }
    _weightRatio = 0.9;
    _bounceRatio = 0.5;
-
+    _itemId = 1;
    
     return true;
 }

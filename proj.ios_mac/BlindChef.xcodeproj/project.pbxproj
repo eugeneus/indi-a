@@ -104,6 +104,10 @@
 		AAF0621019923ACB008563CA /* pressbutton.caf in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620C19923ACB008563CA /* pressbutton.caf */; };
 		AAF0621119923ACB008563CA /* bgmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620D19923ACB008563CA /* bgmusic.mp3 */; };
 		AAF0621419924539008563CA /* Pants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621219924539008563CA /* Pants.cpp */; };
+		AAF06217199254BF008563CA /* Garglic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF06215199254BF008563CA /* Garglic.cpp */; };
+		AAF0621A19925596008563CA /* Tomato.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621819925596008563CA /* Tomato.cpp */; };
+		AAF0621D19926025008563CA /* UserDataProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621B19926025008563CA /* UserDataProvider.cpp */; };
+		AAF06220199279EE008563CA /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621E199279EE008563CA /* Multiplier.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -383,6 +387,14 @@
 		AAF0620D19923ACB008563CA /* bgmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bgmusic.mp3; path = sound/bgmusic.mp3; sourceTree = "<group>"; };
 		AAF0621219924539008563CA /* Pants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pants.cpp; sourceTree = "<group>"; };
 		AAF0621319924539008563CA /* Pants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pants.h; sourceTree = "<group>"; };
+		AAF06215199254BF008563CA /* Garglic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Garglic.cpp; sourceTree = "<group>"; };
+		AAF06216199254BF008563CA /* Garglic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Garglic.h; sourceTree = "<group>"; };
+		AAF0621819925596008563CA /* Tomato.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tomato.cpp; sourceTree = "<group>"; };
+		AAF0621919925596008563CA /* Tomato.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tomato.h; sourceTree = "<group>"; };
+		AAF0621B19926025008563CA /* UserDataProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserDataProvider.cpp; sourceTree = "<group>"; };
+		AAF0621C19926025008563CA /* UserDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataProvider.h; sourceTree = "<group>"; };
+		AAF0621E199279EE008563CA /* Multiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Multiplier.cpp; sourceTree = "<group>"; };
+		AAF0621F199279EE008563CA /* Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Multiplier.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -604,6 +616,8 @@
 			children = (
 				AA34247F1960C74F0067B032 /* ScoreLayer.cpp */,
 				AA3424801960C74F0067B032 /* ScoreLayer.h */,
+				AAF0621E199279EE008563CA /* Multiplier.cpp */,
+				AAF0621F199279EE008563CA /* Multiplier.h */,
 			);
 			path = score;
 			sourceTree = "<group>";
@@ -641,6 +655,10 @@
 				AA870FFA196324A50028A4EA /* Gabbage.h */,
 				AAF06202199232D0008563CA /* Potatoe.cpp */,
 				AAF06203199232D0008563CA /* Potatoe.h */,
+				AAF06215199254BF008563CA /* Garglic.cpp */,
+				AAF06216199254BF008563CA /* Garglic.h */,
+				AAF0621819925596008563CA /* Tomato.cpp */,
+				AAF0621919925596008563CA /* Tomato.h */,
 			);
 			path = food;
 			sourceTree = "<group>";
@@ -811,6 +829,8 @@
 			children = (
 				AACAB432198AC40400F8AE01 /* LevelProvider.cpp */,
 				AACAB433198AC40400F8AE01 /* LevelProvider.h */,
+				AAF0621B19926025008563CA /* UserDataProvider.cpp */,
+				AAF0621C19926025008563CA /* UserDataProvider.h */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -1052,6 +1072,7 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				E0050DE61967F31B009E7BA1 /* GameController.cpp in Sources */,
 				AA8710071963264D0028A4EA /* Bottle.cpp in Sources */,
+				AAF0621A19925596008563CA /* Tomato.cpp in Sources */,
 				AA96A228195DB52800C22BC9 /* GameMenu.cpp in Sources */,
 				AA87100A1963287D0028A4EA /* ItemFactory.cpp in Sources */,
 				AA96A221195DB16C00C22BC9 /* MainMenuPopup.cpp in Sources */,
@@ -1065,6 +1086,7 @@
 				AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
+				AAF06220199279EE008563CA /* Multiplier.cpp in Sources */,
 				AA3424811960C74F0067B032 /* ScoreLayer.cpp in Sources */,
 				AAB58E461966CF4900C48611 /* BonusMenu.cpp in Sources */,
 				AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */,
@@ -1078,6 +1100,7 @@
 				AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */,
 				AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */,
 				AA870FFB196324A50028A4EA /* Food.cpp in Sources */,
+				AAF06217199254BF008563CA /* Garglic.cpp in Sources */,
 				AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */,
 				AAF06204199232D0008563CA /* Potatoe.cpp in Sources */,
 				AAF0621419924539008563CA /* Pants.cpp in Sources */,
@@ -1086,6 +1109,7 @@
 				AAB58E531966F5F600C48611 /* Pot.cpp in Sources */,
 				AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */,
 				AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */,
+				AAF0621D19926025008563CA /* UserDataProvider.cpp in Sources */,
 				AAF0620919923645008563CA /* Duck.cpp in Sources */,
 				AA870FFD196324A50028A4EA /* Gabbage.cpp in Sources */,
 				AA8710011963250E0028A4EA /* Item.cpp in Sources */,

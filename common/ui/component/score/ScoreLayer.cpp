@@ -38,7 +38,7 @@ bool ScoreLayer::init(int pScore) {
     TTFConfig ttfConfig;
     ttfConfig.fontSize = 32;
     ttfConfig.fontFilePath = "RioGrande.ttf";
-    scoreLabel = Label::createWithTTF(ttfConfig, "123455");
+    scoreLabel = Label::createWithTTF(ttfConfig, CCString::createWithFormat("%i", score)->getCString());
     scoreLabel->setColor(Color3B(100, 200, 200));
     this->addChild(scoreLabel);
     
@@ -46,15 +46,16 @@ bool ScoreLayer::init(int pScore) {
 }
 
 void ScoreLayer::updateScore(int dt) {
-    if (dt < 10) {
-    
-    } else if (dt < 100) {
+    //if (dt < 10) {
+        score += dt;
+        scoreLabel->setString(CCString::createWithFormat("%i", score)->getCString());
+    /*} else if (dt < 100) {
     
     } else if (dt < 1000) {
     
     } else if (dt < 10000) {
         
-    }
+    }*/
 }
 
 void ScoreLayer::update(float dt) {

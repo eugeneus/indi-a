@@ -1,11 +1,11 @@
 
-#include "Potatoe.h"
+#include "Garglic.h"
 
 USING_NS_CC;
 
-Potatoe* Potatoe::create()
+Garglic* Garglic::create()
 {
-    Potatoe *pRet = new Potatoe();
+    Garglic *pRet = new Garglic();
     if (pRet && pRet->init())
     {
         pRet->autorelease();
@@ -19,13 +19,13 @@ Potatoe* Potatoe::create()
     }
 }
 
-bool Potatoe::init() {
+bool Garglic::init() {
     
-    if(!super::init("potatoe_1.png", "potatoe_%i.png", 1, 0.2)) {
+    if(!super::init("garglic_1.png", "garglic_%i.png", 1, 0.2)) {
         return false;
     }
     _weightRatio = 0.1;
-    _bounceRatio = 0.2;
-    _itemId = 1;
+    _bounceRatio = 0.1;
+    _itemId = 2;
     return true;
 }

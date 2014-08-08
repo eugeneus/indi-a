@@ -36,6 +36,9 @@ public:
    cocos2d::Point _idleItemPosition;
    cocos2d::Point _currentTargetPoint;
    int _currentTargetType;
+    
+    int _itemType;
+    int _itemId;
 protected:
    cocos2d::ccBezierConfig bezierConfigBouncePathToEndPoint(cocos2d::Point anEndPoint,
                                                             cocos2d::Vec2 anImpulse);
