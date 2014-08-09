@@ -1,12 +1,13 @@
 
 #include "Chef.h"
 #include "Item.h"
+#include "Hand.h"
 
 USING_NS_CC;
 
 Chef::Chef()
 {
-   _rightHandRect = Rect(0.0f, 0.0f, 0.0f, 0.0f);
+   //_rightHandRect = Rect(0.0f, 0.0f, 0.0f, 0.0f);
    _bounceImpulse = Vec2(1.0f, 1.0f);
 }
  
@@ -31,7 +32,6 @@ Chef* Chef::create(cocos2d::Layer* aLayer, int aZOrder)
 
 bool Chef::init(cocos2d::Layer* aLayer, int aZOrder) {
    
-//"chef_1.png", "chef_%i.png", 4, 0.9
    _szWatchSector = Size(10.0f,140.0f);
    _sleepCounter = 0;
    
@@ -50,30 +50,13 @@ bool Chef::init(cocos2d::Layer* aLayer, int aZOrder) {
    _chef->setPosition(chefOrigin);
    _chefRect = Rect(chefOrigin.x,chefOrigin.y,chefSize.width*scaleFactor,chefSize.height*scaleFactor);
    
-   float HscaleFactor = 0.7f;
-   
-   _rightHand = Sprite::createWithSpriteFrameName("hand_left_1.png");
+   // positions will be adjusted by setOrigin
+   _rightHand = Hand::create("hand_left_1.png");
    aLayer->addChild(_rightHand,aZOrder);
-   _rightHand->setAnchorPoint(Point(0,0));
-   _rightHand->setScale(HscaleFactor);
    _rightHand->setFlippedX(true);
-
-   Size handSize = _rightHand->getContentSize();
-   handSize.width = handSize.width*HscaleFactor;
-   handSize.height = handSize.height*HscaleFactor;
-   _rightHandRect = Rect(chefOrigin.x,chefOrigin.y,handSize.width,handSize.height);
-   _rightHand->setPosition(_rightHandRect.origin);
    
-   _leftHand = Sprite::createWithSpriteFrameName("hand_left_1.png");
+   _leftHand = Hand::create("hand_left_1.png");
    aLayer->addChild(_leftHand,aZOrder);
-   _leftHand->setAnchorPoint(Point(0,0));
-   _leftHand->setScale(HscaleFactor);
-   
-   float xPos = chefOrigin.x + _chefRect.size.width - ((handSize.width)/2.0f + 50.0f);
-   _leftHandRect = Rect(_rightHandRect);
-   _leftHandRect.origin.x = xPos;
-   _leftHand->setPosition(_leftHandRect.origin);
-   
    
    return true;
 }
@@ -94,10 +77,11 @@ void Chef::setOrigin(cocos2d::Point anOrigin)
 
    _chefRect.origin.x = anOrigin.x;
    _chefRect.origin.y = anOrigin.y;
-   _rightHandRect.origin.x = anOrigin.x;
+   float xOffset = (_leftHand->getContentSize().width*0.7)*0.5;
+   _rightHandRect.origin.x = anOrigin.x + xOffset;
    _rightHandRect.origin.y = anOrigin.y;
 
-   float xPos = anOrigin.x + _chefRect.size.width - ((_leftHandRect.size.width)/2.0f + 50.0f);
+   float xPos = anOrigin.x + _chefRect.size.width - xOffset;
    _leftHandRect.origin.x = xPos;
    _leftHandRect.origin.y = anOrigin.y;
 
@@ -123,6 +107,39 @@ void Chef::setWatchSector(cocos2d::Size aSectorSize)
  8)
  
  */
+
+bool Chef::isHandCanGrab(Hand* aHand, Item* anItem)
+{
+   if(anItem->getLocalZOrder() > 20)
+      return false;
+   
+   Rect handRect = aHand->getRect();
+   float grabDistance = handRect.origin.x + handRect.size.width;
+   float itemPosX = anItem->getPosition().x;
+   
+   return ( (itemPosX > handRect.origin.x) && (itemPosX < grabDistance));
+}
+
+Item* Chef::looksForItem(Item* anItem)
+{
+   Hand* activeHand = _leftHand;
+   if (_leftHand->isHandBusy()) { //  || _leftHand->isWaiting()
+      activeHand = _rightHand;
+   }
+   
+   if (this->isHandCanGrab(activeHand, anItem)) {
+      activeHand->catchItem(anItem);
+      activeHand->runAction(activeHand->getRiseHandAnimateAction());
+   }
+   
+   if (activeHand->isHandBusy() && !activeHand->randomWaitForToss()) {
+      activeHand->runTossAmiatedAction();
+      Item* tossedItem = activeHand->dropItem();
+      return tossedItem;
+   }
+   
+   return nullptr;
+}
 
 bool Chef::tryToCatchItem(Item* anItem, float aConveyorVelocity)
 {
@@ -179,7 +196,7 @@ bool Chef::tryToCatchItem(Item* anItem, float aConveyorVelocity)
          RotateTo* tossRt = RotateTo::create(0.1, -90.0f);
          Spawn* tossAction = Spawn::create(tossMv,tossRt,NULL);
          
-         //activeHand->runAction(Sequence::create(catchAction,tossAction, NULL));
+         //≥activeHand->runAction(Sequence::create(catchAction,tossAction, NULL));
          
          activeHand->runAction(this->getHandGrabAnimation());
          
