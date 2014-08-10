@@ -110,6 +110,7 @@
 		AAF0621A19925596008563CA /* Tomato.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621819925596008563CA /* Tomato.cpp */; };
 		AAF0621D19926025008563CA /* UserDataProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621B19926025008563CA /* UserDataProvider.cpp */; };
 		AAF06220199279EE008563CA /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621E199279EE008563CA /* Multiplier.cpp */; };
+		AAF788C419978F8F00AE7D3F /* GameCompletePopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF788C219978F8F00AE7D3F /* GameCompletePopup.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -401,6 +402,8 @@
 		AAF0621C19926025008563CA /* UserDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataProvider.h; sourceTree = "<group>"; };
 		AAF0621E199279EE008563CA /* Multiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Multiplier.cpp; sourceTree = "<group>"; };
 		AAF0621F199279EE008563CA /* Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Multiplier.h; sourceTree = "<group>"; };
+		AAF788C219978F8F00AE7D3F /* GameCompletePopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameCompletePopup.cpp; sourceTree = "<group>"; };
+		AAF788C319978F8F00AE7D3F /* GameCompletePopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCompletePopup.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -628,6 +631,8 @@
 				AAC70ED719975327007D0537 /* GameOverPopup.h */,
 				AAC70ED919975374007D0537 /* BaseGamePopup.cpp */,
 				AAC70EDA19975374007D0537 /* BaseGamePopup.h */,
+				AAF788C219978F8F00AE7D3F /* GameCompletePopup.cpp */,
+				AAF788C319978F8F00AE7D3F /* GameCompletePopup.h */,
 			);
 			path = score;
 			sourceTree = "<group>";
@@ -1084,6 +1089,7 @@
 				AA8710071963264D0028A4EA /* Bottle.cpp in Sources */,
 				AAF0621A19925596008563CA /* Tomato.cpp in Sources */,
 				AA96A228195DB52800C22BC9 /* GameMenu.cpp in Sources */,
+				AAF788C419978F8F00AE7D3F /* GameCompletePopup.cpp in Sources */,
 				AA87100A1963287D0028A4EA /* ItemFactory.cpp in Sources */,
 				AA96A221195DB16C00C22BC9 /* MainMenuPopup.cpp in Sources */,
 				AAB01DA219629E84002251B1 /* Hand.cpp in Sources */,
