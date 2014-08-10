@@ -79,6 +79,12 @@
 		AA89687A1997D912005F8946 /* Chicken.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968781997D912005F8946 /* Chicken.cpp */; };
 		AA89687D1997D9A0005F8946 /* Pepps.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA89687B1997D99F005F8946 /* Pepps.cpp */; };
 		AA8968801997DB13005F8946 /* Egg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA89687E1997DB13005F8946 /* Egg.cpp */; };
+		AA8968831997DC28005F8946 /* Onion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968811997DC28005F8946 /* Onion.cpp */; };
+		AA8968861997DCD9005F8946 /* Carrots.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968841997DCD9005F8946 /* Carrots.cpp */; };
+		AA8968891997DD93005F8946 /* Mushrroom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968871997DD93005F8946 /* Mushrroom.cpp */; };
+		AA89688C1997DE70005F8946 /* Bread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA89688A1997DE70005F8946 /* Bread.cpp */; };
+		AA89688F1997DF53005F8946 /* Cheese.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA89688D1997DF53005F8946 /* Cheese.cpp */; };
+		AA8968921997DFD4005F8946 /* Beef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968901997DFD4005F8946 /* Beef.cpp */; };
 		AA96A1FB195DB09200C22BC9 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = AA96A1FA195DB09200C22BC9 /* images.png */; };
 		AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */; };
 		AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A204195DB16C00C22BC9 /* SlidingMenuItem.cpp */; };
@@ -355,6 +361,18 @@
 		AA89687C1997D99F005F8946 /* Pepps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pepps.h; sourceTree = "<group>"; };
 		AA89687E1997DB13005F8946 /* Egg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Egg.cpp; sourceTree = "<group>"; };
 		AA89687F1997DB13005F8946 /* Egg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Egg.h; sourceTree = "<group>"; };
+		AA8968811997DC28005F8946 /* Onion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Onion.cpp; sourceTree = "<group>"; };
+		AA8968821997DC28005F8946 /* Onion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Onion.h; sourceTree = "<group>"; };
+		AA8968841997DCD9005F8946 /* Carrots.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Carrots.cpp; sourceTree = "<group>"; };
+		AA8968851997DCD9005F8946 /* Carrots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Carrots.h; sourceTree = "<group>"; };
+		AA8968871997DD93005F8946 /* Mushrroom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mushrroom.cpp; sourceTree = "<group>"; };
+		AA8968881997DD93005F8946 /* Mushrroom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mushrroom.h; sourceTree = "<group>"; };
+		AA89688A1997DE70005F8946 /* Bread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bread.cpp; sourceTree = "<group>"; };
+		AA89688B1997DE70005F8946 /* Bread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bread.h; sourceTree = "<group>"; };
+		AA89688D1997DF53005F8946 /* Cheese.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cheese.cpp; sourceTree = "<group>"; };
+		AA89688E1997DF53005F8946 /* Cheese.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cheese.h; sourceTree = "<group>"; };
+		AA8968901997DFD4005F8946 /* Beef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Beef.cpp; sourceTree = "<group>"; };
+		AA8968911997DFD4005F8946 /* Beef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beef.h; sourceTree = "<group>"; };
 		AA96A1FA195DB09200C22BC9 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlidingMenuDto.cpp; sourceTree = "<group>"; };
 		AA96A203195DB16C00C22BC9 /* SlidingMenuDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuDto.h; sourceTree = "<group>"; };
@@ -704,6 +722,18 @@
 				AA89687C1997D99F005F8946 /* Pepps.h */,
 				AA89687E1997DB13005F8946 /* Egg.cpp */,
 				AA89687F1997DB13005F8946 /* Egg.h */,
+				AA8968811997DC28005F8946 /* Onion.cpp */,
+				AA8968821997DC28005F8946 /* Onion.h */,
+				AA8968841997DCD9005F8946 /* Carrots.cpp */,
+				AA8968851997DCD9005F8946 /* Carrots.h */,
+				AA8968871997DD93005F8946 /* Mushrroom.cpp */,
+				AA8968881997DD93005F8946 /* Mushrroom.h */,
+				AA89688A1997DE70005F8946 /* Bread.cpp */,
+				AA89688B1997DE70005F8946 /* Bread.h */,
+				AA89688D1997DF53005F8946 /* Cheese.cpp */,
+				AA89688E1997DF53005F8946 /* Cheese.h */,
+				AA8968901997DFD4005F8946 /* Beef.cpp */,
+				AA8968911997DFD4005F8946 /* Beef.h */,
 			);
 			path = food;
 			sourceTree = "<group>";
@@ -1134,6 +1164,7 @@
 			files = (
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				E0050DE61967F31B009E7BA1 /* GameController.cpp in Sources */,
+				AA89688C1997DE70005F8946 /* Bread.cpp in Sources */,
 				AAF788CA1997A81800AE7D3F /* BaseIndicator.cpp in Sources */,
 				AA8710071963264D0028A4EA /* Bottle.cpp in Sources */,
 				AAF0621A19925596008563CA /* Tomato.cpp in Sources */,
@@ -1147,13 +1178,16 @@
 				AA871004196325B50028A4EA /* Garbage.cpp in Sources */,
 				AAB01DA51962A1B9002251B1 /* Hands.cpp in Sources */,
 				AAC70ED819975327007D0537 /* GameOverPopup.cpp in Sources */,
+				AA8968891997DD93005F8946 /* Mushrroom.cpp in Sources */,
 				AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */,
 				AA96A22C195DB76F00C22BC9 /* Spritable.cpp in Sources */,
+				AA8968831997DC28005F8946 /* Onion.cpp in Sources */,
 				AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				AAF06220199279EE008563CA /* Multiplier.cpp in Sources */,
 				AA89687D1997D9A0005F8946 /* Pepps.cpp in Sources */,
+				AA89688F1997DF53005F8946 /* Cheese.cpp in Sources */,
 				AA3424811960C74F0067B032 /* ScoreLayer.cpp in Sources */,
 				AA89686C1997C083005F8946 /* MultiplierIndicator.cpp in Sources */,
 				AAB58E461966CF4900C48611 /* BonusMenu.cpp in Sources */,
@@ -1171,12 +1205,14 @@
 				AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */,
 				AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */,
 				AA870FFB196324A50028A4EA /* Food.cpp in Sources */,
+				AA8968921997DFD4005F8946 /* Beef.cpp in Sources */,
 				AA8968721997D67D005F8946 /* Cap.cpp in Sources */,
 				AAF06217199254BF008563CA /* Garglic.cpp in Sources */,
 				AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */,
 				AAF06204199232D0008563CA /* Potatoe.cpp in Sources */,
 				AAF0621419924539008563CA /* Pants.cpp in Sources */,
 				AA8968771997D73A005F8946 /* Mobile.cpp in Sources */,
+				AA8968861997DCD9005F8946 /* Carrots.cpp in Sources */,
 				AAB58E3D1966BBA600C48611 /* BowlingBall.cpp in Sources */,
 				AA96A21F195DB16C00C22BC9 /* GameSelectMenu.cpp in Sources */,
 				AAB58E531966F5F600C48611 /* Pot.cpp in Sources */,
