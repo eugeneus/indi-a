@@ -99,6 +99,8 @@ protected:
     ScoreLayer* _scoreLayer;
     Multiplier* _multiplier;
     GameCycleIndicator* _gameCycleInd;
+    
+    std::vector<int> _caughtItemsIds;
 private:
    
    cocos2d::Layer* _gameLayer;

@@ -14,6 +14,7 @@ public:
     bool init(float aSpeed, float aLength);
     
     float getFirstItemPosY();
+    void pauseConv();
 };
 
 #endif /* defined(__BlindChef__Conveyor__) */

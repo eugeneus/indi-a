@@ -16,6 +16,7 @@
 #include "Food.h"
 #include "Multiplier.h"
 #include "GameOverPopup.h"
+#include "GameCompletePopup.h"
 #include "SimpleAudioEngine.h"
 #include "GameCycleIndicator.h"
 
@@ -192,7 +193,20 @@ void startGame()
 
 void GameController::stopGame()
 {
-    Director::getInstance()->pause();
+    _gameLayer->pause(); //unscheduleUpdate();
+    Vector<Node*> children = _gameLayer->getChildren();
+    for (int i= 0; i < children.size(); i++) {
+        Node* node = children.at(i);
+        if (node != nullptr) {
+            if (dynamic_cast<Conveyor*>(node)) {
+                ((Conveyor *) node)->pauseConv();
+            } else {
+                node->pause();
+            }
+        }
+    }
+    
+    //Director::getInstance()->pause();
     CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
 
@@ -314,6 +328,18 @@ void GameController::update(float dt)
    Size itemSize;
    _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
     _gameCycleInd->nextStep(dt);
+    if (_gameCycleInd->isComplete()) {
+        this->stopGame();
+        
+        if (_levelInfo->checkAllRequiredExist(_caughtItemsIds)) {
+            GameCompletePopup* goPopup = GameCompletePopup::create();
+            _gameLayer->addChild(goPopup, 1001);
+        } else {
+            GameOverPopup* goPopup = GameOverPopup::create();
+            _gameLayer->addChild(goPopup, 1001);
+        }
+        return;
+    }
    
    // set items idle/put them on the conveuir
    for (int i = _idxRotated; i < _items->size(); i++) {
@@ -452,6 +478,8 @@ void GameController::checkGameProgress(Item* anItem) {
         _gameLayer->addChild(goPopup, 1001);
     } else {
         if (_levelInfo->isRequiredItem(anItem->_itemId)) {
+            _caughtItemsIds.push_back(anItem->_itemId);
+            
             _scoreLayer->updateScore(10);
             int multiCount = _multiplier->update(anItem->_itemId);
             if (multiCount > 4) {

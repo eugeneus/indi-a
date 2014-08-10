@@ -25,6 +25,7 @@ public:
     
     bool initForLevel(int levelId);
     
+    bool checkAllRequiredExist(std::vector<int> itemsIds);
     
     float getSpeed();
     float getTime();

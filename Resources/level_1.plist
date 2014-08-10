@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>time</key>
-	<integer>5</integer>
+	<integer>60</integer>
 	<key>items</key>
 	<dict>
 		<key>requiredFoodItems</key>
 		<array>
 			<integer>0</integer>
-			<string>3</string>
-			<string>11</string>
+			<integer>3</integer>
+			<integer>11</integer>
 		</array>
 		<key>allowedFoodItems</key>
 		<array>

@@ -104,3 +104,31 @@ bool LevelProvider::isRequiredItem(int itemId) {
     
     return false;
 }
+
+bool isExistId(int reqId, std::vector<int> itemsIds) {
+    for (int j = 0; j < itemsIds.size(); j++) {
+        int itemId = itemsIds.at(j);
+        if (itemId == reqId) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+bool LevelProvider::checkAllRequiredExist(std::vector<int> itemsIds) {
+    if (itemsIds.size() >= _requiredItems.size()) {
+        for (int i = 0; i < _requiredItems.size(); i++) {
+            int reqId = _requiredItems.at(i);
+            bool isExist = isExistId(reqId, itemsIds);
+            
+            if (!isExist) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    return false;
+}

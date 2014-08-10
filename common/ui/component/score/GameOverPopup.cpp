@@ -57,5 +57,5 @@ void GameOverPopup::levelSelectMenu(Ref* pSender) {
 }
 
 void GameOverPopup::playAgainMenu(Ref* pSender) {
-    super::changeScene(GameMenu::createScene());
+    this->changeScene(GameMenu::createScene());
 }
