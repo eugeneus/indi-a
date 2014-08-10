@@ -28,7 +28,7 @@ public:
    void startChefBodyAnimation();
    void startHandBounceAnimation();
    
-   Item* looksForItem(Item* anItem);
+   Item* looksForItem(Item* anItem, float aConveyourVelocity);
    
    bool tryToCatchItem(Item* anItem, float aConveyorVelocity);
    void chefWathItem(Item* anItem);

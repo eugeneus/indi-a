@@ -23,7 +23,7 @@ public:
    
    bool randomWaitForToss();
    
-   cocos2d::FiniteTimeAction* getRiseHandAnimateAction();
+   cocos2d::FiniteTimeAction* getRiseHandAnimateAction(float aConveyorVelocity);
    cocos2d::FiniteTimeAction* runTossAmiatedAction();
 protected:
    

@@ -96,18 +96,6 @@ void Chef::setWatchSector(cocos2d::Size aSectorSize)
    _szWatchSector = aSectorSize;
 }
 
-/* Improve Grab Animation:
- 1) Check the Item in Watch Area
- 2) Get arbitrary point between wa.origin.x - wa.size.width = grapPoint
- 3) get actoin Duration as (Item->currPos - grabPoint.x)/conveyrVelocity
- 4) buld bezier, construct BezierTo
- 5) build rotateTo(90)
- 6) spawn BezierTo+rotate(90). this is "grab part"
- 7) toss part?
- 8)
- 
- */
-
 bool Chef::isHandCanGrab(Hand* aHand, Item* anItem)
 {
    if(anItem->getLocalZOrder() > 20)
@@ -120,7 +108,7 @@ bool Chef::isHandCanGrab(Hand* aHand, Item* anItem)
    return ( (itemPosX > handRect.origin.x) && (itemPosX < grabDistance));
 }
 
-Item* Chef::looksForItem(Item* anItem)
+Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
 {
    Hand* activeHand = _leftHand;
    if (_leftHand->isHandBusy()) { //  || _leftHand->isWaiting()
@@ -129,11 +117,11 @@ Item* Chef::looksForItem(Item* anItem)
    
    if (this->isHandCanGrab(activeHand, anItem)) {
       activeHand->catchItem(anItem);
-      activeHand->runAction(activeHand->getRiseHandAnimateAction());
+      activeHand->runAction(activeHand->getRiseHandAnimateAction(aConveyourVelocity));
    }
    
-   if (activeHand->isHandBusy() && !activeHand->randomWaitForToss()) {
-      activeHand->runTossAmiatedAction();
+   if (activeHand->isHandBusy() ) { //&& !activeHand->randomWaitForToss()
+      //activeHand->runTossAmiatedAction();
       Item* tossedItem = activeHand->dropItem();
       return tossedItem;
    }

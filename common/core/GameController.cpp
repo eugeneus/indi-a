@@ -346,8 +346,16 @@ void GameController::update(float dt)
       }
       
       if (item->getLocalZOrder() == kItemZO1) { //toss
+         
+         // 1 chef_looks_for_item : identifies items, sets toss point, wait
+         //   animate a hand to toss point with item velosity
+         // 2 check_lets_toss: checks if _catch item at toss point
+         //   if so run hand toss animation, returns tossed item
+         //   to controller to let him create/start item toss animation
+         //   as far as hand toss and item toss animation going to start
+         //   in the same update cycle
 
-         Item* tossed = _theChef->looksForItem(item);
+         Item* tossed = _theChef->looksForItem(item, this->_convVelY);
          if (tossed) {
             this->tossItem(tossed, _theChef->getBounceImpulse());
          }

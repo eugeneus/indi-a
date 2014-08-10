@@ -113,7 +113,10 @@ Item* Hand::dropItem()
 
 bool Hand::isHandBusy()
 {
-   return (bool)_catchItem;
+   Point currHandPos = this->getPosition();
+   Point handPos = Point((_handRect.origin.x + _handRect.size.width / 2.0f), (_handRect.origin.y + _handRect.size.height / 2.0f));
+   bool isHandBusy = ((handPos.x != currHandPos.x) || (handPos.y != currHandPos.y)) && (_catchItem);
+   return isHandBusy;
 }
 
 Rect Hand::getRect()
@@ -126,12 +129,16 @@ bool Hand::waitIgnoredItem()
    return false;
 }
 
-FiniteTimeAction* Hand::getRiseHandAnimateAction()
+FiniteTimeAction* Hand::getRiseHandAnimateAction(float aConveyorVelocity)
 {
-   Animation* animation = this->getAnimation(1,2, 0.5);
    Point pos = _catchItem->getPosition();
-   pos.y += pos.y + _catchItem->getContentSize().height;
-   MoveTo* move = MoveTo::create(0.3, _handRect.origin); // todo move point
+   float duration = (pos.x - this->getPosition().x)/aConveyorVelocity;
+   duration = duration / 2.0f;
+   
+   Animation* animation = this->getAnimation(1,2, (duration / 2.0f));
+   
+   pos.y = pos.y + _catchItem->getContentSize().height;
+   MoveTo* move = MoveTo::create(duration, pos); // todo move point
    return Spawn::create(move,Animate::create(animation),NULL);
 }
 
@@ -139,25 +146,25 @@ FiniteTimeAction* Hand::runTossAmiatedAction()
 {
    Animation* animationGrab = this->getAnimation(2,3, 0.5);
    Point pos = _catchItem->getPosition();
-   //pos.y += pos.y + _catchItem->getContentSize().height/2.0f;
-   MoveTo* moveGrab = MoveTo::create(0.3, _handRect.origin);
+   pos.y = pos.y + _catchItem->getScaledContentSize().height/2.0f;
+   MoveTo* moveGrab = MoveTo::create(0.3, pos);
    Spawn* aniGrab = Spawn::create(moveGrab, Animate::create(animationGrab),NULL);
    
    Animation* animationToss = this->getAnimation(3,4, 0.3);
    pos = _catchItem->getPosition();
-   pos.y += pos.y + _catchItem->getContentSize().height;
+   pos.y = pos.y + _catchItem->getScaledContentSize().height;
    MoveTo* moveToss = MoveTo::create(0.3, pos);
    Spawn* aniToss = Spawn::create(moveToss, Animate::create(animationToss),NULL);
 
    auto cache = SpriteFrameCache::getInstance();
    Vector<SpriteFrame*> animFrames(2);
-   animFrames.pushBack(cache->getSpriteFrameByName("hand_left_4.png"));
+   animFrames.pushBack(cache->getSpriteFrameByName("hand_left_2.png"));
    animFrames.pushBack(cache->getSpriteFrameByName("hand_left_1.png"));
    
-   MoveTo* moveRet = MoveTo::create(0.5, _handRect.origin);
+   MoveTo* moveRet = MoveTo::create(0.2, _handRect.origin);
    Spawn* aniRet = Spawn::create(moveRet,Animate::create(Animation::createWithSpriteFrames(animFrames, 0.3)), NULL);
 
-   this->runAction(Sequence::create(aniGrab,aniRet,NULL)); //
+   this->runAction(Sequence::create(moveRet,NULL)); //aniGrab,aniToss,
 }
 
 float getRandomFloat(float from ,float to) {
@@ -168,18 +175,4 @@ float getRandomFloat(float from ,float to) {
    
 }
 
-
-/*
- bool Hand::init() {
- 
- 
- handImg = Sprite::createWithSpriteFrameName("hand_left_1.png");
- this->setContentSize(handImg->getContentSize());
- 
- this->addChild(handImg, 0);
- 
- 
- return true;
- }
- */
 
