@@ -5,7 +5,7 @@
 #include "cocos2d.h"
 
 class BaseIndicator : public cocos2d::Layer {
-private:
+protected:
     cocos2d::Sprite* _bg;
     cocos2d::Sprite* _indicator;
     

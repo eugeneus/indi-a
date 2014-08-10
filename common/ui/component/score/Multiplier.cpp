@@ -1,6 +1,6 @@
 
 #include "Multiplier.h"
-
+#include "MultiplierIndicator.h"
 
 USING_NS_CC;
 
@@ -44,11 +44,16 @@ bool Multiplier::init() {
     _countLabel->setColor(Color3B(255, 200, 0));
     this->addChild(_countLabel);
     
+    _ind = MultiplierIndicator::create();
+    _ind->setPosition(Vec2(_countLabel->getPosition().x + _countLabel->getContentSize().width/2 + 20,_countLabel->getPosition().y));
+    this->addChild(_ind);
+    
     return true;
 }
 
 void Multiplier::updateLabel() {
     _countLabel->setString(CCString::createWithFormat("x%i", _count)->getCString());
+    _ind->nextStep(_count);
 }
 
 int Multiplier::update(int pItemId) {

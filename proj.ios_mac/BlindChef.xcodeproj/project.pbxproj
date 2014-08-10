@@ -73,6 +73,7 @@
 		AA8710071963264D0028A4EA /* Bottle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8710051963264D0028A4EA /* Bottle.cpp */; };
 		AA87100A1963287D0028A4EA /* ItemFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8710081963287D0028A4EA /* ItemFactory.cpp */; };
 		AA87100D196329770028A4EA /* GarbageFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA87100B196329770028A4EA /* GarbageFactory.cpp */; };
+		AA89686C1997C083005F8946 /* MultiplierIndicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA89686A1997C083005F8946 /* MultiplierIndicator.cpp */; };
 		AA96A1FB195DB09200C22BC9 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = AA96A1FA195DB09200C22BC9 /* images.png */; };
 		AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */; };
 		AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A204195DB16C00C22BC9 /* SlidingMenuItem.cpp */; };
@@ -337,6 +338,8 @@
 		AA8710091963287D0028A4EA /* ItemFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemFactory.h; sourceTree = "<group>"; };
 		AA87100B196329770028A4EA /* GarbageFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GarbageFactory.cpp; sourceTree = "<group>"; };
 		AA87100C196329770028A4EA /* GarbageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GarbageFactory.h; sourceTree = "<group>"; };
+		AA89686A1997C083005F8946 /* MultiplierIndicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiplierIndicator.cpp; sourceTree = "<group>"; };
+		AA89686B1997C083005F8946 /* MultiplierIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplierIndicator.h; sourceTree = "<group>"; };
 		AA96A1FA195DB09200C22BC9 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlidingMenuDto.cpp; sourceTree = "<group>"; };
 		AA96A203195DB16C00C22BC9 /* SlidingMenuDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuDto.h; sourceTree = "<group>"; };
@@ -864,6 +867,8 @@
 				AAF788C91997A81800AE7D3F /* BaseIndicator.h */,
 				AAF788CB1997ACD900AE7D3F /* GameCycleIndicator.cpp */,
 				AAF788CC1997ACD900AE7D3F /* GameCycleIndicator.h */,
+				AA89686A1997C083005F8946 /* MultiplierIndicator.cpp */,
+				AA89686B1997C083005F8946 /* MultiplierIndicator.h */,
 			);
 			path = indicator;
 			sourceTree = "<group>";
@@ -1124,6 +1129,7 @@
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				AAF06220199279EE008563CA /* Multiplier.cpp in Sources */,
 				AA3424811960C74F0067B032 /* ScoreLayer.cpp in Sources */,
+				AA89686C1997C083005F8946 /* MultiplierIndicator.cpp in Sources */,
 				AAB58E461966CF4900C48611 /* BonusMenu.cpp in Sources */,
 				AAC70EDB19975374007D0537 /* BaseGamePopup.cpp in Sources */,
 				AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */,
