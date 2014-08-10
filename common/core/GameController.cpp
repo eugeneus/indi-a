@@ -139,7 +139,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     _gameLayer->addChild(_scoreLayer, kCloudZO);
 
     _multiplier = Multiplier::create();
-    _multiplier->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 60));
+    _multiplier->setPosition(Vec2(450, aVisibleSize.height + anOrigin.y - 60));
     _gameLayer->addChild(_multiplier, kCloudZO);
     
     _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getTime());
@@ -175,7 +175,7 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
    Item* item = nullptr;
    
    for (int iItm = 0; iItm < 20; iItm++) {
-       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 3));
+       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 5));
       item->setIdle(_itemIdlePos); //-1 * offset
       
       item->setScale(1.0);

@@ -9,7 +9,10 @@ enum
     kFoodGabbge = 0,
     kFoodPotatoe,
     kFoodGarglic,
-    kFoodTomato
+    kFoodTomato,
+    kFoodChicken,
+    kFoodPepps,
+    kFoodEgg
 };
 
 class FoodFactory {

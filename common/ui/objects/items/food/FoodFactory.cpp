@@ -4,6 +4,9 @@
 #include "Potatoe.h"
 #include "Garglic.h"
 #include "Tomato.h"
+#include "Chicken.h"
+#include "Pepps.h"
+#include "Egg.h"
 
 Food* FoodFactory::createFood(int food_type)
 {
@@ -30,6 +33,22 @@ Food* FoodFactory::createFood(int food_type)
             food = Tomato::create();
             break;
         }
+        case kFoodChicken:
+        {
+            food = Chicken::create();
+            break;
+        }
+        case kFoodPepps:
+        {
+            food = Pepps::create();
+            break;
+        }
+        case kFoodEgg:
+        {
+            food = Egg::create();
+            break;
+        }
+            
             
         default:
         {
