@@ -95,6 +95,8 @@
 		AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4B1966E64B00C48611 /* TipsFadeble.cpp */; };
 		AAB58E501966E90C00C48611 /* MindCloudTips.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4E1966E90C00C48611 /* MindCloudTips.cpp */; };
 		AAB58E531966F5F600C48611 /* Pot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E511966F5F600C48611 /* Pot.cpp */; };
+		AAC70ED819975327007D0537 /* GameOverPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED619975327007D0537 /* GameOverPopup.cpp */; };
+		AAC70EDB19975374007D0537 /* BaseGamePopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED919975374007D0537 /* BaseGamePopup.cpp */; };
 		AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AACAB432198AC40400F8AE01 /* LevelProvider.cpp */; };
 		AACAB438198AC41F00F8AE01 /* level_1.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAB437198AC41F00F8AE01 /* level_1.plist */; };
 		AAF06204199232D0008563CA /* Potatoe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF06202199232D0008563CA /* Potatoe.cpp */; };
@@ -374,6 +376,10 @@
 		AAB58E4F1966E90C00C48611 /* MindCloudTips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MindCloudTips.h; sourceTree = "<group>"; };
 		AAB58E511966F5F600C48611 /* Pot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pot.cpp; sourceTree = "<group>"; };
 		AAB58E521966F5F600C48611 /* Pot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pot.h; sourceTree = "<group>"; };
+		AAC70ED619975327007D0537 /* GameOverPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverPopup.cpp; sourceTree = "<group>"; };
+		AAC70ED719975327007D0537 /* GameOverPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverPopup.h; sourceTree = "<group>"; };
+		AAC70ED919975374007D0537 /* BaseGamePopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseGamePopup.cpp; sourceTree = "<group>"; };
+		AAC70EDA19975374007D0537 /* BaseGamePopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseGamePopup.h; sourceTree = "<group>"; };
 		AACAB432198AC40400F8AE01 /* LevelProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelProvider.cpp; sourceTree = "<group>"; };
 		AACAB433198AC40400F8AE01 /* LevelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelProvider.h; sourceTree = "<group>"; };
 		AACAB437198AC41F00F8AE01 /* level_1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level_1.plist; sourceTree = "<group>"; };
@@ -618,6 +624,10 @@
 				AA3424801960C74F0067B032 /* ScoreLayer.h */,
 				AAF0621E199279EE008563CA /* Multiplier.cpp */,
 				AAF0621F199279EE008563CA /* Multiplier.h */,
+				AAC70ED619975327007D0537 /* GameOverPopup.cpp */,
+				AAC70ED719975327007D0537 /* GameOverPopup.h */,
+				AAC70ED919975374007D0537 /* BaseGamePopup.cpp */,
+				AAC70EDA19975374007D0537 /* BaseGamePopup.h */,
 			);
 			path = score;
 			sourceTree = "<group>";
@@ -1081,6 +1091,7 @@
 				AA96A21C195DB16C00C22BC9 /* SlidingMenuLayer.cpp in Sources */,
 				AA871004196325B50028A4EA /* Garbage.cpp in Sources */,
 				AAB01DA51962A1B9002251B1 /* Hands.cpp in Sources */,
+				AAC70ED819975327007D0537 /* GameOverPopup.cpp in Sources */,
 				AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */,
 				AA96A22C195DB76F00C22BC9 /* Spritable.cpp in Sources */,
 				AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */,
@@ -1089,6 +1100,7 @@
 				AAF06220199279EE008563CA /* Multiplier.cpp in Sources */,
 				AA3424811960C74F0067B032 /* ScoreLayer.cpp in Sources */,
 				AAB58E461966CF4900C48611 /* BonusMenu.cpp in Sources */,
+				AAC70EDB19975374007D0537 /* BaseGamePopup.cpp in Sources */,
 				AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */,
 				AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */,
 				AA96A223195DB16C00C22BC9 /* SimpleMenu.cpp in Sources */,

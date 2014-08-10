@@ -15,6 +15,8 @@
 #include "Garbage.h"
 #include "Food.h"
 #include "Multiplier.h"
+#include "GameOverPopup.h"
+#include "SimpleAudioEngine.h"
 
 #include "time.h"
 
@@ -75,6 +77,8 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
    visibleSize = Director::getInstance()->getVisibleSize();
    origin = Director::getInstance()->getVisibleOrigin();
    
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgmusic.mp3", true);
+    
     _levelInfo = LevelProvider::createForLevel(1);
     _userData = UserDataProvider::create();
     
@@ -181,9 +185,10 @@ void startGame()
 
 }
 
-void stopGame()
+void GameController::stopGame()
 {
-
+    Director::getInstance()->pause();
+    CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
 
 void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
@@ -435,7 +440,10 @@ float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPoin
 void GameController::checkGameProgress(Item* anItem) {
     if (anItem->_itemType == 1) {
         _multiplier->reset();
-       // this->stopGame(); //TODO:
+        this->stopGame(); //TODO:
+        //_gameLayer->pause();
+        GameOverPopup* goPopup = GameOverPopup::create();
+        _gameLayer->addChild(goPopup, 1001);
     } else {
         if (_levelInfo->isRequiredItem(anItem->_itemId)) {
             _scoreLayer->updateScore(10);
