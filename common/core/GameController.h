@@ -13,6 +13,7 @@ class LevelProvider;
 class UserDataProvider;
 class ScoreLayer;
 class Multiplier;
+class GameCycleIndicator;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -99,6 +100,9 @@ protected:
     UserDataProvider* _userData;
     ScoreLayer* _scoreLayer;
     Multiplier* _multiplier;
+    GameCycleIndicator* _gameCycleInd;
+    
+    std::vector<int> _caughtItemsIds;
 private:
    
    cocos2d::Layer* _gameLayer;

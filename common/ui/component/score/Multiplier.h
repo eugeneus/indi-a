@@ -4,6 +4,8 @@
 
 #include "cocos2d.h"
 
+class MultiplierIndicator;
+
 class Multiplier : public cocos2d::Layer {
     
 private:
@@ -11,6 +13,8 @@ private:
     int _itemId;
     cocos2d::Label* _countLabel;
     cocos2d::Sprite* _countSprite;
+    
+    MultiplierIndicator* _ind;
 protected:
     bool init();
     void updateLabel();

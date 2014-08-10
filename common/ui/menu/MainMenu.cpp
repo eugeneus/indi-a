@@ -45,7 +45,6 @@ void MainMenu::initializeMenu() {
     
     CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.5); //TODO: load from prop
     CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(0.5); //TODO: load from prop
-    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgmusic.mp3", true);
     
     this->showMainMenu();
 }

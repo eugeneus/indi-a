@@ -35,7 +35,7 @@ bool ImageLabelMenuItem::init(const std::string& text, const std::string& imageF
     ttfConfig.fontSize = 32;
     ttfConfig.fontFilePath = "RioGrande.ttf";
     label = Label::createWithTTF(ttfConfig, text);
-    label->setColor(Color3B(100, 200, 200));
+    label->setColor(Color3B(255, 200, 0));
     label->setPosition(Vec2(label->getPosition().x + normalMenuItemSprite->getContentSize().width,label->getPosition().y));
     this->addChild(label, 1);
     

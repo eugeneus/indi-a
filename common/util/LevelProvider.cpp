@@ -24,6 +24,12 @@ LevelProvider* LevelProvider::createForLevel(int levelId)
     }
 }
 
+
+float getFloatValue(ValueMap map, const char* key) {
+    Value value = map.at(key);
+    return value.asFloat();
+}
+
 std::vector<int> getAllowedItems(ValueMap map, const char* key) {
     std::vector<int> result;
     
@@ -50,6 +56,8 @@ bool LevelProvider::initForLevel(int levelId)
         const char *levelFileName = CCString::createWithFormat("level_%i.plist", levelId)->getCString();
         _levelMap = FileUtils::getInstance()->getValueMapFromFile(levelFileName);
         
+        _speed = getFloatValue(_levelMap, "speed");
+        _time = getFloatValue(_levelMap, "time");
         
         _allowedFoodItems = getAllowedItems(_levelMap, "allowedFoodItems");
         _allowedGarbageItems = getAllowedItems(_levelMap, "allowedGarbageItems");
@@ -62,10 +70,12 @@ bool LevelProvider::initForLevel(int levelId)
 }
 
 float LevelProvider::getSpeed() {
-    Value speed = _levelMap.at("speed");
-    return speed.asFloat();
+    return _speed;
 }
 
+float LevelProvider::getTime() {
+    return _time;
+}
 
 std::vector<int> LevelProvider::getAllowedFoodItems() {
 
@@ -90,6 +100,34 @@ bool LevelProvider::isRequiredItem(int itemId) {
                 return true;
             }
         }
+    }
+    
+    return false;
+}
+
+bool isExistId(int reqId, std::vector<int> itemsIds) {
+    for (int j = 0; j < itemsIds.size(); j++) {
+        int itemId = itemsIds.at(j);
+        if (itemId == reqId) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+bool LevelProvider::checkAllRequiredExist(std::vector<int> itemsIds) {
+    if (itemsIds.size() >= _requiredItems.size()) {
+        for (int i = 0; i < _requiredItems.size(); i++) {
+            int reqId = _requiredItems.at(i);
+            bool isExist = isExistId(reqId, itemsIds);
+            
+            if (!isExist) {
+                return false;
+            }
+        }
+        
+        return true;
     }
     
     return false;

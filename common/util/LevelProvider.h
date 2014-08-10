@@ -10,6 +10,9 @@ private:
     int _levelId;
     cocos2d::ValueMap _levelMap;
     
+    float _speed;
+    float _time;
+    
     std::vector<int> _requiredItems;
     std::vector<int> _allowedFoodItems;
     std::vector<int> _allowedGarbageItems;
@@ -22,8 +25,10 @@ public:
     
     bool initForLevel(int levelId);
     
+    bool checkAllRequiredExist(std::vector<int> itemsIds);
     
     float getSpeed();
+    float getTime();
     std::vector<int> getRequiredItems();
     std::vector<int> getAllowedFoodItems();
     std::vector<int> getAllowedGarbageItems();

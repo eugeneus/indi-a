@@ -15,6 +15,10 @@
 #include "Garbage.h"
 #include "Food.h"
 #include "Multiplier.h"
+#include "GameOverPopup.h"
+#include "GameCompletePopup.h"
+#include "SimpleAudioEngine.h"
+#include "GameCycleIndicator.h"
 
 #include "time.h"
 
@@ -75,6 +79,8 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
    visibleSize = Director::getInstance()->getVisibleSize();
    origin = Director::getInstance()->getVisibleOrigin();
    
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgmusic.mp3", true);
+    
     _levelInfo = LevelProvider::createForLevel(1);
     _userData = UserDataProvider::create();
     
@@ -111,7 +117,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
    Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer);
    _theChef->setOrigin(chefOrigin);
    
-    MindCloudTips* cloudTips = MindCloudTips::create("tips_level_1.png");
+    MindCloudTips* cloudTips = MindCloudTips::create(CCString::createWithFormat("tips_level_%i.png", 1)->getCString());
     cloudTips->setPosition(Vec2(140, yOffsetConveyer + 100));
     _gameLayer->addChild(cloudTips, kCloudZO);
     cloudTips->toggleTip();
@@ -134,8 +140,12 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     _gameLayer->addChild(_scoreLayer, kCloudZO);
 
     _multiplier = Multiplier::create();
-    _multiplier->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 60));
+    _multiplier->setPosition(Vec2(450, aVisibleSize.height + anOrigin.y - 60));
     _gameLayer->addChild(_multiplier, kCloudZO);
+    
+    _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getTime());
+    _gameCycleInd->setPosition(Vec2(0, _convY - 40));
+    _gameLayer->addChild(_gameCycleInd, kCloudZO);
     
     _theChef->startChefBodyAnimation();
    
@@ -166,7 +176,7 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
    Item* item = nullptr;
    
    for (int iItm = 0; iItm < 20; iItm++) {
-       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 3));
+       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 12));
       item->setIdle(_itemIdlePos); //-1 * offset
       
       item->setScale(1.0);
@@ -181,9 +191,23 @@ void startGame()
 
 }
 
-void stopGame()
+void GameController::stopGame()
 {
-
+    _gameLayer->pause(); //unscheduleUpdate();
+    Vector<Node*> children = _gameLayer->getChildren();
+    for (int i= 0; i < children.size(); i++) {
+        Node* node = children.at(i);
+        if (node != nullptr) {
+            if (dynamic_cast<Conveyor*>(node)) {
+                ((Conveyor *) node)->pauseConv();
+            } else {
+                node->pause();
+            }
+        }
+    }
+    
+    //Director::getInstance()->pause();
+    CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
 
 void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
@@ -315,6 +339,19 @@ void GameController::update(float dt)
    Vec2 itemPos;
    Size itemSize;
    _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
+    _gameCycleInd->nextStep(dt);
+    if (_gameCycleInd->isComplete()) {
+        this->stopGame();
+        
+        if (_levelInfo->checkAllRequiredExist(_caughtItemsIds)) {
+            GameCompletePopup* goPopup = GameCompletePopup::create();
+            _gameLayer->addChild(goPopup, 1001);
+        } else {
+            GameOverPopup* goPopup = GameOverPopup::create();
+            _gameLayer->addChild(goPopup, 1001);
+        }
+        return;
+    }
    
    // set items idle/put them on the conveuir
    for (int i = _idxRotated; i < _items->size(); i++) {
@@ -460,9 +497,14 @@ float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPoin
 void GameController::checkGameProgress(Item* anItem) {
     if (anItem->_itemType == 1) {
         _multiplier->reset();
-       // this->stopGame(); //TODO:
+        this->stopGame(); //TODO:
+        //_gameLayer->pause();
+        GameOverPopup* goPopup = GameOverPopup::create();
+        _gameLayer->addChild(goPopup, 1001);
     } else {
         if (_levelInfo->isRequiredItem(anItem->_itemId)) {
+            _caughtItemsIds.push_back(anItem->_itemId);
+            
             _scoreLayer->updateScore(10);
             int multiCount = _multiplier->update(anItem->_itemId);
             if (multiCount > 4) {

@@ -8,13 +8,13 @@ class Cyclable : public cocos2d::LayerColor {
     
 private:
     typedef  cocos2d::LayerColor super;
-    cocos2d::Vector<cocos2d::Sprite*> sprites;
     cocos2d::Vector<cocos2d::Node*> children;
     float endPoint;
     float cyclingSpeed;
     float actionDuration;
-   float actionLength;
+    float actionLength;
 protected:
+    cocos2d::Vector<cocos2d::Sprite*> sprites;
     bool init(const char* bgSpriteFrameName, float speed, float length);
     
 public:
