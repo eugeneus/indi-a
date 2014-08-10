@@ -39,7 +39,7 @@ bool ScoreLayer::init(int pScore) {
     ttfConfig.fontSize = 32;
     ttfConfig.fontFilePath = "RioGrande.ttf";
     scoreLabel = Label::createWithTTF(ttfConfig, CCString::createWithFormat("%i", score)->getCString());
-    scoreLabel->setColor(Color3B(100, 200, 200));
+    scoreLabel->setColor(Color3B(255, 200, 0));
     this->addChild(scoreLabel);
     
     return true;

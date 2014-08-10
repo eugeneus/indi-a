@@ -24,6 +24,12 @@ LevelProvider* LevelProvider::createForLevel(int levelId)
     }
 }
 
+
+float getFloatValue(ValueMap map, const char* key) {
+    Value value = map.at(key);
+    return value.asFloat();
+}
+
 std::vector<int> getAllowedItems(ValueMap map, const char* key) {
     std::vector<int> result;
     
@@ -50,6 +56,8 @@ bool LevelProvider::initForLevel(int levelId)
         const char *levelFileName = CCString::createWithFormat("level_%i.plist", levelId)->getCString();
         _levelMap = FileUtils::getInstance()->getValueMapFromFile(levelFileName);
         
+        _speed = getFloatValue(_levelMap, "speed");
+        _time = getFloatValue(_levelMap, "time");
         
         _allowedFoodItems = getAllowedItems(_levelMap, "allowedFoodItems");
         _allowedGarbageItems = getAllowedItems(_levelMap, "allowedGarbageItems");
@@ -62,10 +70,12 @@ bool LevelProvider::initForLevel(int levelId)
 }
 
 float LevelProvider::getSpeed() {
-    Value speed = _levelMap.at("speed");
-    return speed.asFloat();
+    return _speed;
 }
 
+float LevelProvider::getTime() {
+    return _time;
+}
 
 std::vector<int> LevelProvider::getAllowedFoodItems() {
 

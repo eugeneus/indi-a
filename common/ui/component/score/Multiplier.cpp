@@ -41,7 +41,7 @@ bool Multiplier::init() {
     ttfConfig.fontSize = 32;
     ttfConfig.fontFilePath = "RioGrande.ttf";
     _countLabel = Label::createWithTTF(ttfConfig, CCString::createWithFormat("x%i", _count)->getCString());
-    _countLabel->setColor(Color3B(100, 200, 200));
+    _countLabel->setColor(Color3B(255, 200, 0));
     this->addChild(_countLabel);
     
     return true;

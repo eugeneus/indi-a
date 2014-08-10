@@ -17,6 +17,7 @@
 #include "Multiplier.h"
 #include "GameOverPopup.h"
 #include "SimpleAudioEngine.h"
+#include "GameCycleIndicator.h"
 
 #include "time.h"
 
@@ -115,7 +116,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
    Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer);
    _theChef->setOrigin(chefOrigin);
    
-    MindCloudTips* cloudTips = MindCloudTips::create("tips_level_1.png");
+    MindCloudTips* cloudTips = MindCloudTips::create(CCString::createWithFormat("tips_level_%i.png", 1)->getCString());
     cloudTips->setPosition(Vec2(140, yOffsetConveyer + 100));
     _gameLayer->addChild(cloudTips, kCloudZO);
     cloudTips->toggleTip();
@@ -140,6 +141,10 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     _multiplier = Multiplier::create();
     _multiplier->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 60));
     _gameLayer->addChild(_multiplier, kCloudZO);
+    
+    _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getTime());
+    _gameCycleInd->setPosition(Vec2(0, _convY - 40));
+    _gameLayer->addChild(_gameCycleInd, kCloudZO);
     
     _theChef->startChefBodyAnimation();
    
@@ -308,6 +313,7 @@ void GameController::update(float dt)
    Vec2 itemPos;
    Size itemSize;
    _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
+    _gameCycleInd->nextStep(dt);
    
    // set items idle/put them on the conveuir
    for (int i = _idxRotated; i < _items->size(); i++) {

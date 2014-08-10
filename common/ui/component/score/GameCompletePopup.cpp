@@ -40,7 +40,7 @@ bool GameCompletePopup::init() {
     ttfConfig.fontSize = 32;
     ttfConfig.fontFilePath = "RioGrande.ttf";
     Label* label = Label::createWithTTF(ttfConfig, "Game complete!");
-    label->setColor(Color3B(100, 200, 200));
+    label->setColor(Color3B(255, 255, 255));
     label->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 100));
     this->addChild(label);
     
