@@ -33,7 +33,17 @@ bool Cap::init() {
 
 FiniteTimeAction* Cap::getFloorBumpAction(float aDuration, cocos2d::Point anImpulse)
 {
-    return DelayTime::create(0.1);
+    //return DelayTime::create(0.1);
+   
+   float duration = aDuration / 3.0f;
+   
+   RotateTo* r1 = RotateTo::create(duration, 20.0f);
+   RotateTo* r2 = RotateTo::create(duration, -20.0f);
+   RotateTo* r3 = RotateTo::create(duration, 0.0f);
+   
+   Sequence* rt = Sequence::create(r1, r2, r3, NULL);
+
+   return rt;
 }
 
 FiniteTimeAction* Cap::getPotEdgeBumpAction(float aDuration, cocos2d::Point anImpulse)

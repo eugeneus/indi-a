@@ -12,6 +12,8 @@ bool Item::init(string spriteFrameName, const char* framesPattern, int spriteCou
    _defaultScale = 1.0;
     _itemType = -1;
     _itemId = -1;
+   
+   _bumpSoundFileName = "item_fall.caf";
 
  /*
    DrawNode *dotNode = DrawNode::create();
@@ -225,6 +227,12 @@ void Item::stopActions()
    this->stopAllActions();
    this->setDefaultSize();
    
+}
+
+void Item::playBumpSound()
+{
+   CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(this->_bumpSoundFileName.c_str(), false);
+
 }
 
 Sprite* Item::createCrack() {
