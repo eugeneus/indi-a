@@ -31,6 +31,8 @@ public:
     
     virtual cocos2d::Sprite* createCrack();
    
+   void playBumpSound();
+   
    bool isItemInCurrentTargetPoint();
    
    float _weightRatio;
@@ -45,7 +47,8 @@ protected:
    cocos2d::ccBezierConfig bezierConfigBouncePathToEndPoint(cocos2d::Point anEndPoint,
                                                             cocos2d::Vec2 anImpulse);
     cocos2d::ccBezierConfig bezierConfigTouchPathToEndPoint(cocos2d::Point anEndPoint, cocos2d::Vec2 anImpulse);
-   
+
+   std::string _bumpSoundFileName;
 private:
    typedef Spritable super;
    

@@ -297,6 +297,8 @@ void GameController::runBumpAction(Item* anItem)
    float impulseX = (float)((float)getRandomNumber(0,10))/10.0f;
    float impulseY = (float)((float)getRandomNumber(0,10))/10.0f;
    
+   anItem->playBumpSound();
+   
    Point impulse = Point(impulseX, impulseY);
    if (currentCollisionType == kControlPointTypePotMargin) {
       actionDuration = 1.2f;
