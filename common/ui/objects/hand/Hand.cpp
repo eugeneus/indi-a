@@ -48,6 +48,7 @@ Hand* Hand::create(const std::string &aSpriteFrameName)
    pRet->_grabPoint = pRet->getPosition();
    pRet->_tossPoint = Point(pRet->_grabPoint.x, pRet->_grabPoint.y + 20.0f);
    
+/*
    Point t1 = pRet->getPosition();
    Size s1 = pRet->getContentSize();
    Rect r1 = pRet->getRect1();
@@ -83,7 +84,7 @@ Hand* Hand::create(const std::string &aSpriteFrameName)
    pRet->addChild(dotNode, 0);
    //pRet->addChild(dotNode1, 0);
    pRet->addChild(dotNode2, 0);
-   
+ */  
    
 
    return pRet;

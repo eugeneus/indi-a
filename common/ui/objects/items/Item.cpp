@@ -12,11 +12,12 @@ bool Item::init(string spriteFrameName, const char* framesPattern, int spriteCou
    _defaultScale = 1.0;
     _itemType = -1;
     _itemId = -1;
-   
+
+ /*
    DrawNode *dotNode = DrawNode::create();
    dotNode->drawDot(this->getPosition(), 5, Color4F(Color3B::WHITE));
    this->addChild(dotNode);
-
+*/
    /*
    Rect r1 = Node::getRect();
    DrawNode *dotNode1 = DrawNode::create();
