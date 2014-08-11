@@ -30,6 +30,9 @@ Hand* Hand::create(const std::string &aSpriteFrameName)
    pRet->_handRect = Rect(0.0f, 0.0f, imgSize.width* 0.7, imgSize.height*0.7);
 //pRet->setScale(0.7f);
    pRet->setAnchorPoint(Point(0.5f,0.5f));
+   pRet->_tossPoint = Point(pRet->_handRect.origin.x + pRet->_handRect.size.width/2.0f,
+                            pRet->_handRect.origin.y + pRet->_handRect.size.height/2.0f);
+   
    pRet->setScale(0.7);
    //pRet->setFlippedX(true);
    
@@ -89,6 +92,9 @@ void Hand::setPosition(cocos2d::Point aPosition)
 {
    this->_handRect.origin.x = aPosition.x;
    this->_handRect.origin.y = aPosition.y;
+   this->_tossPoint = Point(_handRect.origin.x + _handRect.size.width/2.0f,
+                            _handRect.origin.y + _handRect.size.height/2.0f);
+
    
    Sprite::setPosition(aPosition);
 }
@@ -111,6 +117,24 @@ Item* Hand::dropItem()
    
 }
 
+Item* Hand::tossItem()
+{
+   Item* tossingItem = nullptr;
+   if (!_catchItem) {
+      return tossingItem;
+   }
+   
+   if (_catchItem->getPosition().x >= _tossPoint.x - 1.0f &&
+       _catchItem->getPosition().x <= _tossPoint.x + 1.0f) {
+      
+      this->runTossAmiatedAction();
+      return this->dropItem();
+      
+   }
+   
+   return nullptr;
+}
+
 bool Hand::isHandBusy()
 {
    Point currHandPos = this->getPosition();
@@ -129,50 +153,37 @@ bool Hand::waitIgnoredItem()
    return false;
 }
 
-FiniteTimeAction* Hand::getRiseHandAnimateAction(float aConveyorVelocity)
+void Hand::runGrabAnimatedAction(float aConveyorVelocity)
 {
    Point pos = _catchItem->getPosition();
-   float duration = (pos.x - this->getPosition().x)/aConveyorVelocity;
-   duration = duration / 2.0f;
+   float duration = (pos.x - this->_tossPoint.x)/aConveyorVelocity;
    
-   Animation* animation = this->getAnimation(1,2, (duration / 2.0f));
+   Animation* animation = this->getAnimation(1,2, (duration/2.0));
+   pos.x = _tossPoint.x;
+   pos.y = pos.y + _catchItem->getContentSize().height/2.0f;
+   Point pos1 = Point(_handRect.origin.x + _handRect.size.width/2.0f,_handRect.origin.y + _handRect.size.height/2.0f);
+   MoveTo* move1 = MoveTo::create(duration/2.0f,  pos1); // todo move point
+   MoveTo* move2 = MoveTo::create(duration/2.0f, pos); // todo move point
    
-   pos.y = pos.y + _catchItem->getContentSize().height;
-   MoveTo* move = MoveTo::create(duration, pos); // todo move point
-   return Spawn::create(move,Animate::create(animation),NULL);
+   this->runAction(Spawn::create(Sequence::create(move1,move2, NULL),Animate::create(animation),NULL));
+
 }
-
-FiniteTimeAction* Hand::runTossAmiatedAction()
+void Hand::runTossAmiatedAction()
 {
-   Animation* animationGrab = this->getAnimation(2,3, 0.5);
-   Point pos = _catchItem->getPosition();
-   pos.y = pos.y + _catchItem->getScaledContentSize().height/2.0f;
-   MoveTo* moveGrab = MoveTo::create(0.3, pos);
-   Spawn* aniGrab = Spawn::create(moveGrab, Animate::create(animationGrab),NULL);
-   
-   Animation* animationToss = this->getAnimation(3,4, 0.3);
-   pos = _catchItem->getPosition();
-   pos.y = pos.y + _catchItem->getScaledContentSize().height;
-   MoveTo* moveToss = MoveTo::create(0.3, pos);
-   Spawn* aniToss = Spawn::create(moveToss, Animate::create(animationToss),NULL);
-
+   /*
    auto cache = SpriteFrameCache::getInstance();
    Vector<SpriteFrame*> animFrames(2);
-   animFrames.pushBack(cache->getSpriteFrameByName("hand_left_2.png"));
-   animFrames.pushBack(cache->getSpriteFrameByName("hand_left_1.png"));
+   animFrames.pushBack(cache->getSpriteFrameByName("hand_left_3.png"));
+   animFrames.pushBack(cache->getSpriteFrameByName("hand_left_4.png"));
+   */
+   Animation* tossAnimation = this->getAnimation(3,4, 0.5);
    
-   MoveTo* moveRet = MoveTo::create(0.2, _handRect.origin);
-   Spawn* aniRet = Spawn::create(moveRet,Animate::create(Animation::createWithSpriteFrames(animFrames, 0.3)), NULL);
-
-   this->runAction(Sequence::create(moveRet,NULL)); //aniGrab,aniToss,
-}
-
-float getRandomFloat(float from ,float to) {
-   // seed the random
-   srand (static_cast <unsigned> (time(0)));
+   Animation* retAnimation = this->getAnimation(1,1, 0.1);
+   MoveTo* moveRet = MoveTo::create(1.2, _handRect.origin);
    
-   return from + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(to-from)));
+   Sequence* seq = Sequence::create(Animate::create(tossAnimation), Animate::create(retAnimation), NULL);
+   
+   this->runAction(Spawn::create(moveRet,seq, NULL));
    
 }
-
 
