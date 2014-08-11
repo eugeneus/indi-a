@@ -12,6 +12,9 @@ public:
     static Pants* create();
     
     bool init();
+    virtual cocos2d::FiniteTimeAction* getTossAction(float aDuration, cocos2d::Point anEndPoint,
+                                                    int aCollisionType, cocos2d::Point anImpulse) override;
+
     virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aDuration, cocos2d::Point anImpulse) override;
     virtual cocos2d::FiniteTimeAction* getPotEdgeBumpAction(float aDuration, cocos2d::Point anImpulse) override;
 };
