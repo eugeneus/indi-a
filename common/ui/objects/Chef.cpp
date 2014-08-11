@@ -101,8 +101,12 @@ bool Chef::isHandCanGrab(Hand* aHand, Item* anItem)
    if(anItem->getLocalZOrder() > 20)
       return false;
    
-   Rect handRect = aHand->getRect();
-   float grabDistance = handRect.origin.x + handRect.size.width*2.0f;
+   if (aHand->isHandBusy()) {
+      return false;
+   }
+   
+   Rect handRect = aHand->getRect1();
+   float grabDistance = handRect.origin.x + handRect.size.width;
    float itemPosX = anItem->getPosition().x;
    
    return ( (itemPosX > handRect.origin.x) && (itemPosX < grabDistance));
@@ -113,7 +117,6 @@ Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
    
    // check if any hand ready to toss catched item
    Item* tossingItem = nullptr;
-   
    tossingItem = _leftHand->tossItem();
    if (tossingItem) {
       return tossingItem;
@@ -124,13 +127,18 @@ Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
       return tossingItem;
    }
 
-   // check if any hand can catch an item
    
+   // try to up catched item
+   _leftHand->upItem();
+   _rightHand->upItem();
+   
+   // check if any hand can catch an item
    Hand* activeHand = _leftHand;
-   if (_leftHand->isHandBusy()) { //  || _leftHand->isWaiting()
+
+ if (_leftHand->isHandBusy()) { //  || _leftHand->isWaiting()
       activeHand = _rightHand;
    }
-   
+
    if (this->isHandCanGrab(activeHand, anItem)) {
       activeHand->catchItem(anItem);
       activeHand->runGrabAnimatedAction(aConveyourVelocity);
@@ -139,46 +147,6 @@ Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
    return nullptr;
 }
 
-
-/*
-void Chef::chefWathItem(Item* anItem)
-{
-   Point itemPos = anItem->getPosition();
-   
-   bool isLeftHandSeep = false;
-   if(_sleepCounter > 2){
-      isLeftHandSeep = true;
-       _sleepCounter = 0;
-   }
-   else
-      _sleepCounter++;
-
-   Sprite* activeHand = _leftHand;
-   Rect activeHandRect = Rect(_leftHandRect);
-   _activeBouncePoint = _leftHandRect.origin;
-   
-   if (isLeftHandSeep) {
-      activeHand = _rightHand;
-      activeHandRect = Rect(_rightHandRect);
-      _activeBouncePoint = _rightHandRect.origin;
-   }
-
- 
-   if((itemPos.x - _szWatchSector.width) <= (activeHandRect.origin.x + activeHandRect.size.width) &&
-      itemPos.x - _szWatchSector.width > activeHandRect.origin.x &&
-      itemPos.y >= activeHandRect.origin.y - _szWatchSector.height &&
-      itemPos.y <= activeHandRect.origin.y
-      ){
-      if (activeHand->getNumberOfRunningActions() == 0) {
-         
-         //this->runGrabAnimation(activeHand, itemPos, activeHandRect);
-
-         this->updateBounceImpulse();
-      }
-   }
-   
-}
-*/
 void  Chef::startChefBodyAnimation()
 {
    Vector<SpriteFrame*> animFrames(15);

@@ -18,15 +18,18 @@ public:
    void setPosition(cocos2d::Point aPosition);
    void catchItem(Item* anItem);
    Item* dropItem();
+   void upItem();
    Item* tossItem();
    bool isHandBusy();
-   cocos2d::Rect getRect();
+   cocos2d::Rect getRect1();
    
    bool randomWaitForToss();
    
    void runGrabAnimatedAction(float aConveyorVelocity);
-   void runTossAmiatedAction();
 protected:
+
+   void runHandUpAnimatedAction();
+   void runTossAmiatedAction();
    
    cocos2d::Animation* getAnimation(int aFirtsImageIndex, int aLastImageIndex, float aDelay);
    bool waitIgnoredItem();
@@ -38,6 +41,7 @@ protected:
    
    cocos2d::Rect _handRect;
    cocos2d::Point _tossPoint;
+   cocos2d::Point _grabPoint;
    
 
 private:
