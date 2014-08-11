@@ -231,7 +231,7 @@ void Item::stopActions()
 
 void Item::playBumpSound()
 {
-   CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(this->_bumpSoundFileName.c_str(), false);
+   CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(this->_bumpSoundFileName.c_str());
 
 }
 
