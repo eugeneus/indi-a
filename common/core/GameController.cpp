@@ -275,6 +275,18 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
    
 }
 
+void GameController::tossItem(Item* anItem, Vec2 anImpulse)
+{
+      //Point impulse
+      ControlPointDef* collisionEndPointDef = nullptr;
+      if (_cntPoints->size() > 0) {
+         int randomPointIdx = getRandomNumber(0,(_cntPoints->size()-1));
+         collisionEndPointDef = _cntPoints->at(randomPointIdx);
+      }
+      float totalActionDuration = 1.5f;
+      this->runTossActionWithScale(anItem, collisionEndPointDef, totalActionDuration, anImpulse);
+}
+
 
 void GameController::runBumpAction(Item* anItem)
 {
@@ -371,13 +383,11 @@ void GameController::update(float dt)
       }
       
       if (item->getLocalZOrder() == kItemZO1) { //toss
-         //_theChef->setConveyorVelocity(_convVelY);
-         //_theChef->chefWathItem(item);
-         if (_theChef->tryToCatchItem(item, _convVelY)) {
-            //this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
-            this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
+         
+         Item* tossed = _theChef->looksForItem(item, this->_convVelY);
+         if (tossed) {
+            this->tossItem(tossed, _theChef->getBounceImpulse());
          }
-         this->throwItemSimple(item,_theChef->getActiveBouncePoint().x,_theChef->getBounceImpulse());
          
       } else
       if (item->getLocalZOrder() == kItemZO2 && item->isItemInCurrentTargetPoint()) {
@@ -457,15 +467,6 @@ float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPoin
       scaleFactor = 0.7f;
    }
 
-   //float scaleFactor = exp((visibleHeight - (anEndPoint.y + floorOffset))/visibleHeight);
-   
-   //float scaleFactor = cbrt((visibleHeight - (anEndPoint.y + floorOffset))/visibleHeight);
-   //float scaleFactor = acos((visibleHeight - (anEndPoint.y + floorOffset))/visibleHeight);
-   //scaleFactor = atan((visibleHeight - (anEndPoint.y + floorOffset))/visibleHeight);
-   //float
-   //scaleFactor = asin((visibleHeight - checkPointY)/visibleHeight);
-   
-   //scaleFactor += 0.3f;
    return scaleFactor;
 }
 
