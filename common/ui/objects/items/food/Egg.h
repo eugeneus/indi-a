@@ -10,7 +10,13 @@ public:
     static Egg* create();
     
     bool init();
-    
+   
+   virtual cocos2d::FiniteTimeAction* getPotEdgeBumpAction(float aDuration, cocos2d::Point anImpulse) override;
+   
+   virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aDuration, cocos2d::Point anImpulse) override;
+   
+   virtual void setIdle(cocos2d::Point anIdleItemPosition) override;
+   
 private:
     typedef Food super;
     
