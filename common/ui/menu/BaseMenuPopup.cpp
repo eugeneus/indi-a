@@ -26,7 +26,7 @@ bool BaseMenuPopup::init()
     
     initMenuItems(menuItems, origin, visibleSize);
    
-    Menu *mainMenu = Menu::createWithArray(menuItems);
+    mainMenu = Menu::createWithArray(menuItems);
     //mainMenu->alignItemsVerticallyWithPadding(0);
     mainMenu->setAnchorPoint(Vec2(0,0));
     mainMenu->setPosition(Vec2(0,0));
