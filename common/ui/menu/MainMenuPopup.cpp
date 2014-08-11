@@ -2,6 +2,7 @@
 #include "OptionsMenu.h"
 #include "GameSelectMenu.h"
 #include "GameMenu.h"
+#include "SocialMenu.h"
 
 USING_NS_CC;
 
@@ -26,7 +27,7 @@ void MainMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItem
     initMenuItem(menuItems, "btn_main_store.png", CC_CALLBACK_1(MainMenuPopup::menuStoreCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 470));
     initMenuItem(menuItems, "btn_main_score.png", CC_CALLBACK_1(MainMenuPopup::menuOptionsCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 620));
     initMenuItem(menuItems, "btn_main_opt.png", CC_CALLBACK_1(MainMenuPopup::menuOptionsCallback, this), Vec2(visibleSize.width/2 + origin.x - 100, visibleSize.height + origin.y - 770));
-    initMenuItem(menuItems, "btn_main_soc.png", CC_CALLBACK_1(MainMenuPopup::menuOptionsCallback, this), Vec2(visibleSize.width/2 + origin.x + 100, visibleSize.height + origin.y - 770));
+    initMenuItem(menuItems, "btn_main_soc.png", CC_CALLBACK_1(MainMenuPopup::menuSocialCallback, this), Vec2(visibleSize.width/2 + origin.x + 100, visibleSize.height + origin.y - 770));
     initMenuItem(menuItems, "btn_main_exit.png", CC_CALLBACK_1(MainMenuPopup::menuExitCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 890));
 }
 
@@ -37,6 +38,11 @@ void MainMenuPopup::menuOptionsCallback(Ref* pSender) {
 
 void MainMenuPopup::menuStoreCallback(Ref* pSender) {
     Scene *newScene = OptionsMenu::createScene();
+    this->changeScene(newScene);
+}
+
+void MainMenuPopup::menuSocialCallback(Ref* pSender) {
+    Scene *newScene = SocialMenu::createScene();
     this->changeScene(newScene);
 }
 

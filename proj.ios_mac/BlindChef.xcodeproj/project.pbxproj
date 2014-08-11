@@ -87,6 +87,8 @@
 		AA8968921997DFD4005F8946 /* Beef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968901997DFD4005F8946 /* Beef.cpp */; };
 		AA8D6B961998B85C00484E65 /* BaseMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B941998B85C00484E65 /* BaseMenuPopup.cpp */; };
 		AA8D6B9B1998BD6C00484E65 /* OptionsMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B991998BD6C00484E65 /* OptionsMenuPopup.cpp */; };
+		AA8D6B9E1999001900484E65 /* SocialMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B9C1999001900484E65 /* SocialMenu.cpp */; };
+		AA8D6BA11999009000484E65 /* SocialMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B9F1999009000484E65 /* SocialMenuPopup.cpp */; };
 		AA96A1FB195DB09200C22BC9 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = AA96A1FA195DB09200C22BC9 /* images.png */; };
 		AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */; };
 		AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A204195DB16C00C22BC9 /* SlidingMenuItem.cpp */; };
@@ -379,6 +381,10 @@
 		AA8D6B951998B85C00484E65 /* BaseMenuPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMenuPopup.h; sourceTree = "<group>"; };
 		AA8D6B991998BD6C00484E65 /* OptionsMenuPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OptionsMenuPopup.cpp; sourceTree = "<group>"; };
 		AA8D6B9A1998BD6C00484E65 /* OptionsMenuPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsMenuPopup.h; sourceTree = "<group>"; };
+		AA8D6B9C1999001900484E65 /* SocialMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocialMenu.cpp; sourceTree = "<group>"; };
+		AA8D6B9D1999001900484E65 /* SocialMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMenu.h; sourceTree = "<group>"; };
+		AA8D6B9F1999009000484E65 /* SocialMenuPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocialMenuPopup.cpp; sourceTree = "<group>"; };
+		AA8D6BA01999009000484E65 /* SocialMenuPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMenuPopup.h; sourceTree = "<group>"; };
 		AA96A1FA195DB09200C22BC9 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlidingMenuDto.cpp; sourceTree = "<group>"; };
 		AA96A203195DB16C00C22BC9 /* SlidingMenuDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuDto.h; sourceTree = "<group>"; };
@@ -832,6 +838,8 @@
 				AA96A214195DB16C00C22BC9 /* MainMenuPopup.h */,
 				AA8D6B991998BD6C00484E65 /* OptionsMenuPopup.cpp */,
 				AA8D6B9A1998BD6C00484E65 /* OptionsMenuPopup.h */,
+				AA8D6B9F1999009000484E65 /* SocialMenuPopup.cpp */,
+				AA8D6BA01999009000484E65 /* SocialMenuPopup.h */,
 				AA96A215195DB16C00C22BC9 /* options */,
 				AA96A216195DB16C00C22BC9 /* OptionsMenu.cpp */,
 				AA96A217195DB16C00C22BC9 /* OptionsMenu.h */,
@@ -839,6 +847,8 @@
 				AA96A219195DB16C00C22BC9 /* SimpleMenu.h */,
 				AA96A226195DB52800C22BC9 /* GameMenu.cpp */,
 				AA96A227195DB52800C22BC9 /* GameMenu.h */,
+				AA8D6B9C1999001900484E65 /* SocialMenu.cpp */,
+				AA8D6B9D1999001900484E65 /* SocialMenu.h */,
 			);
 			path = menu;
 			sourceTree = "<group>";
@@ -1172,12 +1182,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA8D6BA11999009000484E65 /* SocialMenuPopup.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				E0050DE61967F31B009E7BA1 /* GameController.cpp in Sources */,
 				AA89688C1997DE70005F8946 /* Bread.cpp in Sources */,
 				AAF788CA1997A81800AE7D3F /* BaseIndicator.cpp in Sources */,
 				AA8710071963264D0028A4EA /* Bottle.cpp in Sources */,
 				AAF0621A19925596008563CA /* Tomato.cpp in Sources */,
+				AA8D6B9E1999001900484E65 /* SocialMenu.cpp in Sources */,
 				AA96A228195DB52800C22BC9 /* GameMenu.cpp in Sources */,
 				AAF788C419978F8F00AE7D3F /* GameCompletePopup.cpp in Sources */,
 				AA87100A1963287D0028A4EA /* ItemFactory.cpp in Sources */,
