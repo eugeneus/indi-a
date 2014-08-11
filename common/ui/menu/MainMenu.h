@@ -11,7 +11,8 @@ public:
     static MainMenu* create();
     static cocos2d::Scene* createScene();
     virtual void initializeMenu();
-    virtual MainMenuPopup* createMainMenuPopup();
+    
+    virtual cocos2d::Layer* createMenuLayer();
 };
 
 

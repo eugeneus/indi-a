@@ -13,6 +13,8 @@ public:
     static OptionsMenu* create();
     static cocos2d::Scene* createScene();
     virtual void initializeMenu();
+    
+    virtual cocos2d::Layer* createMenuLayer();
 };
 
 

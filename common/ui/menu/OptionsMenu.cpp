@@ -1,12 +1,13 @@
 
 #include "OptionsMenu.h"
+#include "OptionsMenuPopup.h"
 
 USING_NS_CC;
 
 OptionsMenu* OptionsMenu::create()
 {
     OptionsMenu *pRet = new OptionsMenu();
-    if (pRet && pRet->init("Options"))
+    if (pRet && pRet->init("bg_opt.png"))
     {
         pRet->autorelease();
         return pRet;
@@ -30,4 +31,9 @@ Scene* OptionsMenu::createScene()
 void OptionsMenu::initializeMenu() {
     super::initializeMenu();
     CCLOG("Options");
+}
+
+
+cocos2d::Layer* OptionsMenu::createMenuLayer() {
+    return OptionsMenuPopup::create();
 }
