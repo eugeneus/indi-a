@@ -8,7 +8,7 @@ USING_NS_CC;
 MainMenu* MainMenu::create()
 {
     MainMenu *pRet = new MainMenu();
-    if (pRet && pRet->init("Main Menu"))
+    if (pRet && pRet->init("bg_main.png"))
     {
         pRet->autorelease();
         return pRet;
@@ -29,10 +29,6 @@ Scene* MainMenu::createScene()
     return scene;
 }
 
-MainMenuPopup* MainMenu::createMainMenuPopup() {
-    return MainMenuPopup::createForStart();
-}
-
 void MainMenu::initializeMenu() {
     
     CCLOG("Main Menu");
@@ -45,6 +41,8 @@ void MainMenu::initializeMenu() {
     
     CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.5); //TODO: load from prop
     CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(0.5); //TODO: load from prop
-    
-    this->showMainMenu();
+}
+
+cocos2d::Layer* MainMenu::createMenuLayer() {
+    return MainMenuPopup::create();
 }

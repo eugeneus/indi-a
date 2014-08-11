@@ -85,6 +85,8 @@
 		AA89688C1997DE70005F8946 /* Bread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA89688A1997DE70005F8946 /* Bread.cpp */; };
 		AA89688F1997DF53005F8946 /* Cheese.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA89688D1997DF53005F8946 /* Cheese.cpp */; };
 		AA8968921997DFD4005F8946 /* Beef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968901997DFD4005F8946 /* Beef.cpp */; };
+		AA8D6B961998B85C00484E65 /* BaseMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B941998B85C00484E65 /* BaseMenuPopup.cpp */; };
+		AA8D6B9B1998BD6C00484E65 /* OptionsMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B991998BD6C00484E65 /* OptionsMenuPopup.cpp */; };
 		AA96A1FB195DB09200C22BC9 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = AA96A1FA195DB09200C22BC9 /* images.png */; };
 		AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */; };
 		AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A204195DB16C00C22BC9 /* SlidingMenuItem.cpp */; };
@@ -373,6 +375,10 @@
 		AA89688E1997DF53005F8946 /* Cheese.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cheese.h; sourceTree = "<group>"; };
 		AA8968901997DFD4005F8946 /* Beef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Beef.cpp; sourceTree = "<group>"; };
 		AA8968911997DFD4005F8946 /* Beef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beef.h; sourceTree = "<group>"; };
+		AA8D6B941998B85C00484E65 /* BaseMenuPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseMenuPopup.cpp; sourceTree = "<group>"; };
+		AA8D6B951998B85C00484E65 /* BaseMenuPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMenuPopup.h; sourceTree = "<group>"; };
+		AA8D6B991998BD6C00484E65 /* OptionsMenuPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OptionsMenuPopup.cpp; sourceTree = "<group>"; };
+		AA8D6B9A1998BD6C00484E65 /* OptionsMenuPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsMenuPopup.h; sourceTree = "<group>"; };
 		AA96A1FA195DB09200C22BC9 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlidingMenuDto.cpp; sourceTree = "<group>"; };
 		AA96A203195DB16C00C22BC9 /* SlidingMenuDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuDto.h; sourceTree = "<group>"; };
@@ -820,8 +826,12 @@
 				AA96A210195DB16C00C22BC9 /* levels */,
 				AA96A211195DB16C00C22BC9 /* MainMenu.cpp */,
 				AA96A212195DB16C00C22BC9 /* MainMenu.h */,
+				AA8D6B941998B85C00484E65 /* BaseMenuPopup.cpp */,
+				AA8D6B951998B85C00484E65 /* BaseMenuPopup.h */,
 				AA96A213195DB16C00C22BC9 /* MainMenuPopup.cpp */,
 				AA96A214195DB16C00C22BC9 /* MainMenuPopup.h */,
+				AA8D6B991998BD6C00484E65 /* OptionsMenuPopup.cpp */,
+				AA8D6B9A1998BD6C00484E65 /* OptionsMenuPopup.h */,
 				AA96A215195DB16C00C22BC9 /* options */,
 				AA96A216195DB16C00C22BC9 /* OptionsMenu.cpp */,
 				AA96A217195DB16C00C22BC9 /* OptionsMenu.h */,
@@ -1182,6 +1192,7 @@
 				AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */,
 				AA96A22C195DB76F00C22BC9 /* Spritable.cpp in Sources */,
 				AA8968831997DC28005F8946 /* Onion.cpp in Sources */,
+				AA8D6B9B1998BD6C00484E65 /* OptionsMenuPopup.cpp in Sources */,
 				AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
@@ -1210,6 +1221,7 @@
 				AAF06217199254BF008563CA /* Garglic.cpp in Sources */,
 				AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */,
 				AAF06204199232D0008563CA /* Potatoe.cpp in Sources */,
+				AA8D6B961998B85C00484E65 /* BaseMenuPopup.cpp in Sources */,
 				AAF0621419924539008563CA /* Pants.cpp in Sources */,
 				AA8968771997D73A005F8946 /* Mobile.cpp in Sources */,
 				AA8968861997DCD9005F8946 /* Carrots.cpp in Sources */,

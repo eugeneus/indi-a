@@ -10,7 +10,7 @@ USING_NS_CC;
 GameMenu* GameMenu::create()
 {
     GameMenu *pRet = new GameMenu();
-    if (pRet && pRet->init("Game"))
+    if (pRet && pRet->init(""))
     {
         pRet->autorelease();
         return pRet;
