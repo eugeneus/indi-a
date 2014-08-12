@@ -24,5 +24,5 @@ void SimpleMenu::initializeMenu() {
 
 void SimpleMenu::menuShowMenuCallback(Ref* pSender) {
     
-    this->showMainMenu();
+    //this->showMainMenu();
 }

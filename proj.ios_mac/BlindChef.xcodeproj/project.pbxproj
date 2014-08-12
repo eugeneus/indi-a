@@ -73,6 +73,22 @@
 		AA8710071963264D0028A4EA /* Bottle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8710051963264D0028A4EA /* Bottle.cpp */; };
 		AA87100A1963287D0028A4EA /* ItemFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8710081963287D0028A4EA /* ItemFactory.cpp */; };
 		AA87100D196329770028A4EA /* GarbageFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA87100B196329770028A4EA /* GarbageFactory.cpp */; };
+		AA89686C1997C083005F8946 /* MultiplierIndicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA89686A1997C083005F8946 /* MultiplierIndicator.cpp */; };
+		AA8968721997D67D005F8946 /* Cap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968701997D67D005F8946 /* Cap.cpp */; };
+		AA8968771997D73A005F8946 /* Mobile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968751997D73A005F8946 /* Mobile.cpp */; };
+		AA89687A1997D912005F8946 /* Chicken.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968781997D912005F8946 /* Chicken.cpp */; };
+		AA89687D1997D9A0005F8946 /* Pepps.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA89687B1997D99F005F8946 /* Pepps.cpp */; };
+		AA8968801997DB13005F8946 /* Egg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA89687E1997DB13005F8946 /* Egg.cpp */; };
+		AA8968831997DC28005F8946 /* Onion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968811997DC28005F8946 /* Onion.cpp */; };
+		AA8968861997DCD9005F8946 /* Carrots.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968841997DCD9005F8946 /* Carrots.cpp */; };
+		AA8968891997DD93005F8946 /* Mushrroom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968871997DD93005F8946 /* Mushrroom.cpp */; };
+		AA89688C1997DE70005F8946 /* Bread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA89688A1997DE70005F8946 /* Bread.cpp */; };
+		AA89688F1997DF53005F8946 /* Cheese.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA89688D1997DF53005F8946 /* Cheese.cpp */; };
+		AA8968921997DFD4005F8946 /* Beef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8968901997DFD4005F8946 /* Beef.cpp */; };
+		AA8D6B961998B85C00484E65 /* BaseMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B941998B85C00484E65 /* BaseMenuPopup.cpp */; };
+		AA8D6B9B1998BD6C00484E65 /* OptionsMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B991998BD6C00484E65 /* OptionsMenuPopup.cpp */; };
+		AA8D6B9E1999001900484E65 /* SocialMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B9C1999001900484E65 /* SocialMenu.cpp */; };
+		AA8D6BA11999009000484E65 /* SocialMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B9F1999009000484E65 /* SocialMenuPopup.cpp */; };
 		AA96A1FB195DB09200C22BC9 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = AA96A1FA195DB09200C22BC9 /* images.png */; };
 		AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */; };
 		AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A204195DB16C00C22BC9 /* SlidingMenuItem.cpp */; };
@@ -95,6 +111,8 @@
 		AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4B1966E64B00C48611 /* TipsFadeble.cpp */; };
 		AAB58E501966E90C00C48611 /* MindCloudTips.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4E1966E90C00C48611 /* MindCloudTips.cpp */; };
 		AAB58E531966F5F600C48611 /* Pot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E511966F5F600C48611 /* Pot.cpp */; };
+		AAC70ED819975327007D0537 /* GameOverPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED619975327007D0537 /* GameOverPopup.cpp */; };
+		AAC70EDB19975374007D0537 /* BaseGamePopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED919975374007D0537 /* BaseGamePopup.cpp */; };
 		AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AACAB432198AC40400F8AE01 /* LevelProvider.cpp */; };
 		AACAB438198AC41F00F8AE01 /* level_1.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAB437198AC41F00F8AE01 /* level_1.plist */; };
 		AAF06204199232D0008563CA /* Potatoe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF06202199232D0008563CA /* Potatoe.cpp */; };
@@ -108,6 +126,9 @@
 		AAF0621A19925596008563CA /* Tomato.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621819925596008563CA /* Tomato.cpp */; };
 		AAF0621D19926025008563CA /* UserDataProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621B19926025008563CA /* UserDataProvider.cpp */; };
 		AAF06220199279EE008563CA /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0621E199279EE008563CA /* Multiplier.cpp */; };
+		AAF788C419978F8F00AE7D3F /* GameCompletePopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF788C219978F8F00AE7D3F /* GameCompletePopup.cpp */; };
+		AAF788CA1997A81800AE7D3F /* BaseIndicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF788C81997A81800AE7D3F /* BaseIndicator.cpp */; };
+		AAF788CD1997ACD900AE7D3F /* GameCycleIndicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF788CB1997ACD900AE7D3F /* GameCycleIndicator.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -332,6 +353,38 @@
 		AA8710091963287D0028A4EA /* ItemFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemFactory.h; sourceTree = "<group>"; };
 		AA87100B196329770028A4EA /* GarbageFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GarbageFactory.cpp; sourceTree = "<group>"; };
 		AA87100C196329770028A4EA /* GarbageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GarbageFactory.h; sourceTree = "<group>"; };
+		AA89686A1997C083005F8946 /* MultiplierIndicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiplierIndicator.cpp; sourceTree = "<group>"; };
+		AA89686B1997C083005F8946 /* MultiplierIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplierIndicator.h; sourceTree = "<group>"; };
+		AA8968701997D67D005F8946 /* Cap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cap.cpp; sourceTree = "<group>"; };
+		AA8968711997D67D005F8946 /* Cap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cap.h; sourceTree = "<group>"; };
+		AA8968751997D73A005F8946 /* Mobile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mobile.cpp; sourceTree = "<group>"; };
+		AA8968761997D73A005F8946 /* Mobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mobile.h; sourceTree = "<group>"; };
+		AA8968781997D912005F8946 /* Chicken.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Chicken.cpp; sourceTree = "<group>"; };
+		AA8968791997D912005F8946 /* Chicken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chicken.h; sourceTree = "<group>"; };
+		AA89687B1997D99F005F8946 /* Pepps.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pepps.cpp; sourceTree = "<group>"; };
+		AA89687C1997D99F005F8946 /* Pepps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pepps.h; sourceTree = "<group>"; };
+		AA89687E1997DB13005F8946 /* Egg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Egg.cpp; sourceTree = "<group>"; };
+		AA89687F1997DB13005F8946 /* Egg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Egg.h; sourceTree = "<group>"; };
+		AA8968811997DC28005F8946 /* Onion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Onion.cpp; sourceTree = "<group>"; };
+		AA8968821997DC28005F8946 /* Onion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Onion.h; sourceTree = "<group>"; };
+		AA8968841997DCD9005F8946 /* Carrots.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Carrots.cpp; sourceTree = "<group>"; };
+		AA8968851997DCD9005F8946 /* Carrots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Carrots.h; sourceTree = "<group>"; };
+		AA8968871997DD93005F8946 /* Mushrroom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mushrroom.cpp; sourceTree = "<group>"; };
+		AA8968881997DD93005F8946 /* Mushrroom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mushrroom.h; sourceTree = "<group>"; };
+		AA89688A1997DE70005F8946 /* Bread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bread.cpp; sourceTree = "<group>"; };
+		AA89688B1997DE70005F8946 /* Bread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bread.h; sourceTree = "<group>"; };
+		AA89688D1997DF53005F8946 /* Cheese.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cheese.cpp; sourceTree = "<group>"; };
+		AA89688E1997DF53005F8946 /* Cheese.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cheese.h; sourceTree = "<group>"; };
+		AA8968901997DFD4005F8946 /* Beef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Beef.cpp; sourceTree = "<group>"; };
+		AA8968911997DFD4005F8946 /* Beef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beef.h; sourceTree = "<group>"; };
+		AA8D6B941998B85C00484E65 /* BaseMenuPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseMenuPopup.cpp; sourceTree = "<group>"; };
+		AA8D6B951998B85C00484E65 /* BaseMenuPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMenuPopup.h; sourceTree = "<group>"; };
+		AA8D6B991998BD6C00484E65 /* OptionsMenuPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OptionsMenuPopup.cpp; sourceTree = "<group>"; };
+		AA8D6B9A1998BD6C00484E65 /* OptionsMenuPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsMenuPopup.h; sourceTree = "<group>"; };
+		AA8D6B9C1999001900484E65 /* SocialMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocialMenu.cpp; sourceTree = "<group>"; };
+		AA8D6B9D1999001900484E65 /* SocialMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMenu.h; sourceTree = "<group>"; };
+		AA8D6B9F1999009000484E65 /* SocialMenuPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocialMenuPopup.cpp; sourceTree = "<group>"; };
+		AA8D6BA01999009000484E65 /* SocialMenuPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMenuPopup.h; sourceTree = "<group>"; };
 		AA96A1FA195DB09200C22BC9 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		AA96A202195DB16C00C22BC9 /* SlidingMenuDto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlidingMenuDto.cpp; sourceTree = "<group>"; };
 		AA96A203195DB16C00C22BC9 /* SlidingMenuDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuDto.h; sourceTree = "<group>"; };
@@ -374,6 +427,10 @@
 		AAB58E4F1966E90C00C48611 /* MindCloudTips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MindCloudTips.h; sourceTree = "<group>"; };
 		AAB58E511966F5F600C48611 /* Pot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pot.cpp; sourceTree = "<group>"; };
 		AAB58E521966F5F600C48611 /* Pot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pot.h; sourceTree = "<group>"; };
+		AAC70ED619975327007D0537 /* GameOverPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverPopup.cpp; sourceTree = "<group>"; };
+		AAC70ED719975327007D0537 /* GameOverPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverPopup.h; sourceTree = "<group>"; };
+		AAC70ED919975374007D0537 /* BaseGamePopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseGamePopup.cpp; sourceTree = "<group>"; };
+		AAC70EDA19975374007D0537 /* BaseGamePopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseGamePopup.h; sourceTree = "<group>"; };
 		AACAB432198AC40400F8AE01 /* LevelProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelProvider.cpp; sourceTree = "<group>"; };
 		AACAB433198AC40400F8AE01 /* LevelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelProvider.h; sourceTree = "<group>"; };
 		AACAB437198AC41F00F8AE01 /* level_1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level_1.plist; sourceTree = "<group>"; };
@@ -395,6 +452,12 @@
 		AAF0621C19926025008563CA /* UserDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataProvider.h; sourceTree = "<group>"; };
 		AAF0621E199279EE008563CA /* Multiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Multiplier.cpp; sourceTree = "<group>"; };
 		AAF0621F199279EE008563CA /* Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Multiplier.h; sourceTree = "<group>"; };
+		AAF788C219978F8F00AE7D3F /* GameCompletePopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameCompletePopup.cpp; sourceTree = "<group>"; };
+		AAF788C319978F8F00AE7D3F /* GameCompletePopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCompletePopup.h; sourceTree = "<group>"; };
+		AAF788C81997A81800AE7D3F /* BaseIndicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseIndicator.cpp; sourceTree = "<group>"; };
+		AAF788C91997A81800AE7D3F /* BaseIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseIndicator.h; sourceTree = "<group>"; };
+		AAF788CB1997ACD900AE7D3F /* GameCycleIndicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameCycleIndicator.cpp; sourceTree = "<group>"; };
+		AAF788CC1997ACD900AE7D3F /* GameCycleIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCycleIndicator.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -618,6 +681,12 @@
 				AA3424801960C74F0067B032 /* ScoreLayer.h */,
 				AAF0621E199279EE008563CA /* Multiplier.cpp */,
 				AAF0621F199279EE008563CA /* Multiplier.h */,
+				AAC70ED619975327007D0537 /* GameOverPopup.cpp */,
+				AAC70ED719975327007D0537 /* GameOverPopup.h */,
+				AAC70ED919975374007D0537 /* BaseGamePopup.cpp */,
+				AAC70EDA19975374007D0537 /* BaseGamePopup.h */,
+				AAF788C219978F8F00AE7D3F /* GameCompletePopup.cpp */,
+				AAF788C319978F8F00AE7D3F /* GameCompletePopup.h */,
 			);
 			path = score;
 			sourceTree = "<group>";
@@ -659,6 +728,24 @@
 				AAF06216199254BF008563CA /* Garglic.h */,
 				AAF0621819925596008563CA /* Tomato.cpp */,
 				AAF0621919925596008563CA /* Tomato.h */,
+				AA8968781997D912005F8946 /* Chicken.cpp */,
+				AA8968791997D912005F8946 /* Chicken.h */,
+				AA89687B1997D99F005F8946 /* Pepps.cpp */,
+				AA89687C1997D99F005F8946 /* Pepps.h */,
+				AA89687E1997DB13005F8946 /* Egg.cpp */,
+				AA89687F1997DB13005F8946 /* Egg.h */,
+				AA8968811997DC28005F8946 /* Onion.cpp */,
+				AA8968821997DC28005F8946 /* Onion.h */,
+				AA8968841997DCD9005F8946 /* Carrots.cpp */,
+				AA8968851997DCD9005F8946 /* Carrots.h */,
+				AA8968871997DD93005F8946 /* Mushrroom.cpp */,
+				AA8968881997DD93005F8946 /* Mushrroom.h */,
+				AA89688A1997DE70005F8946 /* Bread.cpp */,
+				AA89688B1997DE70005F8946 /* Bread.h */,
+				AA89688D1997DF53005F8946 /* Cheese.cpp */,
+				AA89688E1997DF53005F8946 /* Cheese.h */,
+				AA8968901997DFD4005F8946 /* Beef.cpp */,
+				AA8968911997DFD4005F8946 /* Beef.h */,
 			);
 			path = food;
 			sourceTree = "<group>";
@@ -678,6 +765,10 @@
 				AAF0620819923645008563CA /* Duck.h */,
 				AAF0621219924539008563CA /* Pants.cpp */,
 				AAF0621319924539008563CA /* Pants.h */,
+				AA8968701997D67D005F8946 /* Cap.cpp */,
+				AA8968711997D67D005F8946 /* Cap.h */,
+				AA8968751997D73A005F8946 /* Mobile.cpp */,
+				AA8968761997D73A005F8946 /* Mobile.h */,
 			);
 			path = garbage;
 			sourceTree = "<group>";
@@ -706,6 +797,7 @@
 		AA96A200195DB16C00C22BC9 /* component */ = {
 			isa = PBXGroup;
 			children = (
+				AAF788C71997A80800AE7D3F /* indicator */,
 				E072E19C196932F5002E4C04 /* imageLabelMenu */,
 				AAB58E4A1966E61400C48611 /* tips */,
 				AA34247E1960C7250067B032 /* score */,
@@ -740,8 +832,14 @@
 				AA96A210195DB16C00C22BC9 /* levels */,
 				AA96A211195DB16C00C22BC9 /* MainMenu.cpp */,
 				AA96A212195DB16C00C22BC9 /* MainMenu.h */,
+				AA8D6B941998B85C00484E65 /* BaseMenuPopup.cpp */,
+				AA8D6B951998B85C00484E65 /* BaseMenuPopup.h */,
 				AA96A213195DB16C00C22BC9 /* MainMenuPopup.cpp */,
 				AA96A214195DB16C00C22BC9 /* MainMenuPopup.h */,
+				AA8D6B991998BD6C00484E65 /* OptionsMenuPopup.cpp */,
+				AA8D6B9A1998BD6C00484E65 /* OptionsMenuPopup.h */,
+				AA8D6B9F1999009000484E65 /* SocialMenuPopup.cpp */,
+				AA8D6BA01999009000484E65 /* SocialMenuPopup.h */,
 				AA96A215195DB16C00C22BC9 /* options */,
 				AA96A216195DB16C00C22BC9 /* OptionsMenu.cpp */,
 				AA96A217195DB16C00C22BC9 /* OptionsMenu.h */,
@@ -749,6 +847,8 @@
 				AA96A219195DB16C00C22BC9 /* SimpleMenu.h */,
 				AA96A226195DB52800C22BC9 /* GameMenu.cpp */,
 				AA96A227195DB52800C22BC9 /* GameMenu.h */,
+				AA8D6B9C1999001900484E65 /* SocialMenu.cpp */,
+				AA8D6B9D1999001900484E65 /* SocialMenu.h */,
 			);
 			path = menu;
 			sourceTree = "<group>";
@@ -833,6 +933,19 @@
 				AAF0621C19926025008563CA /* UserDataProvider.h */,
 			);
 			path = util;
+			sourceTree = "<group>";
+		};
+		AAF788C71997A80800AE7D3F /* indicator */ = {
+			isa = PBXGroup;
+			children = (
+				AAF788C81997A81800AE7D3F /* BaseIndicator.cpp */,
+				AAF788C91997A81800AE7D3F /* BaseIndicator.h */,
+				AAF788CB1997ACD900AE7D3F /* GameCycleIndicator.cpp */,
+				AAF788CC1997ACD900AE7D3F /* GameCycleIndicator.h */,
+				AA89686A1997C083005F8946 /* MultiplierIndicator.cpp */,
+				AA89686B1997C083005F8946 /* MultiplierIndicator.h */,
+			);
+			path = indicator;
 			sourceTree = "<group>";
 		};
 		E0050DE01967D07D009E7BA1 /* core */ = {
@@ -1069,11 +1182,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA8D6BA11999009000484E65 /* SocialMenuPopup.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				E0050DE61967F31B009E7BA1 /* GameController.cpp in Sources */,
+				AA89688C1997DE70005F8946 /* Bread.cpp in Sources */,
+				AAF788CA1997A81800AE7D3F /* BaseIndicator.cpp in Sources */,
 				AA8710071963264D0028A4EA /* Bottle.cpp in Sources */,
 				AAF0621A19925596008563CA /* Tomato.cpp in Sources */,
+				AA8D6B9E1999001900484E65 /* SocialMenu.cpp in Sources */,
 				AA96A228195DB52800C22BC9 /* GameMenu.cpp in Sources */,
+				AAF788C419978F8F00AE7D3F /* GameCompletePopup.cpp in Sources */,
 				AA87100A1963287D0028A4EA /* ItemFactory.cpp in Sources */,
 				AA96A221195DB16C00C22BC9 /* MainMenuPopup.cpp in Sources */,
 				AAB01DA219629E84002251B1 /* Hand.cpp in Sources */,
@@ -1081,14 +1199,22 @@
 				AA96A21C195DB16C00C22BC9 /* SlidingMenuLayer.cpp in Sources */,
 				AA871004196325B50028A4EA /* Garbage.cpp in Sources */,
 				AAB01DA51962A1B9002251B1 /* Hands.cpp in Sources */,
+				AAC70ED819975327007D0537 /* GameOverPopup.cpp in Sources */,
+				AA8968891997DD93005F8946 /* Mushrroom.cpp in Sources */,
 				AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */,
 				AA96A22C195DB76F00C22BC9 /* Spritable.cpp in Sources */,
+				AA8968831997DC28005F8946 /* Onion.cpp in Sources */,
+				AA8D6B9B1998BD6C00484E65 /* OptionsMenuPopup.cpp in Sources */,
 				AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				AAF06220199279EE008563CA /* Multiplier.cpp in Sources */,
+				AA89687D1997D9A0005F8946 /* Pepps.cpp in Sources */,
+				AA89688F1997DF53005F8946 /* Cheese.cpp in Sources */,
 				AA3424811960C74F0067B032 /* ScoreLayer.cpp in Sources */,
+				AA89686C1997C083005F8946 /* MultiplierIndicator.cpp in Sources */,
 				AAB58E461966CF4900C48611 /* BonusMenu.cpp in Sources */,
+				AAC70EDB19975374007D0537 /* BaseGamePopup.cpp in Sources */,
 				AA96A21B195DB16C00C22BC9 /* SlidingMenuItem.cpp in Sources */,
 				AA96A21A195DB16C00C22BC9 /* SlidingMenuDto.cpp in Sources */,
 				AA96A223195DB16C00C22BC9 /* SimpleMenu.cpp in Sources */,
@@ -1097,16 +1223,24 @@
 				AA96A220195DB16C00C22BC9 /* MainMenu.cpp in Sources */,
 				E0050DE31967D0FC009E7BA1 /* MovementController.cpp in Sources */,
 				E072E1A1196932F5002E4C04 /* ImageLabelMenuItem.cpp in Sources */,
+				AA89687A1997D912005F8946 /* Chicken.cpp in Sources */,
+				AA8968801997DB13005F8946 /* Egg.cpp in Sources */,
 				AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */,
 				AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */,
 				AA870FFB196324A50028A4EA /* Food.cpp in Sources */,
+				AA8968921997DFD4005F8946 /* Beef.cpp in Sources */,
+				AA8968721997D67D005F8946 /* Cap.cpp in Sources */,
 				AAF06217199254BF008563CA /* Garglic.cpp in Sources */,
 				AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */,
 				AAF06204199232D0008563CA /* Potatoe.cpp in Sources */,
+				AA8D6B961998B85C00484E65 /* BaseMenuPopup.cpp in Sources */,
 				AAF0621419924539008563CA /* Pants.cpp in Sources */,
+				AA8968771997D73A005F8946 /* Mobile.cpp in Sources */,
+				AA8968861997DCD9005F8946 /* Carrots.cpp in Sources */,
 				AAB58E3D1966BBA600C48611 /* BowlingBall.cpp in Sources */,
 				AA96A21F195DB16C00C22BC9 /* GameSelectMenu.cpp in Sources */,
 				AAB58E531966F5F600C48611 /* Pot.cpp in Sources */,
+				AAF788CD1997ACD900AE7D3F /* GameCycleIndicator.cpp in Sources */,
 				AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */,
 				AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */,
 				AAF0621D19926025008563CA /* UserDataProvider.cpp in Sources */,

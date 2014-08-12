@@ -23,11 +23,15 @@ public:
    
    virtual cocos2d::FiniteTimeAction* getVanishAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse);
    
+   virtual void runCatchAction(float aDuration, cocos2d::Point anEndPoint);
+   
    virtual void setIdle(cocos2d::Point anIdleItemPosition);
    
    virtual void stopActions();
     
     virtual cocos2d::Sprite* createCrack();
+   
+   void playBumpSound();
    
    bool isItemInCurrentTargetPoint();
    
@@ -43,7 +47,8 @@ protected:
    cocos2d::ccBezierConfig bezierConfigBouncePathToEndPoint(cocos2d::Point anEndPoint,
                                                             cocos2d::Vec2 anImpulse);
     cocos2d::ccBezierConfig bezierConfigTouchPathToEndPoint(cocos2d::Point anEndPoint, cocos2d::Vec2 anImpulse);
-   
+
+   std::string _bumpSoundFileName;
 private:
    typedef Spritable super;
    

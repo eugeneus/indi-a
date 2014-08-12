@@ -13,6 +13,7 @@ class LevelProvider;
 class UserDataProvider;
 class ScoreLayer;
 class Multiplier;
+class GameCycleIndicator;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -69,6 +70,8 @@ protected:
 
    void throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse);
    
+   void tossItem(Item* anItem, Vec2 anImpulse);
+   
    void runBumpAction(Item* anItem);
    
    float getScaleFactor(cocos2d::Point anEndPoint, int aControlPointType);
@@ -97,6 +100,9 @@ protected:
     UserDataProvider* _userData;
     ScoreLayer* _scoreLayer;
     Multiplier* _multiplier;
+    GameCycleIndicator* _gameCycleInd;
+    
+    std::vector<int> _caughtItemsIds;
 private:
    
    cocos2d::Layer* _gameLayer;

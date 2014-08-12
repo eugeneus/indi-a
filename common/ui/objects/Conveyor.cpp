@@ -35,3 +35,11 @@ float Conveyor::getFirstItemPosY() {
     
     return firstItem->getPosition().y;
 }
+
+void Conveyor::pauseConv() {
+    super::pause();
+    for (int i =0; i < sprites.size(); i++ ) {
+        Sprite* sp = sprites.at(i);
+        if (sp != nullptr) sp->pause();
+    }
+}

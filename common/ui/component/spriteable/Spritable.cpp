@@ -81,6 +81,16 @@ void Spritable::createWalkAnimFrames(Vector<SpriteFrame*>& animateFrames, int st
     }
 }
 
+cocos2d::Size Spritable::getScaledContentSize()
+{
+   Size size = this->getContentSize();
+   float scale = this->getScale();
+   size.width = size.width * scale;
+   size.height = size.height * scale;
+   
+   return size;
+}
+
 Size Spritable::getDefaultContentSize()
 {
    return _defaultContentSize;

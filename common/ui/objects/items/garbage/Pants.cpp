@@ -31,6 +31,35 @@ bool Pants::init() {
     return true;
 }
 
+cocos2d::FiniteTimeAction* Pants::getTossAction(float aDuration, cocos2d::Point anEndPoint,
+                                               int aCollisionType, cocos2d::Point anImpulse)
+{
+   this->stopActionByTag(1001);
+   
+   this->_currentTargetPoint = anEndPoint;
+   this->_currentTargetType = aCollisionType;
+   
+   ccBezierConfig bouncePathConfig = this->bezierConfigBouncePathToEndPoint(anEndPoint, anImpulse);
+   BezierTo* bezierBounceAction = BezierTo::create(aDuration, bouncePathConfig);
+   
+   RotateTo* r1 = RotateTo::create(aDuration/3.0f, 75.0f);
+   RotateTo* r2 = RotateTo::create(aDuration/3.0f, -87.0f);
+   RotateTo* r3 = RotateTo::create(aDuration/3.0f, 0.0f);
+   
+   Sequence* rt = Sequence::create(r1, r2, r3, NULL);
+   Repeat* repeated = Repeat::create(rt, 1);
+   
+   FiniteTimeAction* fullAction = NULL;
+   fullAction =  Sequence::create(bezierBounceAction,
+                                  NULL);
+   
+   FiniteTimeAction* combinedAction = Spawn::create(fullAction, repeated, NULL);
+   
+   return combinedAction;
+   
+}
+
+
 FiniteTimeAction* Pants::getFloorBumpAction(float aDuration, cocos2d::Point anImpulse)
 {
     return DelayTime::create(0.1);

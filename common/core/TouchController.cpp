@@ -112,7 +112,7 @@ void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches
                 if (!_isItemDetected && dynamic_cast<Item*>(child)) {
                     Item *item = (Item *) child;
                     
-                    if (20 < item->getLocalZOrder() && item->getLocalZOrder() < 30) { //TODO: make a global const
+                    if (20 < item->getLocalZOrder() && item->getLocalZOrder() != 51) { //TODO: make a global const
                         
                         if(isTouchingItem(location, item)) {
                             log("item detected with z-index: %i", item->getLocalZOrder());

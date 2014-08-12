@@ -12,6 +12,26 @@ bool Item::init(string spriteFrameName, const char* framesPattern, int spriteCou
    _defaultScale = 1.0;
     _itemType = -1;
     _itemId = -1;
+   
+   _bumpSoundFileName = "item_fall.caf";
+
+ /*
+   DrawNode *dotNode = DrawNode::create();
+   dotNode->drawDot(this->getPosition(), 5, Color4F(Color3B::WHITE));
+   this->addChild(dotNode);
+*/
+   /*
+   Rect r1 = Node::getRect();
+   DrawNode *dotNode1 = DrawNode::create();
+   Point p1 = r1.origin;
+   p1.x += r1.size.width;
+   Point p2 = p1;
+   p2.y += r1.size.height;
+   Point p3 = p2;
+   p3.x = r1.origin.x;
+   Point verts [] = {r1.origin,p1,p2,p3};
+   dotNode1->drawPolygon(verts, 4, Color4F(1,222,120,0.2), 1.0, Color4F(Color3B::WHITE));
+   */
     
     return true;
 }
@@ -149,6 +169,13 @@ cocos2d::FiniteTimeAction* Item::getFloorBumpAction(float aDuration, cocos2d::Po
    
 }
 
+void Item::runCatchAction(float aDuration, cocos2d::Point anEndPoint)
+{
+   this->stopActionByTag(1001);
+   MoveTo* moveUp = MoveTo::create(aDuration, anEndPoint);
+   this->runAction(moveUp);
+}
+
 cocos2d::FiniteTimeAction* Item::getFingerKickAction(float aDuration, cocos2d::Point anEndPoint, cocos2d::Point anImpulse)
 {
    
@@ -162,7 +189,7 @@ cocos2d::FiniteTimeAction* Item::getVanishAction(float aDuration, cocos2d::Point
    _currentTargetPoint = _idleItemPosition;
    _currentTargetType = 0;
    
-   FiniteTimeAction* actionDelay = DelayTime::create(2);
+   //FiniteTimeAction* actionDelay = DelayTime::create(2);
    FiniteTimeAction* actionPlase = Place::create(_idleItemPosition);
    FiniteTimeAction* actionFadeOut = FadeOut::create(2);
    FiniteTimeAction* actionFadeIn = FadeIn::create(2);
@@ -200,6 +227,12 @@ void Item::stopActions()
    this->stopAllActions();
    this->setDefaultSize();
    
+}
+
+void Item::playBumpSound()
+{
+   CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(this->_bumpSoundFileName.c_str());
+
 }
 
 Sprite* Item::createCrack() {

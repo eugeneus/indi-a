@@ -1,5 +1,4 @@
 #include "BaseMenu.h"
-#include "MainMenuPopup.h"
 
 USING_NS_CC;
 
@@ -10,24 +9,22 @@ bool BaseMenu::init(const std::string& pMenuTitle)
         return false;
     }
     
-    
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    auto label = LabelTTF::create(pMenuTitle, "Arial", 24);
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
-    this->addChild(label, 1);
     this->initializeMenu();
     
+    Layer* menuLayer = this->createMenuLayer();
+    if (menuLayer) this->addChild(menuLayer, 0);
+    
+    if (pMenuTitle.size() > 0) {
+        Sprite* bg = Sprite::createWithSpriteFrameName(pMenuTitle);
+        bg->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
+        this->addChild(bg, -1);
+    }
     return true;
 }
 
-MainMenuPopup* BaseMenu::createMainMenuPopup() {
-    return MainMenuPopup::create();
-}
-
-void BaseMenu::showMainMenu() {
-    MainMenuPopup *menuPopup = this->createMainMenuPopup();
-    this->addChild(menuPopup, 1001);
+cocos2d::Layer* BaseMenu::createMenuLayer() {
+    return NULL;
 }

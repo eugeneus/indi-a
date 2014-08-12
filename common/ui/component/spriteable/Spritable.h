@@ -27,9 +27,11 @@ public:
     virtual ~Spritable();
    
    cocos2d::Size getDefaultContentSize();
+   cocos2d::Size getScaledContentSize();
    void setSpriteSize(cocos2d::Size aSize);
    void setDefaultSize();
    void applyDefaultScale();
+   
 
    static Spritable* create(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime);
 };

@@ -6,6 +6,7 @@
 #include "Spritable.h"
 
 class Item;
+class Hand;
 
 class Chef  {
 public:
@@ -25,27 +26,27 @@ public:
    cocos2d::Vec2 getBounceImpulse();
    
    void startChefBodyAnimation();
-   void startHandBounceAnimation();
-   bool tryToCatchItem(Item* anItem, float aConveyorVelocity);
-   void chefWathItem(Item* anItem);
+   
+   Item* looksForItem(Item* anItem, float aConveyourVelocity);
    void setZOrder(int aZOrder);
+
 protected:
+   
+   bool isHandCanGrab(Hand* aHand, Item* anItem);
    void updateBounceImpulse();
-   void runGrabAnimation(cocos2d::Sprite* activeHand, cocos2d::Point itemPos, cocos2d::Rect activeHandRect);
-   cocos2d::Animate* getHandGrabAnimation();
    
 private:
    //typedef cocos2d::Ref super;
    cocos2d::Rect _chefRect;
    
    cocos2d::Vec2 _bounceImpulse;
-   cocos2d::Rect _leftHandRect;
-   cocos2d::Rect _rightHandRect;
+   cocos2d::Rect _leftHandRect; // obsolete?
+   cocos2d::Rect _rightHandRect; // obsolete?
    
    cocos2d::Layer* _layer;
    cocos2d::Sprite* _chef;
-   cocos2d::Sprite* _leftHand;
-   cocos2d::Sprite* _rightHand;
+   Hand* _leftHand;
+   Hand* _rightHand;
    
    cocos2d::Size _szWatchSector;
    cocos2d::Point _activeBouncePoint;

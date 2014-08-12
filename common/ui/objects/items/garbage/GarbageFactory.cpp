@@ -4,6 +4,8 @@
 #include "BowlingBall.h"
 #include "Duck.h"
 #include "Pants.h"
+#include "Cap.h"
+#include "Mobile.h"
 
 Garbage* GarbageFactory::createGarbage(int garbage_type)
 {
@@ -28,6 +30,16 @@ Garbage* GarbageFactory::createGarbage(int garbage_type)
         case kGarbagePants:
         {
             garbage = Pants::create();
+            break;
+        }
+        case kGarbageCap:
+        {
+            garbage = Cap::create();
+            break;
+        }
+        case kGarbageMobile:
+        {
+            garbage = Mobile::create();
             break;
         }
             
