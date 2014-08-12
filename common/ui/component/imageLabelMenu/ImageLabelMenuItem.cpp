@@ -33,7 +33,7 @@ bool ImageLabelMenuItem::init(const std::string& text, const std::string& imageF
     
     TTFConfig ttfConfig;
     ttfConfig.fontSize = 32;
-    ttfConfig.fontFilePath = "RioGrande.ttf";
+    ttfConfig.fontFilePath = "crystal radio kit.ttf";
     label = Label::createWithTTF(ttfConfig, text);
     label->setColor(Color3B(255, 200, 0));
     label->setPosition(Vec2(label->getPosition().x + normalMenuItemSprite->getContentSize().width,label->getPosition().y));
@@ -44,5 +44,5 @@ bool ImageLabelMenuItem::init(const std::string& text, const std::string& imageF
 }
 
 void ImageLabelMenuItem::changeLabelText(const std::string& text) {
-
+    label->setString(text);
 }
