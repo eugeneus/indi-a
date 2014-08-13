@@ -37,7 +37,7 @@ bool ScoreLayer::init(int pScore) {
     
     TTFConfig ttfConfig;
     ttfConfig.fontSize = 32;
-    ttfConfig.fontFilePath = "RioGrande.ttf";
+    ttfConfig.fontFilePath = "crystal radio kit.ttf";
     scoreLabel = Label::createWithTTF(ttfConfig, CCString::createWithFormat("%i", score)->getCString());
     scoreLabel->setColor(Color3B(255, 200, 0));
     this->addChild(scoreLabel);

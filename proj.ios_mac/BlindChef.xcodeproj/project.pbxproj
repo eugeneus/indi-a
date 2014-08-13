@@ -115,6 +115,7 @@
 		AAC70EDB19975374007D0537 /* BaseGamePopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED919975374007D0537 /* BaseGamePopup.cpp */; };
 		AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AACAB432198AC40400F8AE01 /* LevelProvider.cpp */; };
 		AACAB438198AC41F00F8AE01 /* level_1.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAB437198AC41F00F8AE01 /* level_1.plist */; };
+		AAEF481E199A594D0045F40C /* crystal radio kit.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AAEF481D199A594D0045F40C /* crystal radio kit.ttf */; };
 		AAF06204199232D0008563CA /* Potatoe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF06202199232D0008563CA /* Potatoe.cpp */; };
 		AAF0620919923645008563CA /* Duck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0620719923645008563CA /* Duck.cpp */; };
 		AAF0620E19923ACB008563CA /* levelcompleted.caf in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620A19923ACB008563CA /* levelcompleted.caf */; };
@@ -434,6 +435,7 @@
 		AACAB432198AC40400F8AE01 /* LevelProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelProvider.cpp; sourceTree = "<group>"; };
 		AACAB433198AC40400F8AE01 /* LevelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelProvider.h; sourceTree = "<group>"; };
 		AACAB437198AC41F00F8AE01 /* level_1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level_1.plist; sourceTree = "<group>"; };
+		AAEF481D199A594D0045F40C /* crystal radio kit.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "crystal radio kit.ttf"; path = "fonts/crystal radio kit.ttf"; sourceTree = "<group>"; };
 		AAF06202199232D0008563CA /* Potatoe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Potatoe.cpp; sourceTree = "<group>"; };
 		AAF06203199232D0008563CA /* Potatoe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Potatoe.h; sourceTree = "<group>"; };
 		AAF0620719923645008563CA /* Duck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Duck.cpp; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AAEF481D199A594D0045F40C /* crystal radio kit.ttf */,
 				AAF0620A19923ACB008563CA /* levelcompleted.caf */,
 				AAF0620B19923ACB008563CA /* item_fall.caf */,
 				AAF0620C19923ACB008563CA /* pressbutton.caf */,
@@ -1136,6 +1139,7 @@
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
+				AAEF481E199A594D0045F40C /* crystal radio kit.ttf in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				AA96A225195DB25500C22BC9 /* images.plist in Resources */,
