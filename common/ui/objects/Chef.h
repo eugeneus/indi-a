@@ -32,6 +32,7 @@ public:
 
 protected:
    
+   bool isItemAccesible(Item* anItem);
    bool isHandCanGrab(Hand* aHand, Item* anItem);
    void updateBounceImpulse();
    

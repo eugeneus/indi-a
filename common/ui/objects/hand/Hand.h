@@ -17,6 +17,9 @@ public:
    
    void setPosition(cocos2d::Point aPosition);
    void catchItem(Item* anItem);
+   void setIgnoredItem(Item* anItem);
+   bool isIgnoredItem(Item* anItem);
+   void forgetIgnoredItem();
    Item* dropItem();
    void upItem();
    Item* tossItem();
@@ -34,6 +37,8 @@ protected:
    cocos2d::Animation* getAnimation(int aFirtsImageIndex, int aLastImageIndex, float aDelay);
    bool waitIgnoredItem();
    float getRandomFloat(float from ,float to);
+   
+   void testDraw();
    
    Item* _catchItem;
    

@@ -20,7 +20,9 @@ protected:
     void animateSpriteFrames(cocos2d::Vector<cocos2d::SpriteFrame*>& animateFrames, float delayTime);
    
     void changeSpriteFramesAnimation(cocos2d::Vector<cocos2d::SpriteFrame*>& animateFrames, float delayTime);
-
+   
+    void testDraw();
+   
    float _defaultScale;
 public:
     Spritable();

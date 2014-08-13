@@ -18,7 +18,6 @@ Hand::~Hand()
 Hand* Hand::create(const std::string &aSpriteFrameName)
 {
    Hand *pRet = new Hand();
-   //(Hand*)Sprite::createWithSpriteFrameName(aSpriteFrameName);
    
    if (!pRet->initWithSpriteFrameName(aSpriteFrameName)){
       delete pRet;
@@ -27,65 +26,11 @@ Hand* Hand::create(const std::string &aSpriteFrameName)
    }
    
    Size imgSize = pRet->getContentSize();
-   pRet->_handRect = Rect(0.0f, 0.0f, imgSize.width* 0.7, imgSize.height);
-//pRet->setScale(0.7f);
-   
+   pRet->_handRect = Rect(0.0f, 0.0f, imgSize.width, imgSize.height);
    pRet->setAnchorPoint(Point(0.5f,0.5f));
-   
-/*
-   pRet->_grabPoint = Point(pRet->_handRect.origin.x + pRet->_handRect.size.width/2.0f,
-                            pRet->_handRect.origin.y + pRet->_handRect.size.height/2.0f);
-   pRet->_tossPoint = Point(pRet->_grabPoint.x, pRet->_grabPoint.y + 15.0f);
-*/
    pRet->setScale(0.7);
-   
-/*
-   DrawNode *ancNode = DrawNode::create();
-   ancNode->drawDot(pRet->getAnchorPointInPoints(), 20, Color4F(Color3B::WHITE));
-   pRet->addChild(ancNode, 0);
-*/
-   
    pRet->_grabPoint = pRet->getPosition();
-   pRet->_tossPoint = Point(pRet->_grabPoint.x, pRet->_grabPoint.y + 20.0f);
-   
-/*
-   Point t1 = pRet->getPosition();
-   Size s1 = pRet->getContentSize();
-   Rect r1 = pRet->getRect1();
-   
-   DrawNode *dotNode = DrawNode::create();
-   dotNode->drawDot(pRet->getPosition(), 10, Color4F(Color3B::WHITE));
-
-   
-   DrawNode *dotNode1 = DrawNode::create();
-   Point p1 = r1.origin;
-   p1.x += r1.size.width;
-   Point p2 = p1;
-   p2.y += r1.size.height;
-   Point p3 = p2;
-   p3.x = r1.origin.x;
-   Point verts [] = {r1.origin,p1,p2,p3};
-   dotNode1->drawPolygon(verts, 4, Color4F(1,222,120,0.2), 1.0, Color4F(Color3B::WHITE));
-   //dotNode->drawDot(pRet->getPosition(), 10, Color4F(Color3B::WHITE));
-   
-   //(pRet->getPosition(), 10, Color4F(Color3B::WHITE));
-   DrawNode *dotNode2 = DrawNode::create();
-   p1 = pRet->getPosition();
-   p1.x += pRet->getContentSize().width;
-   p2 = p1;
-   p2.y += pRet->getContentSize().height;
-   p3 = p2;
-   p3.x = pRet->getPosition().x;
-   Point verts1 [] = {pRet->getPosition(),p1,p2,p3};
-   dotNode2->drawPolygon(verts1, 4, Color4F(1,222,120,0.2), 1.0, Color4F(Color3B::WHITE));
-   
-   
-
-   pRet->addChild(dotNode, 0);
-   //pRet->addChild(dotNode1, 0);
-   pRet->addChild(dotNode2, 0);
- */  
-   
+   pRet->_tossPoint = Point(pRet->_grabPoint.x, pRet->_grabPoint.y + pRet->_handRect.size.height / 2.0f);
 
    return pRet;
 }
@@ -141,23 +86,20 @@ void Hand::setPosition(cocos2d::Point aPosition)
 {
    this->_handRect.origin.x = aPosition.x;
    this->_handRect.origin.y = aPosition.y;
-   //this->_grabPoint = Point(_handRect.origin.x + _handRect.size.width/2.0f,
-   //                         _handRect.origin.y + _handRect.size.height/2.0f);
+   this->_grabPoint = aPosition;
+   this->_tossPoint = Point(_grabPoint.x, _grabPoint.y + _handRect.size.width / 2.0f);
    
    Sprite::setPosition(aPosition);
-   
-   this->_grabPoint = this->getPosition();
-   this->_tossPoint = Point(_grabPoint.x, _grabPoint.y + 15.0f);
-   
 }
-
 
 void Hand::catchItem(Item* anItem)
 {
+   if (this->_catchItem) {
+      return;
+   }
+   
    this->_catchItem = anItem;
    this->_grabPoint.y = _catchItem->getPosition().y;
-   //this->_tossPoint.y = this->_grabPoint.y + 15.0f;
-   
 }
 
 Item* Hand::dropItem()
@@ -182,7 +124,7 @@ void Hand::upItem()
    if (currPos.x >= _grabPoint.x - 1.0f &&
        currPos.x <= _grabPoint.x + 1.0f &&
        currPos.y == _grabPoint.y) {
-      currPos.y += 1.0f;
+      currPos.y += 0.1f;
       _catchItem->setPosition(currPos);
       this->runHandUpAnimatedAction();
    }
@@ -199,7 +141,7 @@ Item* Hand::tossItem()
    if (currPos.x >= _tossPoint.x - 1.0f &&
        currPos.x <= _tossPoint.x + 1.0f &&
        currPos.y == _tossPoint.y) {
-      currPos.y += 1.0f;
+      currPos.y += 0.1f;
       _catchItem->setPosition(currPos);
       this->runTossAmiatedAction();
       return this->dropItem();
@@ -212,7 +154,8 @@ bool Hand::isHandBusy()
 {
    Point currHandPos = this->getPosition();
    Point handPos = Point((_handRect.origin.x + _handRect.size.width / 2.0f), (_handRect.origin.y + _handRect.size.height / 2.0f));
-   bool isHandBusy = (((handPos.x != currHandPos.x) || (handPos.y != currHandPos.y)) && (_catchItem) &&
+   //((handPos.x != currHandPos.x) || (handPos.y != currHandPos.y)) &&
+   bool isHandBusy = ((_catchItem) &&
    (this->getNumberOfRunningActions() > 0));
    return isHandBusy;
 }
@@ -270,5 +213,54 @@ void Hand::runTossAmiatedAction()
    
    this->runAction(Spawn::create(moveRet,seq, NULL));
    
+}
+
+void Hand::setIgnoredItem(Item* anItem)
+{
+   if(!this->_ignoredItem)
+      _ignoredItem = anItem;
+}
+
+bool Hand::isIgnoredItem(Item* anItem)
+{
+   return _ignoredItem == anItem;
+}
+
+void Hand::forgetIgnoredItem()
+{
+   if(this->_ignoredItem){
+      Point currPos = this->_ignoredItem->getPosition();
+      if(currPos.x < this->_handRect.origin.x)
+         this->_ignoredItem = nullptr;
+   }
+
+}
+
+
+void Hand::testDraw()
+{
+   // draw anchor point
+    DrawNode *dotAnchorNode = DrawNode::create();
+    dotAnchorNode->drawDot(this->getAnchorPointInPoints(), 10, Color4F(Color3B::WHITE));
+    this->addChild(dotAnchorNode, 0);
+   // draw position poing
+   DrawNode *dotPositinNode = DrawNode::create();
+   dotPositinNode->drawDot(this->getPosition(), 10, Color4F(Color3B::WHITE));
+   this->addChild(dotPositinNode, 0);
+   // draw content rect
+ 
+   DrawNode *rectNode = DrawNode::create();
+   Size imgSize = this->getContentSize();
+   Point originPos = this->getPosition();
+   Point point1 = originPos;
+   point1.x += imgSize.width;
+   Point point2 = point1;
+   point2.y += imgSize.height;
+   Point point3 = point2;
+   point3.x = originPos.x;
+   Point verts1 [] = {originPos,point1,point2,point3};
+   
+   rectNode->drawPolygon(verts1, 4, Color4F(1,1,1,0.2), 1.0, Color4F(Color3B::WHITE));
+   this->addChild(rectNode, 0);
 }
 

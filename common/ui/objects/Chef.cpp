@@ -101,19 +101,31 @@ bool Chef::isHandCanGrab(Hand* aHand, Item* anItem)
    if(anItem->getLocalZOrder() > 20)
       return false;
    
-   if (aHand->isHandBusy()) {
+   if(aHand->isIgnoredItem(anItem))
       return false;
-   }
    
    Rect handRect = aHand->getRect1();
-   float grabDistance = handRect.origin.x + handRect.size.width;
+   float grabDistance = handRect.origin.x + (handRect.size.width / 2.0f);
    float itemPosX = anItem->getPosition().x;
    
    return ( (itemPosX > handRect.origin.x) && (itemPosX < grabDistance));
 }
 
+bool Chef::isItemAccesible(Item* anItem)
+{
+   float minX = _rightHand->getRect1().origin.x;
+   float maxX = _leftHand->getRect1().origin.x + _leftHand->getRect1().size.width;
+   float itemPosX = anItem->getPosition().x;
+   
+   return (itemPosX >= minX && itemPosX <= maxX);
+}
+
 Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
 {
+   // initially ignore long distance items TODO!!!
+   if (!this->isItemAccesible(anItem)) {
+      return nullptr;
+   }
    
    // check if any hand ready to toss catched item
    Item* tossingItem = nullptr;
@@ -126,24 +138,33 @@ Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
    if (tossingItem) {
       return tossingItem;
    }
-
    
    // try to up catched item
    _leftHand->upItem();
    _rightHand->upItem();
    
+   // check to forget ignored item
+   _leftHand->forgetIgnoredItem();
+   _rightHand->forgetIgnoredItem();
+   
    // check if any hand can catch an item
    Hand* activeHand = _leftHand;
 
  if (_leftHand->isHandBusy()) { //  || _leftHand->isWaiting()
+    _leftHand->setIgnoredItem(anItem);
       activeHand = _rightHand;
    }
 
    if (this->isHandCanGrab(activeHand, anItem)) {
-      activeHand->catchItem(anItem);
-      activeHand->runGrabAnimatedAction(aConveyourVelocity);
+      if (activeHand->isHandBusy()) {
+         activeHand->setIgnoredItem(anItem);
+      }
+      else{
+         activeHand->catchItem(anItem);
+         activeHand->runGrabAnimatedAction(aConveyourVelocity);
+      }
    }
-   
+
    return nullptr;
 }
 
