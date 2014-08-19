@@ -90,7 +90,7 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
     std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
     
    this->arrangeBackground(origin,visibleSize);
-   _itemIdlePos = Vec2(visibleSize.width + 50.0f, _convY + 70.0f);
+   _itemIdlePos = Vec2(visibleSize.width + 150.0f, _convY + 70.0f);
    this->populateGameObjects(origin,visibleSize);
    
    return true;

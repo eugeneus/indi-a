@@ -32,7 +32,7 @@ Hand* Hand::create(const std::string &aSpriteFrameName)
    pRet->_grabPoint = pRet->getPosition();
    pRet->_tossPoint = Point(pRet->_grabPoint.x, pRet->_grabPoint.y + pRet->_handRect.size.height / 2.0f);
    
-   pRet->testDraw();
+   //pRet->testDraw();
 
    return pRet;
 }
