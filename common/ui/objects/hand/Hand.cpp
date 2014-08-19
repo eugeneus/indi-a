@@ -31,9 +31,23 @@ Hand* Hand::create(const std::string &aSpriteFrameName)
    pRet->setScale(0.7);
    pRet->_grabPoint = pRet->getPosition();
    pRet->_tossPoint = Point(pRet->_grabPoint.x, pRet->_grabPoint.y + pRet->_handRect.size.height / 2.0f);
+   
+   pRet->testDraw();
 
    return pRet;
 }
+
+/*
+void Hand::setGrabPoint(cocos2d::Point aPoint)
+{
+
+}
+
+void Hand::setTossPoint(cocos2d::Point aPoint)
+{
+
+}
+*/
 
 Animation* Hand::getAnimation(int aFirtsImageIndex, int aLastImageIndex, float aDelay)
 {
@@ -111,7 +125,6 @@ Item* Hand::dropItem()
    }
    
    return nullptr;
-   
 }
 
 void Hand::upItem()
@@ -133,9 +146,9 @@ void Hand::upItem()
 
 Item* Hand::tossItem()
 {
-   Item* tossingItem = nullptr;
+   //Item* tossingItem = nullptr;
    if (!_catchItem) {
-      return tossingItem;
+      return nullptr;
    }
    Point currPos = _catchItem->getPosition();
    if (currPos.x >= _tossPoint.x - 1.0f &&
@@ -144,6 +157,7 @@ Item* Hand::tossItem()
       currPos.y += 0.1f;
       _catchItem->setPosition(currPos);
       this->runTossAmiatedAction();
+      
       return this->dropItem();
    }
    
@@ -152,8 +166,8 @@ Item* Hand::tossItem()
 
 bool Hand::isHandBusy()
 {
-   Point currHandPos = this->getPosition();
-   Point handPos = Point((_handRect.origin.x + _handRect.size.width / 2.0f), (_handRect.origin.y + _handRect.size.height / 2.0f));
+   //Point currHandPos = this->getPosition();
+   //Point handPos = Point((_handRect.origin.x + _handRect.size.width / 2.0f), (_handRect.origin.y + _handRect.size.height / 2.0f));
    //((handPos.x != currHandPos.x) || (handPos.y != currHandPos.y)) &&
    bool isHandBusy = ((_catchItem) &&
    (this->getNumberOfRunningActions() > 0));
@@ -165,10 +179,12 @@ Rect Hand::getRect1()
    return _handRect;
 }
 
+/*
 bool Hand::waitIgnoredItem()
 {
    return false;
 }
+*/ 
 
 void Hand::runGrabAnimatedAction(float aConveyorVelocity)
 {
@@ -176,8 +192,6 @@ void Hand::runGrabAnimatedAction(float aConveyorVelocity)
    float duration = (pos.x - this->_grabPoint.x)/aConveyorVelocity;
    
    Animation* animation = this->getAnimation(1,2, (duration/2.0));
-   //pos.x = _grabPoint.x;
-   //pos.y = pos.y + _catchItem->getContentSize().height/2.0f;
    pos = Point(_handRect.origin.x + _handRect.size.width/2.0f,_handRect.origin.y + _handRect.size.height/2.0f);
    MoveTo* move1 = MoveTo::create(duration/2.0f,  pos);
    Point pos2 = Point(_grabPoint.x,_grabPoint.y + _catchItem->getScaledContentSize().height/2.0f);
@@ -190,15 +204,17 @@ void Hand::runGrabAnimatedAction(float aConveyorVelocity)
 void Hand::runHandUpAnimatedAction()
 {
    float duration = 0.5f;
-   Point t = _catchItem->getPosition();
-   Point currPos = this->getPosition();
-   currPos.y += (_tossPoint.y - currPos.y);
+   Point itemPos = _catchItem->getPosition();
+   float actionDistance = abs(_tossPoint.y - itemPos.y);
    
-   MoveTo* moveUp = MoveTo::create(duration, currPos); //_tossPoint
+   Point currPos = this->getPosition();
+   Point upPoint = Point(currPos.x, currPos.y + actionDistance); //currPos.y + (_tossPoint.y - currPos.y)
+   
+   MoveTo* moveUp = MoveTo::create(duration, upPoint);
    Animation* animation = this->getAnimation(3,3, duration);
    Spawn* moveUpSpawn = Spawn::create(moveUp, Animate::create(animation), NULL);
    this->runAction(moveUpSpawn);
-
+   
    _catchItem->runCatchAction(duration,_tossPoint);
 }
 
@@ -224,6 +240,11 @@ void Hand::setIgnoredItem(Item* anItem)
 bool Hand::isIgnoredItem(Item* anItem)
 {
    return _ignoredItem == anItem;
+}
+
+bool Hand::isCaughtItem(Item* anItem)
+{
+   return _catchItem == anItem;
 }
 
 void Hand::forgetIgnoredItem()

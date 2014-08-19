@@ -16,9 +16,12 @@ public:
    void mirrorImg();
    
    void setPosition(cocos2d::Point aPosition);
+   //void setGrabPoint(cocos2d::Point aPoint);
+   //void setTossPoint(cocos2d::Point aPoint);
    void catchItem(Item* anItem);
    void setIgnoredItem(Item* anItem);
    bool isIgnoredItem(Item* anItem);
+   bool isCaughtItem(Item* anItem);
    void forgetIgnoredItem();
    Item* dropItem();
    void upItem();
@@ -35,7 +38,7 @@ protected:
    void runTossAmiatedAction();
    
    cocos2d::Animation* getAnimation(int aFirtsImageIndex, int aLastImageIndex, float aDelay);
-   bool waitIgnoredItem();
+   //bool waitIgnoredItem();
    float getRandomFloat(float from ,float to);
    
    void testDraw();

@@ -253,6 +253,7 @@ void GameController::runTossActionWithScale(Item* anItem, ControlPointDef* aPoin
    anItem->runAction(cobinedAction);
 }
 
+/*
 void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
 {
    float xThrow = throwX;
@@ -275,7 +276,7 @@ void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
    }
    
 }
-
+*/
 void GameController::tossItem(Item* anItem, Vec2 anImpulse)
 {
       //Point impulse

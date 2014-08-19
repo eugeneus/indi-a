@@ -127,44 +127,98 @@ Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
       return nullptr;
    }
    
-   // check if any hand ready to toss catched item
    Item* tossingItem = nullptr;
-   tossingItem = _leftHand->tossItem();
-   if (tossingItem) {
-      return tossingItem;
+   
+   if (_leftHand->isCaughtItem(anItem)) {
+   
+      tossingItem = _leftHand->tossItem();
+      if (tossingItem) {
+         return tossingItem;
+      }
+
+      _leftHand->upItem();
+
+   }
+   else if(_leftHand->isIgnoredItem(anItem)){
+      
+      _leftHand->forgetIgnoredItem();
+      
+   }
+   else if(_leftHand->isHandBusy() && !_leftHand->isCaughtItem(anItem)){
+      
+      _leftHand->setIgnoredItem(anItem);
+   
+   }
+   else if(this->isHandCanGrab(_leftHand, anItem)){
+   
+      _leftHand->catchItem(anItem);
+      _leftHand->runGrabAnimatedAction(aConveyourVelocity);
    }
    
+   // rigth Hand
+   
+   if (_rightHand->isCaughtItem(anItem)) {
+      
+      tossingItem = _rightHand->tossItem();
+      if (tossingItem) {
+         return tossingItem;
+      }
+      
+      _rightHand->upItem();
+      
+   }
+   else if(_rightHand->isIgnoredItem(anItem)){
+      
+      _rightHand->forgetIgnoredItem();
+      
+   }
+   /*
+   else if(_leftHand->isHandBusy() && !_leftHand->isCaughtItem(anItem)){
+      
+      _leftHand->setIgnoredItem(anItem);
+      
+   }
+    */
+   else if(this->isHandCanGrab(_rightHand, anItem)) {
+      
+      _rightHand->catchItem(anItem);
+      _rightHand->runGrabAnimatedAction(aConveyourVelocity);
+   }
+   
+
+   /*
    tossingItem = _rightHand->tossItem();
    if (tossingItem) {
       return tossingItem;
    }
    
    // try to up catched item
-   _leftHand->upItem();
    _rightHand->upItem();
    
    // check to forget ignored item
-   _leftHand->forgetIgnoredItem();
+   
    _rightHand->forgetIgnoredItem();
    
    // check if any hand can catch an item
    Hand* activeHand = _leftHand;
 
  if (_leftHand->isHandBusy()) { //  || _leftHand->isWaiting()
+    if(!_leftHand->isIgnoredItem(anItem) && !_leftHand->isCaughtItem(anItem))
     _leftHand->setIgnoredItem(anItem);
       activeHand = _rightHand;
    }
 
    if (this->isHandCanGrab(activeHand, anItem)) {
-      if (activeHand->isHandBusy()) {
-         activeHand->setIgnoredItem(anItem);
+      if (activeHand->isHandBusy() ) {
+         if(!activeHand->isIgnoredItem(anItem) && !activeHand->isCaughtItem(anItem))
+            activeHand->setIgnoredItem(anItem);
       }
       else{
          activeHand->catchItem(anItem);
          activeHand->runGrabAnimatedAction(aConveyourVelocity);
       }
    }
-
+*/
 
    return nullptr;
 }

@@ -32,7 +32,8 @@ bool Item::init(string spriteFrameName, const char* framesPattern, int spriteCou
    Point verts [] = {r1.origin,p1,p2,p3};
    dotNode1->drawPolygon(verts, 4, Color4F(1,222,120,0.2), 1.0, Color4F(Color3B::WHITE));
    */
-    
+   
+   this->testDraw();
     return true;
 }
 

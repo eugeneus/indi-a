@@ -21,7 +21,8 @@ Spritable* Spritable::create(string spriteFrameName, const char* framesPattern, 
     {
         CC_SAFE_DELETE(pRet);
     }
-    
+   
+   
     return pRet;
 }
 
