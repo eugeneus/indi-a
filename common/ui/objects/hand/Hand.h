@@ -15,18 +15,26 @@ public:
    static Hand* create(const std::string &aSpriteFrameName);
    void mirrorImg();
    
-   void setPosition(cocos2d::Point aPosition);
-   //void setGrabPoint(cocos2d::Point aPoint);
-   //void setTossPoint(cocos2d::Point aPoint);
+   void setInitialPosition(cocos2d::Point aPosition);
+
    void catchItem(Item* anItem);
+   
    void setIgnoredItem(Item* anItem);
+   
    bool isIgnoredItem(Item* anItem);
+   
    bool isCaughtItem(Item* anItem);
-   void forgetIgnoredItem();
+   
    Item* dropItem();
+   
    void upItem();
+   
    Item* tossItem();
+   
    bool isHandBusy();
+   
+   bool isCanGrabItem(Item* anItem);
+   
    cocos2d::Rect getRect1();
    
    bool randomWaitForToss();

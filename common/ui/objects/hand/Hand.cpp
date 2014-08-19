@@ -37,18 +37,6 @@ Hand* Hand::create(const std::string &aSpriteFrameName)
    return pRet;
 }
 
-/*
-void Hand::setGrabPoint(cocos2d::Point aPoint)
-{
-
-}
-
-void Hand::setTossPoint(cocos2d::Point aPoint)
-{
-
-}
-*/
-
 Animation* Hand::getAnimation(int aFirtsImageIndex, int aLastImageIndex, float aDelay)
 {
    
@@ -96,7 +84,7 @@ bool Hand::randomWaitForToss()
 
 }
 
-void Hand::setPosition(cocos2d::Point aPosition)
+void Hand::setInitialPosition(cocos2d::Point aPosition)
 {
    this->_handRect.origin.x = aPosition.x;
    this->_handRect.origin.y = aPosition.y;
@@ -233,8 +221,22 @@ void Hand::runTossAmiatedAction()
 
 void Hand::setIgnoredItem(Item* anItem)
 {
-   if(!this->_ignoredItem)
+   if(!this->_ignoredItem){
+      
       _ignoredItem = anItem;
+      
+   }
+   else{ // reset item if it did go away
+      
+      Point currPos = this->_ignoredItem->getPosition();
+      if(currPos.x < this->_handRect.origin.x ||
+         currPos.x > (this->_handRect.origin.x + _handRect.size.width + 1.0f) ||
+         anItem->getLocalZOrder() != 20
+         )
+         this->_ignoredItem = nullptr;
+   }
+   
+   
 }
 
 bool Hand::isIgnoredItem(Item* anItem)
@@ -247,14 +249,15 @@ bool Hand::isCaughtItem(Item* anItem)
    return _catchItem == anItem;
 }
 
-void Hand::forgetIgnoredItem()
+bool Hand::isCanGrabItem(Item* anItem)
 {
-   if(this->_ignoredItem){
-      Point currPos = this->_ignoredItem->getPosition();
-      if(currPos.x < this->_handRect.origin.x)
-         this->_ignoredItem = nullptr;
-   }
+   if(this->isIgnoredItem(anItem))
+      return false;
+   
+   float grabDistance = _handRect.origin.x + (_handRect.size.width / 2.0f);
+   float itemPosX = anItem->getPosition().x;
 
+   return ( (itemPosX > _handRect.origin.x) && (itemPosX < grabDistance));
 }
 
 

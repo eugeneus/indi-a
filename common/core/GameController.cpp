@@ -253,30 +253,6 @@ void GameController::runTossActionWithScale(Item* anItem, ControlPointDef* aPoin
    anItem->runAction(cobinedAction);
 }
 
-/*
-void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
-{
-   float xThrow = throwX;
-   Point ptItem = anItem->getPosition();
-   
-   if (ptItem.x >= xThrow &&
-       ptItem.x <= xThrow + 10.0f &&
-       ptItem.y >= _itemIdlePos.y - 20.0f &&
-       ptItem.y <= _itemIdlePos.y + 20.0f &&
-       anItem->getLocalZOrder() == kItemZO1
-       )
-   {
-      ControlPointDef* collisionEndPointDef = nullptr;
-      if (_cntPoints->size() > 0) {
-         int randomPointIdx = getRandomNumber(0,(_cntPoints->size()-1));
-         collisionEndPointDef = _cntPoints->at(randomPointIdx);
-       }
-      float totalActionDuration = 1.5f;
-      this->runTossActionWithScale(anItem, collisionEndPointDef, totalActionDuration, anImpulse);
-   }
-   
-}
-*/
 void GameController::tossItem(Item* anItem, Vec2 anImpulse)
 {
       //Point impulse
@@ -344,6 +320,7 @@ void GameController::update(float dt)
    Size itemSize;
    _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
     _gameCycleInd->nextStep(dt);
+   
     if (_gameCycleInd->isComplete()) {
         this->stopGame();
         
@@ -496,5 +473,6 @@ void GameController::checkGameProgress(Item* anItem) {
             _multiplier->reset();
         }
     }
+
 }
 
