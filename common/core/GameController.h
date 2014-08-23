@@ -14,6 +14,7 @@ class UserDataProvider;
 class ScoreLayer;
 class Multiplier;
 class GameCycleIndicator;
+class BonusMenu;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -99,6 +100,8 @@ protected:
     ScoreLayer* _scoreLayer;
     Multiplier* _multiplier;
     GameCycleIndicator* _gameCycleInd;
+    BonusMenu* _bonusMenu;
+   
     
     std::vector<int> _caughtItemsIds;
 private:
