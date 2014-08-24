@@ -288,3 +288,12 @@ void Hand::testDraw()
    this->addChild(rectNode, 0);
 }
 
+void Hand::restart() {
+    _catchItem = nullptr;
+    
+    _ignoredItem = nullptr;
+    this->stopAllActions();
+    this->setPosition(_handRect.origin);
+    this->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("hand_left_1.png"));
+}
+

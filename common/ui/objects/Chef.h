@@ -29,6 +29,7 @@ public:
    
    Item* looksForItem(Item* anItem, float aConveyourVelocity);
    void setZOrder(int aZOrder);
+    void restartChef();
 
 protected:
    

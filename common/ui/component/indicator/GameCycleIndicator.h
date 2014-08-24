@@ -19,6 +19,9 @@ public:
     
     void nextStep(float dt);
     void prevStep(float dt);
+    
+    virtual void restart();
+    void setGameTime(float gt);
 };
 
 #endif /* defined(__BlindChef__GameCycleIndicator__) */

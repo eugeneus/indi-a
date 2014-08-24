@@ -61,9 +61,8 @@ bool Chef::init(cocos2d::Layer* aLayer, int aZOrder) {
    return true;
 }
 
-void Chef::setScale(float aScaleFactor)
-{
-
+void Chef::setScale(float aScaleFactor) {
+    
 }
 
 
@@ -212,6 +211,9 @@ void Chef::setConveyorVelocity(float aConveyorVelocity)
    _conveyorVelocity = aConveyorVelocity;
 }
 
-
+void Chef::restartChef() {
+    _leftHand->restart();
+    _rightHand->restart();
+}
 
 

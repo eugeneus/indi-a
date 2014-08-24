@@ -14,6 +14,8 @@ class UserDataProvider;
 class ScoreLayer;
 class Multiplier;
 class GameCycleIndicator;
+class Conveyor;
+class MindCloudTips;
 class BonusMenu;
 
 class ControlPointDef : public cocos2d::Ref {
@@ -52,12 +54,15 @@ public:
    void startGame();
    
    void stopGame();
+    void restartGame();
    
    void update(float dt);
     
     void changeItemPath(Item* anItem, float angle, Vec2 anImpulse);
 
 protected:
+    void releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
+    void setUpInit(bool isStart);
    
    void arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
    
@@ -100,8 +105,10 @@ protected:
     ScoreLayer* _scoreLayer;
     Multiplier* _multiplier;
     GameCycleIndicator* _gameCycleInd;
+    Conveyor* _conv;
+    MindCloudTips* cloudTips;
+    Sprite* bg;
     BonusMenu* _bonusMenu;
-   
     
     std::vector<int> _caughtItemsIds;
 private:

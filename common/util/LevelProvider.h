@@ -12,6 +12,7 @@ private:
     
     float _speed;
     float _time;
+    std::string _bg;
     
     std::vector<int> _requiredItems;
     std::vector<int> _allowedFoodItems;
@@ -30,6 +31,7 @@ public:
     
     bool checkAllRequiredExist(std::vector<int> itemsIds);
     
+    int getLevelId();
     float getSpeed();
     float getTime();
     std::vector<int> getRequiredItems();
@@ -38,6 +40,7 @@ public:
     std::vector<int> getBonusItems();
     
     bool isRequiredItem(int itemId);
+    std::string getBgSpriteFrameName();
 };
 
 #endif /* defined(__BlindChef__LevelProvider__) */
