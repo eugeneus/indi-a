@@ -71,15 +71,22 @@ GameController* GameController::createWitLayer(cocos2d::Layer* initWithLayer)
 
 bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
 {
-   cocos2d::Size visibleSize;
-   cocos2d::Vec2 origin;
-
    _gameLayer = aGameLayer;
    
-   visibleSize = Director::getInstance()->getVisibleSize();
-   origin = Director::getInstance()->getVisibleOrigin();
    
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgmusic.mp3", true);
+   
+    this->setUpInit(true);
+    
+   return true;
+}
+
+void GameController::setUpInit(bool isStart) {
+    cocos2d::Size visibleSize;
+    cocos2d::Vec2 origin;
+    
+    visibleSize = Director::getInstance()->getVisibleSize();
+    origin = Director::getInstance()->getVisibleOrigin();
     
     _levelInfo = LevelProvider::createForLevel(1);
     _userData = UserDataProvider::create();
@@ -89,11 +96,35 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
     std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
     std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
     
-   this->arrangeBackground(origin,visibleSize);
-   _itemIdlePos = Vec2(visibleSize.width + 50.0f, _convY + 70.0f);
-   this->populateGameObjects(origin,visibleSize);
-   
-   return true;
+    
+    if (isStart) this->arrangeBackground(origin,visibleSize);
+    else releaseAll(origin,visibleSize);
+    _itemIdlePos = Vec2(visibleSize.width + 50.0f, _convY + 70.0f);
+    this->populateGameObjects(origin,visibleSize);
+}
+
+void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize) {
+    bg->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("level_1_bg.png"));
+    
+    cloudTips->changeTip(CCString::createWithFormat("tips_level_%i.png", 1)->getCString());
+    
+    float yOffsetConveyer = 615;
+    
+    _convY = yOffsetConveyer - 102;
+    _convVelY = 50;
+    _convLegth = aVisibleSize.width;
+    
+    _gameCycleInd->setGameTime(_levelInfo->getTime());
+    _gameCycleInd->restart();
+
+    _theChef->startChefBodyAnimation();
+    
+    for(Node* nitem : *_items){
+        nitem->removeFromParentAndCleanup(true);
+    }
+    
+    _caughtItemsIds.clear();
+    _items->clear();
 }
 
 void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
@@ -102,7 +133,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
    SpriteFrameCache* cache = SpriteFrameCache::getInstance();
    cache->addSpriteFramesWithFile("images.plist");
 
-   Sprite* bg = Sprite::createWithSpriteFrameName("level_1_bg.png");
+   bg = Sprite::createWithSpriteFrameName("level_1_bg.png");
    bg->setPosition(Vec2(aVisibleSize.width/2 + anOrigin.x, aVisibleSize.height/2 + anOrigin.y));
    _gameLayer->addChild(bg, kWallZO);
    
@@ -117,7 +148,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
    Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer);
    _theChef->setOrigin(chefOrigin);
    
-    MindCloudTips* cloudTips = MindCloudTips::create(CCString::createWithFormat("tips_level_%i.png", 1)->getCString());
+    cloudTips = MindCloudTips::create(CCString::createWithFormat("tips_level_%i.png", 1)->getCString());
     cloudTips->setPosition(Vec2(140, yOffsetConveyer + 100));
     _gameLayer->addChild(cloudTips, kCloudZO);
     cloudTips->toggleTip();
@@ -126,9 +157,9 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     _convVelY = 50;
     _convLegth = aVisibleSize.width;
 
-    Conveyor* conv = Conveyor::create(_convVelY, _convLegth);
-   conv->setPosition(Vec2(0, _convY));
-    _gameLayer->addChild(conv, kConveyurZO);
+    _conv = Conveyor::create(_convVelY, _convLegth);
+    _conv->setPosition(Vec2(0, _convY));
+    _gameLayer->addChild(_conv, kConveyurZO);
     
     _thePot = Pot::create(_gameLayer,kPotFrontZO,kPotBackZO);
    Size sz = _thePot->getFrontRect().size;
@@ -190,6 +221,11 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
 void startGame()
 {
 
+}
+
+void GameController::restartGame() {
+    this->setUpInit(false);
+    _gameLayer->resume();
 }
 
 void GameController::stopGame()
@@ -343,18 +379,23 @@ void GameController::update(float dt)
    Size itemSize;
    _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
     _gameCycleInd->nextStep(dt);
-    if (_gameCycleInd->isComplete()) {
-        this->stopGame();
+    if (!_gameCycleInd->isComplete()) {   //TODO: remove
+        /*this->stopGame();                //TODO: remove
         
         if (_levelInfo->checkAllRequiredExist(_caughtItemsIds)) {
-            GameCompletePopup* goPopup = GameCompletePopup::create();
+            GameCompletePopup* goPopup = GameCompletePopup::create(); //TODO:replace for change game score and dish
             _gameLayer->addChild(goPopup, 1001);
-        } else {
+        } else {                         //TODO: remove
             GameOverPopup* goPopup = GameOverPopup::create();
             _gameLayer->addChild(goPopup, 1001);
         }
-        return;
-    }
+        return;*/
+        
+        /*if (this->_convVelY < 60) {
+            this->_convVelY +=20;
+            this->_conv->changeCyclingSpeed(this->_convVelY);
+        }*/
+
    
    // set items idle/put them on the conveuir
    for (int i = _idxRotated; i < _items->size(); i++) {
@@ -362,8 +403,9 @@ void GameController::update(float dt)
       this->putIdleItemOnConveyour(dt, item);
    }
    _putNextItemDt -= dt;
-
-
+    }
+    
+    
    for(Node* nitem : *_items){
       
       item = (Item*)nitem;
@@ -385,12 +427,18 @@ void GameController::update(float dt)
          this->setItemIdle(dt, item);
       }
       
+       
+       
       if (item->getLocalZOrder() == kItemZO1) { //toss
          
+        if (!_gameCycleInd->isComplete()) {
+          
          Item* tossed = _theChef->looksForItem(item, this->_convVelY);
          if (tossed) {
             this->tossItem(tossed, _theChef->getBounceImpulse());
          }
+            
+        }
          
       } else
       if (item->getLocalZOrder() == kItemZO2 && item->isItemInCurrentTargetPoint()) {
@@ -410,6 +458,25 @@ void GameController::update(float dt)
          }
       
    }
+    
+    
+    if (_gameCycleInd->isComplete()) {
+        
+        int idledCount = 0;
+        for(Node* nitem : *_items) {
+            if (nitem->getPosition() == _itemIdlePos) {
+                idledCount++;
+            }
+        }
+        
+        if (idledCount == _items->size()) {
+            //NEW ROUND
+            
+           // _gameLayer->unscheduleUpdate();
+            this->stopGame();
+            this->restartGame();
+        }
+    }
 }
 
 ControlPointDef* GameController::findControlPointDefByAngle(Item* anItem, float angle, float xImpulse) {

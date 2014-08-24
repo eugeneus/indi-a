@@ -101,7 +101,12 @@ void Cyclable::startCycling() {
 }
 
 void Cyclable::changeCyclingSpeed(float speed) {
-    
+    for(Sprite* nSprite : sprites){
+        nSprite->stopAllActions();
+    }
+    cyclingSpeed = speed;
+    actionDuration = actionLength/cyclingSpeed;
+    this->startCycling();
 }
 
 void Cyclable::addChild(cocos2d::Node* node, int zIndex) {

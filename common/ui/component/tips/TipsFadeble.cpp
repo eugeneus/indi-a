@@ -69,3 +69,7 @@ void TipsFadeble::toggleTip() {
         hideTip();
     }
 }
+
+void TipsFadeble::changeTip(const std::string& tipsImgFrameName) {
+    img->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(tipsImgFrameName));
+}
