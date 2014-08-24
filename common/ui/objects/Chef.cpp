@@ -100,6 +100,34 @@ bool Chef::isHandCanGrab(Hand* aHand, Item* anItem)
    return anItem->getLocalZOrder() == 20 && aHand->isCanGrabItem(anItem);
 }
 
+void Chef::setVision(std::vector<int> aRequiredItems)
+{
+    _requiredItemIDs = aRequiredItems;
+}
+
+void Chef::resetVision()
+{
+    _requiredItemIDs.clear();
+}
+
+
+bool Chef::hasVision()
+{
+    return _requiredItemIDs.size() > 0;
+}
+
+bool Chef::isRequiredItem(Item* anItem)
+{
+    int iReqItem = 0;
+    bool isRequiredItem = false;
+    while (!isRequiredItem && iReqItem < _requiredItemIDs.size()) {
+        isRequiredItem = (anItem->getItemId() == _requiredItemIDs.at(iReqItem));
+        iReqItem++;
+    }
+    
+    return isRequiredItem;
+}
+
 bool Chef::isItemAccesible(Item* anItem)
 {
    float minX = _chefRect.origin.x;
@@ -116,6 +144,10 @@ Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
    if (!this->isItemAccesible(anItem)) {
       return nullptr;
    }
+    
+    if (this->hasVision() && !this->isRequiredItem(anItem)) {
+        return nullptr;
+    }
    
    Item* tossingItem = nullptr;
    // left hand processing
@@ -215,5 +247,7 @@ void Chef::restartChef() {
     _leftHand->restart();
     _rightHand->restart();
 }
+
+
 
 

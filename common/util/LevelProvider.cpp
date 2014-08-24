@@ -110,7 +110,7 @@ std::vector<int> LevelProvider::getBonusItems()
         Value bonusVal;
         for (int i = 0; i < items.size(); i++) {
             bonusVal = items.at(i);
-            _bonusItems.push_back(bonusVal.asValueMap().at("itemType").asInt());
+            _bonusItems.push_back(bonusVal.asValueMap().at("itemId").asInt());
         }
     }
     return _bonusItems;

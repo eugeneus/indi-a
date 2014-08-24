@@ -36,6 +36,8 @@ public:
    bool isItemInCurrentTargetPoint();
     
     std::string getSpriteFrameName();
+    
+    int getItemId();
    
    float _weightRatio;
    float _bounceRatio;

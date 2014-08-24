@@ -9,19 +9,19 @@
 		<dict>
 			<key>ocurancesPerLevel</key>
 			<integer>3</integer>
-			<key>itemType</key>
+			<key>itemId</key>
 			<integer>5</integer>
 		</dict>
 		<dict>
 			<key>ocurancesPerLevel</key>
 			<integer>3</integer>
-			<key>itemType</key>
+			<key>itemId</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>ocurancesPerLevel</key>
 			<integer>3</integer>
-			<key>itemType</key>
+			<key>itemId</key>
 			<integer>7</integer>
 		</dict>
 	</array>

@@ -29,6 +29,13 @@ public:
    
    Item* looksForItem(Item* anItem, float aConveyourVelocity);
    void setZOrder(int aZOrder);
+    
+    // eyesight control
+    void setVision(std::vector<int> aRequiredItems);
+    void resetVision();
+    bool hasVision();
+    bool isRequiredItem(Item* anItem);
+   
     void restartChef();
 
 protected:
@@ -54,6 +61,7 @@ private:
    cocos2d::Point _activeBouncePoint;
    int _sleepCounter;
    float _conveyorVelocity;
+    std::vector<int> _requiredItemIDs;
    
 };
 

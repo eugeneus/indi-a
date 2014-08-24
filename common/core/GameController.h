@@ -84,7 +84,10 @@ protected:
 
     ControlPointDef* findControlPointDefByAngle(Item* anItem, float angle, float xImpulse);
    
-   // model
+    void processBonusState(float dt);
+    void useActiveBonus();
+    void resetActiveBonus();
+    // model
    cocos2d::Vector<cocos2d::Node*>* _items;
    cocos2d::Vector<ControlPointDef*>* _cntPoints;
    
@@ -111,6 +114,9 @@ protected:
     BonusMenu* _bonusMenu;
     
     std::vector<int> _caughtItemsIds;
+    
+    float _bonusTimer; // if _bonusTimer > 0, the game using active bonus from bonus menu;
+    
 private:
    
    cocos2d::Layer* _gameLayer;

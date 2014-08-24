@@ -228,5 +228,7 @@ std::string Item::getSpriteFrameName()
     return _spriteFrameName;
 }
 
-
-
+int Item::getItemId()
+{
+    return this->_itemId;
+}
