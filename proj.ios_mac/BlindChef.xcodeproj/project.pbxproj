@@ -112,6 +112,7 @@
 		AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4B1966E64B00C48611 /* TipsFadeble.cpp */; };
 		AAB58E501966E90C00C48611 /* MindCloudTips.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4E1966E90C00C48611 /* MindCloudTips.cpp */; };
 		AAB58E531966F5F600C48611 /* Pot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E511966F5F600C48611 /* Pot.cpp */; };
+		AAB5F63619AA0ACE00756B29 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F63519AA0ACE00756B29 /* FacebookSDK.framework */; };
 		AAC70ED819975327007D0537 /* GameOverPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED619975327007D0537 /* GameOverPopup.cpp */; };
 		AAC70EDB19975374007D0537 /* BaseGamePopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED919975374007D0537 /* BaseGamePopup.cpp */; };
 		AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AACAB432198AC40400F8AE01 /* LevelProvider.cpp */; };
@@ -430,6 +431,7 @@
 		AAB58E4F1966E90C00C48611 /* MindCloudTips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MindCloudTips.h; sourceTree = "<group>"; };
 		AAB58E511966F5F600C48611 /* Pot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pot.cpp; sourceTree = "<group>"; };
 		AAB58E521966F5F600C48611 /* Pot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pot.h; sourceTree = "<group>"; };
+		AAB5F63519AA0ACE00756B29 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		AAC70ED619975327007D0537 /* GameOverPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverPopup.cpp; sourceTree = "<group>"; };
 		AAC70ED719975327007D0537 /* GameOverPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverPopup.h; sourceTree = "<group>"; };
 		AAC70ED919975374007D0537 /* BaseGamePopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseGamePopup.cpp; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 				1AC6FB32180E99EB004C840B /* libCocosDenshion iOS.a in Frameworks */,
 				D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				AAB5F63619AA0ACE00756B29 /* FacebookSDK.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */,
@@ -529,6 +532,7 @@
 		080E96DDFE201D6D7F000001 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				AAB5F63419AA0ACE00756B29 /* framework */,
 				5087E77117EB970100C73F5D /* Icons */,
 				503AE0FA17EB989F00D1A890 /* AppController.h */,
 				503AE0FB17EB989F00D1A890 /* AppController.mm */,
@@ -929,6 +933,15 @@
 			);
 			path = tips;
 			sourceTree = "<group>";
+		};
+		AAB5F63419AA0ACE00756B29 /* framework */ = {
+			isa = PBXGroup;
+			children = (
+				AAB5F63519AA0ACE00756B29 /* FacebookSDK.framework */,
+			);
+			name = framework;
+			path = ios/framework;
+			sourceTree = SOURCE_ROOT;
 		};
 		AACAB431198AC40400F8AE01 /* util */ = {
 			isa = PBXGroup;
@@ -1333,6 +1346,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ios/framework",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1366,6 +1383,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ios/framework",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
