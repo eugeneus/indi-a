@@ -80,6 +80,6 @@ void TipsFadeble::changeTip(const std::string& tipsImgFrameName) {
     img->setOpacity(0);
     
     this->setScale(0.5, 0.5);
-    bg->setScale(0.5, 0.5);
-    img->setScale(0.5, 0.5);
+    //bg->setScale(0.5, 0.5);
+    //img->setScale(0.5, 0.5);
 }

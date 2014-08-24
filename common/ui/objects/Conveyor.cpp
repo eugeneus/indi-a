@@ -45,9 +45,12 @@ void Conveyor::pauseConv() {
 }
 
 void Conveyor::resumeConv() {
+    super::startCycling();
+    
     super::resume();
     for (int i =0; i < sprites.size(); i++ ) {
         Sprite* sp = sprites.at(i);
         if (sp != nullptr) sp->resume();
     }
+
 }

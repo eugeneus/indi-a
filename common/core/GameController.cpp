@@ -100,7 +100,6 @@ void GameController::setUpInit(bool isStart) {
     _levelInfo = LevelProvider::createForLevel(level);
     _userData = UserDataProvider::create();
     
-    float speed = _levelInfo->getSpeed();
     std::vector<int> requiredFroodItems = _levelInfo->getRequiredItems();
     std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
     std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
@@ -122,7 +121,7 @@ void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSi
     float yOffsetConveyer = 615;
     
     _convY = yOffsetConveyer - 102;
-    _convVelY = 50;
+    _convVelY = _levelInfo->getSpeed();
     _convLegth = aVisibleSize.width;
     
     //_gameCycleInd->setGameTime(_levelInfo->getTime());
@@ -130,7 +129,7 @@ void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSi
 
     //_conv->resume();
     _theChef->restartChef();
-    _conv->resumeConv();
+    _conv->changeCyclingSpeed(_convVelY);
     
     for(Node* nitem : *_items){
         nitem->removeFromParentAndCleanup(true);
@@ -167,7 +166,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     cloudTips->toggleTip();
    
     _convY = yOffsetConveyer - 102;
-    _convVelY = 50;
+    _convVelY = _levelInfo->getSpeed();
     _convLegth = aVisibleSize.width;
 
     _conv = Conveyor::create(_convVelY, _convLegth);
@@ -240,6 +239,7 @@ void GameController::restartGame() {
     this->setUpInit(false);
     _gameLayer->resume();
    cloudTips->toggleTip();
+    _conv->resumeConv();
 }
 
 void GameController::stopGame()
@@ -532,7 +532,7 @@ float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPoin
 }
 
 void GameController::checkGameProgress(Item* anItem) {
-if (anItem->_itemType == 1) {
+   if (anItem->_itemType == 1) {
         _multiplier->reset();
         this->stopGame(); //TODO:
         //_gameLayer->pause();

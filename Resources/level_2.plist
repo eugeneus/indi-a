@@ -45,6 +45,6 @@
 		</array>
 	</dict>
 	<key>speed</key>
-	<integer>1</integer>
+	<integer>200</integer>
 </dict>
 </plist>
