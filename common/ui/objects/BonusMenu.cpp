@@ -1,13 +1,17 @@
 
 #include "BonusMenu.h"
 #include "ImageLabelMenuItem.h"
+#include "LevelProvider.h"
+#include "FoodFactory.h"
+#include "Item.h"
+
 
 USING_NS_CC;
 
-BonusMenu* BonusMenu::create()
+BonusMenu* BonusMenu::create(LevelProvider* aLevelInfo)
 {
     BonusMenu *pRet = new BonusMenu();
-    if (pRet && pRet->init())
+    if (pRet && pRet->init(aLevelInfo))
     {
         pRet->autorelease();
         return pRet;
@@ -20,20 +24,32 @@ BonusMenu* BonusMenu::create()
     }
 }
 
-bool BonusMenu::init()
+bool BonusMenu::init(LevelProvider* aLevelInfo)
 {
     if ( !Layer::create() )
     {
         return false;
     }
     
-    bonus1Count = Value(3);
-    bonus2Count = Value(2);
+    bonus1Count = Value(0);
+    bonus2Count = Value(0);
     bonus3Count = Value(0);
     
-    bonus1 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus1Count.asInt())->getCString(), "bonus_1.png", CC_CALLBACK_1(BonusMenu::bonus1Callback, this));
-    bonus2 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus2Count.asInt())->getCString(), "bonus_2.png", CC_CALLBACK_1(BonusMenu::bonus2Callback, this));
-    bonus3 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus3Count.asInt())->getCString(), "bonus_3.png", CC_CALLBACK_1(BonusMenu::bonus3Callback, this));
+    Item* bonusItem = FoodFactory::createFood(aLevelInfo->getBonusItems().at(0));
+    
+    bonus1 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus1Count.asInt())->getCString(),
+                                        bonusItem->getSpriteFrameName(), CC_CALLBACK_1(BonusMenu::bonus1Callback, this));
+    
+    //delete bonusItem;
+    bonusItem = FoodFactory::createFood(aLevelInfo->getBonusItems().at(1));
+    bonus2 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus2Count.asInt())->getCString(),
+                                        bonusItem->getSpriteFrameName(), CC_CALLBACK_1(BonusMenu::bonus2Callback, this));
+    
+    //delete bonusItem;
+    bonusItem = FoodFactory::createFood(aLevelInfo->getBonusItems().at(2));
+    bonus3 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus3Count.asInt())->getCString(),
+                                        bonusItem->getSpriteFrameName(), CC_CALLBACK_1(BonusMenu::bonus3Callback, this));
+    //delete bonusItem;
     
     Menu* menu = Menu::create(bonus1, bonus2, bonus3, NULL);
     menu->alignItemsHorizontally();

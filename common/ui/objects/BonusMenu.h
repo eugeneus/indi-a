@@ -5,6 +5,7 @@
 
 #include "cocos2d.h"
 class ImageLabelMenuItem;
+class LevelProvider;
 
 enum
 {
@@ -25,9 +26,9 @@ private:
     void updateBonus(cocos2d::Value& bonusCount, int delta, ImageLabelMenuItem* bonusLabel);
     
 public:
-    static BonusMenu* create();
+    static BonusMenu* create(LevelProvider* aLevelInfo);
     
-    bool init();
+    bool init(LevelProvider* aLevelInfo);
     
     void bonus1Callback(cocos2d::Ref* pSender);
     void bonus2Callback(cocos2d::Ref* pSender);

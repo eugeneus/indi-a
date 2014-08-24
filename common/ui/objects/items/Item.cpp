@@ -14,6 +14,7 @@ bool Item::init(string spriteFrameName, const char* framesPattern, int spriteCou
     _itemId = -1;
    
    _bumpSoundFileName = "item_fall.caf";
+    _spriteFrameName = spriteFrameName;
 
    //this->testDraw();
     return true;
@@ -220,6 +221,11 @@ void Item::playBumpSound()
 
 Sprite* Item::createCrack() {
     return NULL;
+}
+
+std::string Item::getSpriteFrameName()
+{
+    return _spriteFrameName;
 }
 
 

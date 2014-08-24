@@ -107,8 +107,8 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
    bg->setPosition(Vec2(aVisibleSize.width/2 + anOrigin.x, aVisibleSize.height/2 + anOrigin.y));
    _gameLayer->addChild(bg, kWallZO);
    
-    BonusMenu* _bonusMenu = BonusMenu::create();
-    _bonusMenu->setPosition(Vec2(_bonusMenu->getPosition().x - (aVisibleSize.width/2 + anOrigin.x) + 140, aVisibleSize.height/2 + anOrigin.y - 100));
+    _bonusMenu = BonusMenu::create(this->_levelInfo);
+    _bonusMenu->setPosition(Vec2(_bonusMenu->getPosition().x - (aVisibleSize.width/2 + anOrigin.x) + 140, aVisibleSize.height/2 + anOrigin.y - 80));
     _gameLayer->addChild(_bonusMenu, kWallZO);
     
     float yOffsetConveyer = 615;
