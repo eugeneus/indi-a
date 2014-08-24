@@ -73,8 +73,6 @@ protected:
 
    void runTossActionWithScale(Item* anItem, ControlPointDef* aPointDef, float aDuration, cocos2d::Point anImpulse);
 
-   void throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse);
-   
    void tossItem(Item* anItem, Vec2 anImpulse);
    
    void runBumpAction(Item* anItem);

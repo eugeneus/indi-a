@@ -86,8 +86,8 @@ void Chef::setOrigin(cocos2d::Point anOrigin)
    _leftHandRect.origin.y = anOrigin.y;
 
    _chef->setPosition(_chefRect.origin);
-   _leftHand->setPosition(_leftHandRect.origin);
-   _rightHand->setPosition(_rightHandRect.origin);
+   _leftHand->setInitialPosition(_leftHandRect.origin);
+   _rightHand->setInitialPosition(_rightHandRect.origin);
 
 }
 
@@ -98,50 +98,65 @@ void Chef::setWatchSector(cocos2d::Size aSectorSize)
 
 bool Chef::isHandCanGrab(Hand* aHand, Item* anItem)
 {
-   if(anItem->getLocalZOrder() > 20)
-      return false;
-   
-   if (aHand->isHandBusy()) {
-      return false;
-   }
-   
-   Rect handRect = aHand->getRect1();
-   float grabDistance = handRect.origin.x + handRect.size.width;
-   float itemPosX = anItem->getPosition().x;
-   
-   return ( (itemPosX > handRect.origin.x) && (itemPosX < grabDistance));
+   return anItem->getLocalZOrder() == 20 && aHand->isCanGrabItem(anItem);
 }
 
+bool Chef::isItemAccesible(Item* anItem)
+{
+   float minX = _chefRect.origin.x;
+   float maxX = _chefRect.origin.x + _chefRect.size.width;
+   float itemPosX = anItem->getPosition().x;
+   
+   return (itemPosX >= minX && itemPosX <= maxX) && anItem->getLocalZOrder() == 20;
+}
+
+// chef entry point
 Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
 {
+   // initially ignore long distance items
+   if (!this->isItemAccesible(anItem)) {
+      return nullptr;
+   }
    
-   // check if any hand ready to toss catched item
    Item* tossingItem = nullptr;
-   tossingItem = _leftHand->tossItem();
-   if (tossingItem) {
-      return tossingItem;
+   // left hand processing
+   if (_leftHand->isCaughtItem(anItem)) {
+   
+      tossingItem = _leftHand->tossItem();
+      if (tossingItem) {
+         return tossingItem;
+      }
+
+      _leftHand->upItem();
+
+   }
+   else if(_leftHand->isHandBusy() && !_leftHand->isCaughtItem(anItem)){
+      
+      _leftHand->setIgnoredItem(anItem);
+   
+   }
+   else if(this->isHandCanGrab(_leftHand, anItem)){
+   
+      _leftHand->catchItem(anItem);
+      _leftHand->runGrabAnimatedAction(aConveyourVelocity);
    }
    
-   tossingItem = _rightHand->tossItem();
-   if (tossingItem) {
-      return tossingItem;
-   }
-
+   // rigth Hand processing
    
-   // try to up catched item
-   _leftHand->upItem();
-   _rightHand->upItem();
-   
-   // check if any hand can catch an item
-   Hand* activeHand = _leftHand;
-
- if (_leftHand->isHandBusy()) { //  || _leftHand->isWaiting()
-      activeHand = _rightHand;
+   if (_rightHand->isCaughtItem(anItem)) {
+      
+      tossingItem = _rightHand->tossItem();
+      if (tossingItem) {
+         return tossingItem;
+      }
+      
+      _rightHand->upItem();
+      
    }
-
-   if (this->isHandCanGrab(activeHand, anItem)) {
-      activeHand->catchItem(anItem);
-      activeHand->runGrabAnimatedAction(aConveyourVelocity);
+   else if(this->isHandCanGrab(_rightHand, anItem)) {
+      
+      _rightHand->catchItem(anItem);
+      _rightHand->runGrabAnimatedAction(aConveyourVelocity);
    }
    
    return nullptr;

@@ -19,6 +19,7 @@
 #include "GameCompletePopup.h"
 #include "SimpleAudioEngine.h"
 #include "GameCycleIndicator.h"
+#include "BonusMenu.h"
 
 #include "time.h"
 
@@ -137,9 +138,9 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
    bg->setPosition(Vec2(aVisibleSize.width/2 + anOrigin.x, aVisibleSize.height/2 + anOrigin.y));
    _gameLayer->addChild(bg, kWallZO);
    
-    BonusMenu* bonusMenu = BonusMenu::create();
-    bonusMenu->setPosition(Vec2(bonusMenu->getPosition().x - (aVisibleSize.width/2 + anOrigin.x) + 140, aVisibleSize.height/2 + anOrigin.y - 100));
-    _gameLayer->addChild(bonusMenu, kWallZO);
+    BonusMenu* _bonusMenu = BonusMenu::create();
+    _bonusMenu->setPosition(Vec2(_bonusMenu->getPosition().x - (aVisibleSize.width/2 + anOrigin.x) + 140, aVisibleSize.height/2 + anOrigin.y - 100));
+    _gameLayer->addChild(_bonusMenu, kWallZO);
     
     float yOffsetConveyer = 615;
     
@@ -208,7 +209,7 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
    
    for (int iItm = 0; iItm < 20; iItm++) {
        item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 12)); // 0 - 12
-      //item = ItemFactory::createItem(1, 3); // 0 - 12
+      //item = ItemFactory::createItem(0, 3); // 0 - 12
       item->setIdle(_itemIdlePos); //-1 * offset
       
       item->setScale(1.0);
@@ -287,29 +288,6 @@ void GameController::runTossActionWithScale(Item* anItem, ControlPointDef* aPoin
    anItem->setLocalZOrder(kItemZO2);
 
    anItem->runAction(cobinedAction);
-}
-
-void GameController::throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse)
-{
-   float xThrow = throwX;
-   Point ptItem = anItem->getPosition();
-   
-   if (ptItem.x >= xThrow &&
-       ptItem.x <= xThrow + 10.0f &&
-       ptItem.y >= _itemIdlePos.y - 20.0f &&
-       ptItem.y <= _itemIdlePos.y + 20.0f &&
-       anItem->getLocalZOrder() == kItemZO1
-       )
-   {
-      ControlPointDef* collisionEndPointDef = nullptr;
-      if (_cntPoints->size() > 0) {
-         int randomPointIdx = getRandomNumber(0,(_cntPoints->size()-1));
-         collisionEndPointDef = _cntPoints->at(randomPointIdx);
-       }
-      float totalActionDuration = 1.5f;
-      this->runTossActionWithScale(anItem, collisionEndPointDef, totalActionDuration, anImpulse);
-   }
-   
 }
 
 void GameController::tossItem(Item* anItem, Vec2 anImpulse)
@@ -562,5 +540,6 @@ void GameController::checkGameProgress(Item* anItem) {
             _multiplier->reset();
         }
     }
+
 }
 
