@@ -16,6 +16,7 @@ class Multiplier;
 class GameCycleIndicator;
 class Conveyor;
 class MindCloudTips;
+class BonusMenu;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -107,6 +108,7 @@ protected:
     Conveyor* _conv;
     MindCloudTips* cloudTips;
     Sprite* bg;
+    BonusMenu* _bonusMenu;
     
     std::vector<int> _caughtItemsIds;
 private:

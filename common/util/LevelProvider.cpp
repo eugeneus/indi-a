@@ -30,6 +30,11 @@ float getFloatValue(ValueMap map, const char* key) {
     return value.asFloat();
 }
 
+std::string getStringValue(ValueMap map, const char* key) {
+    Value value = map.at(key);
+    return value.asString();
+}
+
 std::vector<int> getAllowedItems(ValueMap map, const char* key) {
     std::vector<int> result;
     
@@ -58,6 +63,7 @@ bool LevelProvider::initForLevel(int levelId)
         
         _speed = getFloatValue(_levelMap, "speed");
         _time = getFloatValue(_levelMap, "time");
+        _bg = getStringValue(_levelMap, "bg");
         
         _allowedFoodItems = getAllowedItems(_levelMap, "allowedFoodItems");
         _allowedGarbageItems = getAllowedItems(_levelMap, "allowedGarbageItems");
@@ -131,4 +137,12 @@ bool LevelProvider::checkAllRequiredExist(std::vector<int> itemsIds) {
     }
     
     return false;
+}
+
+int LevelProvider::getLevelId() {
+    return _levelId;
+}
+
+std::string LevelProvider::getBgSpriteFrameName() {
+    return _bg;
 }

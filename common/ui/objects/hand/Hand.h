@@ -13,6 +13,7 @@ public:
    ~Hand();
 
    static Hand* create(const std::string &aSpriteFrameName);
+    
    void mirrorImg();
    
    void setInitialPosition(cocos2d::Point aPosition);
@@ -40,6 +41,8 @@ public:
    bool randomWaitForToss();
    
    void runGrabAnimatedAction(float aConveyorVelocity);
+    
+    void restart();
 protected:
 
    void runHandUpAnimatedAction();

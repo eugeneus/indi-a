@@ -89,7 +89,15 @@ void GameController::setUpInit(bool isStart) {
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
     
-    _levelInfo = LevelProvider::createForLevel(1);
+    
+    int level = 1;
+    if(!isStart) {
+        level = _levelInfo->getLevelId() + 1;
+        // TODO: remove next lines
+        if (level > 2) level = 1;
+    }
+    
+    _levelInfo = LevelProvider::createForLevel(level);
     _userData = UserDataProvider::create();
     
     float speed = _levelInfo->getSpeed();
@@ -100,14 +108,16 @@ void GameController::setUpInit(bool isStart) {
     
     if (isStart) this->arrangeBackground(origin,visibleSize);
     else releaseAll(origin,visibleSize);
-    _itemIdlePos = Vec2(visibleSize.width + 50.0f, _convY + 70.0f);
+    _itemIdlePos = Vec2(visibleSize.width + 150.0f, _convY + 70.0f);
     this->populateGameObjects(origin,visibleSize);
 }
 
 void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize) {
-    bg->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("level_1_bg.png"));
     
-    cloudTips->changeTip(CCString::createWithFormat("tips_level_%i.png", 1)->getCString());
+    std::string bgFrameName = _levelInfo->getBgSpriteFrameName();
+    bg->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(bgFrameName));
+    
+    cloudTips->changeTip(CCString::createWithFormat("tips_level_%i.png", _levelInfo->getLevelId())->getCString());
     
     float yOffsetConveyer = 615;
     
@@ -115,10 +125,12 @@ void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSi
     _convVelY = 50;
     _convLegth = aVisibleSize.width;
     
-    _gameCycleInd->setGameTime(_levelInfo->getTime());
-    _gameCycleInd->restart();
+    //_gameCycleInd->setGameTime(_levelInfo->getTime());
+    //_gameCycleInd->restart();
 
-    _theChef->startChefBodyAnimation();
+    //_conv->resume();
+    _theChef->restartChef();
+    _conv->resumeConv();
     
     for(Node* nitem : *_items){
         nitem->removeFromParentAndCleanup(true);
@@ -175,9 +187,9 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     _multiplier->setPosition(Vec2(450, aVisibleSize.height + anOrigin.y - 60));
     _gameLayer->addChild(_multiplier, kCloudZO);
     
-    _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getTime());
-    _gameCycleInd->setPosition(Vec2(0, _convY - 40));
-    _gameLayer->addChild(_gameCycleInd, kCloudZO);
+//    _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getTime());
+//    _gameCycleInd->setPosition(Vec2(0, _convY - 40));
+//    _gameLayer->addChild(_gameCycleInd, kCloudZO);
     
     _theChef->startChefBodyAnimation();
    
@@ -227,6 +239,7 @@ void startGame()
 void GameController::restartGame() {
     this->setUpInit(false);
     _gameLayer->resume();
+   cloudTips->toggleTip();
 }
 
 void GameController::stopGame()
@@ -243,7 +256,7 @@ void GameController::stopGame()
             }
         }
     }
-    
+    cloudTips->setOpacity(127);
     //Director::getInstance()->pause();
     CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
@@ -356,9 +369,9 @@ void GameController::update(float dt)
    Vec2 itemPos;
    Size itemSize;
    _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
-    _gameCycleInd->nextStep(dt);
-    if (!_gameCycleInd->isComplete()) {   //TODO: remove
-        /*this->stopGame();                //TODO: remove
+//    _gameCycleInd->nextStep(dt);
+    //if (!_gameCycleInd->isComplete()) {
+        /*this->stopGame();
         
         if (_levelInfo->checkAllRequiredExist(_caughtItemsIds)) {
             GameCompletePopup* goPopup = GameCompletePopup::create(); //TODO:replace for change game score and dish
@@ -368,7 +381,7 @@ void GameController::update(float dt)
             _gameLayer->addChild(goPopup, 1001);
         }
         return;*/
-        
+    
         /*if (this->_convVelY < 60) {
             this->_convVelY +=20;
             this->_conv->changeCyclingSpeed(this->_convVelY);
@@ -381,8 +394,8 @@ void GameController::update(float dt)
       this->putIdleItemOnConveyour(dt, item);
    }
    _putNextItemDt -= dt;
-    }
-    
+
+  //  }
     
    for(Node* nitem : *_items){
       
@@ -409,14 +422,14 @@ void GameController::update(float dt)
        
       if (item->getLocalZOrder() == kItemZO1) { //toss
          
-        if (!_gameCycleInd->isComplete()) {
+       // if (!_gameCycleInd->isComplete()) {
           
          Item* tossed = _theChef->looksForItem(item, this->_convVelY);
          if (tossed) {
             this->tossItem(tossed, _theChef->getBounceImpulse());
          }
             
-        }
+      //  }
          
       } else
       if (item->getLocalZOrder() == kItemZO2 && item->isItemInCurrentTargetPoint()) {
@@ -437,8 +450,8 @@ void GameController::update(float dt)
       
    }
     
-    
-    if (_gameCycleInd->isComplete()) {
+    /* if (_gameCycleInd->isComplete()) {
+        
         
         int idledCount = 0;
         for(Node* nitem : *_items) {
@@ -454,7 +467,7 @@ void GameController::update(float dt)
             this->stopGame();
             this->restartGame();
         }
-    }
+    }*/
 }
 
 ControlPointDef* GameController::findControlPointDefByAngle(Item* anItem, float angle, float xImpulse) {
@@ -519,13 +532,17 @@ float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPoin
 }
 
 void GameController::checkGameProgress(Item* anItem) {
-    if (anItem->_itemType == 1) {
+if (anItem->_itemType == 1) {
         _multiplier->reset();
         this->stopGame(); //TODO:
         //_gameLayer->pause();
         GameOverPopup* goPopup = GameOverPopup::create();
         _gameLayer->addChild(goPopup, 1001);
     } else {
+        //_caughtItemsIds.push_back(0);
+        //_caughtItemsIds.push_back(3);
+        //_caughtItemsIds.push_back(11);
+        
         if (_levelInfo->isRequiredItem(anItem->_itemId)) {
             _caughtItemsIds.push_back(anItem->_itemId);
             
@@ -535,6 +552,12 @@ void GameController::checkGameProgress(Item* anItem) {
                 _scoreLayer->updateScore(50);
                 _multiplier->reset();
             }
+            
+            if (_levelInfo->checkAllRequiredExist(_caughtItemsIds)) {
+                this->stopGame();
+                this->restartGame();
+            }
+            
         } else {
             //_scoreLayer->updateScore(0);
             _multiplier->reset();

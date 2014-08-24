@@ -64,6 +64,7 @@
 		AA3424831960CB230067B032 /* RioGrande.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA3424821960CB230067B032 /* RioGrande.ttf */; };
 		AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA4A9D011960227600BB3634 /* Cyclable.cpp */; };
 		AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA4A9D0419605CF400BB3634 /* Conveyor.cpp */; };
+		AA66A9BA19A9E31A00CB7806 /* level_2.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA66A9B919A9E31A00CB7806 /* level_2.plist */; };
 		AA7E7103197E53BE0019CBDD /* TouchController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7E7101197E53BE0019CBDD /* TouchController.cpp */; };
 		AA870FFB196324A50028A4EA /* Food.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA870FF5196324A50028A4EA /* Food.cpp */; };
 		AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA870FF7196324A50028A4EA /* FoodFactory.cpp */; };
@@ -336,6 +337,7 @@
 		AA4A9D021960227600BB3634 /* Cyclable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cyclable.h; sourceTree = "<group>"; };
 		AA4A9D0419605CF400BB3634 /* Conveyor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Conveyor.cpp; sourceTree = "<group>"; };
 		AA4A9D0519605CF400BB3634 /* Conveyor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conveyor.h; sourceTree = "<group>"; };
+		AA66A9B919A9E31A00CB7806 /* level_2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level_2.plist; sourceTree = "<group>"; };
 		AA7E7101197E53BE0019CBDD /* TouchController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TouchController.cpp; sourceTree = "<group>"; };
 		AA7E7102197E53BE0019CBDD /* TouchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchController.h; sourceTree = "<group>"; };
 		AA870FF5196324A50028A4EA /* Food.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Food.cpp; sourceTree = "<group>"; };
@@ -666,6 +668,7 @@
 				AAF0620C19923ACB008563CA /* pressbutton.caf */,
 				AAF0620D19923ACB008563CA /* bgmusic.mp3 */,
 				AACAB437198AC41F00F8AE01 /* level_1.plist */,
+				AA66A9B919A9E31A00CB7806 /* level_2.plist */,
 				AA3424821960CB230067B032 /* RioGrande.ttf */,
 				AA96A224195DB25500C22BC9 /* images.plist */,
 				AA96A1FA195DB09200C22BC9 /* images.png */,
@@ -1162,6 +1165,7 @@
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				AA66A9BA19A9E31A00CB7806 /* level_2.plist in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				AAF0620E19923ACB008563CA /* levelcompleted.caf in Resources */,
 				AAF0621119923ACB008563CA /* bgmusic.mp3 in Resources */,
