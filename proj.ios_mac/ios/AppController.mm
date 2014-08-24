@@ -28,9 +28,11 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "AdmobController.h"
 
-@implementation AppController
-
+@implementation AppController {
+    AdmobController *_bannerViewController;
+}
 #pragma mark -
 #pragma mark Application lifecycle
 
@@ -58,7 +60,7 @@ static AppDelegate s_sharedApplication;
     _viewController.wantsFullScreenLayout = YES;
     _viewController.view = eaglView;
 
-    // Set RootViewController to window
+    /*// Set RootViewController to window
     if ( [[UIDevice currentDevice].systemVersion floatValue] < 6.0)
     {
         // warning: addSubView doesn't work on iOS6
@@ -68,7 +70,10 @@ static AppDelegate s_sharedApplication;
     {
         // use this method on ios6
         [window setRootViewController:_viewController];
-    }
+    }*/
+    
+    _bannerViewController = [[AdmobController alloc] initWithContentViewController:_viewController withSize:window.bounds.size];
+    window.rootViewController = _bannerViewController;
 
     [window makeKeyAndVisible];
 
@@ -77,6 +82,8 @@ static AppDelegate s_sharedApplication;
     // IMPORTANT: Setting the GLView should be done after creating the RootViewController
     cocos2d::GLView *glview = cocos2d::GLView::createWithEAGLView(eaglView);
     cocos2d::Director::getInstance()->setOpenGLView(glview);
+    
+    cocos2d::CCSize windowSize = cocos2d::Director::getInstance()->getWinSize();
 
     cocos2d::Application::getInstance()->run();
 

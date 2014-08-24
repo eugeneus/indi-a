@@ -28,7 +28,7 @@ void SocialMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuIt
     
     initMenuItem(menuItems, "btn_soc_inv.png", CC_CALLBACK_1(SocialMenuPopup::menuInviteCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 550));
     
-    initMenuItem(menuItems, "btn_back.png", CC_CALLBACK_1(SocialMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 890));
+    initMenuItem(menuItems, "btn_back.png", CC_CALLBACK_1(SocialMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800));
 }
 
 void SocialMenuPopup::menuBackCallback(cocos2d::Ref* pSender) {

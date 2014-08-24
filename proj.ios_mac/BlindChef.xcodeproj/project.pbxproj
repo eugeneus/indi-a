@@ -113,6 +113,15 @@
 		AAB58E501966E90C00C48611 /* MindCloudTips.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4E1966E90C00C48611 /* MindCloudTips.cpp */; };
 		AAB58E531966F5F600C48611 /* Pot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E511966F5F600C48611 /* Pot.cpp */; };
 		AAB5F63619AA0ACE00756B29 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F63519AA0ACE00756B29 /* FacebookSDK.framework */; };
+		AAB5F69119AA290000756B29 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69019AA290000756B29 /* libGoogleAdMobAds.a */; };
+		AAB5F69319AA296E00756B29 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69219AA296E00756B29 /* AdSupport.framework */; };
+		AAB5F69519AA298600756B29 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69419AA298600756B29 /* MessageUI.framework */; };
+		AAB5F69719AA299600756B29 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69619AA299600756B29 /* StoreKit.framework */; };
+		AAB5F69919AA29A500756B29 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69819AA29A500756B29 /* SystemConfiguration.framework */; };
+		AAC4D98D19AA2BC300A42D0A /* AdmobController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D98C19AA2BC300A42D0A /* AdmobController.m */; };
+		AAC4D98F19AA2F3D00A42D0A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4D98E19AA2F3D00A42D0A /* CoreTelephony.framework */; };
+		AAC4D99119AA359800A42D0A /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4D99019AA359800A42D0A /* GameController.framework */; };
+		AAC4D99319AA35A200A42D0A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4D99219AA35A200A42D0A /* MediaPlayer.framework */; };
 		AAC70ED819975327007D0537 /* GameOverPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED619975327007D0537 /* GameOverPopup.cpp */; };
 		AAC70EDB19975374007D0537 /* BaseGamePopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED919975374007D0537 /* BaseGamePopup.cpp */; };
 		AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AACAB432198AC40400F8AE01 /* LevelProvider.cpp */; };
@@ -432,6 +441,28 @@
 		AAB58E511966F5F600C48611 /* Pot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pot.cpp; sourceTree = "<group>"; };
 		AAB58E521966F5F600C48611 /* Pot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pot.h; sourceTree = "<group>"; };
 		AAB5F63519AA0ACE00756B29 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		AAB5F68419AA290000756B29 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		AAB5F68519AA290000756B29 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		AAB5F68619AA290000756B29 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		AAB5F68719AA290000756B29 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		AAB5F68819AA290000756B29 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		AAB5F68919AA290000756B29 /* GADInAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchase.h; sourceTree = "<group>"; };
+		AAB5F68A19AA290000756B29 /* GADInAppPurchaseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchaseDelegate.h; sourceTree = "<group>"; };
+		AAB5F68B19AA290000756B29 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		AAB5F68C19AA290000756B29 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		AAB5F68D19AA290000756B29 /* GADModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADModules.h; sourceTree = "<group>"; };
+		AAB5F68E19AA290000756B29 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		AAB5F68F19AA290000756B29 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		AAB5F69019AA290000756B29 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		AAB5F69219AA296E00756B29 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
+		AAB5F69419AA298600756B29 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
+		AAB5F69619AA299600756B29 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
+		AAB5F69819AA29A500756B29 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		AAC4D98B19AA2BC300A42D0A /* AdmobController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdmobController.h; path = ios/AdmobController.h; sourceTree = SOURCE_ROOT; };
+		AAC4D98C19AA2BC300A42D0A /* AdmobController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdmobController.m; path = ios/AdmobController.m; sourceTree = SOURCE_ROOT; };
+		AAC4D98E19AA2F3D00A42D0A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		AAC4D99019AA359800A42D0A /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
+		AAC4D99219AA35A200A42D0A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		AAC70ED619975327007D0537 /* GameOverPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverPopup.cpp; sourceTree = "<group>"; };
 		AAC70ED719975327007D0537 /* GameOverPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverPopup.h; sourceTree = "<group>"; };
 		AAC70ED919975374007D0537 /* BaseGamePopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseGamePopup.cpp; sourceTree = "<group>"; };
@@ -484,6 +515,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAC4D99319AA35A200A42D0A /* MediaPlayer.framework in Frameworks */,
+				AAC4D99119AA359800A42D0A /* GameController.framework in Frameworks */,
+				AAC4D98F19AA2F3D00A42D0A /* CoreTelephony.framework in Frameworks */,
+				AAB5F69919AA29A500756B29 /* SystemConfiguration.framework in Frameworks */,
+				AAB5F69719AA299600756B29 /* StoreKit.framework in Frameworks */,
+				AAB5F69519AA298600756B29 /* MessageUI.framework in Frameworks */,
+				AAB5F69319AA296E00756B29 /* AdSupport.framework in Frameworks */,
 				1AC6FB2E180E99EB004C840B /* libbox2d iOS.a in Frameworks */,
 				1AC6FB2F180E99EB004C840B /* libchipmunk iOS.a in Frameworks */,
 				1AC6FB30180E99EB004C840B /* libcocos2dx iOS.a in Frameworks */,
@@ -493,6 +531,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				AAB5F63619AA0ACE00756B29 /* FacebookSDK.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				AAB5F69119AA290000756B29 /* libGoogleAdMobAds.a in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */,
 				BF1712471292920000B8313A /* libz.dylib in Frameworks */,
@@ -532,6 +571,7 @@
 		080E96DDFE201D6D7F000001 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				AAB5F68319AA290000756B29 /* admob */,
 				AAB5F63419AA0ACE00756B29 /* framework */,
 				5087E77117EB970100C73F5D /* Icons */,
 				503AE0FA17EB989F00D1A890 /* AppController.h */,
@@ -540,6 +580,8 @@
 				503AE0FD17EB989F00D1A890 /* Prefix.pch */,
 				503AE0FE17EB989F00D1A890 /* RootViewController.h */,
 				503AE0FF17EB989F00D1A890 /* RootViewController.mm */,
+				AAC4D98B19AA2BC300A42D0A /* AdmobController.h */,
+				AAC4D98C19AA2BC300A42D0A /* AdmobController.m */,
 			);
 			name = ios;
 			path = Classes;
@@ -599,6 +641,13 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AAC4D99219AA35A200A42D0A /* MediaPlayer.framework */,
+				AAC4D99019AA359800A42D0A /* GameController.framework */,
+				AAC4D98E19AA2F3D00A42D0A /* CoreTelephony.framework */,
+				AAB5F69819AA29A500756B29 /* SystemConfiguration.framework */,
+				AAB5F69619AA299600756B29 /* StoreKit.framework */,
+				AAB5F69419AA298600756B29 /* MessageUI.framework */,
+				AAB5F69219AA296E00756B29 /* AdSupport.framework */,
 				D6B0611A1803AB670077942B /* CoreMotion.framework */,
 				503AE11A17EB9C5A00D1A890 /* IOKit.framework */,
 				503AE11117EB99EE00D1A890 /* libcurl.dylib */,
@@ -943,6 +992,27 @@
 			path = ios/framework;
 			sourceTree = SOURCE_ROOT;
 		};
+		AAB5F68319AA290000756B29 /* admob */ = {
+			isa = PBXGroup;
+			children = (
+				AAB5F68419AA290000756B29 /* GADAdMobExtras.h */,
+				AAB5F68519AA290000756B29 /* GADAdNetworkExtras.h */,
+				AAB5F68619AA290000756B29 /* GADAdSize.h */,
+				AAB5F68719AA290000756B29 /* GADBannerView.h */,
+				AAB5F68819AA290000756B29 /* GADBannerViewDelegate.h */,
+				AAB5F68919AA290000756B29 /* GADInAppPurchase.h */,
+				AAB5F68A19AA290000756B29 /* GADInAppPurchaseDelegate.h */,
+				AAB5F68B19AA290000756B29 /* GADInterstitial.h */,
+				AAB5F68C19AA290000756B29 /* GADInterstitialDelegate.h */,
+				AAB5F68D19AA290000756B29 /* GADModules.h */,
+				AAB5F68E19AA290000756B29 /* GADRequest.h */,
+				AAB5F68F19AA290000756B29 /* GADRequestError.h */,
+				AAB5F69019AA290000756B29 /* libGoogleAdMobAds.a */,
+			);
+			name = admob;
+			path = ios/admob;
+			sourceTree = SOURCE_ROOT;
+		};
 		AACAB431198AC40400F8AE01 /* util */ = {
 			isa = PBXGroup;
 			children = (
@@ -1246,6 +1316,7 @@
 				E072E1A1196932F5002E4C04 /* ImageLabelMenuItem.cpp in Sources */,
 				AA89687A1997D912005F8946 /* Chicken.cpp in Sources */,
 				AA8968801997DB13005F8946 /* Egg.cpp in Sources */,
+				AAC4D98D19AA2BC300A42D0A /* AdmobController.m in Sources */,
 				AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */,
 				AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */,
 				AA870FFB196324A50028A4EA /* Food.cpp in Sources */,
@@ -1368,7 +1439,8 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ios/admob";
+				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1403,7 +1475,8 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ios/admob";
+				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
