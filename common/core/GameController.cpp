@@ -370,11 +370,13 @@ void GameController::resetActiveBonus()
         case kBonusType1: // set chef blind
             _theChef->resetVision();
             break;
-        case kBonusType2: // reset round time to stadard value
+        case kBonusType2:
+             _convVelY = _levelInfo->getSpeed();
+            _conv->changeCyclingSpeed(_convVelY);
+            // reset round time to stadard value
             //this->updateBonus(bonus2Count, 1, bonus2);
             break;
-        case kBonusType3: // set speed to standard level value
-            //this->updateBonus(bonus3Count, 1, bonus3);
+        case kBonusType3:
             break;
             
         default:
@@ -393,11 +395,11 @@ void GameController::useActiveBonus()
         case kBonusType1: // set chef blind
             _theChef->setVision(_levelInfo->getRequiredItems());
             break;
-        case kBonusType2: // reset round time to stadard value
-            //this->updateBonus(bonus2Count, 1, bonus2);
+        case kBonusType2:
+            _convVelY = _convVelY/1.5f;
+            _conv->changeCyclingSpeed(_convVelY);
             break;
-        case kBonusType3: // set speed to standard level value
-            //this->updateBonus(bonus3Count, 1, bonus3);
+        case kBonusType3:
             break;
             
         default:
