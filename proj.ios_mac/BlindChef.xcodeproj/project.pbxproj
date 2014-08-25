@@ -122,6 +122,8 @@
 		AAC4D98F19AA2F3D00A42D0A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4D98E19AA2F3D00A42D0A /* CoreTelephony.framework */; };
 		AAC4D99119AA359800A42D0A /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4D99019AA359800A42D0A /* GameController.framework */; };
 		AAC4D99319AA35A200A42D0A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4D99219AA35A200A42D0A /* MediaPlayer.framework */; };
+		AAC4D9B019AA605E00A42D0A /* FacebookWrap.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D9AE19AA605E00A42D0A /* FacebookWrap.mm */; };
+		AAC4D9B319AA649B00A42D0A /* FacebookProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D9B119AA649B00A42D0A /* FacebookProvider.cpp */; };
 		AAC70ED819975327007D0537 /* GameOverPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED619975327007D0537 /* GameOverPopup.cpp */; };
 		AAC70EDB19975374007D0537 /* BaseGamePopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED919975374007D0537 /* BaseGamePopup.cpp */; };
 		AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AACAB432198AC40400F8AE01 /* LevelProvider.cpp */; };
@@ -463,6 +465,11 @@
 		AAC4D98E19AA2F3D00A42D0A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		AAC4D99019AA359800A42D0A /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
 		AAC4D99219AA35A200A42D0A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
+		AAC4D9AC19AA5F6900A42D0A /* FacebookCallBack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookCallBack.h; sourceTree = "<group>"; };
+		AAC4D9AE19AA605E00A42D0A /* FacebookWrap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FacebookWrap.mm; sourceTree = SOURCE_ROOT; };
+		AAC4D9AF19AA605E00A42D0A /* FacebookWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookWrap.h; sourceTree = SOURCE_ROOT; };
+		AAC4D9B119AA649B00A42D0A /* FacebookProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FacebookProvider.cpp; sourceTree = "<group>"; };
+		AAC4D9B219AA649B00A42D0A /* FacebookProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookProvider.h; sourceTree = "<group>"; };
 		AAC70ED619975327007D0537 /* GameOverPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverPopup.cpp; sourceTree = "<group>"; };
 		AAC70ED719975327007D0537 /* GameOverPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverPopup.h; sourceTree = "<group>"; };
 		AAC70ED919975374007D0537 /* BaseGamePopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseGamePopup.cpp; sourceTree = "<group>"; };
@@ -582,6 +589,8 @@
 				503AE0FF17EB989F00D1A890 /* RootViewController.mm */,
 				AAC4D98B19AA2BC300A42D0A /* AdmobController.h */,
 				AAC4D98C19AA2BC300A42D0A /* AdmobController.m */,
+				AAC4D9AE19AA605E00A42D0A /* FacebookWrap.mm */,
+				AAC4D9AF19AA605E00A42D0A /* FacebookWrap.h */,
 			);
 			name = ios;
 			path = Classes;
@@ -1013,9 +1022,28 @@
 			path = ios/admob;
 			sourceTree = SOURCE_ROOT;
 		};
+		AAC4D9A919AA5F6900A42D0A /* social */ = {
+			isa = PBXGroup;
+			children = (
+				AAC4D9AA19AA5F6900A42D0A /* facebook */,
+			);
+			path = social;
+			sourceTree = "<group>";
+		};
+		AAC4D9AA19AA5F6900A42D0A /* facebook */ = {
+			isa = PBXGroup;
+			children = (
+				AAC4D9AC19AA5F6900A42D0A /* FacebookCallBack.h */,
+				AAC4D9B119AA649B00A42D0A /* FacebookProvider.cpp */,
+				AAC4D9B219AA649B00A42D0A /* FacebookProvider.h */,
+			);
+			path = facebook;
+			sourceTree = "<group>";
+		};
 		AACAB431198AC40400F8AE01 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				AAC4D9A919AA5F6900A42D0A /* social */,
 				AACAB432198AC40400F8AE01 /* LevelProvider.cpp */,
 				AACAB433198AC40400F8AE01 /* LevelProvider.h */,
 				AAF0621B19926025008563CA /* UserDataProvider.cpp */,
@@ -1334,9 +1362,11 @@
 				AAB58E531966F5F600C48611 /* Pot.cpp in Sources */,
 				AAF788CD1997ACD900AE7D3F /* GameCycleIndicator.cpp in Sources */,
 				AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */,
+				AAC4D9B019AA605E00A42D0A /* FacebookWrap.mm in Sources */,
 				AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */,
 				AAF0621D19926025008563CA /* UserDataProvider.cpp in Sources */,
 				AAF0620919923645008563CA /* Duck.cpp in Sources */,
+				AAC4D9B319AA649B00A42D0A /* FacebookProvider.cpp in Sources */,
 				AA870FFD196324A50028A4EA /* Gabbage.cpp in Sources */,
 				AA8710011963250E0028A4EA /* Item.cpp in Sources */,
 				AA87100D196329770028A4EA /* GarbageFactory.cpp in Sources */,

@@ -82,9 +82,6 @@ static AppDelegate s_sharedApplication;
     // IMPORTANT: Setting the GLView should be done after creating the RootViewController
     cocos2d::GLView *glview = cocos2d::GLView::createWithEAGLView(eaglView);
     cocos2d::Director::getInstance()->setOpenGLView(glview);
-    
-    cocos2d::CCSize windowSize = cocos2d::Director::getInstance()->getWinSize();
-
     cocos2d::Application::getInstance()->run();
 
     return YES;
@@ -133,6 +130,7 @@ static AppDelegate s_sharedApplication;
      */
 }
 
+#pragma mark - Facebook
 
 - (BOOL) application:(UIApplication *)application
              openURL:(NSURL *)url
@@ -144,6 +142,31 @@ static AppDelegate s_sharedApplication;
     return wasHandled;
 }
 
+- (BOOL) shareFb:(NSString *)string {
+    FBLinkShareParams *params = [[FBLinkShareParams alloc] init];
+    params.link = [NSURL URLWithString:@"https://developers.facebook.com/docs/ios/share/"];
+    
+    // If the Facebook app is installed and we can present the share dialog
+    if ([FBDialogs canPresentShareDialogWithParams:params]) {
+        // Present the share dialog
+        [FBDialogs presentShareDialogWithLink:params.link
+                                      handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                          if(error) {
+                                              // An error occurred, we need to handle the error
+                                              // See: https://developers.facebook.com/docs/ios/errors
+                                              NSLog(@"Error publishing story: %@", error.description);
+                                          } else {
+                                              // Success
+                                              NSLog(@"result %@", results);
+                                          }
+                                      }];
+    } else {
+        // Present the feed dialog
+        NSLog(@"present feed dialog");
+    }
+    
+    return true;
+}
 
 #pragma mark -
 #pragma mark Memory management

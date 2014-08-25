@@ -13,5 +13,7 @@
    sourceApplication:(NSString *)sourceApplication
           annotation:(id)annotation;
 
+- (BOOL) shareFb:(NSString *)string;
+
 @end
 

@@ -1,6 +1,7 @@
 
 #include "SocialMenuPopup.h"
 #include "MainMenu.h"
+#include "FacebookProvider.h"
 
 USING_NS_CC;
 
@@ -37,6 +38,7 @@ void SocialMenuPopup::menuBackCallback(cocos2d::Ref* pSender) {
 }
 
 void SocialMenuPopup::menuFbCallback(cocos2d::Ref* pSender) {
+    FacebookProvider::create()->share("blablastr");
 }
 
 void SocialMenuPopup::menuGpCallback(cocos2d::Ref* pSender) {

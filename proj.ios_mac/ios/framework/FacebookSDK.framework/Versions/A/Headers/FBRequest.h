@@ -331,7 +331,6 @@ typedef NSUInteger FBRequestState __attribute__((deprecated));
  A successful Graph API call will return an array of <FBGraphUser> objects representing the
  user's friends.
  */
-+ (FBRequest *)requestForMyFriends;
 
 /*!
  @method
