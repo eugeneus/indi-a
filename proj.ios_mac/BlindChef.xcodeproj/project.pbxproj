@@ -118,6 +118,9 @@
 		AAB5F69519AA298600756B29 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69419AA298600756B29 /* MessageUI.framework */; };
 		AAB5F69719AA299600756B29 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69619AA299600756B29 /* StoreKit.framework */; };
 		AAB5F69919AA29A500756B29 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69819AA29A500756B29 /* SystemConfiguration.framework */; };
+		AABDB9D719AB2A7D004533D0 /* Lemon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABDB9D519AB2A7D004533D0 /* Lemon.cpp */; };
+		AABDB9DA19AB2BEF004533D0 /* Salt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABDB9D819AB2BEF004533D0 /* Salt.cpp */; };
+		AABDB9DD19AB2CA5004533D0 /* Spice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABDB9DB19AB2CA5004533D0 /* Spice.cpp */; };
 		AAC4D98D19AA2BC300A42D0A /* AdmobController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D98C19AA2BC300A42D0A /* AdmobController.m */; };
 		AAC4D98F19AA2F3D00A42D0A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4D98E19AA2F3D00A42D0A /* CoreTelephony.framework */; };
 		AAC4D99119AA359800A42D0A /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4D99019AA359800A42D0A /* GameController.framework */; };
@@ -460,6 +463,12 @@
 		AAB5F69419AA298600756B29 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
 		AAB5F69619AA299600756B29 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		AAB5F69819AA29A500756B29 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		AABDB9D519AB2A7D004533D0 /* Lemon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lemon.cpp; sourceTree = "<group>"; };
+		AABDB9D619AB2A7D004533D0 /* Lemon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lemon.h; sourceTree = "<group>"; };
+		AABDB9D819AB2BEF004533D0 /* Salt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Salt.cpp; sourceTree = "<group>"; };
+		AABDB9D919AB2BEF004533D0 /* Salt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Salt.h; sourceTree = "<group>"; };
+		AABDB9DB19AB2CA5004533D0 /* Spice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Spice.cpp; sourceTree = "<group>"; };
+		AABDB9DC19AB2CA5004533D0 /* Spice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spice.h; sourceTree = "<group>"; };
 		AAC4D98B19AA2BC300A42D0A /* AdmobController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdmobController.h; path = ios/AdmobController.h; sourceTree = SOURCE_ROOT; };
 		AAC4D98C19AA2BC300A42D0A /* AdmobController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdmobController.m; path = ios/AdmobController.m; sourceTree = SOURCE_ROOT; };
 		AAC4D98E19AA2F3D00A42D0A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
@@ -814,6 +823,12 @@
 				AA89688E1997DF53005F8946 /* Cheese.h */,
 				AA8968901997DFD4005F8946 /* Beef.cpp */,
 				AA8968911997DFD4005F8946 /* Beef.h */,
+				AABDB9D519AB2A7D004533D0 /* Lemon.cpp */,
+				AABDB9D619AB2A7D004533D0 /* Lemon.h */,
+				AABDB9D819AB2BEF004533D0 /* Salt.cpp */,
+				AABDB9D919AB2BEF004533D0 /* Salt.h */,
+				AABDB9DB19AB2CA5004533D0 /* Spice.cpp */,
+				AABDB9DC19AB2CA5004533D0 /* Spice.h */,
 			);
 			path = food;
 			sourceTree = "<group>";
@@ -1303,8 +1318,10 @@
 			files = (
 				AA8D6BA11999009000484E65 /* SocialMenuPopup.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				AABDB9DD19AB2CA5004533D0 /* Spice.cpp in Sources */,
 				E0050DE61967F31B009E7BA1 /* GameController.cpp in Sources */,
 				AA89688C1997DE70005F8946 /* Bread.cpp in Sources */,
+				AABDB9DA19AB2BEF004533D0 /* Salt.cpp in Sources */,
 				AAF788CA1997A81800AE7D3F /* BaseIndicator.cpp in Sources */,
 				AA8710071963264D0028A4EA /* Bottle.cpp in Sources */,
 				AAF0621A19925596008563CA /* Tomato.cpp in Sources */,
@@ -1346,6 +1363,7 @@
 				AA8968801997DB13005F8946 /* Egg.cpp in Sources */,
 				AAC4D98D19AA2BC300A42D0A /* AdmobController.m in Sources */,
 				AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */,
+				AABDB9D719AB2A7D004533D0 /* Lemon.cpp in Sources */,
 				AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */,
 				AA870FFB196324A50028A4EA /* Food.cpp in Sources */,
 				AA8968921997DFD4005F8946 /* Beef.cpp in Sources */,
@@ -1444,8 +1462,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1482,8 +1500,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

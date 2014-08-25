@@ -20,6 +20,7 @@
 #include "SimpleAudioEngine.h"
 #include "GameCycleIndicator.h"
 #include "BonusMenu.h"
+#include "FoodFactory.h"
 
 #include "time.h"
 
@@ -220,7 +221,7 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
    Item* item = nullptr;
    
    for (int iItm = 0; iItm < 20; iItm++) {
-       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 12)); // 0 - 12
+       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 15)); // 0 - 12
        //item = ItemFactory::createItem(0, getRandomNumber(4, 5)); // 0 - 12
       //item = ItemFactory::createItem(0, 4); // 0 - 12
       item->setIdle(_itemIdlePos); //-1 * offset
@@ -229,7 +230,26 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
       _gameLayer->addChild(item,kItemZO1);
       _items->pushBack(item);
    }
+    
+    //TODO: remove
+    for (int i : _levelInfo->getRequiredItems()) {
+        item = FoodFactory::createFood(i);
+        item->setIdle(_itemIdlePos); //-1 * offset
+        
+        item->setScale(1.0);
+        _gameLayer->addChild(item,kItemZO1);
+        _items->pushBack(item);
+    }
 
+    for (int i : _levelInfo->getBonusItems()) {
+        item = FoodFactory::createFood(i);
+        item->setIdle(_itemIdlePos); //-1 * offset
+        
+        item->setScale(2.0);
+        _gameLayer->addChild(item,kItemZO1);
+        _items->pushBack(item);
+    }
+    
 }
 
 void startGame()

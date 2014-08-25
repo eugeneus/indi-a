@@ -18,7 +18,10 @@ enum
     kFoodMushrroom,// 9
     kFoodBread,    //10
     kFoodCheese,   //11
-    kFoodBeef      //12
+    kFoodBeef,     //12
+    kFoodLemon,    //13
+    kFoodSalt,     //14
+    kFoodSpice     //15
 };
 
 class FoodFactory {

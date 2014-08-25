@@ -10,19 +10,19 @@
 			<key>ocurancesPerLevel</key>
 			<integer>3</integer>
 			<key>itemId</key>
-			<integer>5</integer>
+			<integer>13</integer>
 		</dict>
 		<dict>
 			<key>ocurancesPerLevel</key>
 			<integer>3</integer>
 			<key>itemId</key>
-			<integer>2</integer>
+			<integer>14</integer>
 		</dict>
 		<dict>
 			<key>ocurancesPerLevel</key>
 			<integer>3</integer>
 			<key>itemId</key>
-			<integer>7</integer>
+			<integer>15</integer>
 		</dict>
 	</array>
 	<key>time</key>
