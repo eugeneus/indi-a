@@ -60,14 +60,14 @@ bool Cyclable::init(const char* bgSpriteFrameName, float pSpeed, float pLength) 
    
    sprites.pushBack(bg2);
    super::addChild(bg2);
-    
+/*    
     Sprite* bg3 = Sprite::createWithSpriteFrameName(bgSpriteFrameName);
     bg3->setAnchorPoint(Vec2(0, 0));
     bg3->setPosition(Vec2(bg2->getPosition().x+imgLen-2,bg2->getPosition().y));
     
     sprites.pushBack(bg3);
     super::addChild(bg3);
-/*
+
     int count = (int)round(pLength/imgLen + 1.5);
    
     for (int i=0; i<count; i++) {
@@ -108,13 +108,17 @@ void Cyclable::startCycling() {
 }
 
 void Cyclable::changeCyclingSpeed(float speed) {
+    float imgLen = sprites.at(0)->getContentSize().width;
+    Vec2 prevPos = Vec2(0, 0);
     for(Sprite* nSprite : sprites){
         nSprite->stopAllActions();
+        nSprite->setPosition(prevPos);
         nSprite->unscheduleAllSelectors();
+        prevPos.x = prevPos.x + (imgLen - 2);
     }
     cyclingSpeed = speed;
     actionDuration = actionLength/cyclingSpeed;
-   // this->startCycling();
+    this->startCycling();
 }
 
 void Cyclable::addChild(cocos2d::Node* node, int zIndex) {

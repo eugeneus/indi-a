@@ -46,6 +46,7 @@ GameController::GameController()
    _convLegth = 0.0f;
    _putNextItemDt = 0.0f;
    _idxRotated = 0;
+    _bonusTimer = 0.0f;
    
    _items = new Vector<cocos2d::Node*>(10);
    _cntPoints = new Vector<ControlPointDef*>(10);
@@ -149,8 +150,8 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
    bg->setPosition(Vec2(aVisibleSize.width/2 + anOrigin.x, aVisibleSize.height/2 + anOrigin.y));
    _gameLayer->addChild(bg, kWallZO);
    
-    BonusMenu* _bonusMenu = BonusMenu::create();
-    _bonusMenu->setPosition(Vec2(_bonusMenu->getPosition().x - (aVisibleSize.width/2 + anOrigin.x) + 140, aVisibleSize.height/2 + anOrigin.y - 100));
+    _bonusMenu = BonusMenu::create(this->_levelInfo);
+    _bonusMenu->setPosition(Vec2(_bonusMenu->getPosition().x - (aVisibleSize.width/2 + anOrigin.x) + 140, aVisibleSize.height/2 + anOrigin.y - 80));
     _gameLayer->addChild(_bonusMenu, kWallZO);
     
     float yOffsetConveyer = 615;
@@ -220,7 +221,8 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
    
    for (int iItm = 0; iItm < 20; iItm++) {
        item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 12)); // 0 - 12
-      //item = ItemFactory::createItem(0, 3); // 0 - 12
+       //item = ItemFactory::createItem(0, getRandomNumber(4, 5)); // 0 - 12
+      //item = ItemFactory::createItem(0, 4); // 0 - 12
       item->setIdle(_itemIdlePos); //-1 * offset
       
       item->setScale(1.0);
@@ -361,6 +363,69 @@ void GameController::runBumpAction(Item* anItem)
       }
 }
 
+void GameController::resetActiveBonus()
+{
+    int activeBonus = _bonusMenu->getActiveBonus();
+    switch (activeBonus) {
+        case kBonusType1: // set chef blind
+            _theChef->resetVision();
+            break;
+        case kBonusType2:
+             _convVelY = _levelInfo->getSpeed();
+            _conv->changeCyclingSpeed(_convVelY);
+            // reset round time to stadard value
+            //this->updateBonus(bonus2Count, 1, bonus2);
+            break;
+        case kBonusType3:
+            break;
+            
+        default:
+            break;
+    }
+    
+    _bonusTimer = 0.0f;
+    _bonusMenu->resetActiveBonus();
+
+}
+
+void GameController::useActiveBonus()
+{
+    int activeBonus = _bonusMenu->getActiveBonus();
+    switch (activeBonus) {
+        case kBonusType1: // set chef blind
+            _theChef->setVision(_levelInfo->getRequiredItems());
+            break;
+        case kBonusType2:
+            _convVelY = _convVelY/1.5f;
+            _conv->changeCyclingSpeed(_convVelY);
+            break;
+        case kBonusType3:
+            break;
+            
+        default:
+            break;
+    }
+    
+    if(activeBonus > 0){
+        _bonusTimer = 20.0f;
+        //_bonusMenu->resetActiveBonus();
+    }
+    
+}
+
+void GameController::processBonusState(float dt)
+{
+
+    if(_bonusTimer > 0.0f){
+        _bonusTimer -= dt;
+        if(_bonusTimer <= 0.0f)
+            this->resetActiveBonus();
+    }
+    else{
+        this->useActiveBonus();
+    }
+    
+}
 
 void GameController::update(float dt)
 {
@@ -368,6 +433,7 @@ void GameController::update(float dt)
    Item* item = nullptr;
    Vec2 itemPos;
    Size itemSize;
+    this->processBonusState(dt);
    _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
 //    _gameCycleInd->nextStep(dt);
     //if (!_gameCycleInd->isComplete()) {
@@ -532,6 +598,11 @@ float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPoin
 }
 
 void GameController::checkGameProgress(Item* anItem) {
+
+    if (_bonusMenu->checkItemToUpdateBonus(anItem)) {
+        return; // if item is bonus, just increment collected bonuses;
+    }
+    
    if (anItem->_itemType == 1) {
         _multiplier->reset();
         this->stopGame(); //TODO:

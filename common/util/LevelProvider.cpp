@@ -98,6 +98,24 @@ std::vector<int> LevelProvider::getRequiredItems() {
     return _requiredItems;
 }
 
+std::vector<int> LevelProvider::getBonusItems()
+{
+    if (_bonusItems.size() > 0)
+        return _bonusItems;
+    
+    Value itemsValue = _levelMap.at("bonusItems");
+    ValueVector items = itemsValue.asValueVector();
+    
+    if (items.size() > 0) {
+        Value bonusVal;
+        for (int i = 0; i < items.size(); i++) {
+            bonusVal = items.at(i);
+            _bonusItems.push_back(bonusVal.asValueMap().at("itemId").asInt());
+        }
+    }
+    return _bonusItems;
+}
+
 bool LevelProvider::isRequiredItem(int itemId) {
     if (itemId > -1 ) {
         for (int i = 0; i < _requiredItems.size(); i++) {

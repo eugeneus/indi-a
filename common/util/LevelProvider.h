@@ -17,6 +17,9 @@ private:
     std::vector<int> _requiredItems;
     std::vector<int> _allowedFoodItems;
     std::vector<int> _allowedGarbageItems;
+    std::vector<int> _bonusItems;
+    
+    
 public:
     LevelProvider();
     
@@ -34,6 +37,7 @@ public:
     std::vector<int> getRequiredItems();
     std::vector<int> getAllowedFoodItems();
     std::vector<int> getAllowedGarbageItems();
+    std::vector<int> getBonusItems();
     
     bool isRequiredItem(int itemId);
     std::string getBgSpriteFrameName();

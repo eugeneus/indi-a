@@ -1,13 +1,17 @@
 
 #include "BonusMenu.h"
 #include "ImageLabelMenuItem.h"
+#include "LevelProvider.h"
+#include "FoodFactory.h"
+#include "Item.h"
+
 
 USING_NS_CC;
 
-BonusMenu* BonusMenu::create()
+BonusMenu* BonusMenu::create(LevelProvider* aLevelInfo)
 {
     BonusMenu *pRet = new BonusMenu();
-    if (pRet && pRet->init())
+    if (pRet && pRet->init(aLevelInfo))
     {
         pRet->autorelease();
         return pRet;
@@ -20,20 +24,37 @@ BonusMenu* BonusMenu::create()
     }
 }
 
-bool BonusMenu::init()
+bool BonusMenu::init(LevelProvider* aLevelInfo)
 {
     if ( !Layer::create() )
     {
         return false;
     }
     
-    bonus1Count = Value(3);
-    bonus2Count = Value(2);
+    _activeBonus = 0;
+    
+    bonus1Count = Value(10);
+    bonus2Count = Value(10);
     bonus3Count = Value(0);
     
-    bonus1 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus1Count.asInt())->getCString(), "bonus_1.png", CC_CALLBACK_1(BonusMenu::bonus1Callback, this));
-    bonus2 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus2Count.asInt())->getCString(), "bonus_2.png", CC_CALLBACK_1(BonusMenu::bonus2Callback, this));
-    bonus3 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus3Count.asInt())->getCString(), "bonus_3.png", CC_CALLBACK_1(BonusMenu::bonus3Callback, this));
+    
+    _bonusItemIds = aLevelInfo->getBonusItems();
+    
+    Item* bonusItem = FoodFactory::createFood(_bonusItemIds.at(kBonusType1 - 1));
+    
+    bonus1 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus1Count.asInt())->getCString(),
+                                        bonusItem->getSpriteFrameName(), CC_CALLBACK_1(BonusMenu::bonus1Callback, this));
+    
+    //delete bonusItem;
+    bonusItem = FoodFactory::createFood(_bonusItemIds.at(kBonusType2 - 1));
+    bonus2 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus2Count.asInt())->getCString(),
+                                        bonusItem->getSpriteFrameName(), CC_CALLBACK_1(BonusMenu::bonus2Callback, this));
+    
+    //delete bonusItem;
+    bonusItem = FoodFactory::createFood(_bonusItemIds.at(kBonusType3 - 1));
+    bonus3 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus3Count.asInt())->getCString(),
+                                        bonusItem->getSpriteFrameName(), CC_CALLBACK_1(BonusMenu::bonus3Callback, this));
+    //delete bonusItem;
     
     Menu* menu = Menu::create(bonus1, bonus2, bonus3, NULL);
     menu->alignItemsHorizontally();
@@ -82,8 +103,10 @@ void BonusMenu::bonus1Callback(Ref* pSender) {
     CCLOG("bonus 1 click");
     
     if (isCanUseBonus(bonus1Count)) {
-        updateBonus(bonus1Count, -1, bonus1);
-        //run
+        if (_activeBonus == 0) {
+            updateBonus(bonus1Count, -1, bonus1);
+            _activeBonus = kBonusType1;
+        }
     } else {
         //show store
     }
@@ -93,8 +116,11 @@ void BonusMenu::bonus2Callback(Ref* pSender) {
     CCLOG("bonus 2 click");
     
     if (isCanUseBonus(bonus2Count)) {
-        updateBonus(bonus2Count, -1, bonus2);
-        //run
+        if (_activeBonus == 0) {
+            updateBonus(bonus2Count, -1, bonus2);
+            _activeBonus = kBonusType2;
+        }
+
     } else {
         //show store
     }
@@ -104,9 +130,53 @@ void BonusMenu::bonus3Callback(Ref* pSender) {
     CCLOG("bonus 3 click");
     
     if (isCanUseBonus(bonus3Count)) {
-        updateBonus(bonus3Count, -1, bonus3);
+        if (_activeBonus == 0) {
+            updateBonus(bonus3Count, -1, bonus3);
+            _activeBonus = kBonusType3;
+        }
+        
         //run
     } else {
         //show store
     }
+}
+
+bool BonusMenu::checkItemToUpdateBonus(Item* anItem)
+{
+    bool isBonusItem = false;
+    int idxBonus = 0;
+
+    while (idxBonus < _bonusItemIds.size() && !isBonusItem) {
+        isBonusItem = _bonusItemIds.at(idxBonus) == anItem->getItemId();
+        idxBonus++;
+    }
+    
+    if (isBonusItem) {
+        switch (idxBonus) {
+            case kBonusType1:
+                this->updateBonus(bonus1Count, 1, bonus1);
+                break;
+            case kBonusType2:
+                this->updateBonus(bonus2Count, 1, bonus2);
+                break;
+            case kBonusType3:
+                this->updateBonus(bonus3Count, 1, bonus3);
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    return isBonusItem;
+}
+
+int BonusMenu::getActiveBonus()
+{
+    return _activeBonus;
+}
+
+void BonusMenu::resetActiveBonus()
+{
+    _activeBonus = 0;
 }
