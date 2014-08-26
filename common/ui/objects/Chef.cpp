@@ -100,6 +100,11 @@ bool Chef::isHandCanGrab(Hand* aHand, Item* anItem)
    return anItem->getLocalZOrder() == 20 && aHand->isCanGrabItem(anItem);
 }
 
+bool Chef::isHandShouldGrabItem(Hand* aHand, Item *anItem)
+{
+    return this->isHandCanGrab(aHand, anItem) && ((this->hasVision() && this->isRequiredItem(anItem)) || !this->hasVision());
+}
+
 void Chef::setVision(std::vector<int> aRequiredItems)
 {
     _requiredItemIDs = aRequiredItems;
@@ -145,28 +150,23 @@ Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
       return nullptr;
    }
     
-    if (this->hasVision() && !this->isRequiredItem(anItem)) {
-        return nullptr;
-    }
-   
    Item* tossingItem = nullptr;
    // left hand processing
    if (_leftHand->isCaughtItem(anItem)) {
-   
-      tossingItem = _leftHand->tossItem();
+
+       tossingItem = _leftHand->tossItem();
       if (tossingItem) {
          return tossingItem;
       }
-
       _leftHand->upItem();
-
    }
+    
    else if(_leftHand->isHandBusy() && !_leftHand->isCaughtItem(anItem)){
       
       _leftHand->setIgnoredItem(anItem);
    
    }
-   else if(this->isHandCanGrab(_leftHand, anItem)){
+   else if(this->isHandShouldGrabItem(_leftHand, anItem)){
    
       _leftHand->catchItem(anItem);
       _leftHand->runGrabAnimatedAction(aConveyourVelocity);
@@ -184,7 +184,7 @@ Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
       _rightHand->upItem();
       
    }
-   else if(this->isHandCanGrab(_rightHand, anItem)) {
+   else if(this->isHandShouldGrabItem(_rightHand, anItem)) {
       
       _rightHand->catchItem(anItem);
       _rightHand->runGrabAnimatedAction(aConveyourVelocity);
