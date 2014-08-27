@@ -428,7 +428,6 @@ void GameController::useActiveBonus()
     
     if(activeBonus > 0){
         _bonusTimer = 20.0f;
-        //_bonusMenu->resetActiveBonus();
     }
     
 }
