@@ -3,6 +3,9 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 void FacebookWrap::share(const std::string& msg, iOSBridge::Callbacks::FacebookCallBack* callback) {
+    
+    
+    
     NSString *msg1 = [NSString stringWithCString:msg.c_str() encoding:[NSString defaultCStringEncoding]];
      [FBSession.activeSession closeAndClearTokenInformation];
     
@@ -75,7 +78,7 @@ void FacebookWrap::share(const std::string& msg, iOSBridge::Callbacks::FacebookC
                                                   }];
     }
     
-    
+
     
     callback->complete();
     NSLog(@",.... sended msg %@", msg1);

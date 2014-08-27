@@ -96,7 +96,7 @@ void GameController::setUpInit(bool isStart) {
     if(!isStart) {
         level = _levelInfo->getLevelId() + 1;
         // TODO: remove next lines
-        if (level > 2) level = 1;
+        if (level > 3) level = 1;
     }
     
     _levelInfo = LevelProvider::createForLevel(level);
