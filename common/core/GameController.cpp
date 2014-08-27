@@ -118,7 +118,7 @@ void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSi
     std::string bgFrameName = _levelInfo->getBgSpriteFrameName();
     bg->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(bgFrameName));
     
-    cloudTips->changeTip(CCString::createWithFormat("tips_level_%i.png", _levelInfo->getLevelId())->getCString());
+    cloudTips->changeTip(_levelInfo->getTipsBgSpriteFrameName());
     
     float yOffsetConveyer = 615;
     
@@ -126,8 +126,8 @@ void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSi
     _convVelY = _levelInfo->getSpeed();
     _convLegth = aVisibleSize.width;
     
-    //_gameCycleInd->setGameTime(_levelInfo->getTime());
-    //_gameCycleInd->restart();
+    _gameCycleInd->setGameTime(_levelInfo->getTime());
+    _gameCycleInd->restart();
 
     //_conv->resume();
     _theChef->restartChef();
@@ -188,9 +188,9 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     _multiplier->setPosition(Vec2(450, aVisibleSize.height + anOrigin.y - 60));
     _gameLayer->addChild(_multiplier, kCloudZO);
     
-//    _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getTime());
-//    _gameCycleInd->setPosition(Vec2(0, _convY - 40));
-//    _gameLayer->addChild(_gameCycleInd, kCloudZO);
+    _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getTime());
+    _gameCycleInd->setPosition(Vec2(0, _convY - 40));
+    _gameLayer->addChild(_gameCycleInd, kCloudZO);
     
     _theChef->startChefBodyAnimation();
    
@@ -262,6 +262,7 @@ void GameController::restartGame() {
     _gameLayer->resume();
    cloudTips->toggleTip();
     _conv->resumeConv();
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgmusic.mp3", true);
 }
 
 void GameController::stopGame()
@@ -454,18 +455,21 @@ void GameController::update(float dt)
    Size itemSize;
     this->processBonusState(dt);
    _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
-//    _gameCycleInd->nextStep(dt);
-    //if (!_gameCycleInd->isComplete()) {
-        /*this->stopGame();
+    _gameCycleInd->nextStep(dt);
+    if (_gameCycleInd->isComplete()) {
+        this->stopGame();
         
         if (_levelInfo->checkAllRequiredExist(_caughtItemsIds)) {
-            GameCompletePopup* goPopup = GameCompletePopup::create(); //TODO:replace for change game score and dish
-            _gameLayer->addChild(goPopup, 1001);
+            this->restartGame();
+            
+            //GameCompletePopup* goPopup = GameCompletePopup::create(); //TODO:replace for change game score and dish
+            //_gameLayer->addChild(goPopup, 1001);
         } else {                         //TODO: remove
             GameOverPopup* goPopup = GameOverPopup::create();
             _gameLayer->addChild(goPopup, 1001);
         }
-        return;*/
+        return;
+    }
     
         /*if (this->_convVelY < 60) {
             this->_convVelY +=20;
@@ -618,10 +622,6 @@ float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPoin
 
 void GameController::checkGameProgress(Item* anItem) {
 
-    if (_bonusMenu->checkItemToUpdateBonus(anItem)) {
-        return; // if item is bonus, just increment collected bonuses;
-    }
-    
    if (anItem->_itemType == 1) {
         _multiplier->reset();
         this->stopGame(); //TODO:
@@ -629,6 +629,9 @@ void GameController::checkGameProgress(Item* anItem) {
         GameOverPopup* goPopup = GameOverPopup::create();
         _gameLayer->addChild(goPopup, 1001);
     } else {
+        if (_bonusMenu->checkItemToUpdateBonus(anItem)) {
+            return; // if item is bonus, just increment collected bonuses;
+        }
         //_caughtItemsIds.push_back(0);
         //_caughtItemsIds.push_back(3);
         //_caughtItemsIds.push_back(11);

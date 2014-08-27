@@ -64,6 +64,7 @@ bool LevelProvider::initForLevel(int levelId)
         _speed = getFloatValue(_levelMap, "speed");
         _time = getFloatValue(_levelMap, "time");
         _bg = getStringValue(_levelMap, "bg");
+        _tipsBg = getStringValue(_levelMap, "tipsBg");
         
         _allowedFoodItems = getAllowedItems(_levelMap, "allowedFoodItems");
         _allowedGarbageItems = getAllowedItems(_levelMap, "allowedGarbageItems");
@@ -96,6 +97,10 @@ std::vector<int> LevelProvider::getAllowedGarbageItems() {
 std::vector<int> LevelProvider::getRequiredItems() {
     
     return _requiredItems;
+}
+
+std::string LevelProvider::getTipsBgSpriteFrameName() {
+    return _tipsBg;
 }
 
 std::vector<int> LevelProvider::getBonusItems()
