@@ -15,6 +15,7 @@ public:
     
     float getFirstItemPosY();
     void pauseConv();
+    void resumeConv();
 };
 
 #endif /* defined(__BlindChef__Conveyor__) */

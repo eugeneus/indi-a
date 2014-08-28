@@ -14,6 +14,9 @@ class UserDataProvider;
 class ScoreLayer;
 class Multiplier;
 class GameCycleIndicator;
+class Conveyor;
+class MindCloudTips;
+class BonusMenu;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -51,12 +54,15 @@ public:
    void startGame();
    
    void stopGame();
+    void restartGame();
    
    void update(float dt);
     
     void changeItemPath(Item* anItem, float angle, Vec2 anImpulse);
 
 protected:
+    void releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
+    void setUpInit(bool isStart);
    
    void arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
    
@@ -68,8 +74,6 @@ protected:
 
    void runTossActionWithScale(Item* anItem, ControlPointDef* aPointDef, float aDuration, cocos2d::Point anImpulse);
 
-   void throwItemSimple(Item* anItem, float throwX, Vec2 anImpulse);
-   
    void tossItem(Item* anItem, Vec2 anImpulse);
    
    void runBumpAction(Item* anItem);
@@ -80,7 +84,10 @@ protected:
 
     ControlPointDef* findControlPointDefByAngle(Item* anItem, float angle, float xImpulse);
    
-   // model
+    void processBonusState(float dt);
+    void useActiveBonus();
+    void resetActiveBonus();
+    // model
    cocos2d::Vector<cocos2d::Node*>* _items;
    cocos2d::Vector<ControlPointDef*>* _cntPoints;
    
@@ -101,8 +108,15 @@ protected:
     ScoreLayer* _scoreLayer;
     Multiplier* _multiplier;
     GameCycleIndicator* _gameCycleInd;
+    Conveyor* _conv;
+    MindCloudTips* cloudTips;
+    Sprite* bg;
+    BonusMenu* _bonusMenu;
     
     std::vector<int> _caughtItemsIds;
+    
+    float _bonusTimer; // if _bonusTimer > 0, the game using active bonus from bonus menu;
+    
 private:
    
    cocos2d::Layer* _gameLayer;

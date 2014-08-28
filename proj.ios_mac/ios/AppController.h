@@ -8,5 +8,12 @@
 
 @property(nonatomic, readonly) RootViewController* viewController;
 
+- (BOOL) application:(UIApplication *)application
+             openURL:(NSURL *)url
+   sourceApplication:(NSString *)sourceApplication
+          annotation:(id)annotation;
+
+- (BOOL) shareFb:(NSString *)string;
+
 @end
 

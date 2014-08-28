@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bg</key>
+	<string>level_2_bg.png</string>
+	<key>bonusItems</key>
+	<array>
+		<dict>
+			<key>ocurancesPerLevel</key>
+			<integer>3</integer>
+			<key>itemId</key>
+			<integer>13</integer>
+		</dict>
+		<dict>
+			<key>ocurancesPerLevel</key>
+			<integer>3</integer>
+			<key>itemId</key>
+			<integer>14</integer>
+		</dict>
+		<dict>
+			<key>ocurancesPerLevel</key>
+			<integer>3</integer>
+			<key>itemId</key>
+			<integer>15</integer>
+		</dict>
+	</array>
+	<key>time</key>
+	<integer>10</integer>
+	<key>items</key>
+	<dict>
+		<key>requiredFoodItems</key>
+		<array>
+			<integer>0</integer>
+			<integer>3</integer>
+			<integer>11</integer>
+		</array>
+		<key>allowedFoodItems</key>
+		<array>
+			<integer>1</integer>
+		</array>
+		<key>allowedGarbageItems</key>
+		<array>
+			<integer>1</integer>
+		</array>
+	</dict>
+	<key>speed</key>
+	<integer>200</integer>
+</dict>
+</plist>

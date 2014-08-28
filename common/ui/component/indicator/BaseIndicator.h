@@ -17,6 +17,8 @@ public:
     
     void doStep(float score);
     bool isComplete();
+    
+    virtual void restart();
 };
 
 

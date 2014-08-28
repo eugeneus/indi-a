@@ -21,7 +21,8 @@ Spritable* Spritable::create(string spriteFrameName, const char* framesPattern, 
     {
         CC_SAFE_DELETE(pRet);
     }
-    
+   
+   
     return pRet;
 }
 
@@ -119,5 +120,33 @@ void Spritable::setSpriteSize(Size aSize)
    this->setContentSize(_defaultContentSize);
    this->setContentSize(_defaultContentSize);
 }
+
+void Spritable::testDraw()
+{
+   // draw anchor point
+   DrawNode *dotAnchorNode = DrawNode::create();
+   dotAnchorNode->drawDot(this->getAnchorPointInPoints(), 10, Color4F(Color3B::WHITE));
+   this->addChild(dotAnchorNode, 0);
+   // draw position poing
+   DrawNode *dotPositinNode = DrawNode::create();
+   dotPositinNode->drawDot(this->getPosition(), 10, Color4F(Color3B::WHITE));
+   this->addChild(dotPositinNode, 0);
+   // draw content rect
+   
+   DrawNode *rectNode = DrawNode::create();
+   Size imgSize = this->getContentSize();
+   Point originPos = this->getPosition();
+   Point point1 = originPos;
+   point1.x += imgSize.width;
+   Point point2 = point1;
+   point2.y += imgSize.height;
+   Point point3 = point2;
+   point3.x = originPos.x;
+   Point verts1 [] = {originPos,point1,point2,point3};
+   
+   rectNode->drawPolygon(verts1, 4, Color4F(1,1,1,0.2), 1.0, Color4F(Color3B::WHITE));
+   this->addChild(rectNode, 0);
+}
+
 
 

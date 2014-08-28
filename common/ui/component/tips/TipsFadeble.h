@@ -16,6 +16,7 @@ public:
     void showTip();
     void hideTip();
     void toggleTip();
+    void changeTip(const std::string& tipsImgFrameName);
 };
 
 #endif /* defined(__BlindChef__TipsFadeble__) */

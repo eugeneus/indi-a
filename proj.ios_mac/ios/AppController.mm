@@ -27,9 +27,12 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import "AdmobController.h"
 
-@implementation AppController
-
+@implementation AppController {
+    AdmobController *_bannerViewController;
+}
 #pragma mark -
 #pragma mark Application lifecycle
 
@@ -57,7 +60,7 @@ static AppDelegate s_sharedApplication;
     _viewController.wantsFullScreenLayout = YES;
     _viewController.view = eaglView;
 
-    // Set RootViewController to window
+    /*// Set RootViewController to window
     if ( [[UIDevice currentDevice].systemVersion floatValue] < 6.0)
     {
         // warning: addSubView doesn't work on iOS6
@@ -67,7 +70,10 @@ static AppDelegate s_sharedApplication;
     {
         // use this method on ios6
         [window setRootViewController:_viewController];
-    }
+    }*/
+    
+    _bannerViewController = [[AdmobController alloc] initWithContentViewController:_viewController withSize:window.bounds.size];
+    window.rootViewController = _bannerViewController;
 
     [window makeKeyAndVisible];
 
@@ -76,7 +82,6 @@ static AppDelegate s_sharedApplication;
     // IMPORTANT: Setting the GLView should be done after creating the RootViewController
     cocos2d::GLView *glview = cocos2d::GLView::createWithEAGLView(eaglView);
     cocos2d::Director::getInstance()->setOpenGLView(glview);
-
     cocos2d::Application::getInstance()->run();
 
     return YES;
@@ -93,6 +98,9 @@ static AppDelegate s_sharedApplication;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    [FBAppEvents activateApp];
+    
+    [FBAppCall handleDidBecomeActive];
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
@@ -122,6 +130,43 @@ static AppDelegate s_sharedApplication;
      */
 }
 
+#pragma mark - Facebook
+
+- (BOOL) application:(UIApplication *)application
+             openURL:(NSURL *)url
+   sourceApplication:(NSString *)sourceApplication
+          annotation:(id)annotation {
+    
+    BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    
+    return wasHandled;
+}
+
+- (BOOL) shareFb:(NSString *)string {
+    FBLinkShareParams *params = [[FBLinkShareParams alloc] init];
+    params.link = [NSURL URLWithString:@"https://developers.facebook.com/docs/ios/share/"];
+    
+    // If the Facebook app is installed and we can present the share dialog
+    if ([FBDialogs canPresentShareDialogWithParams:params]) {
+        // Present the share dialog
+        [FBDialogs presentShareDialogWithLink:params.link
+                                      handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                          if(error) {
+                                              // An error occurred, we need to handle the error
+                                              // See: https://developers.facebook.com/docs/ios/errors
+                                              NSLog(@"Error publishing story: %@", error.description);
+                                          } else {
+                                              // Success
+                                              NSLog(@"result %@", results);
+                                          }
+                                      }];
+    } else {
+        // Present the feed dialog
+        NSLog(@"present feed dialog");
+    }
+    
+    return true;
+}
 
 #pragma mark -
 #pragma mark Memory management

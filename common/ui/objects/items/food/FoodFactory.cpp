@@ -13,6 +13,9 @@
 #include "Bread.h"
 #include "Cheese.h"
 #include "Beef.h"
+#include "Lemon.h"
+#include "Salt.h"
+#include "Spice.h"
 
 Food* FoodFactory::createFood(int food_type)
 {
@@ -82,6 +85,21 @@ Food* FoodFactory::createFood(int food_type)
         case kFoodBeef:
         {
             food = Beef::create();
+            break;
+        }
+        case kFoodLemon:
+        {
+            food = Lemon::create();
+            break;
+        }
+        case kFoodSalt:
+        {
+            food = Salt::create();
+            break;
+        }
+        case kFoodSpice:
+        {
+            food = Spice::create();
             break;
         }
             

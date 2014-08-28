@@ -29,11 +29,15 @@ bool BaseIndicator::init(const std::string& bgFrameName, const std::string& indi
 }
 
 void BaseIndicator::doStep(float score) {
-    if (score > 1) score = 1;
-    else if (score < 0) score = 0;
+    if (score > 1.0) score = 1.0;
+    else if (score < 0.0) score = 0.0;
     _indicator->setScaleX(score);
 }
 
 bool BaseIndicator::isComplete() {
     return _indicator->getScaleX() == 1;
+}
+
+void BaseIndicator::restart() {
+    this->doStep(0.0);
 }

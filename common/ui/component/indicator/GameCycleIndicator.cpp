@@ -42,4 +42,13 @@ void GameCycleIndicator::nextStep(float dt) {
     this->doStep(speed);
 }
 
+void GameCycleIndicator::restart() {
+    _currentTime = 0;
+    super::restart();
+}
+
+void GameCycleIndicator::setGameTime(float gt) {
+    _gameTime = gt;
+}
+
 //

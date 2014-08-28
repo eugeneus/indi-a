@@ -43,3 +43,14 @@ void Conveyor::pauseConv() {
         if (sp != nullptr) sp->pause();
     }
 }
+
+void Conveyor::resumeConv() {
+    super::startCycling();
+    
+    super::resume();
+    for (int i =0; i < sprites.size(); i++ ) {
+        Sprite* sp = sprites.at(i);
+        if (sp != nullptr) sp->resume();
+    }
+
+}

@@ -9,7 +9,7 @@ USING_NS_CC;
 class Item;
 //class cocos2d::BezierTo;
 
-class MovementController {
+class MovementController { // obsolete
 
 private:
 

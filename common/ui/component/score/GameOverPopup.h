@@ -19,8 +19,11 @@ public:
     
     static GameOverPopup* create();
     
-    void levelSelectMenu(cocos2d::Ref* pSender);
+    void menuMainMenu(cocos2d::Ref* pSender);
+    void menuStoreMenu(cocos2d::Ref* pSender);
     void playAgainMenu(cocos2d::Ref* pSender);
+    
+    cocos2d::Node* createScoreLabel();
 };
 
 #endif /* defined(__BlindChef__GameOverPopup__) */

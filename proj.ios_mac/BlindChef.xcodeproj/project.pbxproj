@@ -64,6 +64,7 @@
 		AA3424831960CB230067B032 /* RioGrande.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA3424821960CB230067B032 /* RioGrande.ttf */; };
 		AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA4A9D011960227600BB3634 /* Cyclable.cpp */; };
 		AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA4A9D0419605CF400BB3634 /* Conveyor.cpp */; };
+		AA66A9BA19A9E31A00CB7806 /* level_2.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA66A9B919A9E31A00CB7806 /* level_2.plist */; };
 		AA7E7103197E53BE0019CBDD /* TouchController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7E7101197E53BE0019CBDD /* TouchController.cpp */; };
 		AA870FFB196324A50028A4EA /* Food.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA870FF5196324A50028A4EA /* Food.cpp */; };
 		AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA870FF7196324A50028A4EA /* FoodFactory.cpp */; };
@@ -111,10 +112,26 @@
 		AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4B1966E64B00C48611 /* TipsFadeble.cpp */; };
 		AAB58E501966E90C00C48611 /* MindCloudTips.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4E1966E90C00C48611 /* MindCloudTips.cpp */; };
 		AAB58E531966F5F600C48611 /* Pot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E511966F5F600C48611 /* Pot.cpp */; };
+		AAB5F63619AA0ACE00756B29 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F63519AA0ACE00756B29 /* FacebookSDK.framework */; };
+		AAB5F69119AA290000756B29 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69019AA290000756B29 /* libGoogleAdMobAds.a */; };
+		AAB5F69319AA296E00756B29 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69219AA296E00756B29 /* AdSupport.framework */; };
+		AAB5F69519AA298600756B29 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69419AA298600756B29 /* MessageUI.framework */; };
+		AAB5F69719AA299600756B29 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69619AA299600756B29 /* StoreKit.framework */; };
+		AAB5F69919AA29A500756B29 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69819AA29A500756B29 /* SystemConfiguration.framework */; };
+		AABDB9D719AB2A7D004533D0 /* Lemon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABDB9D519AB2A7D004533D0 /* Lemon.cpp */; };
+		AABDB9DA19AB2BEF004533D0 /* Salt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABDB9D819AB2BEF004533D0 /* Salt.cpp */; };
+		AABDB9DD19AB2CA5004533D0 /* Spice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABDB9DB19AB2CA5004533D0 /* Spice.cpp */; };
+		AAC4D98D19AA2BC300A42D0A /* AdmobController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D98C19AA2BC300A42D0A /* AdmobController.m */; };
+		AAC4D98F19AA2F3D00A42D0A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4D98E19AA2F3D00A42D0A /* CoreTelephony.framework */; };
+		AAC4D99119AA359800A42D0A /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4D99019AA359800A42D0A /* GameController.framework */; };
+		AAC4D99319AA35A200A42D0A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC4D99219AA35A200A42D0A /* MediaPlayer.framework */; };
+		AAC4D9B019AA605E00A42D0A /* FacebookWrap.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D9AE19AA605E00A42D0A /* FacebookWrap.mm */; };
+		AAC4D9B319AA649B00A42D0A /* FacebookProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D9B119AA649B00A42D0A /* FacebookProvider.cpp */; };
 		AAC70ED819975327007D0537 /* GameOverPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED619975327007D0537 /* GameOverPopup.cpp */; };
 		AAC70EDB19975374007D0537 /* BaseGamePopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC70ED919975374007D0537 /* BaseGamePopup.cpp */; };
 		AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AACAB432198AC40400F8AE01 /* LevelProvider.cpp */; };
 		AACAB438198AC41F00F8AE01 /* level_1.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAB437198AC41F00F8AE01 /* level_1.plist */; };
+		AAEF481E199A594D0045F40C /* crystal radio kit.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AAEF481D199A594D0045F40C /* crystal radio kit.ttf */; };
 		AAF06204199232D0008563CA /* Potatoe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF06202199232D0008563CA /* Potatoe.cpp */; };
 		AAF0620919923645008563CA /* Duck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF0620719923645008563CA /* Duck.cpp */; };
 		AAF0620E19923ACB008563CA /* levelcompleted.caf in Resources */ = {isa = PBXBuildFile; fileRef = AAF0620A19923ACB008563CA /* levelcompleted.caf */; };
@@ -335,6 +352,7 @@
 		AA4A9D021960227600BB3634 /* Cyclable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cyclable.h; sourceTree = "<group>"; };
 		AA4A9D0419605CF400BB3634 /* Conveyor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Conveyor.cpp; sourceTree = "<group>"; };
 		AA4A9D0519605CF400BB3634 /* Conveyor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conveyor.h; sourceTree = "<group>"; };
+		AA66A9B919A9E31A00CB7806 /* level_2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level_2.plist; sourceTree = "<group>"; };
 		AA7E7101197E53BE0019CBDD /* TouchController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TouchController.cpp; sourceTree = "<group>"; };
 		AA7E7102197E53BE0019CBDD /* TouchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchController.h; sourceTree = "<group>"; };
 		AA870FF5196324A50028A4EA /* Food.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Food.cpp; sourceTree = "<group>"; };
@@ -427,6 +445,40 @@
 		AAB58E4F1966E90C00C48611 /* MindCloudTips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MindCloudTips.h; sourceTree = "<group>"; };
 		AAB58E511966F5F600C48611 /* Pot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pot.cpp; sourceTree = "<group>"; };
 		AAB58E521966F5F600C48611 /* Pot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pot.h; sourceTree = "<group>"; };
+		AAB5F63519AA0ACE00756B29 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		AAB5F68419AA290000756B29 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		AAB5F68519AA290000756B29 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		AAB5F68619AA290000756B29 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		AAB5F68719AA290000756B29 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		AAB5F68819AA290000756B29 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		AAB5F68919AA290000756B29 /* GADInAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchase.h; sourceTree = "<group>"; };
+		AAB5F68A19AA290000756B29 /* GADInAppPurchaseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchaseDelegate.h; sourceTree = "<group>"; };
+		AAB5F68B19AA290000756B29 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		AAB5F68C19AA290000756B29 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		AAB5F68D19AA290000756B29 /* GADModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADModules.h; sourceTree = "<group>"; };
+		AAB5F68E19AA290000756B29 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		AAB5F68F19AA290000756B29 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		AAB5F69019AA290000756B29 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		AAB5F69219AA296E00756B29 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
+		AAB5F69419AA298600756B29 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
+		AAB5F69619AA299600756B29 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
+		AAB5F69819AA29A500756B29 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		AABDB9D519AB2A7D004533D0 /* Lemon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lemon.cpp; sourceTree = "<group>"; };
+		AABDB9D619AB2A7D004533D0 /* Lemon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lemon.h; sourceTree = "<group>"; };
+		AABDB9D819AB2BEF004533D0 /* Salt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Salt.cpp; sourceTree = "<group>"; };
+		AABDB9D919AB2BEF004533D0 /* Salt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Salt.h; sourceTree = "<group>"; };
+		AABDB9DB19AB2CA5004533D0 /* Spice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Spice.cpp; sourceTree = "<group>"; };
+		AABDB9DC19AB2CA5004533D0 /* Spice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spice.h; sourceTree = "<group>"; };
+		AAC4D98B19AA2BC300A42D0A /* AdmobController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdmobController.h; path = ios/AdmobController.h; sourceTree = SOURCE_ROOT; };
+		AAC4D98C19AA2BC300A42D0A /* AdmobController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdmobController.m; path = ios/AdmobController.m; sourceTree = SOURCE_ROOT; };
+		AAC4D98E19AA2F3D00A42D0A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		AAC4D99019AA359800A42D0A /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
+		AAC4D99219AA35A200A42D0A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
+		AAC4D9AC19AA5F6900A42D0A /* FacebookCallBack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookCallBack.h; sourceTree = "<group>"; };
+		AAC4D9AE19AA605E00A42D0A /* FacebookWrap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FacebookWrap.mm; sourceTree = SOURCE_ROOT; };
+		AAC4D9AF19AA605E00A42D0A /* FacebookWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookWrap.h; sourceTree = SOURCE_ROOT; };
+		AAC4D9B119AA649B00A42D0A /* FacebookProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FacebookProvider.cpp; sourceTree = "<group>"; };
+		AAC4D9B219AA649B00A42D0A /* FacebookProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookProvider.h; sourceTree = "<group>"; };
 		AAC70ED619975327007D0537 /* GameOverPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverPopup.cpp; sourceTree = "<group>"; };
 		AAC70ED719975327007D0537 /* GameOverPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverPopup.h; sourceTree = "<group>"; };
 		AAC70ED919975374007D0537 /* BaseGamePopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseGamePopup.cpp; sourceTree = "<group>"; };
@@ -434,6 +486,7 @@
 		AACAB432198AC40400F8AE01 /* LevelProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelProvider.cpp; sourceTree = "<group>"; };
 		AACAB433198AC40400F8AE01 /* LevelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelProvider.h; sourceTree = "<group>"; };
 		AACAB437198AC41F00F8AE01 /* level_1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level_1.plist; sourceTree = "<group>"; };
+		AAEF481D199A594D0045F40C /* crystal radio kit.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "crystal radio kit.ttf"; path = "fonts/crystal radio kit.ttf"; sourceTree = "<group>"; };
 		AAF06202199232D0008563CA /* Potatoe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Potatoe.cpp; sourceTree = "<group>"; };
 		AAF06203199232D0008563CA /* Potatoe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Potatoe.h; sourceTree = "<group>"; };
 		AAF0620719923645008563CA /* Duck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Duck.cpp; sourceTree = "<group>"; };
@@ -478,6 +531,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAC4D99319AA35A200A42D0A /* MediaPlayer.framework in Frameworks */,
+				AAC4D99119AA359800A42D0A /* GameController.framework in Frameworks */,
+				AAC4D98F19AA2F3D00A42D0A /* CoreTelephony.framework in Frameworks */,
+				AAB5F69919AA29A500756B29 /* SystemConfiguration.framework in Frameworks */,
+				AAB5F69719AA299600756B29 /* StoreKit.framework in Frameworks */,
+				AAB5F69519AA298600756B29 /* MessageUI.framework in Frameworks */,
+				AAB5F69319AA296E00756B29 /* AdSupport.framework in Frameworks */,
 				1AC6FB2E180E99EB004C840B /* libbox2d iOS.a in Frameworks */,
 				1AC6FB2F180E99EB004C840B /* libchipmunk iOS.a in Frameworks */,
 				1AC6FB30180E99EB004C840B /* libcocos2dx iOS.a in Frameworks */,
@@ -485,7 +545,9 @@
 				1AC6FB32180E99EB004C840B /* libCocosDenshion iOS.a in Frameworks */,
 				D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				AAB5F63619AA0ACE00756B29 /* FacebookSDK.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				AAB5F69119AA290000756B29 /* libGoogleAdMobAds.a in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */,
 				BF1712471292920000B8313A /* libz.dylib in Frameworks */,
@@ -525,6 +587,8 @@
 		080E96DDFE201D6D7F000001 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				AAB5F68319AA290000756B29 /* admob */,
+				AAB5F63419AA0ACE00756B29 /* framework */,
 				5087E77117EB970100C73F5D /* Icons */,
 				503AE0FA17EB989F00D1A890 /* AppController.h */,
 				503AE0FB17EB989F00D1A890 /* AppController.mm */,
@@ -532,6 +596,10 @@
 				503AE0FD17EB989F00D1A890 /* Prefix.pch */,
 				503AE0FE17EB989F00D1A890 /* RootViewController.h */,
 				503AE0FF17EB989F00D1A890 /* RootViewController.mm */,
+				AAC4D98B19AA2BC300A42D0A /* AdmobController.h */,
+				AAC4D98C19AA2BC300A42D0A /* AdmobController.m */,
+				AAC4D9AE19AA605E00A42D0A /* FacebookWrap.mm */,
+				AAC4D9AF19AA605E00A42D0A /* FacebookWrap.h */,
 			);
 			name = ios;
 			path = Classes;
@@ -591,6 +659,13 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AAC4D99219AA35A200A42D0A /* MediaPlayer.framework */,
+				AAC4D99019AA359800A42D0A /* GameController.framework */,
+				AAC4D98E19AA2F3D00A42D0A /* CoreTelephony.framework */,
+				AAB5F69819AA29A500756B29 /* SystemConfiguration.framework */,
+				AAB5F69619AA299600756B29 /* StoreKit.framework */,
+				AAB5F69419AA298600756B29 /* MessageUI.framework */,
+				AAB5F69219AA296E00756B29 /* AdSupport.framework */,
 				D6B0611A1803AB670077942B /* CoreMotion.framework */,
 				503AE11A17EB9C5A00D1A890 /* IOKit.framework */,
 				503AE11117EB99EE00D1A890 /* libcurl.dylib */,
@@ -658,11 +733,13 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AAEF481D199A594D0045F40C /* crystal radio kit.ttf */,
 				AAF0620A19923ACB008563CA /* levelcompleted.caf */,
 				AAF0620B19923ACB008563CA /* item_fall.caf */,
 				AAF0620C19923ACB008563CA /* pressbutton.caf */,
 				AAF0620D19923ACB008563CA /* bgmusic.mp3 */,
 				AACAB437198AC41F00F8AE01 /* level_1.plist */,
+				AA66A9B919A9E31A00CB7806 /* level_2.plist */,
 				AA3424821960CB230067B032 /* RioGrande.ttf */,
 				AA96A224195DB25500C22BC9 /* images.plist */,
 				AA96A1FA195DB09200C22BC9 /* images.png */,
@@ -746,6 +823,12 @@
 				AA89688E1997DF53005F8946 /* Cheese.h */,
 				AA8968901997DFD4005F8946 /* Beef.cpp */,
 				AA8968911997DFD4005F8946 /* Beef.h */,
+				AABDB9D519AB2A7D004533D0 /* Lemon.cpp */,
+				AABDB9D619AB2A7D004533D0 /* Lemon.h */,
+				AABDB9D819AB2BEF004533D0 /* Salt.cpp */,
+				AABDB9D919AB2BEF004533D0 /* Salt.h */,
+				AABDB9DB19AB2CA5004533D0 /* Spice.cpp */,
+				AABDB9DC19AB2CA5004533D0 /* Spice.h */,
 			);
 			path = food;
 			sourceTree = "<group>";
@@ -924,9 +1007,58 @@
 			path = tips;
 			sourceTree = "<group>";
 		};
+		AAB5F63419AA0ACE00756B29 /* framework */ = {
+			isa = PBXGroup;
+			children = (
+				AAB5F63519AA0ACE00756B29 /* FacebookSDK.framework */,
+			);
+			name = framework;
+			path = ios/framework;
+			sourceTree = SOURCE_ROOT;
+		};
+		AAB5F68319AA290000756B29 /* admob */ = {
+			isa = PBXGroup;
+			children = (
+				AAB5F68419AA290000756B29 /* GADAdMobExtras.h */,
+				AAB5F68519AA290000756B29 /* GADAdNetworkExtras.h */,
+				AAB5F68619AA290000756B29 /* GADAdSize.h */,
+				AAB5F68719AA290000756B29 /* GADBannerView.h */,
+				AAB5F68819AA290000756B29 /* GADBannerViewDelegate.h */,
+				AAB5F68919AA290000756B29 /* GADInAppPurchase.h */,
+				AAB5F68A19AA290000756B29 /* GADInAppPurchaseDelegate.h */,
+				AAB5F68B19AA290000756B29 /* GADInterstitial.h */,
+				AAB5F68C19AA290000756B29 /* GADInterstitialDelegate.h */,
+				AAB5F68D19AA290000756B29 /* GADModules.h */,
+				AAB5F68E19AA290000756B29 /* GADRequest.h */,
+				AAB5F68F19AA290000756B29 /* GADRequestError.h */,
+				AAB5F69019AA290000756B29 /* libGoogleAdMobAds.a */,
+			);
+			name = admob;
+			path = ios/admob;
+			sourceTree = SOURCE_ROOT;
+		};
+		AAC4D9A919AA5F6900A42D0A /* social */ = {
+			isa = PBXGroup;
+			children = (
+				AAC4D9AA19AA5F6900A42D0A /* facebook */,
+			);
+			path = social;
+			sourceTree = "<group>";
+		};
+		AAC4D9AA19AA5F6900A42D0A /* facebook */ = {
+			isa = PBXGroup;
+			children = (
+				AAC4D9AC19AA5F6900A42D0A /* FacebookCallBack.h */,
+				AAC4D9B119AA649B00A42D0A /* FacebookProvider.cpp */,
+				AAC4D9B219AA649B00A42D0A /* FacebookProvider.h */,
+			);
+			path = facebook;
+			sourceTree = "<group>";
+		};
 		AACAB431198AC40400F8AE01 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				AAC4D9A919AA5F6900A42D0A /* social */,
 				AACAB432198AC40400F8AE01 /* LevelProvider.cpp */,
 				AACAB433198AC40400F8AE01 /* LevelProvider.h */,
 				AAF0621B19926025008563CA /* UserDataProvider.cpp */,
@@ -1136,6 +1268,7 @@
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
+				AAEF481E199A594D0045F40C /* crystal radio kit.ttf in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				AA96A225195DB25500C22BC9 /* images.plist in Resources */,
@@ -1158,6 +1291,7 @@
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				AA66A9BA19A9E31A00CB7806 /* level_2.plist in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				AAF0620E19923ACB008563CA /* levelcompleted.caf in Resources */,
 				AAF0621119923ACB008563CA /* bgmusic.mp3 in Resources */,
@@ -1184,8 +1318,10 @@
 			files = (
 				AA8D6BA11999009000484E65 /* SocialMenuPopup.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				AABDB9DD19AB2CA5004533D0 /* Spice.cpp in Sources */,
 				E0050DE61967F31B009E7BA1 /* GameController.cpp in Sources */,
 				AA89688C1997DE70005F8946 /* Bread.cpp in Sources */,
+				AABDB9DA19AB2BEF004533D0 /* Salt.cpp in Sources */,
 				AAF788CA1997A81800AE7D3F /* BaseIndicator.cpp in Sources */,
 				AA8710071963264D0028A4EA /* Bottle.cpp in Sources */,
 				AAF0621A19925596008563CA /* Tomato.cpp in Sources */,
@@ -1225,7 +1361,9 @@
 				E072E1A1196932F5002E4C04 /* ImageLabelMenuItem.cpp in Sources */,
 				AA89687A1997D912005F8946 /* Chicken.cpp in Sources */,
 				AA8968801997DB13005F8946 /* Egg.cpp in Sources */,
+				AAC4D98D19AA2BC300A42D0A /* AdmobController.m in Sources */,
 				AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */,
+				AABDB9D719AB2A7D004533D0 /* Lemon.cpp in Sources */,
 				AA96A21E195DB16C00C22BC9 /* SelectGameLayer.cpp in Sources */,
 				AA870FFB196324A50028A4EA /* Food.cpp in Sources */,
 				AA8968921997DFD4005F8946 /* Beef.cpp in Sources */,
@@ -1242,9 +1380,11 @@
 				AAB58E531966F5F600C48611 /* Pot.cpp in Sources */,
 				AAF788CD1997ACD900AE7D3F /* GameCycleIndicator.cpp in Sources */,
 				AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */,
+				AAC4D9B019AA605E00A42D0A /* FacebookWrap.mm in Sources */,
 				AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */,
 				AAF0621D19926025008563CA /* UserDataProvider.cpp in Sources */,
 				AAF0620919923645008563CA /* Duck.cpp in Sources */,
+				AAC4D9B319AA649B00A42D0A /* FacebookProvider.cpp in Sources */,
 				AA870FFD196324A50028A4EA /* Gabbage.cpp in Sources */,
 				AA8710011963250E0028A4EA /* Item.cpp in Sources */,
 				AA87100D196329770028A4EA /* GarbageFactory.cpp in Sources */,
@@ -1322,9 +1462,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
 				COMPRESS_PNG_FILES = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ios/framework",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1343,7 +1487,8 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ios/admob";
+				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1355,9 +1500,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mikhail Smarshchok (3ENUU6GK3H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mikhail Smarshchok (3ENUU6GK3H)";
 				COMPRESS_PNG_FILES = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ios/framework",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
@@ -1374,7 +1523,8 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ios/admob";
+				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1464,6 +1614,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "44D544BB-36F9-4AD9-9098-6F84F6AABFD7";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -1492,6 +1643,7 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "44D544BB-36F9-4AD9-9098-6F84F6AABFD7";
 				SDKROOT = macosx;
 				VALIDATE_PRODUCT = YES;
 			};
