@@ -126,8 +126,8 @@ void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSi
     _convVelY = _levelInfo->getSpeed();
     _convLegth = aVisibleSize.width;
     
-    //_gameCycleInd->setGameTime(_levelInfo->getTime());
-    //_gameCycleInd->restart();
+    _gameCycleInd->setGameTime(_levelInfo->getRoundTime());
+    _gameCycleInd->restart();
 
     //_conv->resume();
     _theChef->restartChef();
@@ -188,9 +188,9 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     _multiplier->setPosition(Vec2(450, aVisibleSize.height + anOrigin.y - 60));
     _gameLayer->addChild(_multiplier, kCloudZO);
     
-//    _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getTime());
-//    _gameCycleInd->setPosition(Vec2(0, _convY - 40));
-//    _gameLayer->addChild(_gameCycleInd, kCloudZO);
+    _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getRoundTime());
+    _gameCycleInd->setPosition(Vec2(0, _convY - 40));
+    _gameLayer->addChild(_gameCycleInd, kCloudZO);
     
     _theChef->startChefBodyAnimation();
    
@@ -421,7 +421,8 @@ void GameController::useActiveBonus()
             break;
         case kBonusType3:
             break;
-            
+            _gameCycleInd->setGameTime(_gameCycleInd->getGameTime() + _levelInfo->getRoundTime()/2.0f);
+            _gameCycleInd->restart();
         default:
             break;
     }
@@ -454,33 +455,34 @@ void GameController::update(float dt)
    Size itemSize;
     this->processBonusState(dt);
    _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
-//    _gameCycleInd->nextStep(dt);
-    //if (!_gameCycleInd->isComplete()) {
-        /*this->stopGame();
-        
-        if (_levelInfo->checkAllRequiredExist(_caughtItemsIds)) {
-            GameCompletePopup* goPopup = GameCompletePopup::create(); //TODO:replace for change game score and dish
-            _gameLayer->addChild(goPopup, 1001);
-        } else {                         //TODO: remove
-            GameOverPopup* goPopup = GameOverPopup::create();
-            _gameLayer->addChild(goPopup, 1001);
-        }
-        return;*/
-    
-        /*if (this->_convVelY < 60) {
-            this->_convVelY +=20;
-            this->_conv->changeCyclingSpeed(this->_convVelY);
-        }*/
-
    
-   // set items idle/put them on the conveuir
-   for (int i = _idxRotated; i < _items->size(); i++) {
-      item = (Item*)_items->at(i);
-      this->putIdleItemOnConveyour(dt, item);
-   }
-   _putNextItemDt -= dt;
-
-  //  }
+    _gameCycleInd->nextStep(dt);
+    
+//   if (!_gameCycleInd->isComplete()) {
+//        this->stopGame();
+//       
+//        if (_levelInfo->checkAllRequiredExist(_caughtItemsIds)) {
+//            GameCompletePopup* goPopup = GameCompletePopup::create(); //TODO:replace for change game score and dish
+//            _gameLayer->addChild(goPopup, 1001);
+//        } else {                         //TODO: remove
+//            GameOverPopup* goPopup = GameOverPopup::create();
+//            _gameLayer->addChild(goPopup, 1001);
+//        }
+//        return;
+//    
+//        if (this->_convVelY < 60) {
+//            this->_convVelY +=20;
+//            this->_conv->changeCyclingSpeed(this->_convVelY);
+//        }
+//   
+//  }
+    // set items idle/put them on the conveuir
+    for (int i = _idxRotated; i < _items->size(); i++) {
+        item = (Item*)_items->at(i);
+        this->putIdleItemOnConveyour(dt, item);
+    }
+    _putNextItemDt -= dt;
+    
     
    for(Node* nitem : *_items){
       

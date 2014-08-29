@@ -62,7 +62,7 @@ bool LevelProvider::initForLevel(int levelId)
         _levelMap = FileUtils::getInstance()->getValueMapFromFile(levelFileName);
         
         _speed = getFloatValue(_levelMap, "speed");
-        _time = getFloatValue(_levelMap, "time");
+        _roundTime = getFloatValue(_levelMap, "roundTime");
         _bg = getStringValue(_levelMap, "bg");
         
         _allowedFoodItems = getAllowedItems(_levelMap, "allowedFoodItems");
@@ -79,8 +79,8 @@ float LevelProvider::getSpeed() {
     return _speed;
 }
 
-float LevelProvider::getTime() {
-    return _time;
+float LevelProvider::getRoundTime() {
+    return _roundTime;
 }
 
 std::vector<int> LevelProvider::getAllowedFoodItems() {

@@ -11,7 +11,7 @@ private:
     cocos2d::ValueMap _levelMap;
     
     float _speed;
-    float _time;
+    float _roundTime;
     std::string _bg;
     
     std::vector<int> _requiredItems;
@@ -33,7 +33,7 @@ public:
     
     int getLevelId();
     float getSpeed();
-    float getTime();
+    float getRoundTime();
     std::vector<int> getRequiredItems();
     std::vector<int> getAllowedFoodItems();
     std::vector<int> getAllowedGarbageItems();
