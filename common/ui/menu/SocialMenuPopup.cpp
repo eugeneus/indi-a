@@ -42,7 +42,7 @@ void SocialMenuPopup::menuFbCallback(cocos2d::Ref* pSender) {
 }
 
 void SocialMenuPopup::menuGpCallback(cocos2d::Ref* pSender) {
-   
+    FacebookProvider::create()->readGloabalScore();
 }
 
 void SocialMenuPopup::menuInviteCallback(cocos2d::Ref* pSender) {

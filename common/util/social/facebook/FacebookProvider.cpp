@@ -42,3 +42,8 @@ void FacebookProvider::complete() {
     //
     CCLOG("..fb.. complete..");
 }
+
+void FacebookProvider::readGloabalScore() {
+    FacebookWrap* wrap = new FacebookWrap::FacebookWrap();
+    wrap->readGlobalScores(this);
+}

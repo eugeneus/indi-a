@@ -12,6 +12,7 @@ public:
     void menuStoreCallback(cocos2d::Ref* pSender);
     void menuOptionsCallback(cocos2d::Ref* pSender);
     void menuSocialCallback(cocos2d::Ref* pSender);
+    void menuScoreCallback(cocos2d::Ref* pSender);
     void menuExitCallback(cocos2d::Ref* pSender);
     void menuCloseCallback(cocos2d::Ref* pSender);
     void menuGameCallback(cocos2d::Ref* pSender);

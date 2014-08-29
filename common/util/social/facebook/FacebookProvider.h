@@ -13,6 +13,7 @@ public:
     ~FacebookProvider();
     static FacebookProvider* create();
     void share(std::string msg);
+    void readGloabalScore();
     void complete();
 private:
     bool init();

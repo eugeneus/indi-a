@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
@@ -65,7 +67,7 @@
 	<key>CFBundleVersion</key>
 	<string>1.1</string>
 	<key>FacebookAppID</key>
-	<string>828436257174750</string>
+	<string>1511878459049707</string>
 	<key>FacebookDisplayName</key>
 	<string>Blind Chef</string>
 	<key>LSRequiresIPhoneOS</key>

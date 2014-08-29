@@ -98,7 +98,6 @@ static AppDelegate s_sharedApplication;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [FBAppEvents activateApp];
     
     [FBAppCall handleDidBecomeActive];
     /*
@@ -132,14 +131,10 @@ static AppDelegate s_sharedApplication;
 
 #pragma mark - Facebook
 
-- (BOOL) application:(UIApplication *)application
-             openURL:(NSURL *)url
-   sourceApplication:(NSString *)sourceApplication
-          annotation:(id)annotation {
-    
-    BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
-    
-    return wasHandled;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [FBSession.activeSession handleOpenURL:url];
 }
 
 - (BOOL) shareFb:(NSString *)string {
