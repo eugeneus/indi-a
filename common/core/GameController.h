@@ -116,7 +116,6 @@ protected:
     std::vector<int> _caughtItemsIds;
     
     float _bonusTimer; // if _bonusTimer > 0, the game using active bonus from bonus menu;
-    //float _roundTimer;
     
 private:
    

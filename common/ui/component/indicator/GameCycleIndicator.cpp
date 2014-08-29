@@ -51,9 +51,4 @@ void GameCycleIndicator::setGameTime(float gt) {
     _gameTime = gt;
 }
 
-float GameCycleIndicator::getGameTime()
-{
-    return _gameTime;
-}
-
 //

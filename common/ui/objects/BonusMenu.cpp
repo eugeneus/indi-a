@@ -35,7 +35,7 @@ bool BonusMenu::init(LevelProvider* aLevelInfo)
     
     bonus1Count = Value(10);
     bonus2Count = Value(10);
-    bonus3Count = Value(10);
+    bonus3Count = Value(0);
     
     
     _bonusItemIds = aLevelInfo->getBonusItems();
