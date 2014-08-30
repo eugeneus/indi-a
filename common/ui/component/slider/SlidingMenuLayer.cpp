@@ -3,10 +3,10 @@
 
 USING_NS_CC;
 
-SlidingMenuLayer* SlidingMenuLayer::create(int rowsCount, bool isVertical)
+SlidingMenuLayer* SlidingMenuLayer::create(Size pContentSize, bool pIsVertical)
 {
     SlidingMenuLayer *pRet = new SlidingMenuLayer();
-    if (pRet && pRet->init(rowsCount, isVertical))
+    if (pRet && pRet->init(pContentSize, pIsVertical))
     {
         pRet->autorelease();
         return pRet;
@@ -19,7 +19,7 @@ SlidingMenuLayer* SlidingMenuLayer::create(int rowsCount, bool isVertical)
     }
 }
 
-bool SlidingMenuLayer::init(int pRowsCount, bool pIsVertical)
+bool SlidingMenuLayer::init(Size pContentSize, bool pIsVertical)
 {
     if ( !Layer::init() )
     {
@@ -27,8 +27,7 @@ bool SlidingMenuLayer::init(int pRowsCount, bool pIsVertical)
     }
     
     isVertical = pIsVertical;
-    rowsCount = pRowsCount;
-    int itemsCount = 10;
+    rowsCount = 1;
     
     pScreenSize = Director::getInstance()->getWinSize();
     generalscalefactor = pScreenSize.height / 500 ;
@@ -39,32 +38,8 @@ bool SlidingMenuLayer::init(int pRowsCount, bool pIsVertical)
     scrollView->setDirection(isVertical ?  cocos2d::extension::ScrollView::Direction::VERTICAL : cocos2d::extension::ScrollView::Direction::HORIZONTAL);
     this->addChild(scrollView, 218, SCROLLVIEW_TAG);
     
-    Sprite* tilebox = Sprite::createWithSpriteFrameName("menu_bg.png");
-    float itemLength = isVertical ? tilebox->getContentSize().height : tilebox->getContentSize().width;
+    scrollContentSize = pContentSize;
     
-    
-    int colsCount = rowsCount > 1 ? itemsCount/rowsCount : 1;
-    
-    
-    for (int i=0 ; i < 10 ; i++){
-        std::stringstream ss;
-        ss << "Game, N " << i;
-        
-        auto item = SlidingMenuItem::create(ss.str(), i);
-        
-        float itemPositionSideTmp = i * itemLength + 30 + itemLength/2;
-        float itemPositionSide = isVertical ? pScreenSize.height - itemPositionSideTmp : itemPositionSideTmp;
-        
-        
-        Vec2 position = isVertical ? Vec2(pScreenSize.width/2 - (tilebox->getContentSize().width *tilescale)/2.0f, itemPositionSide) : Vec2(itemPositionSide, pScreenSize.height/2 - (tilebox->getContentSize().height *tilescale)/2.0f);
-        
-        item->setPosition(position);
-        scrollView->addChild(item, 1, i);
-    }
-    
-    scrollView->setViewSize(Size(pScreenSize.width, pScreenSize.height ));
-    Size scrollContentSize = isVertical ? Size(pScreenSize.width, (itemLength + 30) * 10) : Size((itemLength + 30)* 10, pScreenSize.height);
-    scrollView->setContentSize(scrollContentSize);
     
   //  if (isVertical)  scrollView->setPosition(Vec2(scrollContentSize.width/2 , itemLength - scrollContentSize.height/2 * 1.0/(10 + 1)));
     
@@ -74,6 +49,33 @@ bool SlidingMenuLayer::init(int pRowsCount, bool pIsVertical)
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
     return true;
+}
+
+void SlidingMenuLayer::addItems(std::vector<SlidingMenuItem*> items) {
+    
+    scrollView->removeAllChildren();
+    
+    int i = 0;
+    float contenSize = 0;
+    for (SlidingMenuItem *item : items){
+        
+        float itemLength = isVertical ? item->getContentSize().height : item->getContentSize().width;
+        contenSize +=itemLength + 30;
+    
+        float itemPositionSide = isVertical ? scrollContentSize.height - contenSize : contenSize;
+        
+        Vec2 position = isVertical ? Vec2(scrollContentSize.width/2 - (item->getContentSize().width )/2.0f, itemPositionSide) : Vec2(itemPositionSide, scrollContentSize.height/2 - (item->getContentSize().height)/2.0f);
+        
+        item->setPosition(position);
+        scrollView->addChild(item, 1, i);
+        
+        
+        i++;
+    }
+    
+    scrollView->setViewSize(Size(scrollContentSize.width, scrollContentSize.height ));
+    Size allScrollContentSize = isVertical ? Size(pScreenSize.width, contenSize) : Size(contenSize, pScreenSize.height);
+    scrollView->setContentSize(allScrollContentSize);
 }
 
 void SlidingMenuLayer::onTouchesEnded(const std::vector<Touch*>& touches, Event *unused_event) {

@@ -2,6 +2,7 @@
 #include "ScoreMenuPopup.h"
 #include "MainMenu.h"
 #include "FacebookProvider.h"
+#include "SlidingMenuLayer.h"
 
 USING_NS_CC;
 
@@ -28,6 +29,17 @@ void reinitTabs(cocos2d::Vector<cocos2d::MenuItem *> &menuItems, cocos2d::Vector
     }
 }
 
+void ScoreMenuPopup::initSlidingLayer() {
+    std::vector<SlidingMenuItem *> items;
+    
+    for (int i=0; i < 20; i ++) {
+        SlidingMenuItem* item = SlidingMenuItem::create("bla bla bla", i);
+        items.push_back(item);
+    }
+    
+    layer->addItems(items);
+}
+
 void ScoreMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItems, cocos2d::Vec2 origin, cocos2d::Size visibleSize) {
     isFriendsTab = false;
     
@@ -41,6 +53,18 @@ void ScoreMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuIte
     reinitTabs(menuItems, tabs);
     
     initMenuItem(menuItems, "btn_back.png", CC_CALLBACK_1(ScoreMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800));
+    
+    
+    Sprite* bg = Sprite::createWithSpriteFrameName("bg_score_table.png");
+    
+    layer = SlidingMenuLayer::create(bg->getContentSize(), true);
+    layer->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    this->addChild(layer, 1);
+    
+    
+    
+    initSlidingLayer();
+    
 }
 
 void ScoreMenuPopup::menuBackCallback(cocos2d::Ref* pSender) {

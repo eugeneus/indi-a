@@ -1,6 +1,5 @@
 
 #include "GameCompletePopup.h"
-#include "GameSelectMenu.h"
 #include "GameMenu.h"
 
 USING_NS_CC;
@@ -77,7 +76,7 @@ void GameCompletePopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem*>& menuI
 }
 
 void GameCompletePopup::levelSelectMenu(Ref* pSender) {
-    this->changeScene(GameSelectMenu::createScene());
+    //this->changeScene(GameSelectMenu::createScene());
 }
 
 void GameCompletePopup::playNextMenu(Ref* pSender) {

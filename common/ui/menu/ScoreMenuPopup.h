@@ -4,12 +4,14 @@
 
 #include "cocos2d.h"
 #include "BaseMenuPopup.h"
+#include "SlidingMenuLayer.h"
 
 class ScoreMenuPopup : public BaseMenuPopup
 {
 private:
     bool isFriendsTab;
     cocos2d::Vector<cocos2d::MenuItemSprite *> tabs;
+    SlidingMenuLayer *layer;
 public:
     static ScoreMenuPopup* create();
     
@@ -18,7 +20,7 @@ public:
     void menuGlobalCallback(cocos2d::Ref* pSender);
     
     virtual void initMenuItems(cocos2d::Vector<cocos2d::MenuItem*>& menuItems, cocos2d::Vec2 origin, cocos2d::Size visibleSize);
-    
+    void initSlidingLayer() ;
     //CREATE_FUNC(MainMenuPopup);
 };
 
