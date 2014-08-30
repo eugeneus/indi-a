@@ -25,7 +25,7 @@
 			<integer>15</integer>
 		</dict>
 	</array>
-	<key>time</key>
+	<key>roundTime</key>
 	<integer>60</integer>
 	<key>items</key>
 	<dict>
