@@ -22,6 +22,7 @@ public:
     
     virtual void restart();
     void setGameTime(float gt);
+    float getGameTime();
 };
 
 #endif /* defined(__BlindChef__GameCycleIndicator__) */
