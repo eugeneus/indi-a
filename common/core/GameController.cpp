@@ -126,7 +126,7 @@ void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSi
     _convVelY = _levelInfo->getSpeed();
     _convLegth = aVisibleSize.width;
     
-    _gameCycleInd->setGameTime(_levelInfo->getTime());
+    _gameCycleInd->setGameTime(_levelInfo->getRoundTime());
     _gameCycleInd->restart();
 
     //_conv->resume();
@@ -188,7 +188,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     _multiplier->setPosition(Vec2(450, aVisibleSize.height + anOrigin.y - 60));
     _gameLayer->addChild(_multiplier, kCloudZO);
     
-    _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getTime());
+    _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getRoundTime());
     _gameCycleInd->setPosition(Vec2(0, _convY - 40));
     _gameLayer->addChild(_gameCycleInd, kCloudZO);
     
@@ -421,6 +421,7 @@ void GameController::useActiveBonus()
             _conv->changeCyclingSpeed(_convVelY);
             break;
         case kBonusType3:
+            _gameCycleInd->setGameTime( _gameCycleInd->getGameTime() + _levelInfo->getRoundTime()/2.0f);
             break;
             
         default:
