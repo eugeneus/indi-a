@@ -51,6 +51,7 @@ GameController::GameController()
    
    _items = new Vector<cocos2d::Node*>(10);
    _cntPoints = new Vector<ControlPointDef*>(10);
+    _requiredItemTimer = 0.0f;
 
 }
 
@@ -219,37 +220,64 @@ float getRandomFloat(float from ,float to) {
 
 void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
 {
-   Item* item = nullptr;
-   
-   for (int iItm = 0; iItm < 20; iItm++) {
-       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 15)); // 0 - 12
-       //item = ItemFactory::createItem(0, getRandomNumber(4, 5)); // 0 - 12
-      //item = ItemFactory::createItem(0, 4); // 0 - 12
-      item->setIdle(_itemIdlePos); //-1 * offset
-      
-      item->setScale(1.0);
-      _gameLayer->addChild(item,kItemZO1);
-      _items->pushBack(item);
-   }
+    Item* item = nullptr;
     
-    //TODO: remove
-    for (int i : _levelInfo->getRequiredItems()) {
-        item = FoodFactory::createFood(i);
+    std::vector<int> requiredFroodItems = _levelInfo->getRequiredItems();
+    for (auto itemSubtype : requiredFroodItems) {
+        item = ItemFactory::createItem(0, itemSubtype);
         item->setIdle(_itemIdlePos); //-1 * offset
-        
         item->setScale(1.0);
         _gameLayer->addChild(item,kItemZO1);
-        _items->pushBack(item);
+        _requiredItems.pushBack(item);
     }
-
-    for (int i : _levelInfo->getBonusItems()) {
-        item = FoodFactory::createFood(i);
+    std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
+    for (auto itemSubtype : allowedFoodItems) {
+        item = ItemFactory::createItem(0, itemSubtype);
         item->setIdle(_itemIdlePos); //-1 * offset
-        
-        item->setScale(2.0);
+        item->setScale(1.0);
         _gameLayer->addChild(item,kItemZO1);
-        _items->pushBack(item);
+        _foodItems.pushBack(item);
     }
+    std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
+    for (auto itemSubtype : allowedFoodItems) {
+        item = ItemFactory::createItem(1, itemSubtype);
+        item->setIdle(_itemIdlePos); //-1 * offset
+        item->setScale(1.0);
+        _gameLayer->addChild(item,kItemZO1);
+        _garbageItems.pushBack(item);
+    }
+    
+   
+   
+//   for (int iItm = 0; iItm < 20; iItm++) {
+//       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 15)); // 0 - 12
+//       //item = ItemFactory::createItem(0, getRandomNumber(4, 5)); // 0 - 12
+//      //item = ItemFactory::createItem(0, 4); // 0 - 12
+//      item->setIdle(_itemIdlePos); //-1 * offset
+//      
+//      item->setScale(1.0);
+//      _gameLayer->addChild(item,kItemZO1);
+//      _items->pushBack(item);
+//   }
+//    
+//    //TODO: remove
+//    for (int i : _levelInfo->getRequiredItems()) {
+//        item = FoodFactory::createFood(i);
+//        item->setIdle(_itemIdlePos); //-1 * offset
+//        
+//        item->setScale(1.0);
+//        _gameLayer->addChild(item,kItemZO1);
+//        _items->pushBack(item);
+//    }
+//
+//    for (int i : _levelInfo->getBonusItems()) {
+//        item = FoodFactory::createFood(i);
+//        item->setIdle(_itemIdlePos); //-1 * offset
+//        
+//        item->setScale(2.0);
+//        _gameLayer->addChild(item,kItemZO1);
+//        _items->pushBack(item);
+//    }
     
 }
 
@@ -303,6 +331,24 @@ void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
       
 		_putNextItemDt = getRandomNumber(1, 3);
 	}
+
+}
+
+void GameController::launchItems(float dt)
+{
+    // to launch required item:
+    // get roundTime, number of required items, launch count
+    if(_requiredItemTimer < 0.0f){
+        _requiredItemTimer = _levelInfo->getRoundTime() / ((float)(_requiredItems.size() * _levelInfo->getRequiredLaunchCount()));
+    }
+    else
+        _requiredItemTimer -= dt;
+    
+    //to launch bonus items?
+    
+    // to launch arbitrary food items?
+    
+    // to launch arbitrary garbage items?
 
 }
 
@@ -477,6 +523,9 @@ void GameController::update(float dt)
 
    
    // set items idle/put them on the conveuir
+   
+    this->launchItems(dt);
+    
    for (int i = _idxRotated; i < _items->size(); i++) {
       item = (Item*)_items->at(i);
       this->putIdleItemOnConveyour(dt, item);

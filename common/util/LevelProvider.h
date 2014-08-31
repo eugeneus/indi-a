@@ -14,6 +14,7 @@ private:
     float _roundTime;
     std::string _bg;
     std::string _tipsBg;
+    int _requiredLaunchCount; // number of times each required item should appear per round
     
     std::vector<int> _requiredItems;
     std::vector<int> _allowedFoodItems;
@@ -39,6 +40,7 @@ public:
     std::vector<int> getAllowedFoodItems();
     std::vector<int> getAllowedGarbageItems();
     std::vector<int> getBonusItems();
+    int getRequiredLaunchCount();
     
     bool isRequiredItem(int itemId);
     std::string getBgSpriteFrameName();

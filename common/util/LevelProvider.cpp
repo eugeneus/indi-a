@@ -4,6 +4,7 @@
 LevelProvider::LevelProvider()
 {
     _levelId = 0;
+    _requiredLaunchCount = -1;
 }
 
 LevelProvider::~LevelProvider() {}
@@ -52,6 +53,12 @@ std::vector<int> getAllowedItems(ValueMap map, const char* key) {
     
     return result;
 }
+
+float getIntValue(ValueMap map, const char* key) {
+    Value value = map.at(key);
+    return value.asInt();
+}
+
 
 bool LevelProvider::initForLevel(int levelId)
 {
@@ -168,4 +175,14 @@ int LevelProvider::getLevelId() {
 
 std::string LevelProvider::getBgSpriteFrameName() {
     return _bg;
+}
+
+int LevelProvider::getRequiredLaunchCount()
+{
+    if(_requiredLaunchCount < 0){ //lazy init
+        //Value itemsVlaue = ;
+        //ValueMap itemsMap = itemsVlaue.asValueMap();
+        _requiredLaunchCount = getIntValue(_levelMap.at("items").asValueMap(), "requiredLaunchCount");
+    }
+    return _requiredLaunchCount;
 }
