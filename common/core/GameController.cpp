@@ -126,6 +126,7 @@ void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSi
     _convVelY = _levelInfo->getSpeed();
     _convLegth = aVisibleSize.width;
     
+    _bonusMenu->resetActiveBonus();
     _gameCycleInd->setGameTime(_levelInfo->getRoundTime());
     _gameCycleInd->restart();
 
@@ -394,8 +395,6 @@ void GameController::resetActiveBonus()
         case kBonusType2:
              _convVelY = _levelInfo->getSpeed();
             _conv->changeCyclingSpeed(_convVelY);
-            // reset round time to stadard value
-            //this->updateBonus(bonus2Count, 1, bonus2);
             break;
         case kBonusType3:
             break;
@@ -415,21 +414,20 @@ void GameController::useActiveBonus()
     switch (activeBonus) {
         case kBonusType1: // set chef blind
             _theChef->setVision(_levelInfo->getRequiredItems());
+            _bonusTimer = 20.0f;
             break;
         case kBonusType2:
             _convVelY = _convVelY/1.5f;
             _conv->changeCyclingSpeed(_convVelY);
+            _bonusTimer = 20.0f;
             break;
         case kBonusType3:
-            _gameCycleInd->setGameTime( _gameCycleInd->getGameTime() + _levelInfo->getRoundTime()/2.0f);
+            _bonusTimer =  _gameCycleInd->getGameTime() + _levelInfo->getRoundTime()/2.0f;
+            _gameCycleInd->setGameTime(_bonusTimer);
             break;
             
         default:
             break;
-    }
-    
-    if(activeBonus > 0){
-        _bonusTimer = 20.0f;
     }
     
 }
