@@ -27,7 +27,9 @@ public:
 protected:
 
     cocos2d::Vector<Item*> _items; // contains overall list of items
-    cocos2d::Map<int, ItemList*> _requiredPool;
+    //cocos2d::Map<std::string, ItemList*> _requiredPool;
+    
+    std::queue<Item*> _requiredItem;
 private:
 
 
