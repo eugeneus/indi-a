@@ -1,5 +1,7 @@
 
 #include "ItemsPool.h"
+#include "Item.h"
+
 
 ItemsPool::ItemsPool(){}
 

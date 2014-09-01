@@ -7,6 +7,7 @@ USING_NS_CC;
 
 class LevelProvider : public cocos2d::Ref {
 private:
+    
     int _levelId;
     cocos2d::ValueMap _levelMap;
     
@@ -23,6 +24,7 @@ private:
     
     
 public:
+    
     LevelProvider();
     
     ~LevelProvider();
