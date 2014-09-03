@@ -20,7 +20,7 @@ private:
     std::vector<int> _requiredItems;
     std::vector<int> _allowedFoodItems;
     std::vector<int> _allowedGarbageItems;
-    std::vector<int> _bonusItems;
+    std::map<int,int> _bonusItems;
     
     
 public:
@@ -39,10 +39,11 @@ public:
     float getSpeed();
     float getRoundTime();
     std::vector<int> getRequiredItems();
+    int getRequiredAppearsPerLevel();
+    
     std::vector<int> getAllowedFoodItems();
     std::vector<int> getAllowedGarbageItems();
-    std::vector<int> getBonusItems();
-    int getRequiredLaunchCount();
+    std::map<int,int> getBonusItems();
     
     bool isRequiredItem(int itemId);
     std::string getBgSpriteFrameName();

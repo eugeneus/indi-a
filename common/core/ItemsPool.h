@@ -5,12 +5,7 @@
 #include "cocos2d.h"
 
 class Item;
-
-class ItemList:cocos2d::Ref
-{
-    
-};
-
+class LevelProvider;
 
 class ItemsPool {
 
@@ -20,16 +15,29 @@ public:
 
    ~ItemsPool();
 
-   static ItemsPool* create();
+   static ItemsPool* create(LevelProvider* aLevelInfo);
 
-   bool init();
+    Item* getItemFromPool(cocos2d::Vector<Item*>* anItemList, float dt);
 
 protected:
 
-    cocos2d::Vector<Item*> _items; // contains overall list of items
+    //cocos2d::Vector<Item*> _items; // contains overall list of items
     //cocos2d::Map<std::string, ItemList*> _requiredPool;
     
-    std::queue<Item*> _requiredItem;
+    //std::queue<Item*> _requiredItem;
+    
+    std::map<int,int> _requiredItemsCounter;
+    float _requiredItemsInterval; // time interval to launch next required item
+    
+    std::map<int,int> _bonusItemsCounter;
+    float _bonusItemsInterval; // time interval to launch next bonus item
+
+    std::map<int,int> _foodItemsCounter;
+    float _foodItemsInterval; // time interval to launch next bonus item
+
+    std::map<int,int> _garbageItemsCounter;
+    float _garbageItemsInterval; // time interval to launch next bonus item
+   
 private:
 
 

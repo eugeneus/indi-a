@@ -269,16 +269,17 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
         _gameLayer->addChild(item,kItemZO1);
         _items->pushBack(item);
     }
-
-    for (int i : _levelInfo->getBonusItems()) {
-        item = FoodFactory::createFood(i);
+    
+    std::map<int,int> bonuses = _levelInfo->getBonusItems();
+    for (auto bonus : bonuses){
+    
+        item = FoodFactory::createFood(bonus.first);
         item->setIdle(_itemIdlePos); //-1 * offset
         
         item->setScale(2.0);
         _gameLayer->addChild(item,kItemZO1);
         _items->pushBack(item);
     }
-    
 }
 
 void startGame()
@@ -339,7 +340,7 @@ void GameController::launchItems(float dt)
     // to launch required item:
     // get roundTime, number of required items, launch count
     if(_requiredItemTimer < 0.0f){
-        _requiredItemTimer = _levelInfo->getRoundTime() / ((float)(_requiredItems.size() * _levelInfo->getRequiredLaunchCount()));
+        _requiredItemTimer = _levelInfo->getRoundTime() / ((float)(_requiredItems.size() * _levelInfo->getRequiredAppearsPerLevel()));
     }
     else
         _requiredItemTimer -= dt;

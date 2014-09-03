@@ -37,8 +37,10 @@ bool BonusMenu::init(LevelProvider* aLevelInfo)
     bonus2Count = Value(10);
     bonus3Count = Value(0);
     
-    
-    _bonusItemIds = aLevelInfo->getBonusItems();
+    std::map<int,int> bonuses = aLevelInfo->getBonusItems();
+    for (auto bonus : bonuses) {
+        _bonusItemIds.push_back(bonus.first);
+    }
     
     Item* bonusItem = FoodFactory::createFood(_bonusItemIds.at(kBonusType1 - 1));
     

@@ -7,19 +7,19 @@
 	<key>bonusItems</key>
 	<array>
 		<dict>
-			<key>ocurancesPerLevel</key>
+			<key>appearsPerLevel</key>
 			<integer>3</integer>
 			<key>itemId</key>
 			<integer>13</integer>
 		</dict>
 		<dict>
-			<key>ocurancesPerLevel</key>
+			<key>appearsPerLevel</key>
 			<integer>3</integer>
 			<key>itemId</key>
 			<integer>14</integer>
 		</dict>
 		<dict>
-			<key>ocurancesPerLevel</key>
+			<key>appearsPerLevel</key>
 			<integer>3</integer>
 			<key>itemId</key>
 			<integer>15</integer>
@@ -29,7 +29,7 @@
 	<integer>60</integer>
 	<key>items</key>
 	<dict>
-		<key>requiredLaunchCount</key>
+		<key>requiredAppearsPerLevel</key>
 		<integer>2</integer>
 		<key>requiredFoodItems</key>
 		<array>
