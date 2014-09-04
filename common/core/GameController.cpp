@@ -51,6 +51,7 @@ GameController::GameController()
    
    _items = new Vector<cocos2d::Node*>(10);
    _cntPoints = new Vector<ControlPointDef*>(10);
+    _requiredItemTimer = 0.0f;
 
 }
 
@@ -126,6 +127,7 @@ void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSi
     _convVelY = _levelInfo->getSpeed();
     _convLegth = aVisibleSize.width;
     
+    _bonusMenu->resetActiveBonus();
     _gameCycleInd->setGameTime(_levelInfo->getRoundTime());
     _gameCycleInd->restart();
 
@@ -218,7 +220,34 @@ float getRandomFloat(float from ,float to) {
 
 void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
 {
-   Item* item = nullptr;
+    Item* item = nullptr;
+    
+    std::vector<int> requiredFroodItems = _levelInfo->getRequiredItems();
+    for (auto itemSubtype : requiredFroodItems) {
+        item = ItemFactory::createItem(0, itemSubtype);
+        item->setIdle(_itemIdlePos); //-1 * offset
+        item->setScale(1.0);
+        _gameLayer->addChild(item,kItemZO1);
+        _requiredItems.pushBack(item);
+    }
+    std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
+    for (auto itemSubtype : allowedFoodItems) {
+        item = ItemFactory::createItem(0, itemSubtype);
+        item->setIdle(_itemIdlePos); //-1 * offset
+        item->setScale(1.0);
+        _gameLayer->addChild(item,kItemZO1);
+        _foodItems.pushBack(item);
+    }
+    std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
+    for (auto itemSubtype : allowedFoodItems) {
+        item = ItemFactory::createItem(1, itemSubtype);
+        item->setIdle(_itemIdlePos); //-1 * offset
+        item->setScale(1.0);
+        _gameLayer->addChild(item,kItemZO1);
+        _garbageItems.pushBack(item);
+    }
+    
+   
    
    for (int iItm = 0; iItm < 20; iItm++) {
        item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 15)); // 0 - 12
@@ -240,16 +269,17 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
         _gameLayer->addChild(item,kItemZO1);
         _items->pushBack(item);
     }
-
-    for (int i : _levelInfo->getBonusItems()) {
-        item = FoodFactory::createFood(i);
+    
+    std::map<int,int> bonuses = _levelInfo->getBonusItems();
+    for (auto bonus : bonuses){
+    
+        item = FoodFactory::createFood(bonus.first);
         item->setIdle(_itemIdlePos); //-1 * offset
         
         item->setScale(2.0);
         _gameLayer->addChild(item,kItemZO1);
         _items->pushBack(item);
     }
-    
 }
 
 void startGame()
@@ -302,6 +332,24 @@ void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
       
 		_putNextItemDt = getRandomNumber(1, 3);
 	}
+
+}
+
+void GameController::launchItems(float dt)
+{
+    // to launch required item:
+    // get roundTime, number of required items, launch count
+    if(_requiredItemTimer < 0.0f){
+        _requiredItemTimer = _levelInfo->getRoundTime() / ((float)(_requiredItems.size() * _levelInfo->getRequiredAppearsPerLevel()));
+    }
+    else
+        _requiredItemTimer -= dt;
+    
+    //to launch bonus items?
+    
+    // to launch arbitrary food items?
+    
+    // to launch arbitrary garbage items?
 
 }
 
@@ -394,8 +442,6 @@ void GameController::resetActiveBonus()
         case kBonusType2:
              _convVelY = _levelInfo->getSpeed();
             _conv->changeCyclingSpeed(_convVelY);
-            // reset round time to stadard value
-            //this->updateBonus(bonus2Count, 1, bonus2);
             break;
         case kBonusType3:
             break;
@@ -415,21 +461,20 @@ void GameController::useActiveBonus()
     switch (activeBonus) {
         case kBonusType1: // set chef blind
             _theChef->setVision(_levelInfo->getRequiredItems());
+            _bonusTimer = 20.0f;
             break;
         case kBonusType2:
             _convVelY = _convVelY/1.5f;
             _conv->changeCyclingSpeed(_convVelY);
+            _bonusTimer = 20.0f;
             break;
         case kBonusType3:
-            _gameCycleInd->setGameTime( _gameCycleInd->getGameTime() + _levelInfo->getRoundTime()/2.0f);
+            _bonusTimer =  _gameCycleInd->getGameTime() + _levelInfo->getRoundTime()/2.0f;
+            _gameCycleInd->setGameTime(_bonusTimer);
             break;
             
         default:
             break;
-    }
-    
-    if(activeBonus > 0){
-        _bonusTimer = 20.0f;
     }
     
 }
@@ -479,6 +524,9 @@ void GameController::update(float dt)
 
    
    // set items idle/put them on the conveuir
+   
+    this->launchItems(dt);
+    
    for (int i = _idxRotated; i < _items->size(); i++) {
       item = (Item*)_items->at(i);
       this->putIdleItemOnConveyour(dt, item);

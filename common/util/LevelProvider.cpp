@@ -4,6 +4,7 @@
 LevelProvider::LevelProvider()
 {
     _levelId = 0;
+    _requiredLaunchCount = -1;
 }
 
 LevelProvider::~LevelProvider() {}
@@ -52,6 +53,12 @@ std::vector<int> getAllowedItems(ValueMap map, const char* key) {
     
     return result;
 }
+
+float getIntValue(ValueMap map, const char* key) {
+    Value value = map.at(key);
+    return value.asInt();
+}
+
 
 bool LevelProvider::initForLevel(int levelId)
 {
@@ -103,19 +110,22 @@ std::string LevelProvider::getTipsBgSpriteFrameName() {
     return _tipsBg;
 }
 
-std::vector<int> LevelProvider::getBonusItems()
+std::map<int,int> LevelProvider::getBonusItems()
 {
     if (_bonusItems.size() > 0)
         return _bonusItems;
     
     Value itemsValue = _levelMap.at("bonusItems");
     ValueVector items = itemsValue.asValueVector();
-    
+    int id;
+    int val;
     if (items.size() > 0) {
         Value bonusVal;
         for (int i = 0; i < items.size(); i++) {
             bonusVal = items.at(i);
-            _bonusItems.push_back(bonusVal.asValueMap().at("itemId").asInt());
+            id = bonusVal.asValueMap().at("itemId").asInt();
+            val = bonusVal.asValueMap().at("appearsPerLevel").asInt();
+            _bonusItems.insert(std::pair<int, int>(id, val));
         }
     }
     return _bonusItems;
@@ -168,4 +178,14 @@ int LevelProvider::getLevelId() {
 
 std::string LevelProvider::getBgSpriteFrameName() {
     return _bg;
+}
+
+int LevelProvider::getRequiredAppearsPerLevel()
+{
+    if(_requiredLaunchCount < 0){ //lazy init
+        //Value itemsVlaue = ;
+        //ValueMap itemsMap = itemsVlaue.asValueMap();
+        _requiredLaunchCount = getIntValue(_levelMap.at("items").asValueMap(), "requiredAppearsPerLevel");
+    }
+    return _requiredLaunchCount;
 }

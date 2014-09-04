@@ -7,6 +7,7 @@ USING_NS_CC;
 
 class LevelProvider : public cocos2d::Ref {
 private:
+    
     int _levelId;
     cocos2d::ValueMap _levelMap;
     
@@ -14,14 +15,16 @@ private:
     float _roundTime;
     std::string _bg;
     std::string _tipsBg;
+    int _requiredLaunchCount; // number of times each required item should appear per round
     
     std::vector<int> _requiredItems;
     std::vector<int> _allowedFoodItems;
     std::vector<int> _allowedGarbageItems;
-    std::vector<int> _bonusItems;
+    std::map<int,int> _bonusItems;
     
     
 public:
+    
     LevelProvider();
     
     ~LevelProvider();
@@ -36,9 +39,11 @@ public:
     float getSpeed();
     float getRoundTime();
     std::vector<int> getRequiredItems();
+    int getRequiredAppearsPerLevel();
+    
     std::vector<int> getAllowedFoodItems();
     std::vector<int> getAllowedGarbageItems();
-    std::vector<int> getBonusItems();
+    std::map<int,int> getBonusItems();
     
     bool isRequiredItem(int itemId);
     std::string getBgSpriteFrameName();

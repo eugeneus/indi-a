@@ -7,19 +7,19 @@
 	<key>bonusItems</key>
 	<array>
 		<dict>
-			<key>ocurancesPerLevel</key>
+			<key>appearsPerLevel</key>
 			<integer>3</integer>
 			<key>itemId</key>
 			<integer>13</integer>
 		</dict>
 		<dict>
-			<key>ocurancesPerLevel</key>
+			<key>appearsPerLevel</key>
 			<integer>3</integer>
 			<key>itemId</key>
 			<integer>14</integer>
 		</dict>
 		<dict>
-			<key>ocurancesPerLevel</key>
+			<key>appearsPerLevel</key>
 			<integer>3</integer>
 			<key>itemId</key>
 			<integer>15</integer>
@@ -29,6 +29,8 @@
 	<integer>60</integer>
 	<key>items</key>
 	<dict>
+		<key>requiredAppearsPerLevel</key>
+		<integer>2</integer>
 		<key>requiredFoodItems</key>
 		<array>
 			<integer>3</integer>
@@ -36,11 +38,28 @@
 		</array>
 		<key>allowedFoodItems</key>
 		<array>
+			<integer>0</integer>
 			<integer>1</integer>
+			<integer>2</integer>
+			<integer>4</integer>
+			<integer>5</integer>
+			<integer>6</integer>
+			<integer>7</integer>
+			<integer>9</integer>
+			<integer>10</integer>
+			<integer>12</integer>
+			<integer>13</integer>
+			<integer>14</integer>
+			<integer>15</integer>
 		</array>
 		<key>allowedGarbageItems</key>
 		<array>
+			<integer>0</integer>
 			<integer>1</integer>
+			<integer>2</integer>
+			<integer>3</integer>
+			<integer>4</integer>
+			<integer>5</integer>
 		</array>
 	</dict>
 	<key>speed</key>

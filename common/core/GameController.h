@@ -69,6 +69,7 @@ protected:
    void populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
    
    void putIdleItemOnConveyour(float dt, Item* anItem);
+    void launchItems(float dt);
    
    void setItemIdle(float dt, Item* anItem);
 
@@ -91,11 +92,18 @@ protected:
    cocos2d::Vector<cocos2d::Node*>* _items;
    cocos2d::Vector<ControlPointDef*>* _cntPoints;
    
+    cocos2d::Vector<Item*>  _requiredItems;
+    cocos2d::Vector<Item*>  _foodItems;
+    cocos2d::Vector<Item*>  _garbageItems;
+    
+   
    float _convY;
    float _convVelY;
    float _convLegth;
    float _putNextItemDt;
-   float _itemTimer;
+   float _maxReqiredItemInterval;
+    
+    float _requiredItemTimer;
 
    cocos2d::Vec2 _itemIdlePos;
    int _idxRotated;
