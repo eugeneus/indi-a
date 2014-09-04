@@ -1,5 +1,6 @@
 
 #include "Item.h"
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 
@@ -13,7 +14,7 @@ bool Item::init(string spriteFrameName, const char* framesPattern, int spriteCou
     _itemType = -1;
     _itemId = -1;
    
-   _bumpSoundFileName = "item_fall.caf";
+   _bumpSoundFileName = SOUND_FALL_ITEM;
     _spriteFrameName = spriteFrameName;
 
    //this->testDraw();

@@ -2,6 +2,7 @@
 #include "MainMenu.h"
 #include "MainMenuPopup.h"
 #include "SimpleAudioEngine.h"
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 
@@ -36,8 +37,8 @@ void MainMenu::initializeMenu() {
     SpriteBatchNode *spriteBatch = SpriteBatchNode::create("images.png");
     this->addChild(spriteBatch);
     
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("pressbutton.caf");
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("pressbutton.caf");
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(SOUND_CLICK);
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(SOUND_FALL_ITEM);
     
     CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.5); //TODO: load from prop
     CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(0.5); //TODO: load from prop

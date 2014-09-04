@@ -21,6 +21,7 @@
 #include "GameCycleIndicator.h"
 #include "BonusMenu.h"
 #include "FoodFactory.h"
+#include "SoundsConstants.h"
 
 #include "time.h"
 
@@ -78,7 +79,7 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
    _gameLayer = aGameLayer;
    
    
-    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgmusic.mp3", true);
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(SOUND_BG, true);
    
     this->setUpInit(true);
     
@@ -292,7 +293,7 @@ void GameController::restartGame() {
     _gameLayer->resume();
    cloudTips->toggleTip();
     _conv->resumeConv();
-    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgmusic.mp3", true);
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(SOUND_BG, true);
 }
 
 void GameController::stopGame()
