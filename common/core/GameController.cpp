@@ -377,14 +377,15 @@ void GameController::runTossActionWithScale(Item* anItem, ControlPointDef* aPoin
 
 void GameController::tossItem(Item* anItem, Vec2 anImpulse)
 {
-      //Point impulse
-      ControlPointDef* collisionEndPointDef = nullptr;
-      if (_cntPoints->size() > 0) {
-         int randomPointIdx = getRandomNumber(0,(_cntPoints->size()-1));
-         collisionEndPointDef = _cntPoints->at(randomPointIdx);
-      }
-      float totalActionDuration = 1.5f;
-      this->runTossActionWithScale(anItem, collisionEndPointDef, totalActionDuration, anImpulse);
+    //Point impulse
+    ControlPointDef* collisionEndPointDef = nullptr;
+    if (_cntPoints->size() > 0) {
+        int randomPointIdx = getRandomNumber(0,(_cntPoints->size()-1));
+        collisionEndPointDef = _cntPoints->at(randomPointIdx);
+    }
+    float totalActionDuration = 1.5f;
+    this->runTossActionWithScale(anItem, collisionEndPointDef, totalActionDuration, anImpulse);
+    anItem->playBounceSound();
 }
 
 
@@ -397,7 +398,7 @@ void GameController::runBumpAction(Item* anItem)
    float impulseX = (float)((float)getRandomNumber(0,10))/10.0f;
    float impulseY = (float)((float)getRandomNumber(0,10))/10.0f;
    
-   anItem->playBumpSound();
+   //anItem->playBumpSound();
    
    Point impulse = Point(impulseX, impulseY);
    if (currentCollisionType == kControlPointTypePotMargin) {
@@ -409,6 +410,8 @@ void GameController::runBumpAction(Item* anItem)
       Spawn* cobinedPotBump = Spawn::create(itemAction, scaleAction, NULL);
       anItem->setLocalZOrder(kItemZO2);
       anItem->runAction(cobinedPotBump);
+       
+       anItem->playHitPotSound();
    }else
       if(currentCollisionType == kControlPointTypeFloor){
          FiniteTimeAction* itemAction = anItem->getFloorBumpAction(actionDuration, impulse);
@@ -425,9 +428,11 @@ void GameController::runBumpAction(Item* anItem)
          Spawn* cobinedAction = Spawn::create(itemAction, scaleAction, NULL);
          anItem->setLocalZOrder(kItemZO3);
          anItem->runAction(cobinedAction);
+          anItem->playCrashSound();
    }else
       if (currentCollisionType == kControlPointTypePotCenter){
          anItem->setLocalZOrder(kItemZO3);
+          anItem->playHitPotSound();
           
           this->checkGameProgress(anItem);
       }

@@ -32,6 +32,9 @@ public:
    virtual cocos2d::Sprite* createCrack();
    
    void playBumpSound();
+    void playHitPotSound();
+    void playCrashSound();
+    void playBounceSound();
    
    bool isItemInCurrentTargetPoint();
     
@@ -47,6 +50,7 @@ public:
     
     int _itemType;
     int _itemId;
+    
 protected:
    cocos2d::ccBezierConfig bezierConfigBouncePathToEndPoint(cocos2d::Point anEndPoint,
                                                             cocos2d::Vec2 anImpulse);
@@ -54,6 +58,9 @@ protected:
 
    std::string _bumpSoundFileName;
     std::string _spriteFrameName;
+    std::string _hitPotSoundFileName;
+    std::string _crashSoundFile;
+    std::string _bounceSoundFile;
 private:
    typedef Spritable super;
    
