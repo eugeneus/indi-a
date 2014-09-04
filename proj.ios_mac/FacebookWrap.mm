@@ -2,9 +2,8 @@
 #include "FacebookWrap.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-
 FacebookWrap::FacebookWrap() {
-    
+    _callback = nil;
 }
 FacebookWrap::~FacebookWrap() {}
 
@@ -179,7 +178,9 @@ void FacebookWrap::readGlobalScores(iOSBridge::Callbacks::FacebookCallBack* call
     auto listener = EventListenerCustom::create("FACEBOOK_LOGIN", readHandler);
     EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
     dispatcher->addEventListenerWithFixedPriority(listener, 1);// addCustomEventListener("FACEBOOK_LOGIN", readHandler);*/
-    
+
+    _callback = callback;//->retain();
+    str = "aaa";
     if (!FBSession.activeSession.isOpen)
         
         [FBSession.activeSession openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
@@ -209,7 +210,10 @@ void FacebookWrap::doReadGlobalScores() {
                                   
                                   if (result && !error) {
                                       NSLog(@"good");
+                                      std::vector<iOSBridge::Callbacks::FacebookScore *> scores;
                                       if ([[result objectForKey:@"data"] count] > 0)  {
+                                          
+                                          
                                           for (id data : [result objectForKey:@"data"]) {
                                               int score = [[data objectForKey:@"score"] intValue];
                                               NSLog(@"score");
@@ -217,15 +221,31 @@ void FacebookWrap::doReadGlobalScores() {
                                               NSString* name = [user objectForKey:@"name"];
                                               //NSString* userId = [user objectForKey:@"id"];
                                               
+                                              iOSBridge::Callbacks::FacebookScore* sc = new iOSBridge::Callbacks::FacebookScore();
+                                              sc->name = [name cStringUsingEncoding:[NSString defaultCStringEncoding]];
+                                              sc->score = score;
+                                              
+                                              scores.push_back(sc);
                                               
                                               NSLog(@"User: %@ - score: %i", name, score);
                                           }
+                                          
+                                          
                                       }
+                                      this->readGlobalScoreComplete();//_callback->completeReadScores(scores);
+                                  } else {
+                                      _callback->error();
                                   }
                                   
                               }];
 }
 
+void FacebookWrap::readGlobalScoreComplete() {
+    
+    if (_callback)
+    _callback->error();
+    
+}
 
 bool FacebookWrap::initSession() {
     NSArray *permissions = @[@"publish_actions", @"user_friends", @"user_games_activity", @"friends_games_activity"];

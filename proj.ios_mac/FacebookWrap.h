@@ -4,10 +4,14 @@
 
 #import "FacebookCallBack.h"
 
-
 class FacebookWrap
 {
+private:
+    
 public:
+    iOSBridge::Callbacks::FacebookCallBack* _callback;
+    std::string str;
+    
     FacebookWrap();
     ~FacebookWrap();
     
@@ -19,6 +23,7 @@ public:
     
     void readGlobalScores(iOSBridge::Callbacks::FacebookCallBack* callback);
     void doReadGlobalScores();
+    void readGlobalScoreComplete();
     
     bool initSession();
     //void sessionStateChanged(FBSession *session, FBSessionState state, NSError *error);

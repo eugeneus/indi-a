@@ -4,14 +4,14 @@
 
 #include "cocos2d.h"
 #include "BaseMenuPopup.h"
-#include "SlidingMenuLayer.h"
+#include "Overview.h"
 
 class ScoreMenuPopup : public BaseMenuPopup
 {
 private:
     bool isFriendsTab;
     cocos2d::Vector<cocos2d::MenuItemSprite *> tabs;
-    SlidingMenuLayer *layer;
+    Overview* table;
 public:
     static ScoreMenuPopup* create();
     

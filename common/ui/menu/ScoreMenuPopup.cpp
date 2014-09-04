@@ -2,7 +2,10 @@
 #include "ScoreMenuPopup.h"
 #include "MainMenu.h"
 #include "FacebookProvider.h"
-#include "SlidingMenuLayer.h"
+#include "Overview.h"
+
+#include "score/ScoreDataSource.h"
+#include "score/ScoreTableRenderer.h"
 
 USING_NS_CC;
 
@@ -30,14 +33,7 @@ void reinitTabs(cocos2d::Vector<cocos2d::MenuItem *> &menuItems, cocos2d::Vector
 }
 
 void ScoreMenuPopup::initSlidingLayer() {
-    std::vector<SlidingMenuItem *> items;
     
-    for (int i=0; i < 20; i ++) {
-        SlidingMenuItem* item = SlidingMenuItem::create("bla bla bla", i);
-        items.push_back(item);
-    }
-    
-    layer->addItems(items);
 }
 
 void ScoreMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItems, cocos2d::Vec2 origin, cocos2d::Size visibleSize) {
@@ -57,13 +53,17 @@ void ScoreMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuIte
     
     Sprite* bg = Sprite::createWithSpriteFrameName("bg_score_table.png");
     
-    layer = SlidingMenuLayer::create(bg->getContentSize(), true);
-    layer->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-    this->addChild(layer, 1);
+  //  layer = SlidingMenuLayer::create(bg->getContentSize(), true);
+  //  layer->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+  //  this->addChild(layer, 1);
     
     
+    table = new Overview();
+    table->init(ScoreDataSource::create(FacebookProvider::create()), ScoreTableRenderer::create(), Size(bg->getContentSize().width - 100, bg->getContentSize().height - 300));
+    table->setPosition(Vec2(100 + visibleSize.width/2 + origin.x - table->getContentSize().width/2, visibleSize.height/2 + origin.y - 200));
+    this->addChild(table, 100);
     
-    initSlidingLayer();
+ //   initSlidingLayer();
     
 }
 

@@ -30,20 +30,20 @@ bool FacebookProvider::init()
     return true;
 }
 
-void FacebookProvider::share(const std::string msg)
+void FacebookProvider::share(const std::string msg, iOSBridge::Callbacks::FacebookCallBack* callback)
 {
     // запрос продуктов
     FacebookWrap* wrap = new FacebookWrap::FacebookWrap();
-    wrap->share(msg, this); //передаем указатель на себя для Callback вызовов своих методов.
+    wrap->share(msg, callback); //передаем указатель на себя для Callback вызовов своих методов.
     delete wrap;
 }
 
-void FacebookProvider::complete() {
-    //
-    CCLOG("..fb.. complete..");
-}
 
-void FacebookProvider::readGloabalScore() {
+std::vector<ScoreDto *> FacebookProvider::readGloabalScore(iOSBridge::Callbacks::FacebookCallBack* callback) {
+    std::vector<ScoreDto *> scores;
+    
     FacebookWrap* wrap = new FacebookWrap::FacebookWrap();
-    wrap->readGlobalScores(this);
+    wrap->readGlobalScores(callback);
+    
+    return scores;
 }

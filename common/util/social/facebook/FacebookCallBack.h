@@ -10,20 +10,21 @@ namespace iOSBridge
 {
     namespace Callbacks
     {
-        class IAPItem : public Ref
+        class FacebookScore : public Ref
         {
         public:
-            std::string identification;
+            std::string uid;
             std::string name;
-            std::string localizedTitle;
-            std::string localizedDescription;
+            int score;
+            std::string photo;
             float price;
         };
         
         class FacebookCallBack
         {
         public:
-            virtual void complete() = 0;
+            virtual void completeReadScores(std::vector<FacebookScore *> score) = 0;
+            virtual void error() = 0;
         };
     };
 };

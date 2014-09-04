@@ -5,16 +5,17 @@
 #include "cocos2d.h"
 #include "FacebookCallBack.h"
 #include "FacebookWrap.h"
+#include "ScoreDto.h"
 
-class FacebookProvider : public cocos2d::Ref, public iOSBridge::Callbacks::FacebookCallBack
+class FacebookProvider : public cocos2d::Ref///, public iOSBridge::Callbacks::FacebookCallBack
 {
 public:
     FacebookProvider();
     ~FacebookProvider();
     static FacebookProvider* create();
-    void share(std::string msg);
-    void readGloabalScore();
-    void complete();
+    void share(std::string msg, iOSBridge::Callbacks::FacebookCallBack* callback);
+    std::vector<ScoreDto *> readGloabalScore(iOSBridge::Callbacks::FacebookCallBack* callback);
+    //void completeReadScores(std::vector<iOSBridge::Callbacks::FacebookScore *> score);
 private:
     bool init();
 };
