@@ -4,7 +4,7 @@
 #include "LevelProvider.h"
 #include "FoodFactory.h"
 #include "Item.h"
-
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 
@@ -47,16 +47,19 @@ bool BonusMenu::init(LevelProvider* aLevelInfo)
     bonus1 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus1Count.asInt())->getCString(),
                                         bonusItem->getSpriteFrameName(), CC_CALLBACK_1(BonusMenu::bonus1Callback, this));
     
+    _bonus1PickUpSoundFile = SOUND_BONUS_LEMON;
     //delete bonusItem;
     bonusItem = FoodFactory::createFood(_bonusItemIds.at(kBonusType2 - 1));
     bonus2 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus2Count.asInt())->getCString(),
                                         bonusItem->getSpriteFrameName(), CC_CALLBACK_1(BonusMenu::bonus2Callback, this));
+    _bonus2PickUpSoundFile = SOUND_BONUS_SLOW_START;
     
     //delete bonusItem;
     bonusItem = FoodFactory::createFood(_bonusItemIds.at(kBonusType3 - 1));
     bonus3 = ImageLabelMenuItem::create(CCString::createWithFormat("x%i", bonus3Count.asInt())->getCString(),
                                         bonusItem->getSpriteFrameName(), CC_CALLBACK_1(BonusMenu::bonus3Callback, this));
     //delete bonusItem;
+    _bonus3PickUpSoundFile = SOUND_BONUS_PICKUP;
     
     Menu* menu = Menu::create(bonus1, bonus2, bonus3, NULL);
     menu->alignItemsHorizontally();
@@ -103,7 +106,7 @@ void BonusMenu::changeBonusCount(int bonus_type, bool incr) {
 
 void BonusMenu::bonus1Callback(Ref* pSender) {
     CCLOG("bonus 1 click");
-    
+    this->playBonus1PickUpSound();
     if (isCanUseBonus(bonus1Count)) {
         if (_activeBonus == 0) {
             updateBonus(bonus1Count, -1, bonus1);
@@ -116,7 +119,7 @@ void BonusMenu::bonus1Callback(Ref* pSender) {
 
 void BonusMenu::bonus2Callback(Ref* pSender) {
     CCLOG("bonus 2 click");
-    
+    this->playBonus2PickUpSound();
     if (isCanUseBonus(bonus2Count)) {
         if (_activeBonus == 0) {
             updateBonus(bonus2Count, -1, bonus2);
@@ -130,7 +133,7 @@ void BonusMenu::bonus2Callback(Ref* pSender) {
 
 void BonusMenu::bonus3Callback(Ref* pSender) {
     CCLOG("bonus 3 click");
-    
+    this->playBonus3PickUpSound();
     if (isCanUseBonus(bonus3Count)) {
         if (_activeBonus == 0) {
             updateBonus(bonus3Count, -1, bonus3);
@@ -182,3 +185,25 @@ void BonusMenu::resetActiveBonus()
 {
     _activeBonus = 0;
 }
+
+void BonusMenu::playBonus1PickUpSound()
+{
+    if(!this->_bonus1PickUpSoundFile.empty()){
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(this->_bonus1PickUpSoundFile.c_str());
+    }
+}
+
+void BonusMenu::playBonus2PickUpSound()
+{
+    if(!this->_bonus2PickUpSoundFile.empty()){
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(this->_bonus2PickUpSoundFile.c_str());
+    }
+}
+
+void BonusMenu::playBonus3PickUpSound()
+{
+    if(!this->_bonus3PickUpSoundFile.empty()){
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(this->_bonus3PickUpSoundFile.c_str());
+    }
+}
+

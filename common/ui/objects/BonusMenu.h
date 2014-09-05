@@ -23,13 +23,21 @@ private:
     ImageLabelMenuItem* bonus1;
     ImageLabelMenuItem* bonus2;
     ImageLabelMenuItem* bonus3;
+
+    std::string _bonus1PickUpSoundFile;
+    std::string _bonus2PickUpSoundFile;
+    std::string _bonus3PickUpSoundFile;
     
     std::vector<int> _bonusItemIds;
   
     void updateBonus(cocos2d::Value& bonusCount, int delta, ImageLabelMenuItem* bonusLabel);
     
     int _activeBonus; // 0 means no active bonuses
-    
+
+protected:
+    void playBonus1PickUpSound();
+    void playBonus2PickUpSound();
+    void playBonus3PickUpSound();
 public:
     static BonusMenu* create(LevelProvider* aLevelInfo);
     
