@@ -42,13 +42,13 @@ void ScoreMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuIte
     Sprite* tabImg = Sprite::createWithSpriteFrameName("btn_score_global_sel.png");
     //tabImg->setScale(0.9);
     
-    initMenuItem(menuItems, "btn_score_global_sel.png", CC_CALLBACK_1(ScoreMenuPopup::menuGlobalCallback, this), Vec2(visibleSize.width/2 + origin.x - tabImg->getContentSize().width/2*0.9, visibleSize.height/2 + origin.y + 390));
+    initMenuItem(menuItems, BTN_SCORE_GLOBAL, CC_CALLBACK_1(ScoreMenuPopup::menuGlobalCallback, this), Vec2(visibleSize.width/2 + origin.x - tabImg->getContentSize().width/2*0.9, visibleSize.height/2 + origin.y + 390));
     
-    initMenuItem(menuItems, "btn_score_friends.png", CC_CALLBACK_1(ScoreMenuPopup::menuFbCallback, this), Vec2(visibleSize.width/2 + origin.x + tabImg->getContentSize().width/2*0.9, visibleSize.height/2 + origin.y + 390));
+    initMenuItem(menuItems, BTN_SCORE_FRIENDS, CC_CALLBACK_1(ScoreMenuPopup::menuFbCallback, this), Vec2(visibleSize.width/2 + origin.x + tabImg->getContentSize().width/2*0.9, visibleSize.height/2 + origin.y + 390));
 
     reinitTabs(menuItems, tabs);
     
-    initMenuItem(menuItems, "btn_back.png", CC_CALLBACK_1(ScoreMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800));
+    initMenuItem(menuItems, BTN_ALL_BACK, CC_CALLBACK_1(ScoreMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800));
     
     
     Sprite* bg = Sprite::createWithSpriteFrameName("bg_score_table.png");
@@ -84,8 +84,10 @@ bool doChangeTab(cocos2d::Vector<cocos2d::MenuItemSprite *> &tabs, bool isFirstT
         return false;
     }
     
-    std::string activeTabName = isFirstTabClicked ? "btn_score_global_sel.png" : "btn_score_friends_sel.png";
-    std::string passiveTabName = isFirstTabClicked ? "btn_score_friends.png" : "btn_score_global.png";
+    std::string scoreGlobal = BTN_SCORE_GLOBAL;
+    std::string scoreFriend = BTN_SCORE_FRIENDS;
+    std::string activeTabName = isFirstTabClicked ? BTN_NAME_SELECTED(scoreGlobal) : BTN_NAME_SELECTED(scoreFriend);
+    std::string passiveTabName = isFirstTabClicked ? BTN_NAME(scoreFriend) : BTN_NAME(scoreGlobal);
     int tabIndexToActivate = isFirstTabClicked ? 0 : 1;
     int tabIndexToPassivate = isFirstTabClicked ? 1 : 0;
     

@@ -75,9 +75,9 @@ bool GameOverPopup::init() {
 }
 
 void GameOverPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem*>& menuItems) {
-    super::initItem(menuItems, "btn_game_over_store.png", CC_CALLBACK_1(GameOverPopup::menuStoreMenu, this));
-    super::initItem(menuItems, "btn_game_over_play.png", CC_CALLBACK_1(GameOverPopup::playAgainMenu, this));
-    super::initItem(menuItems, "btn_game_over_quit.png", CC_CALLBACK_1(GameOverPopup::menuMainMenu, this));
+    super::initItem(menuItems, BTN_GAME_OVER_STORE, CC_CALLBACK_1(GameOverPopup::menuStoreMenu, this));
+    super::initItem(menuItems, BTN_GAME_OVER_PLAY, CC_CALLBACK_1(GameOverPopup::playAgainMenu, this));
+    super::initItem(menuItems, BTN_GAME_OVER_EXIT, CC_CALLBACK_1(GameOverPopup::menuMainMenu, this));
 }
 
 void GameOverPopup::menuStoreMenu(Ref* pSender) {

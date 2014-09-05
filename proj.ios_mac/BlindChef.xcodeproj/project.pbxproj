@@ -540,6 +540,7 @@
 		AAB109EB19B8DF5000919961 /* timer about to finish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "timer about to finish.mp3"; sourceTree = "<group>"; };
 		AAB109EC19B8DF5000919961 /* Timer Finish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Timer Finish.mp3"; sourceTree = "<group>"; };
 		AAB10A2019B8ECAA00919961 /* SoundsConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundsConstants.h; sourceTree = "<group>"; };
+		AAB114F019BA105600791163 /* ButtonConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonConstants.h; sourceTree = "<group>"; };
 		AAB58E3B1966BBA600C48611 /* BowlingBall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BowlingBall.cpp; sourceTree = "<group>"; };
 		AAB58E3C1966BBA600C48611 /* BowlingBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlingBall.h; sourceTree = "<group>"; };
 		AAB58E441966CF4900C48611 /* BonusMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BonusMenu.cpp; sourceTree = "<group>"; };
@@ -987,6 +988,7 @@
 				AA96A22D195DC38400C22BC9 /* objects */,
 				AA96A200195DB16C00C22BC9 /* component */,
 				AA96A208195DB16C00C22BC9 /* menu */,
+				AAB114F019BA105600791163 /* ButtonConstants.h */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -1315,7 +1317,7 @@
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = LN7LM3BJW2;
+						DevelopmentTeam = 3ENUU6GK3H;
 					};
 				};
 			};
@@ -1668,8 +1670,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mikhail Smarshchok (3ENUU6GK3H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mikhail Smarshchok (3ENUU6GK3H)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1706,8 +1708,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mikhail Smarshchok (3ENUU6GK3H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mikhail Smarshchok (3ENUU6GK3H)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

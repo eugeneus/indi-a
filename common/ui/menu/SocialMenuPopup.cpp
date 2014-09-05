@@ -22,14 +22,14 @@ SocialMenuPopup* SocialMenuPopup::create()
 }
 
 void SocialMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItems, cocos2d::Vec2 origin, cocos2d::Size visibleSize) {
-    initMenuItem(menuItems, "btn_soc_fb.png", CC_CALLBACK_1(SocialMenuPopup::menuFbCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 250));
+    initMenuItem(menuItems, BTN_SOCIAL_FB, CC_CALLBACK_1(SocialMenuPopup::menuFbCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 250));
     
-    initMenuItem(menuItems, "btn_soc_gp.png", CC_CALLBACK_1(SocialMenuPopup::menuGpCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 400));
+    initMenuItem(menuItems, BTN_SOCIAL_GP, CC_CALLBACK_1(SocialMenuPopup::menuGpCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 400));
     
     
-    initMenuItem(menuItems, "btn_soc_inv.png", CC_CALLBACK_1(SocialMenuPopup::menuInviteCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 550));
+    initMenuItem(menuItems, BTN_SOCIAL_INV, CC_CALLBACK_1(SocialMenuPopup::menuInviteCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 550));
     
-    initMenuItem(menuItems, "btn_back.png", CC_CALLBACK_1(SocialMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800));
+    initMenuItem(menuItems, BTN_ALL_BACK, CC_CALLBACK_1(SocialMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800));
 }
 
 void SocialMenuPopup::menuBackCallback(cocos2d::Ref* pSender) {

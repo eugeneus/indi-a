@@ -4,6 +4,7 @@
 
 
 #include "cocos2d.h"
+#include "ButtonConstants.h"
 
 class BaseGamePopup : public cocos2d::Layer
 {
