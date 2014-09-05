@@ -1,5 +1,6 @@
 
 #include "Beef.h"
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 
@@ -27,5 +28,7 @@ bool Beef::init() {
     _weightRatio = 0.6;
     _bounceRatio = 0.0;
     _itemId = 12;
+    
+    _crashSoundFile = SOUND_FALL_MEAT;
     return true;
 }

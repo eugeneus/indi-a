@@ -1,5 +1,6 @@
 
 #include "Spice.h"
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 

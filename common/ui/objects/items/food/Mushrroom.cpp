@@ -1,5 +1,6 @@
 
 #include "Mushrroom.h"
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 

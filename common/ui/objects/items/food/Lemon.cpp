@@ -1,5 +1,6 @@
 
 #include "Lemon.h"
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 

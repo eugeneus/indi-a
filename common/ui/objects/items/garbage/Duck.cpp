@@ -1,5 +1,6 @@
 
 #include "Duck.h"
+#include "SoundsConstants.h"
 
 
 USING_NS_CC;
@@ -28,7 +29,7 @@ bool Duck::init() {
     _weightRatio = 0.1;
     _bounceRatio = 0.1;
     _itemId = 2;
-    
+    _crashSoundFile = SOUND_FALL_DUCK;
     return true;
 }
 

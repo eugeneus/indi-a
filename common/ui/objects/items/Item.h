@@ -33,6 +33,7 @@ public:
    
    void playBumpSound();
     void playHitPotSound();
+    void playCrachPotEdgeSound();
     void playCrashSound();
     void playBounceSound();
    
@@ -59,6 +60,7 @@ protected:
    std::string _bumpSoundFileName;
     std::string _spriteFrameName;
     std::string _hitPotSoundFileName;
+    std::string _crashPotEdgeFileName;
     std::string _crashSoundFile;
     std::string _bounceSoundFile;
 private:

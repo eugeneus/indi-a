@@ -16,6 +16,7 @@ bool Item::init(string spriteFrameName, const char* framesPattern, int spriteCou
    
    _bumpSoundFileName = SOUND_FALL_ITEM;
     _hitPotSoundFileName = SOUND_POT_FALL_ITEM;
+    _crashPotEdgeFileName = SOUND_FALL_METAL;
     _crashSoundFile = SOUND_FALL_ITEM;
     _bounceSoundFile = SOUND_BOUNCE;
  
@@ -230,6 +231,14 @@ void Item::playHitPotSound()
     if(!this->_hitPotSoundFileName.empty()){
         CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(this->_hitPotSoundFileName.c_str());
     }
+}
+
+void Item::playCrachPotEdgeSound()
+{
+    if(!this->_crashPotEdgeFileName.empty()){
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(this->_crashPotEdgeFileName.c_str());
+    }
+
 }
 
 void Item::playCrashSound()

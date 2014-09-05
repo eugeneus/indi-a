@@ -1,5 +1,6 @@
 
 #include "Cap.h"
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 
@@ -27,7 +28,7 @@ bool Cap::init() {
     _weightRatio = 0.01;
     _bounceRatio = 0.01;
     _itemId = 4;
-    
+    _crashSoundFile = SOUND_FALL_HAT_PHONE_HAIR;
     return true;
 }
 
