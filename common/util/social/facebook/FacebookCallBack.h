@@ -10,6 +10,14 @@ namespace iOSBridge
 {
     namespace Callbacks
     {
+        
+        enum
+        {
+            kFBCallbackGlobalScore = 0,
+            kFBCallbackPostScore  // 1
+            
+        } typedef FBCallbackType;
+        
         class FacebookScore : public Ref
         {
         public:
@@ -20,11 +28,22 @@ namespace iOSBridge
             float price;
         };
         
+        
+        
         class FacebookCallBack
         {
         public:
+            FBCallbackType type = FBCallbackType::kFBCallbackGlobalScore;
             virtual void completeReadScores(std::vector<FacebookScore *> score) = 0;
             virtual void error() = 0;
+        };
+        
+        class FacebookLoginCallBack
+        {
+        public:
+            virtual void complete() = 0;
+            virtual void error() = 0;
+            virtual void canceled() = 0;
         };
     };
 };

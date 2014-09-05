@@ -7,6 +7,27 @@ FacebookWrap::FacebookWrap() {
 }
 FacebookWrap::~FacebookWrap() {}
 
+bool FacebookWrap::login(iOSBridge::Callbacks::FacebookLoginCallBack* callback) {
+   
+    //_callback = callback;
+    
+    if (!FBSession.activeSession.isOpen) {
+        
+        [FBSession.activeSession openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+            if (error) {
+                this->initSession();
+                callback->canceled();
+            } else {
+                callback->complete();
+            }
+        }];
+    
+        return false;
+    } else  {
+        callback->complete();
+        return true;
+    }
+}
 
 void FacebookWrap::share(const std::string& msg, iOSBridge::Callbacks::FacebookCallBack* callback) {
     if (!FBSession.activeSession.isOpen)
@@ -180,6 +201,7 @@ void FacebookWrap::readGlobalScores(iOSBridge::Callbacks::FacebookCallBack* call
     dispatcher->addEventListenerWithFixedPriority(listener, 1);// addCustomEventListener("FACEBOOK_LOGIN", readHandler);*/
 
     _callback = callback;//->retain();
+    /*__block auto ccc = callback;
     str = "aaa";
     if (!FBSession.activeSession.isOpen)
         
@@ -187,19 +209,44 @@ void FacebookWrap::readGlobalScores(iOSBridge::Callbacks::FacebookCallBack* call
             if (error) {
                 this->initSession();
             } else {
-                this->doReadGlobalScores();
+                this->doReadGlobalScores(ccc);
             }
         }];
         
         
     else  {
-        this->doReadGlobalScores();
-    }
+        this->doReadGlobalScores(ccc);
+    }*/
+    this->doReadGlobalScores(_callback);
 }
 
-void FacebookWrap::doReadGlobalScores() {
+void FacebookWrap::doReadGlobalScores(iOSBridge::Callbacks::FacebookCallBack* callback) {
     
-    [FBRequestConnection startWithGraphPath:@"/1511878459049707/scores"
+    __block auto cccc = callback;
+    __block auto aaaa = "sdfsdf";
+    
+    
+    FBRequestConnection *newConnection = [[FBRequestConnection alloc] init];
+
+    
+    FBRequest *request = [[FBRequest alloc] initWithSession:FBSession.activeSession
+                                                  graphPath:@"/1511878459049707/scores"];
+    FBRequestHandler handler =
+    ^(FBRequestConnection *connection, id result, NSError *error)
+    {
+        // output the results of the request
+        _callback->error();
+    };
+    [newConnection addRequest:request completionHandler:handler];
+    [newConnection start];
+    
+    /*FBRequestHandler bla =  ^(FBRequestConnection *connection, id result, NSError *error) {
+        _callback->error();
+    };
+    FBRequest *request = [FBRequest requestForGraphPath:@"/1511878459049707/scores"];
+    [request startWithCompletionHandler:bla];
+      */
+    /*[FBRequestConnection startWithGraphPath:@"/1511878459049707/scores"
                                      parameters:nil
                                      HTTPMethod:@"GET"
                               completionHandler:^(
@@ -232,12 +279,13 @@ void FacebookWrap::doReadGlobalScores() {
                                           
                                           
                                       }
-                                      this->readGlobalScoreComplete();//_callback->completeReadScores(scores);
+                                      _callback->completeReadScores(scores);//this->readGlobalScoreComplete();
                                   } else {
+                                      aaaa = "bbbb";
                                       _callback->error();
                                   }
                                   
-                              }];
+                              }];*/
 }
 
 void FacebookWrap::readGlobalScoreComplete() {

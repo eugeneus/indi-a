@@ -21,6 +21,8 @@ ScoreDataSource* ScoreDataSource::create(FacebookProvider* provider)
 
 ScoreDataSource::ScoreDataSource() {}
 ScoreDataSource::~ScoreDataSource() {}
+ScoreDataSource::ScoreDataSource(ScoreDataSource const& copy):_dataProvider(copy._dataProvider) {}
+
 
 bool ScoreDataSource::init(FacebookProvider* provider) {
     _dataProvider = provider;
