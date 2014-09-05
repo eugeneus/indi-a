@@ -205,6 +205,7 @@
 		E0050DE31967D0FC009E7BA1 /* MovementController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0050DE11967D0FC009E7BA1 /* MovementController.cpp */; };
 		E0050DE61967F31B009E7BA1 /* GameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0050DE41967F31B009E7BA1 /* GameController.cpp */; };
 		E072E1A1196932F5002E4C04 /* ImageLabelMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E072E19D196932F5002E4C04 /* ImageLabelMenuItem.cpp */; };
+		E0A6366519B965F7002CB469 /* ItemsPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0A6366319B965F7002CB469 /* ItemsPool.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -627,6 +628,8 @@
 		E0050DE51967F31B009E7BA1 /* GameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameController.h; sourceTree = "<group>"; };
 		E072E19D196932F5002E4C04 /* ImageLabelMenuItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelMenuItem.cpp; sourceTree = "<group>"; };
 		E072E19E196932F5002E4C04 /* ImageLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLabelMenuItem.h; sourceTree = "<group>"; };
+		E0A6366319B965F7002CB469 /* ItemsPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ItemsPool.cpp; sourceTree = "<group>"; };
+		E0A6366419B965F7002CB469 /* ItemsPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsPool.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1239,6 +1242,8 @@
 		E0050DE01967D07D009E7BA1 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				E0A6366319B965F7002CB469 /* ItemsPool.cpp */,
+				E0A6366419B965F7002CB469 /* ItemsPool.h */,
 				E0050DE41967F31B009E7BA1 /* GameController.cpp */,
 				E0050DE51967F31B009E7BA1 /* GameController.h */,
 				E0050DE11967D0FC009E7BA1 /* MovementController.cpp */,
@@ -1571,6 +1576,7 @@
 				AADB3D2419B20DFC008FB3DD /* Overview.cpp in Sources */,
 				AA8968921997DFD4005F8946 /* Beef.cpp in Sources */,
 				AA8968721997D67D005F8946 /* Cap.cpp in Sources */,
+				E0A6366519B965F7002CB469 /* ItemsPool.cpp in Sources */,
 				AAF06217199254BF008563CA /* Garglic.cpp in Sources */,
 				AACAB434198AC40400F8AE01 /* LevelProvider.cpp in Sources */,
 				AAF06204199232D0008563CA /* Potatoe.cpp in Sources */,
