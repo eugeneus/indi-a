@@ -159,6 +159,7 @@
 		AAB10A1B19B8DF5000919961 /* thudheavyland.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AAB109EA19B8DF5000919961 /* thudheavyland.mp3 */; };
 		AAB10A1C19B8DF5000919961 /* timer about to finish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AAB109EB19B8DF5000919961 /* timer about to finish.mp3 */; };
 		AAB10A1D19B8DF5000919961 /* Timer Finish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AAB109EC19B8DF5000919961 /* Timer Finish.mp3 */; };
+		AAB114F319BA26E600791163 /* Health.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB114F119BA26E600791163 /* Health.cpp */; };
 		AAB58E3D1966BBA600C48611 /* BowlingBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E3B1966BBA600C48611 /* BowlingBall.cpp */; };
 		AAB58E461966CF4900C48611 /* BonusMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E441966CF4900C48611 /* BonusMenu.cpp */; };
 		AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB58E4B1966E64B00C48611 /* TipsFadeble.cpp */; };
@@ -541,6 +542,8 @@
 		AAB109EC19B8DF5000919961 /* Timer Finish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Timer Finish.mp3"; sourceTree = "<group>"; };
 		AAB10A2019B8ECAA00919961 /* SoundsConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundsConstants.h; sourceTree = "<group>"; };
 		AAB114F019BA105600791163 /* ButtonConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonConstants.h; sourceTree = "<group>"; };
+		AAB114F119BA26E600791163 /* Health.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Health.cpp; sourceTree = "<group>"; };
+		AAB114F219BA26E600791163 /* Health.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Health.h; sourceTree = "<group>"; };
 		AAB58E3B1966BBA600C48611 /* BowlingBall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BowlingBall.cpp; sourceTree = "<group>"; };
 		AAB58E3C1966BBA600C48611 /* BowlingBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlingBall.h; sourceTree = "<group>"; };
 		AAB58E441966CF4900C48611 /* BonusMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BonusMenu.cpp; sourceTree = "<group>"; };
@@ -866,6 +869,8 @@
 				AAC70EDA19975374007D0537 /* BaseGamePopup.h */,
 				AAF788C219978F8F00AE7D3F /* GameCompletePopup.cpp */,
 				AAF788C319978F8F00AE7D3F /* GameCompletePopup.h */,
+				AAB114F119BA26E600791163 /* Health.cpp */,
+				AAB114F219BA26E600791163 /* Health.h */,
 			);
 			path = score;
 			sourceTree = "<group>";
@@ -1588,6 +1593,7 @@
 				AA2C671C19B65C6D00AF97D0 /* SlidingItemRenderer.cpp in Sources */,
 				AAB58E4D1966E64B00C48611 /* TipsFadeble.cpp in Sources */,
 				AAF0621D19926025008563CA /* UserDataProvider.cpp in Sources */,
+				AAB114F319BA26E600791163 /* Health.cpp in Sources */,
 				AAF0620919923645008563CA /* Duck.cpp in Sources */,
 				AAC4D9B319AA649B00A42D0A /* FacebookProvider.cpp in Sources */,
 				AA870FFD196324A50028A4EA /* Gabbage.cpp in Sources */,

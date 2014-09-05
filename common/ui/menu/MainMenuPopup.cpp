@@ -5,6 +5,8 @@
 #include "SocialMenu.h"
 #include "ScoreMenu.h"
 
+#include "Health.h"
+
 USING_NS_CC;
 
 MainMenuPopup* MainMenuPopup::create()
@@ -31,6 +33,10 @@ void MainMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItem
     initMenuItem(menuItems, BTN_MAIN_OPTION, CC_CALLBACK_1(MainMenuPopup::menuOptionsCallback, this), Vec2(visibleSize.width/2 + origin.x - 100, visibleSize.height + origin.y - 700));
     initMenuItem(menuItems, BTN_MAIN_SOCIAL, CC_CALLBACK_1(MainMenuPopup::menuSocialCallback, this), Vec2(visibleSize.width/2 + origin.x + 100, visibleSize.height + origin.y - 700));
     initMenuItem(menuItems, BTN_MAIN_EXIT, CC_CALLBACK_1(MainMenuPopup::menuExitCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 820));
+    
+    Health *health = Health::create(6);
+    health->setPosition(Vec2(0, visibleSize.height + origin.y));
+    this->addChild(health);
 }
 
 void MainMenuPopup::menuOptionsCallback(Ref* pSender) {
