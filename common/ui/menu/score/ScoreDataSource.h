@@ -22,6 +22,7 @@ public:
     virtual bool init(FacebookProvider* provider);
     ScoreDataSource();
     virtual ~ScoreDataSource();
+    ScoreDataSource(ScoreDataSource const& copy);
     
     void requestData();
     

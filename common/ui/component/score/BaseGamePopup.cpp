@@ -34,9 +34,13 @@ bool BaseGamePopup::init() {
 
 void BaseGamePopup::initItem(cocos2d::Vector<cocos2d::MenuItem*>& menuItems, const std::string& spriteFrameName, const ccMenuCallback& callback) {
 
+    std::string spriteNormalFrameName = BTN_NAME(spriteFrameName);
+    std::string spriteSelectedFrameName = BTN_NAME_SELECTED(spriteFrameName);
+    if (!SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteSelectedFrameName)) spriteSelectedFrameName = BTN_NAME(spriteFrameName);
+    
     MenuItem* item = MenuItemSprite::create(
-                           Sprite::createWithSpriteFrameName(spriteFrameName),
-                           Sprite::createWithSpriteFrameName(spriteFrameName),
+                           Sprite::createWithSpriteFrameName(spriteNormalFrameName),
+                           Sprite::createWithSpriteFrameName(spriteSelectedFrameName),
                            callback);
     menuItems.pushBack(item);
 }

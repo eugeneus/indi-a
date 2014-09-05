@@ -22,22 +22,25 @@ OptionsMenuPopup* OptionsMenuPopup::create()
 }
 
 void OptionsMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItems, cocos2d::Vec2 origin, cocos2d::Size visibleSize) {
-    initMenuItem(menuItems, "btn_opt_music.png", CC_CALLBACK_1(OptionsMenuPopup::menuMusicCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 250));
-    initMenuItemTrigger(menuItems, "btn_opt_music_on.png", CC_CALLBACK_1(OptionsMenuPopup::menuMusicCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 250), 0);
+    initMenuItem(menuItems, BTN_OPTION_MUSIC, CC_CALLBACK_1(OptionsMenuPopup::menuMusicCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 250));
+    initMenuItemTrigger(menuItems, BTN_OPTION_MUSIC_ON, CC_CALLBACK_1(OptionsMenuPopup::menuMusicCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 250), 0);
     
-    initMenuItem(menuItems, "btn_opt_sound.png", CC_CALLBACK_1(OptionsMenuPopup::menuSoundCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 400));
-    initMenuItemTrigger(menuItems, "btn_opt_sound_on.png", CC_CALLBACK_1(OptionsMenuPopup::menuSoundCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 400), 1);
+    initMenuItem(menuItems, BTN_OPTION_SOUND, CC_CALLBACK_1(OptionsMenuPopup::menuSoundCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 400));
+    initMenuItemTrigger(menuItems, BTN_OPTION_SOUND_ON, CC_CALLBACK_1(OptionsMenuPopup::menuSoundCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 400), 1);
     
     
-    initMenuItem(menuItems, "btn_opt_notif.png", CC_CALLBACK_1(OptionsMenuPopup::menuNotificationsCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 550));
-    initMenuItemTrigger(menuItems, "btn_opt_notif_on.png", CC_CALLBACK_1(OptionsMenuPopup::menuNotificationsCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 550), 2);
+    initMenuItem(menuItems, BTN_OPTION_NOTIF, CC_CALLBACK_1(OptionsMenuPopup::menuNotificationsCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 550));
+    initMenuItemTrigger(menuItems, BTN_OPTION_NOTIF_ON, CC_CALLBACK_1(OptionsMenuPopup::menuNotificationsCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 550), 2);
     
-    initMenuItem(menuItems, "btn_back.png", CC_CALLBACK_1(OptionsMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800));
+    initMenuItem(menuItems, BTN_ALL_BACK, CC_CALLBACK_1(OptionsMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800));
 }
 
 void OptionsMenuPopup::initMenuItemTrigger(cocos2d::Vector<cocos2d::MenuItem*>& menuItems, const std::string& name, const ccMenuCallback& callback, Vec2 pos, int tag) {
-    Sprite* normal = Sprite::createWithSpriteFrameName(name);
-    Sprite* selected = Sprite::createWithSpriteFrameName(name);
+    std::string spriteNormalFrameName = BTN_NAME(name);
+    std::string spriteSelectedFrameName = BTN_NAME_SELECTED(name);
+    if (!isFrameNameExist(spriteSelectedFrameName)) spriteSelectedFrameName = BTN_NAME(name);
+    Sprite* normal = Sprite::createWithSpriteFrameName(spriteNormalFrameName);
+    Sprite* selected = Sprite::createWithSpriteFrameName(spriteSelectedFrameName);
     MenuItemSprite *menuItem = MenuItemSprite::create(normal, selected, callback);//MenuItemFont::create(name, callback);
     menuItem->setPosition(pos);
     menuItem->setTag(tag);
@@ -49,8 +52,11 @@ void OptionsMenuPopup::toggleMenuItemByTag(int tag, const char* format, bool isO
     if (node) {
         MenuItemSprite* item = (MenuItemSprite*) node;
         const std::string& imageName = CCString::createWithFormat(format, isON ? "on" : "off")->getCString();
-        item->setNormalImage(Sprite::createWithSpriteFrameName(imageName));
-        item->setSelectedImage(Sprite::createWithSpriteFrameName(imageName));
+        std::string spriteNormalFrameName = BTN_NAME(imageName);
+        std::string spriteSelectedFrameName = BTN_NAME_SELECTED(imageName);
+        if (!isFrameNameExist(spriteSelectedFrameName)) spriteSelectedFrameName = BTN_NAME(imageName);
+        item->setNormalImage(Sprite::createWithSpriteFrameName(spriteNormalFrameName));
+        item->setSelectedImage(Sprite::createWithSpriteFrameName(spriteSelectedFrameName));
     }
 }
 
@@ -67,7 +73,7 @@ void OptionsMenuPopup::menuMusicCallback(cocos2d::Ref* pSender) {
         volume = 1;
     
     CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(volume);
-    this->toggleMenuItemByTag(0, "btn_opt_music_%s.png", volume == 1);
+    this->toggleMenuItemByTag(0, "btn_opt_music_%s", volume == 1);
 }
 
 void OptionsMenuPopup::menuSoundCallback(cocos2d::Ref* pSender) {
@@ -78,9 +84,9 @@ void OptionsMenuPopup::menuSoundCallback(cocos2d::Ref* pSender) {
             volume = 1;
     
     CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(volume);
-    this->toggleMenuItemByTag(1, "btn_opt_sound_%s.png", volume == 1);
+    this->toggleMenuItemByTag(1, "btn_opt_sound_%s", volume == 1);
 }
 
 void OptionsMenuPopup::menuNotificationsCallback(cocos2d::Ref* pSender) {
-    this->toggleMenuItemByTag(2, "btn_opt_notif_%s.png", true);
+    this->toggleMenuItemByTag(2, "btn_opt_notif_%s", true);
 }
