@@ -15,6 +15,11 @@ bool Item::init(string spriteFrameName, const char* framesPattern, int spriteCou
     _itemId = -1;
    
    _bumpSoundFileName = SOUND_FALL_ITEM;
+    _hitPotSoundFileName = SOUND_POT_FALL_ITEM;
+    _crashPotEdgeFileName = SOUND_FALL_METAL;
+    _crashSoundFile = SOUND_FALL_ITEM;
+    _bounceSoundFile = SOUND_BOUNCE;
+ 
     _spriteFrameName = spriteFrameName;
 
    //this->testDraw();
@@ -216,9 +221,40 @@ void Item::stopActions()
 
 void Item::playBumpSound()
 {
+    
    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(this->_bumpSoundFileName.c_str());
 
 }
+
+void Item::playHitPotSound()
+{
+    if(!this->_hitPotSoundFileName.empty()){
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(this->_hitPotSoundFileName.c_str());
+    }
+}
+
+void Item::playCrachPotEdgeSound()
+{
+    if(!this->_crashPotEdgeFileName.empty()){
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(this->_crashPotEdgeFileName.c_str());
+    }
+
+}
+
+void Item::playCrashSound()
+{
+    if(!this->_crashSoundFile.empty()){
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(this->_crashSoundFile.c_str());
+    }
+}
+
+void Item::playBounceSound()
+{
+    if(!this->_bounceSoundFile.empty()){
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(this->_bounceSoundFile.c_str());
+    }
+}
+
 
 Sprite* Item::createCrack() {
     return NULL;

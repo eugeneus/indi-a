@@ -1,5 +1,6 @@
 
 #include "Garbage.h"
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 
@@ -10,5 +11,6 @@ bool Garbage::init(string spriteFrameName, const char* framesPattern, int sprite
     }
     
     _itemType = 1;
+    _hitPotSoundFileName = SOUND_POT_FALL_GARBAGE;
     return true;
 }

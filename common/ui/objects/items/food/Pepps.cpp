@@ -1,5 +1,6 @@
 
 #include "Pepps.h"
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 

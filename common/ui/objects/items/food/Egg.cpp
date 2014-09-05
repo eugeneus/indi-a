@@ -1,8 +1,9 @@
 
 #include "Egg.h"
-
+#include "SoundsConstants.h"
 
 USING_NS_CC;
+
 
 Egg* Egg::create()
 {
@@ -28,6 +29,7 @@ bool Egg::init() {
     _weightRatio = 0.1;
     _bounceRatio = 0.0;
     _itemId = 6;
+    _crashSoundFile = SOUND_FALL_EGG;
     return true;
 }
 

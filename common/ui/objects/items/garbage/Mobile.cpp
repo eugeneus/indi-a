@@ -1,5 +1,6 @@
 
 #include "Mobile.h"
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 
@@ -27,7 +28,7 @@ bool Mobile::init() {
     _weightRatio = 0.3;
     _bounceRatio = 0.1;
     _itemId = 5;
-    
+    _crashSoundFile = SOUND_FALL_HAT_PHONE_HAIR;
     return true;
 }
 

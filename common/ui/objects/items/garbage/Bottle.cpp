@@ -1,5 +1,6 @@
 
 #include "Bottle.h"
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 
@@ -27,6 +28,7 @@ bool Bottle::init() {
    _weightRatio = 0.7;
    _bounceRatio = 0.5;
    _itemId = 0;
+    _crashSoundFile = SOUND_FALL_GLASS;
     return true;
 }
 

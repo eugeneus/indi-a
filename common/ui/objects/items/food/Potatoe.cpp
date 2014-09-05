@@ -1,5 +1,6 @@
 
 #include "Potatoe.h"
+#include "SoundsConstants.h"
 
 USING_NS_CC;
 
