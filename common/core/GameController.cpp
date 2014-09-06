@@ -22,6 +22,7 @@
 #include "BonusMenu.h"
 #include "FoodFactory.h"
 #include "SoundsConstants.h"
+#include "ItemsPool.h"
 
 #include "time.h"
 
@@ -50,7 +51,7 @@ GameController::GameController()
    _idxRotated = 0;
     _bonusTimer = 0.0f;
    
-   _items = new Vector<cocos2d::Node*>(10);
+   //_items = new Vector<Item*>(10);
    _cntPoints = new Vector<ControlPointDef*>(10);
     _requiredItemTimer = 0.0f;
 
@@ -113,6 +114,8 @@ void GameController::setUpInit(bool isStart) {
     else releaseAll(origin,visibleSize);
     _itemIdlePos = Vec2(visibleSize.width + 150.0f, _convY + 70.0f);
     this->populateGameObjects(origin,visibleSize);
+    
+    _itemsPool = ItemsPool::create(_levelInfo);
 }
 
 void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize) {
@@ -136,12 +139,12 @@ void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSi
     _theChef->restartChef();
     _conv->changeCyclingSpeed(_convVelY);
     
-    for(Node* nitem : *_items){
+    for(Item* nitem : _items){
         nitem->removeFromParentAndCleanup(true);
     }
     
     _caughtItemsIds.clear();
-    _items->clear();
+    _items.clear();
 }
 
 void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
@@ -258,7 +261,7 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
       
       item->setScale(1.0);
       _gameLayer->addChild(item,kItemZO1);
-      _items->pushBack(item);
+      _items.push_back(item);
    }
     
     //TODO: remove
@@ -268,7 +271,7 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
         
         item->setScale(1.0);
         _gameLayer->addChild(item,kItemZO1);
-        _items->pushBack(item);
+        _items.push_back(item);
     }
     
     std::map<int,int> bonuses = _levelInfo->getBonusItems();
@@ -279,7 +282,7 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
         
         item->setScale(2.0);
         _gameLayer->addChild(item,kItemZO1);
-        _items->pushBack(item);
+        _items.push_back(item);
     }
 }
 
@@ -506,7 +509,7 @@ void GameController::update(float dt)
    Vec2 itemPos;
    Size itemSize;
     this->processBonusState(dt);
-   _idxRotated = (_idxRotated + 1) < _items->size() ? (_idxRotated + 1) : 0;
+   _idxRotated = (_idxRotated + 1) < _items.size() ? (_idxRotated + 1) : 0;
     _gameCycleInd->nextStep(dt);
     if (_gameCycleInd->isComplete()) {
         this->stopGame();
@@ -533,15 +536,17 @@ void GameController::update(float dt)
    
     this->launchItems(dt);
     
-   for (int i = _idxRotated; i < _items->size(); i++) {
-      item = (Item*)_items->at(i);
+    Item* iTest = _itemsPool->getItemFromPool(&_items, dt, _gameCycleInd->getGameTime());
+    
+   for (int i = _idxRotated; i < _items.size(); i++) {
+      item = _items.at(i);
       this->putIdleItemOnConveyour(dt, item);
    }
    _putNextItemDt -= dt;
 
   //  }
     
-   for(Node* nitem : *_items){
+   for(Node* nitem : _items){
       
       item = (Item*)nitem;
       itemPos = item->getPosition();
@@ -713,4 +718,11 @@ void GameController::checkGameProgress(Item* anItem) {
     }
 
 }
+
+float GameController::getActualRoundTime()
+{
+    return _gameCycleInd->getGameTime();
+}
+
+
 

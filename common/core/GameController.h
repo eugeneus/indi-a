@@ -17,6 +17,7 @@ class GameCycleIndicator;
 class Conveyor;
 class MindCloudTips;
 class BonusMenu;
+class ItemsPool;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -59,27 +60,29 @@ public:
    void update(float dt);
     
     void changeItemPath(Item* anItem, float angle, Vec2 anImpulse);
+    
+    float getActualRoundTime();
 
 protected:
     void releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
     void setUpInit(bool isStart);
    
-   void arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
+    void arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
    
-   void populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
+    void populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
    
-   void putIdleItemOnConveyour(float dt, Item* anItem);
+    void putIdleItemOnConveyour(float dt, Item* anItem);
     void launchItems(float dt);
    
-   void setItemIdle(float dt, Item* anItem);
+    void setItemIdle(float dt, Item* anItem);
 
-   void runTossActionWithScale(Item* anItem, ControlPointDef* aPointDef, float aDuration, cocos2d::Point anImpulse);
+    void runTossActionWithScale(Item* anItem, ControlPointDef* aPointDef, float aDuration, cocos2d::Point anImpulse);
 
-   void tossItem(Item* anItem, Vec2 anImpulse);
+    void tossItem(Item* anItem, Vec2 anImpulse);
    
-   void runBumpAction(Item* anItem);
+    void runBumpAction(Item* anItem);
    
-   float getScaleFactor(cocos2d::Point anEndPoint, int aControlPointType);
+    float getScaleFactor(cocos2d::Point anEndPoint, int aControlPointType);
     
     void checkGameProgress(Item* anItem);
 
@@ -89,27 +92,27 @@ protected:
     void useActiveBonus();
     void resetActiveBonus();
     // model
-   cocos2d::Vector<cocos2d::Node*>* _items;
-   cocos2d::Vector<ControlPointDef*>* _cntPoints;
+    std::vector<Item*> _items;
+    cocos2d::Vector<ControlPointDef*>* _cntPoints;
    
     cocos2d::Vector<Item*>  _requiredItems;
     cocos2d::Vector<Item*>  _foodItems;
     cocos2d::Vector<Item*>  _garbageItems;
     
    
-   float _convY;
-   float _convVelY;
-   float _convLegth;
-   float _putNextItemDt;
-   float _maxReqiredItemInterval;
+    float _convY;
+    float _convVelY;
+    float _convLegth;
+    float _putNextItemDt;
+    float _maxReqiredItemInterval;
     
     float _requiredItemTimer;
 
-   cocos2d::Vec2 _itemIdlePos;
-   int _idxRotated;
+    cocos2d::Vec2 _itemIdlePos;
+    int _idxRotated;
    
-   Pot* _thePot;
-   Chef* _theChef;
+    Pot* _thePot;
+    Chef* _theChef;
     
     LevelProvider* _levelInfo;
     UserDataProvider* _userData;
@@ -120,6 +123,7 @@ protected:
     MindCloudTips* cloudTips;
     Sprite* bg;
     BonusMenu* _bonusMenu;
+    ItemsPool* _itemsPool;
     
     std::vector<int> _caughtItemsIds;
     
