@@ -33,7 +33,7 @@ public:
     virtual void onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event::Event *unused_event);
     virtual void onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event::Event *unused_event);
     virtual void onTouchesCancelled(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event::Event *unused_event);
-    
+    virtual void onEnterTransitionDidFinish();
 
 };
 

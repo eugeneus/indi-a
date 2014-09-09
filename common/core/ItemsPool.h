@@ -17,9 +17,19 @@ public:
 
    static ItemsPool* create(LevelProvider* aLevelInfo);
 
-    Item* getItemFromPool(std::vector<Item*>* anItemList, float dt, float anEffectiveRoundTime);
+    Item* getItemFromPool(std::vector<Item*>* anItemList,
+                          float dt,
+                          float anEffectiveRoundTime,
+                          cocos2d::Vec2 aStartPos,
+                          int aStartZOrder);
 
 protected:
+    
+    Item* getItemByType(std::vector<Item*>* anItemList,
+                        int anItemID,
+                        int anItemType,
+                        cocos2d::Vec2 aStartPos,
+                        int aStartZOrder);
     
     int getCurrenTotalBonuses();
     

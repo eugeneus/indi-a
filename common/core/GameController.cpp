@@ -321,9 +321,10 @@ void GameController::stopGame()
 void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
 {
    Vec2 pos = anItem->getPosition();
-   int zOrder = anItem->getLocalZOrder();
-	if(_putNextItemDt < 0.0f && pos.x == _itemIdlePos.x && zOrder == kItemZO1){ //
-      
+   //int zOrder = anItem->getLocalZOrder();
+	//if(pos.x == _itemIdlePos.x && zOrder == kItemZO1){ // //_putNextItemDt < 0.0f &&
+    
+    anItem->setPosition(_itemIdlePos);
       anItem->setLocalZOrder(kItemZO1);
       float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
       Vec2 targetPoint = Vec2(_itemIdlePos.x -  actionOffsetX, _itemIdlePos.y);
@@ -334,8 +335,8 @@ void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
       anItem->setScale(scaleFactor);
       anItem->runAction(itemAction);
       
-		_putNextItemDt = getRandomNumber(1, 3);
-	}
+		//_putNextItemDt = getRandomNumber(1, 3);
+	//}
 
 }
 
@@ -534,16 +535,20 @@ void GameController::update(float dt)
    
    // set items idle/put them on the conveuir
    
-    this->launchItems(dt);
+    //this->launchItems(dt);
     
-    Item* iTest = _itemsPool->getItemFromPool(&_items, dt, _gameCycleInd->getGameTime());
-    
+    Item* iTest = _itemsPool->getItemFromPool(&_items, dt, _gameCycleInd->getGameTime(), _itemIdlePos, kItemZO1);
+    if(iTest){
+        this->putIdleItemOnConveyour(dt, iTest);
+    }
+
+    /*
    for (int i = _idxRotated; i < _items.size(); i++) {
       item = _items.at(i);
       this->putIdleItemOnConveyour(dt, item);
    }
    _putNextItemDt -= dt;
-
+*/
   //  }
     
    for(Node* nitem : _items){

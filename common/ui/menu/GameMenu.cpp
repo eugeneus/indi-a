@@ -57,9 +57,17 @@ void GameMenu::initializeMenu() {
     listener->onTouchesCancelled = CC_CALLBACK_2(GameMenu::onTouchesCancelled, this);
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
    
-    this->scheduleUpdate();
+    //this->scheduleUpdate();
    
 }
+
+void GameMenu::onEnterTransitionDidFinish()
+{
+    Node::onEnterTransitionDidFinish();
+    
+    this->scheduleUpdate();
+}
+
 
 void GameMenu::update(float dt) {
    
