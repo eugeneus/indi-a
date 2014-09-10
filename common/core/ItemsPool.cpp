@@ -99,7 +99,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
     int cycleTerminator = 3;
     
     int startID = -1;
-    int startQ = -1;
+    //int startQ = -1;
     
     _elapsedRoundTime += dt;
     _requiredItemsInterval -= dt;
@@ -165,19 +165,19 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
         std::map<int,int>::iterator rnd = _foodItemsCounter.begin();
         std::advance(rnd, rand() % _foodItemsCounter.size());
         startID = rnd->first;
-        startQ = rnd->second;
+        //startQ = rnd->second;
 
         while (suitableItemId < 0 && cycleTerminator > 0) {
             if(rnd == _foodItemsCounter.end()){
                 cycleTerminator--;
                 rnd = _foodItemsCounter.begin();
                 //_recentFoodID = rnd->first;
-                startQ += 1;
-            }else if (rnd->second < startQ || rnd->second <= 0) {
+                //startQ += 1;
+            }else if (rnd->second < 3) {
                 suitableItemId = rnd->first;
                 //_recentFoodID = suitableItemId;
                 suitableItemType = 0;
-                startQ = rnd->second;
+                //startQ = rnd->second;
                 rnd->second += 1;
                 _pulledFoodCount += 1;
             }
@@ -192,7 +192,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
             suitableItemType = 0;
             _pulledFoodCount += 1;
         }
-        //CCLOG("_arbitraryItemInterval = %d", suitableItemId);
+        CCLOG("_arbitraryItemInterval = %d", suitableItemId);
         _arbitraryItemInterval = 0.8f;
     }
     

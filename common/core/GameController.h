@@ -106,6 +106,8 @@ protected:
     float _putNextItemDt;
     float _maxReqiredItemInterval;
     
+    float _elasedTest;
+    
     float _requiredItemTimer;
 
     cocos2d::Vec2 _itemIdlePos;

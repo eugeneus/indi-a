@@ -50,6 +50,8 @@ GameController::GameController()
    _putNextItemDt = 0.0f;
    _idxRotated = 0;
     _bonusTimer = 0.0f;
+    
+    _elasedTest = 0.0f;
    
    //_items = new Vector<Item*>(10);
    _cntPoints = new Vector<ControlPointDef*>(10);
@@ -112,7 +114,7 @@ void GameController::setUpInit(bool isStart) {
     
     if (isStart) this->arrangeBackground(origin,visibleSize);
     else releaseAll(origin,visibleSize);
-    _itemIdlePos = Vec2(visibleSize.width + 150.0f, _convY + 70.0f);
+    _itemIdlePos = Vec2(visibleSize.width - 50.0f, _convY + 70.0f);
     this->populateGameObjects(origin,visibleSize);
     
     _itemsPool = ItemsPool::create(_levelInfo);
@@ -225,7 +227,7 @@ float getRandomFloat(float from ,float to) {
 void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
 {
     Item* item = nullptr;
-    
+/*
     std::vector<int> requiredFroodItems = _levelInfo->getRequiredItems();
     for (auto itemSubtype : requiredFroodItems) {
         item = ItemFactory::createItem(0, itemSubtype);
@@ -284,6 +286,7 @@ void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size a
         _gameLayer->addChild(item,kItemZO1);
         _items.push_back(item);
     }
+ */
 }
 
 void startGame()
@@ -334,7 +337,11 @@ void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
       float scaleFactor = this->getScaleFactor(_itemIdlePos, 0);
       anItem->setScale(scaleFactor);
       anItem->runAction(itemAction);
-      
+    
+     if(!anItem->getParent())
+      _gameLayer->addChild(anItem,kItemZO1);
+
+    CCLOG("==== Put Item On Conv ===");
 		//_putNextItemDt = getRandomNumber(1, 3);
 	//}
 
@@ -537,8 +544,11 @@ void GameController::update(float dt)
    
     //this->launchItems(dt);
     
+    _elasedTest += dt;
     Item* iTest = _itemsPool->getItemFromPool(&_items, dt, _gameCycleInd->getGameTime(), _itemIdlePos, kItemZO1);
     if(iTest){
+        
+        CCLOG("elapsed time %f = ", _elasedTest);
         this->putIdleItemOnConveyour(dt, iTest);
     }
 
