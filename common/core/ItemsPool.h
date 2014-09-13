@@ -35,15 +35,8 @@ protected:
     
     int getBonusHasMaxCount();
     
-    int getBonusHasFirstBiggerCount();
-    
     void decreaseBonusCount(int aBonusItemId);
 
-    //cocos2d::Vector<Item*> _items; // contains overall list of items
-    //cocos2d::Map<std::string, ItemList*> _requiredPool;
-    
-    //std::queue<Item*> _requiredItem;
-    
     std::map<int,int> _requiredItemsCounter;
     int _maxRequiredItemsCounter;
     float _requiredItemsInterval; // time interval to launch next required item
@@ -53,20 +46,14 @@ protected:
     float _bonusItemsInterval; // time interval to launch next bonus item
 
     std::map<int,int> _foodItemsCounter;
-    //float _foodItemsInterval; // time interval to launch next bonus item
 
     std::map<int,int> _garbageItemsCounter;
-    //float _garbageItemsInterval; // time interval to launch next bonus item
     
     float _arbitraryItemInterval; // time interval to launch next good/garbage item
     float _elapsedRoundTime;
     int _pulledGarbageCount;
     int _pulledFoodCount;
     float _garbagePerFood;
-    int _recentFoodID;
-    int _recentGarbageID;
-    
-    
    
 private:
 

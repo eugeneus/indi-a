@@ -64,15 +64,14 @@ public:
     float getActualRoundTime();
 
 protected:
+    
     void releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
     void setUpInit(bool isStart);
    
     void arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
    
-    void populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
-   
-    void putIdleItemOnConveyour(float dt, Item* anItem);
-    void launchItems(float dt);
+    void runItemConveyorAction(Item *anItem);
+    void putItemOnConveyour(float dt);
    
     void setItemIdle(float dt, Item* anItem);
 

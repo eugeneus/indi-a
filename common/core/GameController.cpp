@@ -114,9 +114,7 @@ void GameController::setUpInit(bool isStart) {
     
     if (isStart) this->arrangeBackground(origin,visibleSize);
     else releaseAll(origin,visibleSize);
-    _itemIdlePos = Vec2(visibleSize.width - 50.0f, _convY + 70.0f);
-    this->populateGameObjects(origin,visibleSize);
-    
+    _itemIdlePos = Vec2(visibleSize.width + 40.0f, _convY + 70.0f);
     _itemsPool = ItemsPool::create(_levelInfo);
 }
 
@@ -224,71 +222,6 @@ float getRandomFloat(float from ,float to) {
 
 }
 
-void GameController::populateGameObjects(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
-{
-    Item* item = nullptr;
-/*
-    std::vector<int> requiredFroodItems = _levelInfo->getRequiredItems();
-    for (auto itemSubtype : requiredFroodItems) {
-        item = ItemFactory::createItem(0, itemSubtype);
-        item->setIdle(_itemIdlePos); //-1 * offset
-        item->setScale(1.0);
-        _gameLayer->addChild(item,kItemZO1);
-        _requiredItems.pushBack(item);
-    }
-    std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
-    for (auto itemSubtype : allowedFoodItems) {
-        item = ItemFactory::createItem(0, itemSubtype);
-        item->setIdle(_itemIdlePos); //-1 * offset
-        item->setScale(1.0);
-        _gameLayer->addChild(item,kItemZO1);
-        _foodItems.pushBack(item);
-    }
-    std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
-    for (auto itemSubtype : allowedFoodItems) {
-        item = ItemFactory::createItem(1, itemSubtype);
-        item->setIdle(_itemIdlePos); //-1 * offset
-        item->setScale(1.0);
-        _gameLayer->addChild(item,kItemZO1);
-        _garbageItems.pushBack(item);
-    }
-    
-   
-   
-   for (int iItm = 0; iItm < 20; iItm++) {
-       item = ItemFactory::createItem(getRandomNumber(0, 1), getRandomNumber(0, 15)); // 0 - 12
-       //item = ItemFactory::createItem(0, getRandomNumber(4, 5)); // 0 - 12
-      //item = ItemFactory::createItem(0, 4); // 0 - 12
-      item->setIdle(_itemIdlePos); //-1 * offset
-      
-      item->setScale(1.0);
-      _gameLayer->addChild(item,kItemZO1);
-      _items.push_back(item);
-   }
-    
-    //TODO: remove
-    for (int i : _levelInfo->getRequiredItems()) {
-        item = FoodFactory::createFood(i);
-        item->setIdle(_itemIdlePos); //-1 * offset
-        
-        item->setScale(1.0);
-        _gameLayer->addChild(item,kItemZO1);
-        _items.push_back(item);
-    }
-    
-    std::map<int,int> bonuses = _levelInfo->getBonusItems();
-    for (auto bonus : bonuses){
-    
-        item = FoodFactory::createFood(bonus.first);
-        item->setIdle(_itemIdlePos); //-1 * offset
-        
-        item->setScale(2.0);
-        _gameLayer->addChild(item,kItemZO1);
-        _items.push_back(item);
-    }
- */
-}
-
 void startGame()
 {
 
@@ -321,48 +254,34 @@ void GameController::stopGame()
     CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
 
-void GameController::putIdleItemOnConveyour(float dt, Item* anItem)
+void GameController::runItemConveyorAction(Item* anItem)
 {
-   Vec2 pos = anItem->getPosition();
-   //int zOrder = anItem->getLocalZOrder();
-	//if(pos.x == _itemIdlePos.x && zOrder == kItemZO1){ // //_putNextItemDt < 0.0f &&
-    
-    anItem->setPosition(_itemIdlePos);
-      anItem->setLocalZOrder(kItemZO1);
-      float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
-      Vec2 targetPoint = Vec2(_itemIdlePos.x -  actionOffsetX, _itemIdlePos.y);
-      float actionDuration = actionOffsetX/_convVelY;
-
-      FiniteTimeAction* itemAction = anItem->getConveyourAction(actionDuration, targetPoint);
-      float scaleFactor = this->getScaleFactor(_itemIdlePos, 0);
-      anItem->setScale(scaleFactor);
-      anItem->runAction(itemAction);
-    
-     if(!anItem->getParent())
-      _gameLayer->addChild(anItem,kItemZO1);
-
-    CCLOG("==== Put Item On Conv ===");
-		//_putNextItemDt = getRandomNumber(1, 3);
-	//}
+    float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
+    Vec2 targetPoint = Vec2(_itemIdlePos.x -  actionOffsetX, _itemIdlePos.y);
+    float actionDuration = actionOffsetX/_convVelY;
+    FiniteTimeAction* itemAction = anItem->getConveyourAction(actionDuration, targetPoint);
+    float scaleFactor = this->getScaleFactor(_itemIdlePos, 0);
+    anItem->setScale(scaleFactor);
+    anItem->runAction(itemAction);
 
 }
-
-void GameController::launchItems(float dt)
+void GameController::putItemOnConveyour(float dt)
 {
-    // to launch required item:
-    // get roundTime, number of required items, launch count
-    if(_requiredItemTimer < 0.0f){
-        _requiredItemTimer = _levelInfo->getRoundTime() / ((float)(_requiredItems.size() * _levelInfo->getRequiredAppearsPerLevel()));
-    }
-    else
-        _requiredItemTimer -= dt;
     
-    //to launch bonus items?
-    
-    // to launch arbitrary food items?
-    
-    // to launch arbitrary garbage items?
+    _elasedTest += dt;
+    Item* item = _itemsPool->getItemFromPool(&_items, dt, _gameCycleInd->getGameTime(), _itemIdlePos, kItemZO1);
+    if(item){
 
+        if(!item->getParent())
+            _gameLayer->addChild(item,kItemZO1);
+        
+        Vec2 pos = item->getPosition();
+        item->setPosition(_itemIdlePos);
+        item->setLocalZOrder(kItemZO1);
+        
+        this->runItemConveyorAction(item);
+        CCLOG("elapsed time %f = ", _elasedTest);
+    }
 }
 
 void GameController::setItemIdle(float dt, Item* anItem)
@@ -540,28 +459,9 @@ void GameController::update(float dt)
         }*/
 
    
-   // set items idle/put them on the conveuir
-   
-    //this->launchItems(dt);
+    this->putItemOnConveyour(dt);
     
-    _elasedTest += dt;
-    Item* iTest = _itemsPool->getItemFromPool(&_items, dt, _gameCycleInd->getGameTime(), _itemIdlePos, kItemZO1);
-    if(iTest){
-        
-        CCLOG("elapsed time %f = ", _elasedTest);
-        this->putIdleItemOnConveyour(dt, iTest);
-    }
-
-    /*
-   for (int i = _idxRotated; i < _items.size(); i++) {
-      item = _items.at(i);
-      this->putIdleItemOnConveyour(dt, item);
-   }
-   _putNextItemDt -= dt;
-*/
-  //  }
-    
-   for(Node* nitem : _items){
+    for(Node* nitem : _items){
       
       item = (Item*)nitem;
       itemPos = item->getPosition();

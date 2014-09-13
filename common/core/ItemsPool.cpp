@@ -4,6 +4,7 @@
 #include "LevelProvider.h"
 #include "ItemFactory.h"
 
+
 ItemsPool::ItemsPool():
 _requiredItemsInterval(0.0f),
 _bonusItemsInterval(0.0f),
@@ -14,11 +15,8 @@ _maxBonusItemsCounter(0),
 _pulledGarbageCount(0),
 _pulledFoodCount(0),
 _garbagePerFood(0.3f),
-_recentFoodID(-1),
-_recentGarbageID(-1),
 _arbitraryItemInterval(0.0f)
 {}
-
 
 ItemsPool::~ItemsPool() {}
 
@@ -28,6 +26,7 @@ ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo){
     
     pRet->_maxRequiredItemsCounter = aLevelInfo->getRequiredAppearsPerLevel();
     pRet->_requiredItemsInterval =  (aLevelInfo->getRoundTime() - pRet->_elapsedRoundTime) / pRet->_maxRequiredItemsCounter;
+    pRet->_requiredItemsInterval =  pRet->_requiredItemsInterval/3.0f;
     
     std::vector<int> itemTypes = aLevelInfo->getRequiredItems();
     for (int i = 0; i < itemTypes.size(); i++){
@@ -39,7 +38,6 @@ ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo){
         pRet->_foodItemsCounter.insert(std::pair<int,int>(itemTypes1.at(i),0));
     }
     
-    
     std::vector<int> itemTypes2 = aLevelInfo->getAllowedGarbageItems();
     for (int i = 0; i < itemTypes2.size(); i++){
         pRet->_garbageItemsCounter.insert(std::pair<int,int>(itemTypes2.at(i),0));
@@ -47,6 +45,8 @@ ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo){
     
     pRet->_bonusItemsCounter = aLevelInfo->getBonusItems();
     pRet->_bonusItemsInterval = (aLevelInfo->getRoundTime() - pRet->_elapsedRoundTime) / pRet->getCurrenTotalBonuses();
+    
+    //Size frameSize = Director::getInstance()->getVisibleSize();
     
    return pRet;
 }
@@ -97,171 +97,141 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
     int suitableItemId = -1;
     int suitableItemType = -1;
     int cycleTerminator = 3;
-    
     int startID = -1;
-    //int startQ = -1;
     
     _elapsedRoundTime += dt;
     _requiredItemsInterval -= dt;
     _bonusItemsInterval -= dt;
     _arbitraryItemInterval -= dt;
     
-    
-    
     // one of level complication technique:
     // for harder level start pulling required item closer to a round end.
     // i.e. inital value of _requiredItemsInterval should be multipied by complication factor
-    
-
     // try to find required Item (dish ingridients)
-/*
     if (_maxRequiredItemsCounter > 0 && _requiredItemsInterval < 0.0f) {
-        
+        cycleTerminator = 3;
         std::map<int,int>::iterator it = _requiredItemsCounter.begin();
         
+        int currentCount = _maxRequiredItemsCounter;
         while (suitableItemId < 0 && cycleTerminator > 0) {
-            if (it->second == this->_maxRequiredItemsCounter) {
-                suitableItemId = it->first;
-                suitableItemType = 0;
-            }
-            else if(it != _requiredItemsCounter.end()){
-                ++it;
-            }
-            else{
-                _maxRequiredItemsCounter--;
+            if (it == _requiredItemsCounter.end()) {
                 cycleTerminator--;
+                currentCount--;
                 it = _requiredItemsCounter.begin();
             }
-        }
-        
-        _requiredItemsInterval = (anEffectiveRoundTime - this->_elapsedRoundTime) / this->_maxRequiredItemsCounter;
-    }
-    
-    // try to find Bonus item
-    if (suitableItemId < 0) {
-        std::map<int,int>::iterator it = _bonusItemsCounter.begin();
-        
-        while (suitableItemId < 0 && cycleTerminator > 0) {
-            if (it->second == this->_maxRequiredItemsCounter) { // should compare bonuses metrics, not required!
+            else if (it->second == currentCount){
                 suitableItemId = it->first;
+                it->second -= 1;
                 suitableItemType = 0;
-            }
-            else if(it != _bonusItemsCounter.end()){
-                ++it;
             }
             else{
-                cycleTerminator--;
-                it = _bonusItemsCounter.begin();
+                ++it;
             }
         }
         
-        _bonusItemsInterval = (anEffectiveRoundTime -  this->_elapsedRoundTime) / this->getCurrenTotalBonuses();
-
-    }
-*/
-    
-    if(suitableItemId < 0 && _arbitraryItemInterval < 0.0f){
+        _requiredItemsInterval = ((anEffectiveRoundTime - this->_elapsedRoundTime) / (currentCount + 2)) - 0.2f;
         
-        std::map<int,int>::iterator rnd = _foodItemsCounter.begin();
-        std::advance(rnd, rand() % _foodItemsCounter.size());
-        startID = rnd->first;
-        //startQ = rnd->second;
+    }
 
+    // try to find Bonus item
+    if (this->getBonusHasMaxCount() > 0 && suitableItemId < 0 && _bonusItemsInterval < 0) {
+        cycleTerminator = 2;
+        std::map<int,int>::iterator rnd = _bonusItemsCounter.begin();
+        std::advance(rnd, rand() % _bonusItemsCounter.size());
+        
         while (suitableItemId < 0 && cycleTerminator > 0) {
-            if(rnd == _foodItemsCounter.end()){
+            if (rnd == _bonusItemsCounter.end()) {
                 cycleTerminator--;
-                rnd = _foodItemsCounter.begin();
-                //_recentFoodID = rnd->first;
-                //startQ += 1;
-            }else if (rnd->second < 3) {
+                rnd = _bonusItemsCounter.begin();
+            }
+            else if (rnd->second > 0){
                 suitableItemId = rnd->first;
-                //_recentFoodID = suitableItemId;
+                rnd->second -= 1;
                 suitableItemType = 0;
-                //startQ = rnd->second;
-                rnd->second += 1;
-                _pulledFoodCount += 1;
             }
             else{
                 ++rnd;
             }
         }
         
-        if (suitableItemId < 0) {
-            suitableItemId = startID;
-            //_recentFoodID = startID;
-            suitableItemType = 0;
-            _pulledFoodCount += 1;
-        }
-        CCLOG("_arbitraryItemInterval = %d", suitableItemId);
-        _arbitraryItemInterval = 0.8f;
+        _bonusItemsInterval = (anEffectiveRoundTime -  this->_elapsedRoundTime) / this->getCurrenTotalBonuses();
     }
-    
-    
-//        if(_garbagePerFood > ((float)(_pulledGarbageCount + 1))/((float)(_pulledFoodCount+0.01f))){
-//            // try to get arbitrary food item
-//            std::map<int,int>::iterator it;
-//            if(_recentFoodID < 0){
-//                it = _foodItemsCounter.begin();
-//            }
-//            else{
-//                it = _foodItemsCounter.find(_recentFoodID);
-//            }
-//
-//            int prevCounter = it->second;
-//            while (suitableItemId < 0 && cycleTerminator > 0) {
-//                if (it->second > prevCounter || it->second <= 0) {
-//                    suitableItemId = it->first;
-//                    _recentFoodID = suitableItemId;
-//                    suitableItemType = 0;
-//                    prevCounter = it->second;
-//                    it->second += 1;
-//                    _pulledFoodCount += 1;
-//                }
-//                else if(it != _foodItemsCounter.end()){
-//                    ++it;
-//                }
-//                else{
-//                    cycleTerminator--;
-//                    it = _foodItemsCounter.begin();
-//                    prevCounter += 1;
-//                }
-//            }
-//        }
-//        else{
-//            // try to get garbage item
-//            std::map<int,int>::iterator it;
-//            if(_recentGarbageID < 0){
-//                it = _garbageItemsCounter.begin();
-//            }
-//            else{
-//                it = _garbageItemsCounter.find(_recentGarbageID);
-//            }
-//            int prevCounter = it->second;
-//            
-//            while (suitableItemId < 0 && cycleTerminator > 0) {
-//                if (it->second > prevCounter || it->second <= 0) {
-//                    suitableItemId = it->first;
-//                    _recentGarbageID = suitableItemId;
-//                    suitableItemType = 1;
-//                    prevCounter = it->second;
-//                    it->second += 1;
-//                    _pulledGarbageCount += 1;
-//                }
-//                else if(it != _garbageItemsCounter.end()){
-//                    ++it;
-//                }
-//                else{
-//                    prevCounter += 1;
-//                    cycleTerminator--;
-//                    it = _garbageItemsCounter.begin();
-//                }
-//            }
-//        }
+
+    if(suitableItemId < 0 && _arbitraryItemInterval < 0.0f){
         
-    
-    // final step:
-    // try to find anItem by suitableID in main array
-    // if not found  - create it
+        int rndFood = 0;
+        int rndGarg = 0;
+        int rnd = rand()%2;
+        if (rnd) {
+            rndGarg = 1;
+        }
+        else{
+            rndFood = 1;
+        }
+        
+        float pct = ((float)(_pulledFoodCount + rndFood))/((float)(_pulledFoodCount + rndFood + _pulledGarbageCount + rndGarg));
+        
+        if(_garbagePerFood > pct){
+            rnd = 0;
+        }
+        
+        if (!rnd) {
+            cycleTerminator = 2;
+            std::map<int,int>::iterator rnd = _foodItemsCounter.begin();
+            std::advance(rnd, rand() % _foodItemsCounter.size());
+            startID = rnd->first;
+            
+            while (suitableItemId < 0 && cycleTerminator > 0) {
+                if(rnd == _foodItemsCounter.end()){
+                    cycleTerminator--;
+                    rnd = _foodItemsCounter.begin();
+                }else if (rnd->second < 3) {
+                    suitableItemId = rnd->first;
+                    suitableItemType = 0;
+                    rnd->second += 1;
+                    _pulledFoodCount += 1;
+                }
+                else{
+                    ++rnd;
+                }
+            }
+            
+            if (suitableItemId < 0) {
+                suitableItemId = startID;
+                suitableItemType = 0;
+                _pulledFoodCount += 1;
+            }
+        }
+        else{
+            cycleTerminator = 2;
+            std::map<int,int>::iterator rnd = _garbageItemsCounter.begin();
+            std::advance(rnd, rand() % _garbageItemsCounter.size());
+            startID = rnd->first;
+            
+            while (suitableItemId < 0 && cycleTerminator > 0) {
+                if(rnd == _garbageItemsCounter.end()){
+                    cycleTerminator--;
+                    rnd = _garbageItemsCounter.begin();
+                }else if (rnd->second < 3) {
+                    suitableItemId = rnd->first;
+                    suitableItemType = 1;
+                    rnd->second += 1;
+                    _pulledGarbageCount += 1;
+                }
+                else{
+                    ++rnd;
+                }
+            }
+            
+            if (suitableItemId < 0) {
+                suitableItemId = startID;
+                suitableItemType = 1;
+                _pulledGarbageCount += 1;
+            }
+        }
+        
+        _arbitraryItemInterval = 1.5f;
+    }
 
     if (suitableItemType >= 0 && suitableItemId >= 0)  { // there is no item (time is not reached)
         std::vector<Item*>::iterator iItem = anItemList->begin();
@@ -307,15 +277,8 @@ int ItemsPool::getBonusHasMaxCount()
             maxCount = bonus.second;
         }
     }
-}
-
-int ItemsPool::getBonusHasFirstBiggerCount()
-{
-    int maxCount = 0;
-    std::map<int,int>::iterator it = _bonusItemsCounter.begin();
-    while (it != _bonusItemsCounter.end() && maxCount <= it->second) {
-        it++;
-    }
+    
+    return maxCount;
 }
 
 void ItemsPool::decreaseBonusCount(int aBonusItemId)
