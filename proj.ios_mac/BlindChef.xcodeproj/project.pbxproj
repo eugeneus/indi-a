@@ -205,6 +205,9 @@
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		E0050DE31967D0FC009E7BA1 /* MovementController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0050DE11967D0FC009E7BA1 /* MovementController.cpp */; };
 		E0050DE61967F31B009E7BA1 /* GameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0050DE41967F31B009E7BA1 /* GameController.cpp */; };
+		E035A38219C618660009F87E /* Dish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E035A38019C618660009F87E /* Dish.cpp */; };
+		E035A38719C618880009F87E /* DishFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E035A38519C618880009F87E /* DishFactory.cpp */; };
+		E035A38919C61F7B0009F87E /* dishes.plist in Resources */ = {isa = PBXBuildFile; fileRef = E035A38819C61F7B0009F87E /* dishes.plist */; };
 		E072E1A1196932F5002E4C04 /* ImageLabelMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E072E19D196932F5002E4C04 /* ImageLabelMenuItem.cpp */; };
 		E0A6366519B965F7002CB469 /* ItemsPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0A6366319B965F7002CB469 /* ItemsPool.cpp */; };
 /* End PBXBuildFile section */
@@ -630,6 +633,11 @@
 		E0050DE21967D0FC009E7BA1 /* MovementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovementController.h; sourceTree = "<group>"; };
 		E0050DE41967F31B009E7BA1 /* GameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameController.cpp; sourceTree = "<group>"; };
 		E0050DE51967F31B009E7BA1 /* GameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameController.h; sourceTree = "<group>"; };
+		E035A38019C618660009F87E /* Dish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dish.cpp; sourceTree = "<group>"; };
+		E035A38119C618660009F87E /* Dish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dish.h; sourceTree = "<group>"; };
+		E035A38519C618880009F87E /* DishFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DishFactory.cpp; sourceTree = "<group>"; };
+		E035A38619C618880009F87E /* DishFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DishFactory.h; sourceTree = "<group>"; };
+		E035A38819C61F7B0009F87E /* dishes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dishes.plist; sourceTree = "<group>"; };
 		E072E19D196932F5002E4C04 /* ImageLabelMenuItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLabelMenuItem.cpp; sourceTree = "<group>"; };
 		E072E19E196932F5002E4C04 /* ImageLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLabelMenuItem.h; sourceTree = "<group>"; };
 		E0A6366319B965F7002CB469 /* ItemsPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ItemsPool.cpp; sourceTree = "<group>"; };
@@ -854,6 +862,7 @@
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
 				1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */,
+				E035A38819C61F7B0009F87E /* dishes.plist */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -1093,6 +1102,10 @@
 				AAB58E4F1966E90C00C48611 /* MindCloudTips.h */,
 				AAB58E511966F5F600C48611 /* Pot.cpp */,
 				AAB58E521966F5F600C48611 /* Pot.h */,
+				E035A38019C618660009F87E /* Dish.cpp */,
+				E035A38119C618660009F87E /* Dish.h */,
+				E035A38519C618880009F87E /* DishFactory.cpp */,
+				E035A38619C618880009F87E /* DishFactory.h */,
 			);
 			path = objects;
 			sourceTree = "<group>";
@@ -1489,6 +1502,7 @@
 				AAB10A0E19B8DF5000919961 /* splat.mp3 in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				AA6ADBA619ACE430008813B2 /* level_3.plist in Resources */,
+				E035A38919C61F7B0009F87E /* dishes.plist in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				AAB109ED19B8DF5000919961 /* bgmusic.mp3 in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
@@ -1577,9 +1591,11 @@
 				AA82AE8A19AFA1420078DDB4 /* ScoreMenu.cpp in Sources */,
 				AA8968801997DB13005F8946 /* Egg.cpp in Sources */,
 				AAC4D98D19AA2BC300A42D0A /* AdmobController.m in Sources */,
+				E035A38719C618880009F87E /* DishFactory.cpp in Sources */,
 				AA96A222195DB16C00C22BC9 /* OptionsMenu.cpp in Sources */,
 				AABDB9D719AB2A7D004533D0 /* Lemon.cpp in Sources */,
 				AA870FFB196324A50028A4EA /* Food.cpp in Sources */,
+				E035A38219C618660009F87E /* Dish.cpp in Sources */,
 				AADB3D2419B20DFC008FB3DD /* Overview.cpp in Sources */,
 				AA8968921997DFD4005F8946 /* Beef.cpp in Sources */,
 				AA8968721997D67D005F8946 /* Cap.cpp in Sources */,
