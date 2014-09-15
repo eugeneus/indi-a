@@ -31,6 +31,13 @@ bool Overview::init(SlidingDataSource *dataSource, SlidingItemRenderer* renderer
         _tableView->reloadData();
         this->setTouchEnabled(true);
         
+        _loadingBg = Sprite::createWithSpriteFrameName("bg_popup.png");
+        this->addChild(_loadingBg, 1000);
+        _loading = Sprite::createWithSpriteFrameName("bottle_1.png");
+        this->addChild(_loading, 1001);
+        _loadingAction = RepeatForever::create(RotateBy::create(5.0, 360));
+        _loading->runAction(_loadingAction);
+        
         _dataSource->requestData(this);
         
         bRet = true;
@@ -74,4 +81,15 @@ ssize_t Overview::numberOfCellsInTableView(cocos2d::extension::TableView *table)
 
 void Overview::requestDataComplete() {
     _tableView->reloadData();
+    this->toggleLoading();
+}
+
+void Overview::toggleLoading() {
+    bool visibility = false;
+    
+    if (!_loading->isVisible()) {
+        visibility = true;
+    }
+    _loading->setVisible(visibility);
+    _loadingBg->setVisible(visibility);
 }

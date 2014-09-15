@@ -29,6 +29,8 @@
 #import "RootViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "AdmobController.h"
+//#import "GameCenterManager.h"
+//#import "GameCenterDelegate.h"
 
 @implementation AppController {
     AdmobController *_bannerViewController;
@@ -60,6 +62,10 @@ static AppDelegate s_sharedApplication;
     _viewController.wantsFullScreenLayout = YES;
     _viewController.view = eaglView;
 
+   // GameCenterDelegate* gcDelegate = [[GameCenterDelegate alloc] init];
+   // [GameCenterManager init];
+   // [[GameCenterManager instance] setDelegate:gcDelegate];
+    
     /*// Set RootViewController to window
     if ( [[UIDevice currentDevice].systemVersion floatValue] < 6.0)
     {
