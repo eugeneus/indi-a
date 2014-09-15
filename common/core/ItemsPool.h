@@ -5,6 +5,7 @@
 #include "cocos2d.h"
 
 class Item;
+class Dish;
 class LevelProvider;
 
 class ItemsPool {
@@ -15,7 +16,7 @@ public:
 
    ~ItemsPool();
 
-   static ItemsPool* create(LevelProvider* aLevelInfo);
+   static ItemsPool* create(LevelProvider* aLevelInfo, Dish* aDish);
 
     Item* getItemFromPool(std::vector<Item*>* anItemList,
                           float dt,

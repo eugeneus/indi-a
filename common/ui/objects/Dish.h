@@ -15,6 +15,9 @@ public:
    static Dish* create(std::string anImageFileName, std::vector<int> anIngridientIDsList);
 
    bool init(std::string anImageFileName, std::vector<int> anIngridientIDsList);
+    
+    std::string getImageName();
+    std::vector<int> getIngridientIDs();
 
 protected:
     

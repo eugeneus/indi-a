@@ -3,6 +3,7 @@
 #include "Item.h"
 #include "LevelProvider.h"
 #include "ItemFactory.h"
+#include "Dish.h"
 
 
 ItemsPool::ItemsPool():
@@ -20,7 +21,8 @@ _arbitraryItemInterval(0.0f)
 
 ItemsPool::~ItemsPool() {}
 
-ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo){
+ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo, Dish* aDish)
+{
     
     ItemsPool *pRet = new ItemsPool();
     
@@ -28,9 +30,9 @@ ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo){
     pRet->_requiredItemsInterval =  (aLevelInfo->getRoundTime() - pRet->_elapsedRoundTime) / pRet->_maxRequiredItemsCounter;
     pRet->_requiredItemsInterval =  pRet->_requiredItemsInterval/3.0f;
     
-    std::vector<int> itemTypes = aLevelInfo->getRequiredItems();
-    for (int i = 0; i < itemTypes.size(); i++){
-        pRet->_requiredItemsCounter.insert(std::pair<int,int>(itemTypes.at(i), pRet->_maxRequiredItemsCounter));
+    std::vector<int> ingridients = aDish->getIngridientIDs();
+    for (int i = 0; i < ingridients.size(); i++){
+        pRet->_requiredItemsCounter.insert(std::pair<int,int>(ingridients.at(i), pRet->_maxRequiredItemsCounter));
     }
     
     std::vector<int> itemTypes1 = aLevelInfo->getAllowedFoodItems();
@@ -45,8 +47,6 @@ ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo){
     
     pRet->_bonusItemsCounter = aLevelInfo->getBonusItems();
     pRet->_bonusItemsInterval = (aLevelInfo->getRoundTime() - pRet->_elapsedRoundTime) / pRet->getCurrenTotalBonuses();
-    
-    //Size frameSize = Director::getInstance()->getVisibleSize();
     
    return pRet;
 }

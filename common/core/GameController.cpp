@@ -23,6 +23,7 @@
 #include "FoodFactory.h"
 #include "SoundsConstants.h"
 #include "ItemsPool.h"
+#include "DishFactory.h"
 
 #include "time.h"
 
@@ -115,7 +116,10 @@ void GameController::setUpInit(bool isStart) {
     if (isStart) this->arrangeBackground(origin,visibleSize);
     else releaseAll(origin,visibleSize);
     _itemIdlePos = Vec2(visibleSize.width + 40.0f, _convY + 70.0f);
-    _itemsPool = ItemsPool::create(_levelInfo);
+    
+    _dishFactory = DishFactory::create("dishes.plist");
+    _mainCource = _dishFactory->getRandomDish();
+    _itemsPool = ItemsPool::create(_levelInfo, _mainCource);
 }
 
 void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize) {

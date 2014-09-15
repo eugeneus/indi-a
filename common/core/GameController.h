@@ -18,6 +18,8 @@ class Conveyor;
 class MindCloudTips;
 class BonusMenu;
 class ItemsPool;
+class DishFactory;
+class Dish;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -125,6 +127,8 @@ protected:
     Sprite* bg;
     BonusMenu* _bonusMenu;
     ItemsPool* _itemsPool;
+    DishFactory* _dishFactory;
+    Dish* _mainCource;
     
     std::vector<int> _caughtItemsIds;
     

@@ -13,15 +13,16 @@ public:
 
    ~DishFactory();
 
-   static DishFactory* create();
+   static DishFactory* create(const char* aFileName);
 
-   bool init();
+   bool init(const char* aFileName);
     
     Dish* getRandomDish();
     
 protected:
     
-    std::vector<Dish*> _dishes;
+    cocos2d::ValueMap _dishesMap;
+    
     
 private:
 
