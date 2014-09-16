@@ -72,7 +72,8 @@ void TipsFadeble::toggleTip() {
 
 void TipsFadeble::changeTip(const std::string& tipsImgFrameName) {
     //this->toggleTip();
-    img->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(tipsImgFrameName));
+    cocos2d::SpriteFrame* sp= SpriteFrameCache::getInstance()->getSpriteFrameByName(tipsImgFrameName);
+    img->setSpriteFrame(sp);
     //this->toggleTip();
     
     this->setOpacity(0);

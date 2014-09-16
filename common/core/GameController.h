@@ -123,7 +123,7 @@ protected:
     Multiplier* _multiplier;
     GameCycleIndicator* _gameCycleInd;
     Conveyor* _conv;
-    MindCloudTips* cloudTips;
+    MindCloudTips* _cloudTips;
     Sprite* bg;
     BonusMenu* _bonusMenu;
     ItemsPool* _itemsPool;
@@ -134,6 +134,10 @@ protected:
     std::vector<int> _caughtItemsIds;
     
     float _bonusTimer; // if _bonusTimer > 0, the game using active bonus from bonus menu;
+    
+    bool _isControllerWaitingStop;
+    
+    cocos2d::Point _cloudTipsPos;
     
 private:
    

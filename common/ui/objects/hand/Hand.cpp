@@ -297,3 +297,11 @@ void Hand::restart() {
     this->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("hand_left_1.png"));
 }
 
+bool Hand::isHandIdle()
+{
+    Point p = this->getPosition();
+    bool h1 = !this->isHandBusy();
+    bool h2 = p.y == this->_handRect.origin.y;
+    return h1 && h2;
+}
+

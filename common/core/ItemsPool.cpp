@@ -129,14 +129,14 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
             }
         }
         
-        _requiredItemsInterval = ((anEffectiveRoundTime - this->_elapsedRoundTime) / (currentCount + 2)) - 0.2f;
+        _requiredItemsInterval = ((anEffectiveRoundTime - this->_elapsedRoundTime) / (currentCount + 2)) - 10.2f; //0.2f;
         
     }
-
+    
     // try to find Bonus item
     //this->getBonusHasMaxCount() > 0 &&
     //int bcnt = this->getBonusHasMaxCount();
-    if (this->getBonusHasMaxCount()>0 && suitableItemId < 0 && _bonusItemsInterval < 0) {
+/*    if (this->getBonusHasMaxCount()>0 && suitableItemId < 0 && _bonusItemsInterval < 0) {
         cycleTerminator = 2;
         std::map<int,int>::iterator rnd = _bonusItemsCounter.begin();
         std::advance(rnd, rand() % _bonusItemsCounter.size());
@@ -234,7 +234,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
         
         _arbitraryItemInterval = 1.5f;
     }
-
+*/
     if (suitableItemType >= 0 && suitableItemId >= 0)  { // there is no item (time is not reached)
         std::vector<Item*>::iterator iItem = anItemList->begin();
         

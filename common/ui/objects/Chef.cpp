@@ -248,6 +248,11 @@ void Chef::restartChef() {
     _rightHand->restart();
 }
 
+bool Chef::isChefIdle()
+{
+    return _leftHand->isHandIdle() && _rightHand->isHandIdle();
+}
+
 
 
 

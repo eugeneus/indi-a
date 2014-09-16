@@ -37,6 +37,8 @@ public:
     bool isRequiredItem(Item* anItem);
    
     void restartChef();
+    
+    bool isChefIdle();
 
 protected:
    
