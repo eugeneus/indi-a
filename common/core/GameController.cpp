@@ -110,7 +110,7 @@ void GameController::setUpInit(bool isStart) {
     std::vector<int> requiredFroodItems = _levelInfo->getRequiredItems();
     std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
     std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
-    
+    _currGameTime = 0.0;
     
     if (isStart) this->arrangeBackground(origin,visibleSize);
     else releaseAll(origin,visibleSize);
@@ -432,13 +432,24 @@ void GameController::processBonusState(float dt)
 
 void GameController::update(float dt)
 {
-   
+ 
+    _currGameTime += dt;
    Item* item = nullptr;
    Vec2 itemPos;
    Size itemSize;
     this->processBonusState(dt);
    _idxRotated = (_idxRotated + 1) < _items.size() ? (_idxRotated + 1) : 0;
     _gameCycleInd->nextStep(dt);
+    
+    if (_gameCycleInd->getGameTime() - _currGameTime < 8 && _gameCycleInd->getGameTime() - _currGameTime > 7) {
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(SOUND_TIMER_BEFORE);
+    } else
+    
+    if (_gameCycleInd->getGameTime() - _currGameTime < 4 && _gameCycleInd->getGameTime() - _currGameTime > 3) {
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(SOUND_TIMER_END);
+    }
+    
+    
     if (_gameCycleInd->isComplete()) {
         this->stopGame();
         
