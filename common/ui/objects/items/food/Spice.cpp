@@ -22,7 +22,7 @@ Spice* Spice::create()
 
 bool Spice::init() {
     
-    if(!super::init("item_bonus_2.png", "item_bonus_%i.png", 1, 0.2)) {
+    if(!super::init("item_bonus2_1.png", "item_bonus2_%i.png", 1, 0.2)) {
         return false;
     }
     _weightRatio = 0.1;

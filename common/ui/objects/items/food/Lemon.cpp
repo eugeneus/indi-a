@@ -22,7 +22,7 @@ Lemon* Lemon::create()
 
 bool Lemon::init() {
     
-    if(!super::init("item_bonus_3.png", "item_bonus_%i.png", 1, 0.2)) {
+    if(!super::init("item_bonus3_1.png", "item_bonus3_%i.png", 1, 0.2)) {
         return false;
     }
     _weightRatio = 0.1;
