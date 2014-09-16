@@ -9,8 +9,11 @@ class GameOverPopup : public BaseGamePopup
 {
 private:
     typedef BaseGamePopup super;
+    cocos2d::Sprite *bg;
 protected:
     virtual void initMenuItems(cocos2d::Vector<cocos2d::MenuItem*>& menuItems);
+    void update(float dt);
+    void checkLives();
 public:
     GameOverPopup();
     virtual ~GameOverPopup();

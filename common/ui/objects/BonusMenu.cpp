@@ -5,6 +5,7 @@
 #include "FoodFactory.h"
 #include "Item.h"
 #include "SoundsConstants.h"
+#include "UserDataProvider.h"
 
 USING_NS_CC;
 
@@ -33,9 +34,11 @@ bool BonusMenu::init(LevelProvider* aLevelInfo)
     
     _activeBonus = 0;
     
-    bonus1Count = Value(10);
-    bonus2Count = Value(10);
-    bonus3Count = Value(0);
+    UserDataProvider* userData = UserDataProvider::getInstance();
+    
+    bonus1Count = Value(userData->getBonus1Count());
+    bonus2Count = Value(userData->getBonus2Count());
+    bonus3Count = Value(userData->getBonus3Count());
     
     std::map<int,int> bonuses = aLevelInfo->getBonusItems();
     for (auto bonus : bonuses) {
@@ -79,21 +82,26 @@ void BonusMenu::updateBonus(Value& bonusCount, int delta, ImageLabelMenuItem* bo
 
 void BonusMenu::changeBonusCount(int bonus_type, bool incr) {
     int delta = incr ? 1 : -1;
+    UserDataProvider* userData = UserDataProvider::getInstance();
+    
     
     switch(bonus_type)
     {
         case kBonusType1:
         {
+            userData->updateBonus1Count(bonus1Count.asInt() + delta);
             updateBonus(bonus1Count, delta, bonus1);
             break;
         }
         case kBonusType2:
         {
+            userData->updateBonus2Count(bonus2Count.asInt() + delta);
             updateBonus(bonus2Count, delta, bonus2);
             break;
         }
         case kBonusType3:
         {
+            userData->updateBonus3Count(bonus3Count.asInt() + delta);
             updateBonus(bonus3Count, delta, bonus3);
             break;
         }
@@ -111,6 +119,7 @@ void BonusMenu::bonus1Callback(Ref* pSender) {
         if (_activeBonus == 0) {
             updateBonus(bonus1Count, -1, bonus1);
             _activeBonus = kBonusType1;
+            UserDataProvider::getInstance()->updateBonus1Count(bonus1Count.asInt() - 1);
         }
     } else {
         //show store
@@ -124,6 +133,7 @@ void BonusMenu::bonus2Callback(Ref* pSender) {
         if (_activeBonus == 0) {
             updateBonus(bonus2Count, -1, bonus2);
             _activeBonus = kBonusType2;
+            UserDataProvider::getInstance()->updateBonus2Count(bonus2Count.asInt() - 1);
         }
 
     } else {
@@ -138,6 +148,7 @@ void BonusMenu::bonus3Callback(Ref* pSender) {
         if (_activeBonus == 0) {
             updateBonus(bonus3Count, -1, bonus3);
             _activeBonus = kBonusType3;
+            UserDataProvider::getInstance()->updateBonus3Count(bonus3Count.asInt() - 1);
         }
         
         //run
@@ -160,12 +171,15 @@ bool BonusMenu::checkItemToUpdateBonus(Item* anItem)
         switch (idxBonus) {
             case kBonusType1:
                 this->updateBonus(bonus1Count, 1, bonus1);
+                UserDataProvider::getInstance()->updateBonus1Count(bonus1Count.asInt() + 1);
                 break;
             case kBonusType2:
                 this->updateBonus(bonus2Count, 1, bonus2);
+                UserDataProvider::getInstance()->updateBonus2Count(bonus2Count.asInt() + 1);
                 break;
             case kBonusType3:
                 this->updateBonus(bonus3Count, 1, bonus3);
+                UserDataProvider::getInstance()->updateBonus3Count(bonus3Count.asInt() + 1);
                 break;
                 
             default:

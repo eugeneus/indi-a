@@ -1,5 +1,8 @@
 
 #include "Health.h"
+#include "UserDataProvider.h"
+#include "SoundsConstants.h"
+
 USING_NS_CC;
 
 Health::Health() {}
@@ -42,5 +45,45 @@ bool Health::init(int pCount) {
     label->setColor(colorYellow);
     this->addChild(label);
     
+    this->checkLives();
+    
+    _dt = 0;
+    this->scheduleUpdate();
+    
     return true;
+}
+
+static inline long millisecondNow()
+{
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    return tv.tv_sec * 1000 + tv.tv_usec / 1000;
+}
+
+void Health::update(float dt) {
+    _dt += dt;
+    //if (_dt > 60) {
+        _dt = 0;
+        this->checkLives();
+   // }
+}
+
+void Health::checkLives() {
+    int livesCount = UserDataProvider::getInstance()->getUserLives();
+    if (livesCount < 10) {
+        long now = millisecondNow();
+       // for (int i=livesCount + 1; i < 10 + 1; i ++) {
+            std::string timeout = UserDataProvider::getInstance()->getLiveTimeout(0);
+            long t = atol(timeout.c_str());
+            if (t != 0 && now - t > 10 * 60 * 1000) { // 10 min
+                livesCount ++;
+                UserDataProvider::getInstance()->updateLiveTimeout(0, CCString::createWithFormat("%li", now)->getCString());
+                UserDataProvider::getInstance()->updateUserLives(livesCount);
+                count = livesCount;
+                label->setString(CCString::createWithFormat("x%i", count)->getCString());
+                
+                CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(SOUND_BONUS_PICKUP);
+            }
+       // }
+    }
 }

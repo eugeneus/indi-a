@@ -106,7 +106,6 @@ void GameController::setUpInit(bool isStart) {
     }
     
     _levelInfo = LevelProvider::createForLevel(level);
-    _userData = UserDataProvider::create();
     
     std::vector<int> requiredFroodItems = _levelInfo->getRequiredItems();
     std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
@@ -190,7 +189,7 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
    Point potOrigin = Point(0,0);//Point(aVisibleSize.width/2.0f - sz.width/2.0f, 0.0f);
    _thePot->setOriginPos(potOrigin);
     
-    _scoreLayer = ScoreLayer::create(_userData->getUserScore());
+    _scoreLayer = ScoreLayer::create(0); 
     _scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
     _gameLayer->addChild(_scoreLayer, kCloudZO);
 

@@ -118,7 +118,7 @@ protected:
     Chef* _theChef;
     
     LevelProvider* _levelInfo;
-    UserDataProvider* _userData;
+    //UserDataProvider* _userData;
     ScoreLayer* _scoreLayer;
     Multiplier* _multiplier;
     GameCycleIndicator* _gameCycleInd;

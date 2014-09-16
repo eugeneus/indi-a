@@ -29,6 +29,7 @@
 #import "RootViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "AdmobController.h"
+
 //#import "GameCenterManager.h"
 //#import "GameCenterDelegate.h"
 
@@ -46,20 +47,9 @@ static AppDelegate s_sharedApplication;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-
-    // Override point for customization after application launch.
-    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (localNotification) {
-        application.applicationIconBadgeNumber = 0;
-    } else {
-        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:15];
-        localNotification.alertBody = @"new Blog Posted at iOScreator.com";
-        localNotification.timeZone = [NSTimeZone defaultTimeZone];
-        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
-        
-        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-    }
+    
+    application.applicationIconBadgeNumber = 0;
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 
     // Add the view controller's view to the window and display.
     window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
@@ -135,19 +125,18 @@ static AppDelegate s_sharedApplication;
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
     
-    NSDate *alertTime = [[NSDate date]
-                         dateByAddingTimeInterval:10];
-    UIApplication* app = [UIApplication sharedApplication];
-    UILocalNotification* notifyAlarm = [[UILocalNotification alloc]
-                                        init];
-    if (notifyAlarm)
-    {
-        notifyAlarm.fireDate = alertTime;
-        notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
-        notifyAlarm.repeatInterval = 10;
-        //notifyAlarm.soundName = @"bell_tree.mp3";
-        notifyAlarm.alertBody = @"Staff meeting in 30 minutes";
-        [app scheduleLocalNotification:notifyAlarm];
+    //save last visit time
+    
+    UILocalNotification *notification=[[UILocalNotification alloc] init];
+    if (notification!=nil) {//
+        notification.fireDate=[NSDate dateWithTimeIntervalSinceNow:15];
+        notification.repeatInterval=0;//
+        notification.timeZone=[NSTimeZone defaultTimeZone];
+        notification.alertBody=@"Your lives is full! Back to game!";//
+        notification.applicationIconBadgeNumber=1; //
+        notification.soundName= UILocalNotificationDefaultSoundName;//
+        notification.alertAction = NSLocalizedString(@"", nil);  //
+        [[UIApplication sharedApplication]   scheduleLocalNotification:notification];
     }
     cocos2d::Application::getInstance()->applicationDidEnterBackground();
 }

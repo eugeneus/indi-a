@@ -61,10 +61,10 @@ bool GameCompletePopup::init() {
     Label* dishes2 = this->createLabel(ttf32, "dishes served", colorWhite);
     this->addLabelsLine(bg, dishes1, dishes2, posX/2, posY - 250);
     
-    this->addLabel(bg, ttf32, "x1", colorYellow, 1 * posX/4 - 60, 40);
-    this->addLabel(bg, ttf32, "x2", colorYellow, 2 * posX/4 - 60, 40);
-    this->addLabel(bg, ttf32, "x3", colorYellow, 3 * posX/4 - 60, 40);
-    this->addLabel(bg, ttf32, "x4", colorYellow, 4 * posX/4 - 60, 40);
+    //this->addLabel(bg, ttf32, "x1", colorYellow, 1 * posX/4 - 60, 40);
+    //this->addLabel(bg, ttf32, "x2", colorYellow, 2 * posX/4 - 60, 40);
+    //this->addLabel(bg, ttf32, "x3", colorYellow, 3 * posX/4 - 60, 40);
+    //this->addLabel(bg, ttf32, "x4", colorYellow, 4 * posX/4 - 60, 40);
     
     return true;
 }
