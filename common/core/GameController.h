@@ -129,6 +129,7 @@ protected:
     ItemsPool* _itemsPool;
     DishFactory* _dishFactory;
     Dish* _mainCource;
+    int _levelCounter;
     
     std::vector<int> _caughtItemsIds;
     

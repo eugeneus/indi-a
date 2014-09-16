@@ -8,8 +8,8 @@
 		<string>foo</string>
 		<key>ingridients</key>
 		<array>
-			<string>13</string>
-			<integer>2</integer>
+			<string>3</string>
+			<integer>11</integer>
 		</array>
 	</dict>
 </dict>
