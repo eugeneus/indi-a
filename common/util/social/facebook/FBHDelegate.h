@@ -17,9 +17,10 @@ private:
     
 public:
     int ii = 0;
-    virtual FBHDelegate* copy() = 0;
     FBHDelegate();
     FBHDelegate(const FBHDelegate& other);
+    
+    virtual FBHDelegate* copy() = 0;
     bool _debug;
     void setDebug(bool debug){_debug = debug;};
     

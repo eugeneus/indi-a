@@ -1,6 +1,7 @@
 
 #include "FBHWrapperCpp.h"
 #import "FacebookHelper.h"
+#import "ScoreRequestDelegate.h"
 
 FBHWrapperCpp::FBHWrapperCpp(){
     
@@ -20,6 +21,10 @@ void FBHWrapperCpp::retrieveTopTenAllTimeGlobalScores(std::string catagory){
 void FBHWrapperCpp::setDelegate(FBHDelegate* delegate){
     
     FacebookHelper *helper = [FacebookHelper sharedHelper];
-    [helper setDelegate:delegate];
+    [helper setDelegate:this];
     
+}
+
+void FBHWrapperCpp::onScoresReceived(std::vector<GKScoreCpp> scores) {
+    ScoreRequestDelegate::getInstance().onScoresReceived(scores);
 }

@@ -1,12 +1,14 @@
 
 #include "ScoreDataSource.h"
+#include "ScoreDto.h"
+#include "ScoreRequestDelegate.h"
 
 USING_NS_CC;
 
-ScoreDataSource* ScoreDataSource::create(FacebookProvider* provider)
+ScoreDataSource* ScoreDataSource::create()
 {
     ScoreDataSource *pRet = new ScoreDataSource();
-    if (pRet && pRet->init(provider))
+    if (pRet && pRet->init())
     {
         pRet->autorelease();
         return pRet;
@@ -24,19 +26,21 @@ ScoreDataSource::~ScoreDataSource() {}
 ScoreDataSource::ScoreDataSource(ScoreDataSource const& copy):_dataProvider(copy._dataProvider) {}
 
 
-bool ScoreDataSource::init(FacebookProvider* provider) {
-    _dataProvider = provider;
+bool ScoreDataSource::init() {
+    _dataProvider = new FBHWrapperCpp();
+    ScoreRequestDelegate::getInstance()._currentDataSource = *this;
+    _dataProvider->setDelegate(nullptr);
     return true;
 }
 
 void ScoreDataSource::requestData() {
-    _dataProvider->readGloabalScore(this);
+    _dataProvider->retrieveTopTenAllTimeGlobalScores("");
 }
 
-void ScoreDataSource::completeReadScores(std::vector<iOSBridge::Callbacks::FacebookScore *> score) {
+void ScoreDataSource::completeReadScores(std::vector<GKScoreCpp> score) {
     std::vector<Ref *> data;
-    for (iOSBridge::Callbacks::FacebookScore *sc : score) {
-        data.push_back(ScoreDto::create(sc->name, sc->photo, sc->score));
+    for (GKScoreCpp sc : score) {
+        data.push_back(ScoreDto::create(sc.playerID, sc.formattedValue, sc.rank));
     }
     
     this->dataRequestComplete(data);

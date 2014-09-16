@@ -8,7 +8,7 @@
 
 @implementation FacebookHelper{
     
-    FBHDelegate *_gkhDelegate;
+    FBHWrapperCpp *_gkhDelegate;
     
 }
 
@@ -92,7 +92,7 @@ static FacebookHelper *instanceOfHelper;
 -(void) retrieveTopTenAllTimeGlobalScoresForCatagory:(NSString*)catagory
 {
     
-    __block FBHDelegate* tmpDelegate = _gkhDelegate->copy();//new ScoreFBDataSource(*(ScoreFBDataSource*) _gkhDelegate);
+    __block FBHWrapperCpp* tmpDelegate = _gkhDelegate;//new ScoreFBDataSource(*(ScoreFBDataSource*) _gkhDelegate);
 	[FBRequestConnection startWithGraphPath:@"/1511878459049707/scores"
                                  parameters:nil
                                  HTTPMethod:@"GET"
@@ -128,12 +128,13 @@ static FacebookHelper *instanceOfHelper;
      
         }
         std::vector<GKScoreCpp> scores;
-        _gkhDelegate->onScoresReceived(scores);
+       // _gkhDelegate->onScoresReceived(scores);
      
      } else {
                                         std::vector<GKScoreCpp> scores;
-        tmpDelegate->onScoresReceived(scores);
-     
+        //tmpDelegate->onScoresReceived(scores);
+         //[ScoreRequestDelegate
+         tmpDelegate->onScoresReceived(scores);
      }
      
      }];
@@ -141,7 +142,7 @@ static FacebookHelper *instanceOfHelper;
 
 #pragma mark Delegate
 
--(void)setDelegate:(FBHDelegate*)gkhDelegate{
+-(void)setDelegate:(FBHWrapperCpp*)gkhDelegate{
     
     _gkhDelegate = gkhDelegate;
     

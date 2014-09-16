@@ -165,6 +165,7 @@
 		AAB10A1C19B8DF5000919961 /* timer about to finish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AAB109EB19B8DF5000919961 /* timer about to finish.mp3 */; };
 		AAB10A1D19B8DF5000919961 /* Timer Finish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AAB109EC19B8DF5000919961 /* Timer Finish.mp3 */; };
 		AAB114F319BA26E600791163 /* Health.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB114F119BA26E600791163 /* Health.cpp */; };
+		AAB2F30919C806FC006063EB /* ScoreRequestDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB2F30719C806FC006063EB /* ScoreRequestDelegate.cpp */; };
 		AAB4CA4F19C7047800EFBDFA /* FBHDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4CA4D19C7047800EFBDFA /* FBHDelegate.cpp */; };
 		AAB4CA5419C7058300EFBDFA /* ScoreFBDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4CA5219C7058300EFBDFA /* ScoreFBDataSource.cpp */; };
 		AAB4CA5A19C7072300EFBDFA /* FBHWrapperCpp.mm in Sources */ = {isa = PBXBuildFile; fileRef = AAB4CA5819C7072300EFBDFA /* FBHWrapperCpp.mm */; };
@@ -567,6 +568,8 @@
 		AAB114F019BA105600791163 /* ButtonConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonConstants.h; sourceTree = "<group>"; };
 		AAB114F119BA26E600791163 /* Health.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Health.cpp; sourceTree = "<group>"; };
 		AAB114F219BA26E600791163 /* Health.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Health.h; sourceTree = "<group>"; };
+		AAB2F30719C806FC006063EB /* ScoreRequestDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScoreRequestDelegate.cpp; sourceTree = "<group>"; };
+		AAB2F30819C806FC006063EB /* ScoreRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreRequestDelegate.h; sourceTree = "<group>"; };
 		AAB4CA4D19C7047800EFBDFA /* FBHDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FBHDelegate.cpp; sourceTree = "<group>"; };
 		AAB4CA4E19C7047800EFBDFA /* FBHDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBHDelegate.h; sourceTree = "<group>"; };
 		AAB4CA5219C7058300EFBDFA /* ScoreFBDataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScoreFBDataSource.cpp; sourceTree = "<group>"; };
@@ -932,6 +935,8 @@
 			children = (
 				AA5CA85F19C6E1BC006E62C6 /* GKHDelegate.cpp */,
 				AA5CA86019C6E1BC006E62C6 /* GKHDelegate.h */,
+				AAB2F30719C806FC006063EB /* ScoreRequestDelegate.cpp */,
+				AAB2F30819C806FC006063EB /* ScoreRequestDelegate.h */,
 			);
 			path = score;
 			sourceTree = "<group>";
@@ -1668,6 +1673,7 @@
 				AAB4CA5D19C7084800EFBDFA /* FacebookHelper.mm in Sources */,
 				AAB01DA219629E84002251B1 /* Hand.cpp in Sources */,
 				AAB4CA5419C7058300EFBDFA /* ScoreFBDataSource.cpp in Sources */,
+				AAB2F30919C806FC006063EB /* ScoreRequestDelegate.cpp in Sources */,
 				AA7E7103197E53BE0019CBDD /* TouchController.cpp in Sources */,
 				AA5CA86119C6E1BC006E62C6 /* GKHDelegate.cpp in Sources */,
 				AA871004196325B50028A4EA /* Garbage.cpp in Sources */,
