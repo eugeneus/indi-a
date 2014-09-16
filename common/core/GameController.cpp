@@ -282,9 +282,7 @@ void GameController::putItemOnConveyour(float dt)
         Vec2 pos = item->getPosition();
         item->setPosition(_itemIdlePos);
         item->setLocalZOrder(kItemZO1);
-        
         this->runItemConveyorAction(item);
-        CCLOG("elapsed time %f = ", _elasedTest);
     }
 }
 
@@ -513,6 +511,7 @@ void GameController::update(float dt)
             ScaleTo* scaleAction = ScaleTo::create(actionDuration, scaleFactor);
             Sequence* cobinedAction = Sequence::create(itemAction, scaleAction, NULL);
             item->runAction(cobinedAction);
+             item->setLocalZOrder(kItemZO1);
 
          }
       

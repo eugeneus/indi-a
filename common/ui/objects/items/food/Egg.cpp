@@ -63,15 +63,20 @@ cocos2d::FiniteTimeAction* Egg::getFloorBumpAction(float aDuration, cocos2d::Poi
    Vector<SpriteFrame*> animateFrames(3);
    char frameName[100] = {0};
    SpriteFrame* animFrame = nullptr;
-   
-   for(int i = 1; i < 4; i++)
+
+    /*
+   for(int i = 1; i < 3; i++)
    {
       sprintf(frameName, "egg_crash_%1d.png", i);
       animFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
       animateFrames.pushBack(animFrame);
    }
-   
-   Animation* animation = Animation::createWithSpriteFrames(animateFrames, 0.3f);
+*/
+    sprintf(frameName, "egg_crash_%1d.png", 2); //todo: revert back when images list will be corrected
+    animFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
+    animateFrames.pushBack(animFrame);
+    
+   Animation* animation = Animation::createWithSpriteFrames(animateFrames, 0.7f);
    return Animate::create(animation);
    
 }

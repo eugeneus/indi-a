@@ -134,7 +134,9 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
     }
 
     // try to find Bonus item
-    if (this->getBonusHasMaxCount() > 0 && suitableItemId < 0 && _bonusItemsInterval < 0) {
+    //this->getBonusHasMaxCount() > 0 &&
+    //int bcnt = this->getBonusHasMaxCount();
+    if (this->getBonusHasMaxCount()>0 && suitableItemId < 0 && _bonusItemsInterval < 0) {
         cycleTerminator = 2;
         std::map<int,int>::iterator rnd = _bonusItemsCounter.begin();
         std::advance(rnd, rand() % _bonusItemsCounter.size());
@@ -273,7 +275,7 @@ int ItemsPool::getBonusHasMaxCount()
 {
     int maxCount = 0;
     for (auto bonus : _bonusItemsCounter) {
-        if (maxCount > bonus.second) {
+        if (maxCount < bonus.second) {
             maxCount = bonus.second;
         }
     }
