@@ -270,6 +270,7 @@ void GameController::restartGame() {
     _gameLayer->resume();
    _cloudTips->toggleTip();
     _conv->resumeConv();
+    //_theChef->startChefBodyAnimation();
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(SOUND_BG, true);
 }
 

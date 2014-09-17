@@ -246,6 +246,8 @@ void Chef::setConveyorVelocity(float aConveyorVelocity)
 void Chef::restartChef() {
     _leftHand->restart();
     _rightHand->restart();
+    _chef->stopAllActions();
+    this->startChefBodyAnimation();
 }
 
 bool Chef::isChefIdle()
