@@ -104,7 +104,6 @@ void GameController::setUpInit(bool isStart) {
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
     
-    
     int level = 1;
     /*
     if(!isStart) {
@@ -270,7 +269,6 @@ void GameController::restartGame() {
     _gameLayer->resume();
    _cloudTips->toggleTip();
     _conv->resumeConv();
-    //_theChef->startChefBodyAnimation();
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(SOUND_BG, true);
 }
 
@@ -308,6 +306,7 @@ void GameController::putItemOnConveyour(float dt)
 {
     
     _elasedTest += dt;
+
     Item* item = _itemsPool->getItemFromPool(&_items, dt, _gameCycleInd->getGameTime(), _itemIdlePos, kItemZO1);
     if(item){
 

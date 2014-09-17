@@ -16,7 +16,10 @@ _maxBonusItemsCounter(0),
 _pulledGarbageCount(0),
 _pulledFoodCount(0),
 _garbagePerFood(0.3f),
-_arbitraryItemInterval(0.0f)
+_arbitraryItemInterval(0.0f),
+_minItemInterval(0.9f),
+_elapsedMinInterval(0.0f)
+
 {}
 
 ItemsPool::~ItemsPool() {}
@@ -112,6 +115,12 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
     _bonusItemsInterval -= dt;
     _arbitraryItemInterval -= dt;
     
+    _elapsedMinInterval += dt;
+    
+    if(_minItemInterval - _elapsedMinInterval > 0.0f)
+        return nullptr;
+    _elapsedMinInterval = 0.0f;
+    
     // one of level complication technique:
     // for harder level start pulling required item closer to a round end.
     // i.e. inital value of _requiredItemsInterval should be multipied by complication factor
@@ -144,7 +153,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
     // try to find Bonus item
     //this->getBonusHasMaxCount() > 0 &&
     //int bcnt = this->getBonusHasMaxCount();
-/*    if (this->getBonusHasMaxCount()>0 && suitableItemId < 0 && _bonusItemsInterval < 0) {
+    if (this->getBonusHasMaxCount()>0 && suitableItemId < 0 && _bonusItemsInterval < 0) {
         cycleTerminator = 2;
         std::map<int,int>::iterator rnd = _bonusItemsCounter.begin();
         std::advance(rnd, rand() % _bonusItemsCounter.size());
@@ -240,9 +249,9 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
             }
         }
         
-        _arbitraryItemInterval = 1.5f;
+        _arbitraryItemInterval = 2.0f;
     }
-*/
+
     if (suitableItemType >= 0 && suitableItemId >= 0)  { // there is no item (time is not reached)
         std::vector<Item*>::iterator iItem = anItemList->begin();
         
@@ -304,5 +313,8 @@ void ItemsPool::decreaseBonusCount(int aBonusItemId)
 void ItemsPool::resetForNewRound()
 {
     _elapsedRoundTime = 0.0f;
+    _minItemInterval = 0.5f;
+    _elapsedMinInterval = 0.0f;
+
 }
 

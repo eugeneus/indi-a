@@ -56,6 +56,8 @@ protected:
     int _pulledGarbageCount;
     int _pulledFoodCount;
     float _garbagePerFood;
+    float _minItemInterval;
+    float _elapsedMinInterval;
    
 private:
 
