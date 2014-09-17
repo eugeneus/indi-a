@@ -24,6 +24,7 @@ public:
                           cocos2d::Vec2 aStartPos,
                           int aStartZOrder);
     void updateRequredItems(Dish* aDish);
+    void resetForNewRound();
 protected:
     
     Item* getItemByType(std::vector<Item*>* anItemList,

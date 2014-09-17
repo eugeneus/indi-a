@@ -153,6 +153,7 @@ void GameController::setUpInit(bool isStart) {
         _itemsPool = ItemsPool::create(_levelInfo, _mainCource);
     }
     _itemsPool->updateRequredItems(_mainCource);
+    _itemsPool->resetForNewRound();
     
 }
 

@@ -301,3 +301,8 @@ void ItemsPool::decreaseBonusCount(int aBonusItemId)
     }
 }
 
+void ItemsPool::resetForNewRound()
+{
+    _elapsedRoundTime = 0.0f;
+}
+
