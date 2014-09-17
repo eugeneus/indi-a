@@ -30,6 +30,9 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "AdmobController.h"
 
+//#import "GameCenterManager.h"
+//#import "GameCenterDelegate.h"
+
 @implementation AppController {
     AdmobController *_bannerViewController;
 }
@@ -39,9 +42,14 @@
 // cocos2d application instance
 static AppDelegate s_sharedApplication;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    application.applicationIconBadgeNumber = 0;
+}
 
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+    
+    application.applicationIconBadgeNumber = 0;
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 
     // Add the view controller's view to the window and display.
     window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
@@ -60,6 +68,10 @@ static AppDelegate s_sharedApplication;
     _viewController.wantsFullScreenLayout = YES;
     _viewController.view = eaglView;
 
+   // GameCenterDelegate* gcDelegate = [[GameCenterDelegate alloc] init];
+   // [GameCenterManager init];
+   // [[GameCenterManager instance] setDelegate:gcDelegate];
+    
     /*// Set RootViewController to window
     if ( [[UIDevice currentDevice].systemVersion floatValue] < 6.0)
     {
@@ -112,6 +124,20 @@ static AppDelegate s_sharedApplication;
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
+    
+    //save last visit time
+    
+    UILocalNotification *notification=[[UILocalNotification alloc] init];
+    if (notification!=nil) {//
+        notification.fireDate=[NSDate dateWithTimeIntervalSinceNow:15];
+        notification.repeatInterval=0;//
+        notification.timeZone=[NSTimeZone defaultTimeZone];
+        notification.alertBody=@"Your lives is full! Back to game!";//
+        notification.applicationIconBadgeNumber=1; //
+        notification.soundName= UILocalNotificationDefaultSoundName;//
+        notification.alertAction = NSLocalizedString(@"", nil);  //
+        [[UIApplication sharedApplication]   scheduleLocalNotification:notification];
+    }
     cocos2d::Application::getInstance()->applicationDidEnterBackground();
 }
 

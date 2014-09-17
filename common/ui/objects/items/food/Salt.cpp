@@ -22,7 +22,7 @@ Salt* Salt::create()
 
 bool Salt::init() {
     
-    if(!super::init("item_bonus_1.png", "item_bonus_%i.png", 1, 0.2)) {
+    if(!super::init("item_bonus1_1.png", "item_bonus1_%i.png", 1, 0.2)) {
         return false;
     }
     _weightRatio = 0.1;

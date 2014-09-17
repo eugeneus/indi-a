@@ -18,6 +18,12 @@ private:
     SlidingDataSource* _dataSource;
     SlidingItemRenderer* _renderer;
     cocos2d::extension::TableView* _tableView;
+    cocos2d::Sprite* _loading;
+    cocos2d::Sprite* _loadingBg;
+    cocos2d::Action* _loadingAction;
+    
+protected:
+    void toggleLoading();
 public:
     Overview();
     ~Overview();

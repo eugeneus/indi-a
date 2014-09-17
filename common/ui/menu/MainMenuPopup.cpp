@@ -1,5 +1,6 @@
 #include "MainMenuPopup.h"
 #include "OptionsMenu.h"
+#include "UserDataProvider.h"
 
 #include "GameMenu.h"
 #include "SocialMenu.h"
@@ -27,6 +28,16 @@ MainMenuPopup* MainMenuPopup::create()
 
 void MainMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItems, cocos2d::Vec2 origin, cocos2d::Size visibleSize) {
     
+    UserDataProvider* userData = UserDataProvider::getInstance();
+    if (userData->isFirstLaunch()) {
+        userData->updateFirstLaunch(false);
+        userData->updateUserLives(10);
+        
+        for (int i = 1; i < 11; i ++) {
+            userData->updateLiveTimeout(i, CCString::createWithFormat("%i", i)->getCString());
+        }
+    }
+    
     initMenuItem(menuItems, BTN_MAIN_PLAY, CC_CALLBACK_1(MainMenuPopup::menuGameCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 180));
     initMenuItem(menuItems, BTN_MAIN_STORE, CC_CALLBACK_1(MainMenuPopup::menuStoreCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 400));
     initMenuItem(menuItems, BTN_MAIN_SCORE, CC_CALLBACK_1(MainMenuPopup::menuScoreCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 550));
@@ -34,7 +45,7 @@ void MainMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItem
     initMenuItem(menuItems, BTN_MAIN_SOCIAL, CC_CALLBACK_1(MainMenuPopup::menuSocialCallback, this), Vec2(visibleSize.width/2 + origin.x + 100, visibleSize.height + origin.y - 700));
     initMenuItem(menuItems, BTN_MAIN_EXIT, CC_CALLBACK_1(MainMenuPopup::menuExitCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 820));
     
-    Health *health = Health::create(6);
+    Health *health = Health::create(userData->getUserLives());
     health->setPosition(Vec2(0, visibleSize.height + origin.y));
     this->addChild(health);
 }
@@ -60,8 +71,12 @@ void MainMenuPopup::menuSocialCallback(Ref* pSender) {
 }
 
 void MainMenuPopup::menuGameCallback(Ref* pSender) {
-    Scene *newScene = GameMenu::createScene();
-    this->changeScene(newScene);
+    if (UserDataProvider::getInstance()->getUserLives() > 0) {
+        Scene *newScene = GameMenu::createScene();
+        this->changeScene(newScene);
+    } else {
+        // TODO: purchases;
+    }
 }
 
 void MainMenuPopup::menuExitCallback(Ref* pSender)

@@ -3,6 +3,8 @@
 
 SlidingDataSource::SlidingDataSource() {}
 SlidingDataSource::~SlidingDataSource() {}
+SlidingDataSource::SlidingDataSource(const SlidingDataSource& other) : _data(other._data), _callback(other._callback) {}
+
 
 ssize_t SlidingDataSource::getDataSize() {
     return _data.size();

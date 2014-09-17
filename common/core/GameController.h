@@ -116,9 +116,9 @@ protected:
    
     Pot* _thePot;
     Chef* _theChef;
-    
+    float _currGameTime;
     LevelProvider* _levelInfo;
-    UserDataProvider* _userData;
+    //UserDataProvider* _userData;
     ScoreLayer* _scoreLayer;
     Multiplier* _multiplier;
     GameCycleIndicator* _gameCycleInd;

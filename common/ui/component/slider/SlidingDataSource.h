@@ -14,6 +14,7 @@ private:
     SlidingDataSourceCallback *_callback;
 public:
     SlidingDataSource();
+    SlidingDataSource(const SlidingDataSource& other);
     virtual ~SlidingDataSource();
     
     ssize_t getDataSize();

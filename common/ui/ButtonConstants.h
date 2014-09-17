@@ -17,14 +17,8 @@
 #define BTN_MAIN_SOCIAL "btn_main_soc"
 #define BTN_MAIN_STORE "btn_main_store"
 
-#define BTN_OPTION_MUSIC_OFF "btn_opt_music_off"
-#define BTN_OPTION_MUSIC_ON "btn_opt_music_on"
 #define BTN_OPTION_MUSIC "btn_opt_music"
-#define BTN_OPTION_NOTIF_OFF "btn_opt_notif_off"
-#define BTN_OPTION_NOTIF_ON "btn_opt_notif_on"
 #define BTN_OPTION_NOTIF "btn_opt_notif"
-#define BTN_OPTION_SOUND_OFF "btn_opt_sound_off"
-#define BTN_OPTION_SOUND_ON "btn_opt_sound_on"
 #define BTN_OPTION_SOUND "btn_opt_sound"
 
 #define BTN_SCORE_FRIENDS "btn_score_friends"
@@ -34,7 +28,13 @@
 #define BTN_SOCIAL_GP "btn_soc_gp"
 #define BTN_SOCIAL_INV "btn_soc_inv"
 
+#define TRIGGER_ON_SUFFIX "_on"
+#define TRIGGER_OFF_SUFFIX "_off"
+
 #define BTN_NAME(btn_name) ((btn_name) + BTN_EXT)
 #define BTN_NAME_SELECTED(btn_name) ((btn_name) + BTN_SELECTED_SUFFIX + BTN_EXT)
+
+#define BTN_NAME_TRIGGER_ON(btn_name) ((btn_name) + TRIGGER_ON_SUFFIX + BTN_EXT)
+#define BTN_NAME_TRIGGER_OFF(btn_name) ((btn_name) + TRIGGER_OFF_SUFFIX + BTN_EXT)
 
 #endif

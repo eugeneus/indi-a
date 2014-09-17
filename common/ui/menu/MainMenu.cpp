@@ -3,6 +3,7 @@
 #include "MainMenuPopup.h"
 #include "SimpleAudioEngine.h"
 #include "SoundsConstants.h"
+#include "UserDataProvider.h"
 
 USING_NS_CC;
 
@@ -40,8 +41,14 @@ void MainMenu::initializeMenu() {
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(SOUND_CLICK);
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(SOUND_FALL_ITEM);
     
-    CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.5); //TODO: load from prop
-    CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(0.5); //TODO: load from prop
+    bool isSoundOn = UserDataProvider::getInstance()->isSoundOn();
+    bool isMusicOn = UserDataProvider::getInstance()->isMusicOn();
+    
+    float soundVolume = isSoundOn ? 1.0 : 0.0;
+    float musicVolume = isMusicOn ? 1.0 : 0.0;
+    
+    CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(musicVolume);
+    CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(soundVolume);
 }
 
 cocos2d::Layer* MainMenu::createMenuLayer() {

@@ -55,9 +55,10 @@ void BaseGamePopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem*>& menuItems
     CCLOG("base");
 }
 
-void BaseGamePopup::addLabel(cocos2d::Node* target, const cocos2d::TTFConfig& ttfConfig, const std::string& text, const cocos2d::Color3B& color, float posX, float posY) {
+void BaseGamePopup::addLabel(cocos2d::Node* target, const cocos2d::TTFConfig& ttfConfig, const std::string& text, const cocos2d::Color3B& color, float posX, float posY, int tag) {
     Label* label = this->createLabel(ttfConfig, text, color);
     label->setPosition(Vec2(posX, posY));
+    label->setTag(tag);
     target->addChild(label);
 }
 

@@ -1,5 +1,7 @@
 #include "AppDelegate.h"
 #include "MainMenu.h"
+#include "GKHWrapperCpp.h"
+
 
 USING_NS_CC;
 
@@ -20,6 +22,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
+    GKHWrapperCpp gkh;
+    gkh.authenticateLocalPlayer();
+    
     // turn on display FPS
     director->setDisplayStats(true);
 

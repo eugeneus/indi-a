@@ -1,6 +1,6 @@
 
 #include "ScoreLayer.h"
-
+#include "UserDataProvider.h"
 
 
 USING_NS_CC;
@@ -49,6 +49,8 @@ void ScoreLayer::updateScore(int dt) {
     //if (dt < 10) {
         score += dt;
         scoreLabel->setString(CCString::createWithFormat("%i", score)->getCString());
+    
+    UserDataProvider::getInstance()->updateUserScore(score);
     /*} else if (dt < 100) {
     
     } else if (dt < 1000) {
