@@ -23,7 +23,7 @@ public:
                           float anEffectiveRoundTime,
                           cocos2d::Vec2 aStartPos,
                           int aStartZOrder);
-
+    void updateRequredItems(Dish* aDish);
 protected:
     
     Item* getItemByType(std::vector<Item*>* anItemList,

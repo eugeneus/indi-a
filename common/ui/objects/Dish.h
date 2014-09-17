@@ -19,6 +19,7 @@ public:
     std::string getImageName();
     std::vector<int> getIngridientIDs();
     bool checkAllRequiredExist(std::vector<int> itemsIds);
+    bool isRequiredItem(int anItemId);
 
 protected:
     

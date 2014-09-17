@@ -26,14 +26,10 @@ ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo, Dish* aDish)
     
     ItemsPool *pRet = new ItemsPool();
     
-    pRet->_maxRequiredItemsCounter = aLevelInfo->getRequiredAppearsPerLevel();
+    pRet->_maxRequiredItemsCounter = 3;//aLevelInfo->getRequiredAppearsPerLevel();
     pRet->_requiredItemsInterval =  (aLevelInfo->getRoundTime() - pRet->_elapsedRoundTime) / pRet->_maxRequiredItemsCounter;
     pRet->_requiredItemsInterval =  pRet->_requiredItemsInterval/3.0f;
-    
-    std::vector<int> ingridients = aDish->getIngridientIDs();
-    for (int i = 0; i < ingridients.size(); i++){
-        pRet->_requiredItemsCounter.insert(std::pair<int,int>(ingridients.at(i), pRet->_maxRequiredItemsCounter));
-    }
+    pRet->updateRequredItems(aDish);
     
     std::vector<int> itemTypes1 = aLevelInfo->getAllowedFoodItems();
     for (int i = 0; i < itemTypes1.size(); i++){
@@ -49,6 +45,18 @@ ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo, Dish* aDish)
     pRet->_bonusItemsInterval = (aLevelInfo->getRoundTime() - pRet->_elapsedRoundTime) / pRet->getCurrenTotalBonuses();
     
    return pRet;
+}
+
+void ItemsPool::updateRequredItems(Dish* aDish)
+{
+    if(_requiredItemsCounter.size() > 0)
+        _requiredItemsCounter.clear();
+    
+    std::vector<int> ingridients = aDish->getIngridientIDs();
+    for (int i = 0; i < ingridients.size(); i++){
+        this->_requiredItemsCounter.insert(std::pair<int,int>(ingridients.at(i), this->_maxRequiredItemsCounter));
+    }
+
 }
 
 Item* ItemsPool::getItemByType(std::vector<Item*>* anItemList,
@@ -129,7 +137,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
             }
         }
         
-        _requiredItemsInterval = ((anEffectiveRoundTime - this->_elapsedRoundTime) / (currentCount + 2)) - 10.2f; //0.2f;
+        _requiredItemsInterval = ((anEffectiveRoundTime - this->_elapsedRoundTime) / (currentCount + 2)); //0.2f;
         
     }
     

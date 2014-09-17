@@ -302,6 +302,7 @@ bool Hand::isHandIdle()
     Point p = this->getPosition();
     bool h1 = !this->isHandBusy();
     bool h2 = p.y == this->_handRect.origin.y;
-    return h1 && h2;
+    bool h3 = this->getNumberOfRunningActions() == 0;
+    return h1 && h3;
 }
 

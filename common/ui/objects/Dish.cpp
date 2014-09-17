@@ -55,5 +55,11 @@ bool Dish::checkAllRequiredExist(std::vector<int> itemsIds) {
 
 
 
+bool Dish::isRequiredItem(int anItemId) {
+    
+    return (std::find(_ingridientIDs.begin(), _ingridientIDs.end(), anItemId) != _ingridientIDs.end());
+}
+
+
 
 

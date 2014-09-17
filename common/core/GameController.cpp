@@ -106,11 +106,13 @@ void GameController::setUpInit(bool isStart) {
     
     
     int level = 1;
+    /*
     if(!isStart) {
         level = _levelInfo->getLevelId() + 1;
         // TODO: remove next lines
         if (level > 3) level = 1;
     }
+    */
     
     _levelInfo = LevelProvider::createForLevel(level);
     _userData = UserDataProvider::create();
@@ -150,6 +152,7 @@ void GameController::setUpInit(bool isStart) {
     if (!_itemsPool) {
         _itemsPool = ItemsPool::create(_levelInfo, _mainCource);
     }
+    _itemsPool->updateRequredItems(_mainCource);
     
 }
 
@@ -349,7 +352,6 @@ void GameController::tossItem(Item* anItem, Vec2 anImpulse)
     this->runTossActionWithScale(anItem, collisionEndPointDef, totalActionDuration, anImpulse);
     anItem->playBounceSound();
 }
-
 
 void GameController::runBumpAction(Item* anItem)
 {
@@ -635,7 +637,7 @@ void GameController::checkGameProgress(Item* anItem) {
         //_caughtItemsIds.push_back(3);
         //_caughtItemsIds.push_back(11);
         
-        if (_levelInfo->isRequiredItem(anItem->_itemId)) {
+        if (_mainCource->isRequiredItem(anItem->_itemId)) {
             _caughtItemsIds.push_back(anItem->_itemId);
             
             _scoreLayer->updateScore(10);
