@@ -48,8 +48,8 @@ ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo,
     pRet->_startItemPos = Point(0.0f,0.0f);
     pRet->_recentPulledItem = nullptr;
     
-    pRet->_requiredItemsInterval =  (aLevelInfo->getRoundTime() - pRet->_elapsedRoundTime) / pRet->_repeatIngridients;
-    pRet->_requiredItemsInterval =  pRet->_requiredItemsInterval/pRet->_repeatIngridients;
+    pRet->_requiredItemsInterval =  aLevelInfo->getRoundTime() / pRet->_repeatIngridients;
+    pRet->_requiredItemsInterval =  (pRet->_requiredItemsInterval/pRet->_repeatIngridients) / 3.0f;
     
     std::vector<int> itemTypes1 = aLevelInfo->getAllowedFoodItems();
     for (int i = 0; i < itemTypes1.size(); i++){
@@ -252,34 +252,36 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
             }
         }
         else{
-            cycleTerminator = 2;
-            std::map<int,int>::iterator rnd = _garbageItemsCounter.begin();
-            std::advance(rnd, rand() % _garbageItemsCounter.size());
-            startID = rnd->first;
-            
-            while (suitableItemId < 0 && cycleTerminator > 0) {
-                if(rnd == _garbageItemsCounter.end()){
-                    cycleTerminator--;
-                    rnd = _garbageItemsCounter.begin();
-                }else if (rnd->second < 3) {
-                    suitableItemId = rnd->first;
+            if (_nRound > 1) {
+                cycleTerminator = 2;
+                std::map<int,int>::iterator rnd = _garbageItemsCounter.begin();
+                std::advance(rnd, rand() % _garbageItemsCounter.size());
+                startID = rnd->first;
+                
+                while (suitableItemId < 0 && cycleTerminator > 0) {
+                    if(rnd == _garbageItemsCounter.end()){
+                        cycleTerminator--;
+                        rnd = _garbageItemsCounter.begin();
+                    }else if (rnd->second < 3) {
+                        suitableItemId = rnd->first;
+                        suitableItemType = 1;
+                        rnd->second += 1;
+                        _pulledGarbageCount += 1;
+                    }
+                    else{
+                        ++rnd;
+                    }
+                }
+                
+                if (suitableItemId < 0) {
+                    suitableItemId = startID;
                     suitableItemType = 1;
-                    rnd->second += 1;
                     _pulledGarbageCount += 1;
                 }
-                else{
-                    ++rnd;
-                }
-            }
-            
-            if (suitableItemId < 0) {
-                suitableItemId = startID;
-                suitableItemType = 1;
-                _pulledGarbageCount += 1;
             }
         }
         
-        _arbitraryItemInterval = 2.0f;
+        _arbitraryItemInterval = 9.0f - 9.0f * _nRound * 0.1f ;
     }
     
     return this->getItemByType(anItemList,
