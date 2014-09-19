@@ -79,7 +79,7 @@ bool Cyclable::init(const char* bgSpriteFrameName, float pSpeed, float pLength) 
         super::addChild(bg);
     }
 */
-    actionLength = imgLen;
+    actionLength = endPoint;
     actionDuration = actionLength/cyclingSpeed;
    
     this->startCycling();
@@ -94,15 +94,18 @@ void Cyclable::stopCycling() {
 }
 
 void Cyclable::startCycling() {
-   
+   // Check for double restart (action runs twise)
    FiniteTimeAction* actionMoveBy = nullptr;
    FiniteTimeAction* actionPlase = nullptr;
    Vec2 v;
    for(Sprite* nSprite : sprites){
+       nSprite->stopAllActions();
       actionMoveBy = CCMoveBy::create(actionDuration,Vec2(-actionLength, 0.0f));
       v = Vec2(nSprite->getPosition().x,nSprite->getPosition().y);
       actionPlase = Place::create(v);
-      nSprite->runAction(RepeatForever::create(Sequence::create(actionMoveBy,actionPlase, NULL)));
+       RepeatForever* cyclable = RepeatForever::create(Sequence::create(actionMoveBy,actionPlase, NULL));
+       cyclable->setTag(1);
+       nSprite->runAction(cyclable);
    }
    
 }
@@ -116,6 +119,7 @@ void Cyclable::changeCyclingSpeed(float speed) {
         nSprite->setPosition(prevPos);
         prevPos.x = prevPos.x + (imgLen - 2);
     }
+    
     cyclingSpeed = speed;
     actionDuration = actionLength/cyclingSpeed;
     this->startCycling();

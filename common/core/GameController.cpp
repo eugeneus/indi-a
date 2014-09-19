@@ -312,6 +312,7 @@ void GameController::runItemConveyorAction(Item* anItem)
     FiniteTimeAction* itemAction = anItem->getConveyourAction(actionDuration, targetPoint);
     float scaleFactor = this->getScaleFactor(_itemIdlePos, 0);
     anItem->setScale(scaleFactor);
+    anItem->stopAllActions();
     anItem->runAction(itemAction);
 
 }

@@ -135,7 +135,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
                                  float aBandVelosity)
 
 {
-    Item* suitableItem = nullptr;
+    //Item* suitableItem = nullptr;
     int suitableItemId = -1;
     int suitableItemType = -1;
     int cycleTerminator = 3;
@@ -150,6 +150,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
        (_recentPulledItem->getPosition().x + _recentPulledItem->getContentSize().width) > _startItemPos.x)
         return nullptr;
     
+    _recentPulledItem = nullptr;
     // one of level complication technique:
     // for harder level start pulling required item closer to a round end.
     // i.e. inital value of _requiredItemsInterval should be multipied by complication factor
@@ -285,37 +286,6 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
                                suitableItemId,
                                suitableItemType,
                                aStartZOrder);
- 
- /*
-
-    if (suitableItemType >= 0 && suitableItemId >= 0)  { // there is no item (time is not reached)
-        std::vector<Item*>::iterator iItem = anItemList->begin();
-        
-        Item* nextItem = nullptr;
-        
-        while (!suitableItem && iItem != anItemList->end()) {
-            nextItem = (Item*)*iItem;
-            if (nextItem->_itemType == suitableItemType &&
-                nextItem->_itemId == suitableItemId &&
-                nextItem->getPosition().x == _startItemPos.x &&
-                nextItem->getLocalZOrder() == aStartZOrder) {
-                suitableItem = nextItem;
-            }
-            ++iItem;
-        }
-        
-        if (!suitableItem) {
-            suitableItem = ItemFactory::createItem(suitableItemType, suitableItemId);
-            suitableItem->setPosition(_startItemPos);
-            suitableItem->setLocalZOrder(aStartZOrder);
-            anItemList->push_back(suitableItem);
-        }
-    }
-    
-    _recentPulledItem = suitableItem;
-    
-    return suitableItem;
-*/
     
 }
 
