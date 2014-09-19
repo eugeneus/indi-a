@@ -154,11 +154,16 @@ Item* Hand::tossItem()
 
 bool Hand::isHandBusy()
 {
-   //Point currHandPos = this->getPosition();
-   //Point handPos = Point((_handRect.origin.x + _handRect.size.width / 2.0f), (_handRect.origin.y + _handRect.size.height / 2.0f));
-   //((handPos.x != currHandPos.x) || (handPos.y != currHandPos.y)) &&
-   bool isHandBusy = ((_catchItem) &&
-   (this->getNumberOfRunningActions() > 0));
+    Point currHandPos = this->getPosition();
+    Point handPos = _handRect.origin; //Point((_handRect.origin.x + _handRect.size.width / 2.0f), (_handRect.origin.y + _handRect.size.height / 2.0f));
+    //((handPos.x != currHandPos.x) || (handPos.y != currHandPos.y));
+    
+   bool isHandBusy = (((int)handPos.x) != ((int)currHandPos.x)) || (((int)handPos.y) != ((int)currHandPos.y));
+//    if (isHandBusy) {
+//        CCLOG("handby");
+//    }
+   //bool isHandBusy = ((_catchItem) &&
+   //(this->getNumberOfRunningActions() > 0));
    return isHandBusy;
 }
 

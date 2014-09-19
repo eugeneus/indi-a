@@ -47,12 +47,10 @@
 GameController::GameController()
 {
    _convY = 0.0f;
-   _convVelY = 0.0f;
    _convLegth = 0.0f;
    _putNextItemDt = 0.0f;
    _idxRotated = 0;
     _bonusTimer = 0.0f;
-    _levelCounter = 0;
     _elasedTest = 0.0f;
    
    //_items = new Vector<Item*>(10);
@@ -63,7 +61,19 @@ GameController::GameController()
     _itemsPool =  nullptr;
     _cloudTips = nullptr;
     _isControllerWaitingStop = false;
+    _nRound = 1;
 
+    _maxBandVelosity = 100;
+    
+    _maxRepeatIngridients = 3;
+    
+    _maxRepeatBonus1 = 3;
+    
+    _maxRepeatBonus2 = 3;
+    
+    _maxRepeatBonus3 = 3;
+    
+    _maxGarbagePct = 0.7;
 
 }
 
@@ -116,8 +126,8 @@ void GameController::setUpInit(bool isStart) {
     _levelInfo = LevelProvider::createForLevel(level);
     
     //std::vector<int> requiredFroodItems = _levelInfo->getRequiredItems();
-    std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
-    std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
+    //std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
+    //std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
     _currGameTime = 0.0;
     
     if (isStart)
@@ -148,10 +158,15 @@ void GameController::setUpInit(bool isStart) {
     _cloudTips->setPosition(_cloudTipsPos);
     
     if (!_itemsPool) {
-        _itemsPool = ItemsPool::create(_levelInfo, _mainCource);
+        _itemsPool = ItemsPool::create(_levelInfo,
+                                       _maxGarbagePct,
+                                       _maxRepeatIngridients,
+                                       _maxRepeatBonus1,
+                                       _maxRepeatBonus2,
+                                       _maxRepeatBonus3
+                                       );
     }
-    _itemsPool->updateRequredItems(_mainCource);
-    _itemsPool->resetForNewRound();
+    _itemsPool->resetForNewRound(_nRound, _itemIdlePos, _mainCource);
     
 }
 
@@ -166,16 +181,15 @@ void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSi
     float yOffsetConveyer = 615;
     
     _convY = yOffsetConveyer - 102;
-    _convVelY = _levelInfo->getSpeed();
+    //_bandVelosity = 100;
     _convLegth = aVisibleSize.width;
     
     _bonusMenu->resetActiveBonus();
     _gameCycleInd->setGameTime(_levelInfo->getRoundTime());
     _gameCycleInd->restart();
 
-    //_conv->resume();
     _theChef->restartChef();
-    _conv->changeCyclingSpeed(_convVelY);
+    _conv->changeCyclingSpeed(_bandVelosity);
     
     for(Item* nitem : _items){
         nitem->removeFromParentAndCleanup(true);
@@ -187,7 +201,8 @@ void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSi
 
 void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
 {
-   
+   this->updatePerformanceMetrics();
+    
    SpriteFrameCache* cache = SpriteFrameCache::getInstance();
    cache->addSpriteFramesWithFile("images.plist");
 
@@ -209,10 +224,9 @@ void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVi
     _cloudTipsPos = Vec2(140, yOffsetConveyer + 100);
     
     _convY = yOffsetConveyer - 102;
-    _convVelY = _levelInfo->getSpeed();
     _convLegth = aVisibleSize.width;
-
-    _conv = Conveyor::create(_convVelY, _convLegth);
+    
+    _conv = Conveyor::create(_bandVelosity, _convLegth);
     _conv->setPosition(Vec2(0, _convY));
     _gameLayer->addChild(_conv, kConveyurZO);
     
@@ -266,7 +280,7 @@ void GameController::restartGame() {
     _isControllerWaitingStop = false;
     this->setUpInit(false);
     _gameLayer->resume();
-   _cloudTips->toggleTip();
+    _cloudTips->toggleTip();
     _conv->resumeConv();
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(SOUND_BG, true);
 }
@@ -294,7 +308,7 @@ void GameController::runItemConveyorAction(Item* anItem)
 {
     float actionOffsetX = _itemIdlePos.x + anItem->getContentSize().width + 1;
     Vec2 targetPoint = Vec2(_itemIdlePos.x -  actionOffsetX, _itemIdlePos.y);
-    float actionDuration = actionOffsetX/_convVelY;
+    float actionDuration = actionOffsetX/_bandVelosity;
     FiniteTimeAction* itemAction = anItem->getConveyourAction(actionDuration, targetPoint);
     float scaleFactor = this->getScaleFactor(_itemIdlePos, 0);
     anItem->setScale(scaleFactor);
@@ -303,10 +317,9 @@ void GameController::runItemConveyorAction(Item* anItem)
 }
 void GameController::putItemOnConveyour(float dt)
 {
-    
     _elasedTest += dt;
 
-    Item* item = _itemsPool->getItemFromPool(&_items, dt, _gameCycleInd->getGameTime(), _itemIdlePos, kItemZO1);
+    Item* item = _itemsPool->getItemFromPool(&_items, dt, _gameCycleInd->getGameTime(), kItemZO1, _bandVelosity);
     if(item){
 
         if(!item->getParent())
@@ -362,8 +375,6 @@ void GameController::runBumpAction(Item* anItem)
    float impulseX = (float)((float)getRandomNumber(0,10))/10.0f;
    float impulseY = (float)((float)getRandomNumber(0,10))/10.0f;
    
-   //anItem->playBumpSound();
-   
    Point impulse = Point(impulseX, impulseY);
    if (currentCollisionType == kControlPointTypePotMargin) {
       actionDuration = 1.2f;
@@ -410,8 +421,8 @@ void GameController::resetActiveBonus()
             _theChef->resetVision();
             break;
         case kBonusType2:
-             _convVelY = _levelInfo->getSpeed();
-            _conv->changeCyclingSpeed(_convVelY);
+             _bandVelosity = _levelInfo->getSpeed();
+            _conv->changeCyclingSpeed(_bandVelosity);
             break;
         case kBonusType3:
             break;
@@ -434,8 +445,8 @@ void GameController::useActiveBonus()
             _bonusTimer = 20.0f;
             break;
         case kBonusType2:
-            _convVelY = _convVelY/1.5f;
-            _conv->changeCyclingSpeed(_convVelY);
+            _bandVelosity = _bandVelosity/1.5f;
+            _conv->changeCyclingSpeed(_bandVelosity);
             _bonusTimer = 20.0f;
             break;
         case kBonusType3:
@@ -489,28 +500,21 @@ void GameController::update(float dt)
         this->stopGame();
         
         if (this->_mainCource->checkAllRequiredExist(_caughtItemsIds)) {
-            this->restartGame();
-            
-            //GameCompletePopup* goPopup = GameCompletePopup::create(); //TODO:replace for change game score and dish
-            //_gameLayer->addChild(goPopup, 1001);
+            _isControllerWaitingStop = true;
         } else {                         //TODO: remove
             GameOverPopup* goPopup = GameOverPopup::create();
             _gameLayer->addChild(goPopup, 1001);
         }
         return;
     }
-    
-        /*if (this->_convVelY < 60) {
-            this->_convVelY +=20;
-            this->_conv->changeCyclingSpeed(this->_convVelY);
-        }*/
 
    
     if (_isControllerWaitingStop) {
         if(_theChef->isChefIdle()){
             this->stopGame();
+            this->_nRound++;
+            this->updatePerformanceMetrics();
             this->restartGame();
-            this->_levelCounter++;
             _isControllerWaitingStop = false;
         }
     }
@@ -542,15 +546,11 @@ void GameController::update(float dt)
        
       if (item->getLocalZOrder() == kItemZO1) { //toss
          
-       // if (!_gameCycleInd->isComplete()) {
-          
-         Item* tossed = _theChef->looksForItem(item, this->_convVelY);
+         Item* tossed = _theChef->looksForItem(item, this->_bandVelosity);
          if (tossed) {
             this->tossItem(tossed, _theChef->getBounceImpulse());
          }
             
-      //  }
-         
       } else
       if (item->getLocalZOrder() == kItemZO2 && item->isItemInCurrentTargetPoint()) {
          this->runBumpAction(item);
@@ -673,6 +673,39 @@ void GameController::checkGameProgress(Item* anItem) {
 float GameController::getActualRoundTime()
 {
     return _gameCycleInd->getGameTime();
+}
+
+void GameController::updatePerformanceMetrics()
+{
+    
+    float factor = (float)_nRound * 0.1f;
+    
+    _bandVelosity = _maxBandVelosity * factor + 40;
+    
+    //_repeatIngridients = _maxRepeatIngridients - ;
+    
+    //_repeatBonus1;
+    
+    //_repeatBonus2;
+    
+    //_repeatBonus3;
+    
+    _garbagePct = _maxGarbagePct * factor;
+
+    
+/*
+    _maxBandVelosity = 100;
+    
+    _maxRepeatIngridients = 3;
+    
+    _maxRepeatBonus1 = 3;
+    
+    _maxRepeatBonus2 = 3;
+    
+    _maxRepeatBonus3 = 3;
+    
+    _maxGarbagePct = 0.7;
+*/
 }
 
 

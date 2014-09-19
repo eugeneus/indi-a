@@ -16,23 +16,40 @@ _maxBonusItemsCounter(0),
 _pulledGarbageCount(0),
 _pulledFoodCount(0),
 _garbagePerFood(0.3f),
-_arbitraryItemInterval(0.0f),
-_minItemInterval(0.9f),
-_elapsedMinInterval(0.0f)
-
+_arbitraryItemInterval(0.0f)
 {}
 
 ItemsPool::~ItemsPool() {}
 
-ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo, Dish* aDish)
+ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo,
+                             float aMaxGarbagePct,
+                         int aMaxRepeatIngridients,
+                         int aMaxRepeatBonus1,
+                         int aMaxRepeatBonus2,
+                         int aMaxRepeatBonus3
+                         )
 {
-    
     ItemsPool *pRet = new ItemsPool();
     
-    pRet->_maxRequiredItemsCounter = 3;//aLevelInfo->getRequiredAppearsPerLevel();
-    pRet->_requiredItemsInterval =  (aLevelInfo->getRoundTime() - pRet->_elapsedRoundTime) / pRet->_maxRequiredItemsCounter;
-    pRet->_requiredItemsInterval =  pRet->_requiredItemsInterval/3.0f;
-    pRet->updateRequredItems(aDish);
+    pRet->_maxGarbagePct = aMaxGarbagePct;
+    pRet->_maxRepeatIngridients = aMaxRepeatIngridients;
+    pRet->_maxRepeatBonus1 = aMaxRepeatBonus1;
+    pRet->_maxRepeatBonus2 = aMaxRepeatBonus2;
+    pRet->_maxRepeatBonus3 = aMaxRepeatBonus3;
+
+    pRet->_bandVelosity = 0.0f;
+    pRet->_repeatIngridients = pRet->_maxRepeatIngridients;
+    pRet->_repeatBonus1 = pRet->_maxRepeatBonus1;
+    pRet->_repeatBonus2 = pRet->_maxRepeatBonus2;
+    pRet->_repeatBonus3 = pRet->_maxRepeatBonus3;
+    pRet->_garbagePct = pRet->_maxGarbagePct;
+    pRet->_nRound = 1;
+    
+    pRet->_startItemPos = Point(0.0f,0.0f);
+    pRet->_recentPulledItem = nullptr;
+    
+    pRet->_requiredItemsInterval =  (aLevelInfo->getRoundTime() - pRet->_elapsedRoundTime) / pRet->_repeatIngridients;
+    pRet->_requiredItemsInterval =  pRet->_requiredItemsInterval/pRet->_repeatIngridients;
     
     std::vector<int> itemTypes1 = aLevelInfo->getAllowedFoodItems();
     for (int i = 0; i < itemTypes1.size(); i++){
@@ -47,8 +64,21 @@ ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo, Dish* aDish)
     pRet->_bonusItemsCounter = aLevelInfo->getBonusItems();
     pRet->_bonusItemsInterval = (aLevelInfo->getRoundTime() - pRet->_elapsedRoundTime) / pRet->getCurrenTotalBonuses();
     
-   return pRet;
+    return pRet;
 }
+
+void ItemsPool::resetForNewRound(int aRoundNumber, cocos2d::Vec2 aStartPos, Dish* aDish)
+{
+    _elapsedRoundTime = 0.0f;
+    _recentPulledItem = nullptr;
+
+    _nRound = aRoundNumber;
+    _startItemPos = Point(aStartPos.x, aStartPos.y);
+    this->updateRequredItems(aDish);
+
+}
+
+
 
 void ItemsPool::updateRequredItems(Dish* aDish)
 {
@@ -57,7 +87,7 @@ void ItemsPool::updateRequredItems(Dish* aDish)
     
     std::vector<int> ingridients = aDish->getIngridientIDs();
     for (int i = 0; i < ingridients.size(); i++){
-        this->_requiredItemsCounter.insert(std::pair<int,int>(ingridients.at(i), this->_maxRequiredItemsCounter));
+        this->_requiredItemsCounter.insert(std::pair<int,int>(ingridients.at(i), this->_maxRepeatIngridients));
     }
 
 }
@@ -65,7 +95,6 @@ void ItemsPool::updateRequredItems(Dish* aDish)
 Item* ItemsPool::getItemByType(std::vector<Item*>* anItemList,
                                int anItemID,
                                int anItemType,
-                               cocos2d::Vec2 aStartPos,
                                int aStartZOrder)
 {
     Item* suitableItem  = nullptr;
@@ -80,7 +109,7 @@ Item* ItemsPool::getItemByType(std::vector<Item*>* anItemList,
         nextItem = (Item*)*iItem;
         if (nextItem->_itemType == anItemType &&
             nextItem->_itemId == anItemID &&
-            nextItem->getPosition().x == aStartPos.x &&
+            nextItem->getPosition().x == _startItemPos.x &&
             nextItem->getLocalZOrder() == aStartZOrder) {
             suitableItem = nextItem;
         }
@@ -89,10 +118,12 @@ Item* ItemsPool::getItemByType(std::vector<Item*>* anItemList,
         
         if (!suitableItem) {
             suitableItem = ItemFactory::createItem(anItemType, anItemID);
-            suitableItem->setPosition(aStartPos);
+            suitableItem->setPosition(_startItemPos);
             suitableItem->setLocalZOrder(aStartZOrder);
             anItemList->push_back(suitableItem);
         }
+    
+    _recentPulledItem = suitableItem;
     
     return suitableItem;
 }
@@ -100,8 +131,8 @@ Item* ItemsPool::getItemByType(std::vector<Item*>* anItemList,
 Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
                                  float dt,
                                  float anEffectiveRoundTime,
-                                 cocos2d::Vec2 aStartPos,
-                                 int aStartZOrder)
+                                 int aStartZOrder,
+                                 float aBandVelosity)
 
 {
     Item* suitableItem = nullptr;
@@ -115,21 +146,19 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
     _bonusItemsInterval -= dt;
     _arbitraryItemInterval -= dt;
     
-    _elapsedMinInterval += dt;
-    
-    if(_minItemInterval - _elapsedMinInterval > 0.0f)
+    if(_recentPulledItem &&
+       (_recentPulledItem->getPosition().x + _recentPulledItem->getContentSize().width) > _startItemPos.x)
         return nullptr;
-    _elapsedMinInterval = 0.0f;
     
     // one of level complication technique:
     // for harder level start pulling required item closer to a round end.
     // i.e. inital value of _requiredItemsInterval should be multipied by complication factor
     // try to find required Item (dish ingridients)
-    if (_maxRequiredItemsCounter > 0 && _requiredItemsInterval < 0.0f) {
+    if (_repeatIngridients > 0 && _requiredItemsInterval < 0.0f) {
         cycleTerminator = 3;
         std::map<int,int>::iterator it = _requiredItemsCounter.begin();
         
-        int currentCount = _maxRequiredItemsCounter;
+        int currentCount = _maxRepeatIngridients;
         while (suitableItemId < 0 && cycleTerminator > 0) {
             if (it == _requiredItemsCounter.end()) {
                 cycleTerminator--;
@@ -251,6 +280,13 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
         
         _arbitraryItemInterval = 2.0f;
     }
+    
+    return this->getItemByType(anItemList,
+                               suitableItemId,
+                               suitableItemType,
+                               aStartZOrder);
+ 
+ /*
 
     if (suitableItemType >= 0 && suitableItemId >= 0)  { // there is no item (time is not reached)
         std::vector<Item*>::iterator iItem = anItemList->begin();
@@ -261,7 +297,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
             nextItem = (Item*)*iItem;
             if (nextItem->_itemType == suitableItemType &&
                 nextItem->_itemId == suitableItemId &&
-                nextItem->getPosition().x == aStartPos.x &&
+                nextItem->getPosition().x == _startItemPos.x &&
                 nextItem->getLocalZOrder() == aStartZOrder) {
                 suitableItem = nextItem;
             }
@@ -270,13 +306,17 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
         
         if (!suitableItem) {
             suitableItem = ItemFactory::createItem(suitableItemType, suitableItemId);
-            suitableItem->setPosition(aStartPos);
+            suitableItem->setPosition(_startItemPos);
             suitableItem->setLocalZOrder(aStartZOrder);
             anItemList->push_back(suitableItem);
         }
     }
     
+    _recentPulledItem = suitableItem;
+    
     return suitableItem;
+*/
+    
 }
 
 int ItemsPool::getCurrenTotalBonuses()
@@ -310,11 +350,4 @@ void ItemsPool::decreaseBonusCount(int aBonusItemId)
     }
 }
 
-void ItemsPool::resetForNewRound()
-{
-    _elapsedRoundTime = 0.0f;
-    _minItemInterval = 0.5f;
-    _elapsedMinInterval = 0.0f;
-
-}
 
