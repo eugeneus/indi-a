@@ -259,7 +259,7 @@ bool Hand::isCanGrabItem(Item* anItem)
    if(this->isIgnoredItem(anItem))
       return false;
    
-   float grabDistance = _handRect.origin.x + (_handRect.size.width / 2.0f);
+   float grabDistance = _handRect.origin.x + (_handRect.size.width / 3.0f);
    float itemPosX = anItem->getPosition().x;
 
    return ( (itemPosX > _handRect.origin.x) && (itemPosX < grabDistance));

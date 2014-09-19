@@ -99,10 +99,11 @@ void Cyclable::startCycling() {
    FiniteTimeAction* actionPlase = nullptr;
    Vec2 v;
    for(Sprite* nSprite : sprites){
+       
        nSprite->stopAllActions();
-      actionMoveBy = CCMoveBy::create(actionDuration,Vec2(-actionLength, 0.0f));
-      v = Vec2(nSprite->getPosition().x,nSprite->getPosition().y);
-      actionPlase = Place::create(v);
+       actionMoveBy = CCMoveBy::create(actionDuration,Vec2(-actionLength, 0.0f));
+       v = Vec2(nSprite->getPosition().x,nSprite->getPosition().y);
+       actionPlase = Place::create(v);
        RepeatForever* cyclable = RepeatForever::create(Sequence::create(actionMoveBy,actionPlase, NULL));
        cyclable->setTag(1);
        nSprite->runAction(cyclable);

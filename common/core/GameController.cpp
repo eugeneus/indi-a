@@ -681,7 +681,8 @@ void GameController::updatePerformanceMetrics()
     
     float factor = (float)_nRound * 0.1f;
     
-    _bandVelosity = _maxBandVelosity * factor + 40;
+    //if(!_nRound%2)
+        _bandVelosity = _maxBandVelosity * factor + 40;
     
     //_repeatIngridients = _maxRepeatIngridients - ;
     
@@ -691,7 +692,10 @@ void GameController::updatePerformanceMetrics()
     
     //_repeatBonus3;
     
-    _garbagePct = _maxGarbagePct * factor;
+    //if (!_nRound%3) {
+        _garbagePct = _maxGarbagePct * factor;
+    //}
+    
 
     
 /*
