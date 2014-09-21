@@ -281,7 +281,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
             }
         }
         
-        _arbitraryItemInterval = 9.0f - 9.0f * _nRound * 0.1f ;
+        _arbitraryItemInterval = 10.0f - 7.0f * _nRound * 0.1f ;
     }
     
     return this->getItemByType(anItemList,
