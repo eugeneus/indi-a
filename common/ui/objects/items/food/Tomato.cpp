@@ -64,17 +64,17 @@ cocos2d::FiniteTimeAction* Tomato::getFloorBumpAction(float aDuration, cocos2d::
     char frameName[100] = {0};
     SpriteFrame* animFrame = nullptr;
 
-    /*
+    
     for(int i = 1; i < 4; i++)
     {
         sprintf(frameName, "tomato_crash_%1d.png", i);
         animFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
         animateFrames.pushBack(animFrame);
     }
-     */
-    sprintf(frameName, "tomato_crash_%1d.png", 2);
-    animFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
-    animateFrames.pushBack(animFrame);
+    
+    //sprintf(frameName, "tomato_crash_%1d.png", 2);
+    //animFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
+    //animateFrames.pushBack(animFrame);
     
     Animation* animation = Animation::createWithSpriteFrames(animateFrames, 0.7f);
     return Animate::create(animation);

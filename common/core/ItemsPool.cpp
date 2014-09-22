@@ -163,7 +163,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
     
     if(_recentPulledItem && recentDistace < 0.0f)
         return nullptr;
-    
+
     //_recentPulledItem = nullptr;
     // one of level complication technique:
     // for harder level start pulling required item closer to a round end.
