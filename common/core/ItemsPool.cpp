@@ -76,7 +76,11 @@ void ItemsPool::resetForNewRound(int aRoundNumber, cocos2d::Vec2 aStartPos, Dish
     _startItemPos = Point(aStartPos.x, aStartPos.y);
     
     _pointsInterval = (_convLength / 4.0f) - (_convLength / 4.0f) *_nRound * 0.1f;
-//    _arbitraryItemInterval = 10.0f - 7.0f * _nRound * 0.1f ;
+    
+    _pulledGarbageCount = 1;
+    _pulledFoodCount = 1;
+    _garbagePerFood = _nRound%7 * 0.1f; // 0.7% max
+
 
     this->updateRequredItems(aDish);
 
@@ -180,6 +184,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
                 suitableItemId = it->first;
                 it->second -= 1;
                 suitableItemType = 0;
+                _pulledFoodCount += 1;
             }
             else{
                 ++it;
@@ -207,6 +212,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
                 suitableItemId = rnd->first;
                 rnd->second -= 1;
                 suitableItemType = 0;
+                _pulledFoodCount += 1;
             }
             else{
                 ++rnd;
@@ -218,6 +224,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
 
     if(suitableItemId < 0 && _pointsInterval < recentDistace){ //_arbitraryItemInterval < 0.0f
         
+/*
         int rndFood = 0;
         int rndGarg = 0;
         int rnd = rand()%2;
@@ -227,14 +234,10 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
         else{
             rndFood = 1;
         }
+*/
+        float pct = ((float)(_pulledGarbageCount))/((float)(_pulledFoodCount + _pulledGarbageCount));
         
-        float pct = ((float)(_pulledFoodCount + rndFood))/((float)(_pulledFoodCount + rndFood + _pulledGarbageCount + rndGarg));
-        
-        if(_garbagePerFood > pct){
-            rnd = 0;
-        }
-        
-        if (!rnd) {
+        if(_garbagePerFood < pct){
             cycleTerminator = 2;
             std::map<int,int>::iterator rnd = _foodItemsCounter.begin();
             std::advance(rnd, rand() % _foodItemsCounter.size());
@@ -289,8 +292,41 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
                     _pulledGarbageCount += 1;
                 }
             }
-        }
         
+        }
+/*
+        if (!rnd) {
+        }
+        else{
+            if (_nRound > 1) {
+                cycleTerminator = 2;
+                std::map<int,int>::iterator rnd = _garbageItemsCounter.begin();
+                std::advance(rnd, rand() % _garbageItemsCounter.size());
+                startID = rnd->first;
+                
+                while (suitableItemId < 0 && cycleTerminator > 0) {
+                    if(rnd == _garbageItemsCounter.end()){
+                        cycleTerminator--;
+                        rnd = _garbageItemsCounter.begin();
+                    }else if (rnd->second < 3) {
+                        suitableItemId = rnd->first;
+                        suitableItemType = 1;
+                        rnd->second += 1;
+                        _pulledGarbageCount += 1;
+                    }
+                    else{
+                        ++rnd;
+                    }
+                }
+                
+                if (suitableItemId < 0) {
+                    suitableItemId = startID;
+                    suitableItemType = 1;
+                    _pulledGarbageCount += 1;
+                }
+            }
+        }
+*/
         //_pointsInterval =
         //_arbitraryItemInterval = 10.0f - 7.0f * _nRound * 0.1f ;
     }
