@@ -24,6 +24,8 @@ public:
                              int aMaxRepeatBonus2,
                              int aMaxRepeatBonus3
                              );
+    
+    void setConveyorLength(float aConveyorLength);
 
     Item* getItemFromPool(std::vector<Item*>* anItemList,
                           float dt,
@@ -96,6 +98,9 @@ protected:
     
     
     Item* _recentPulledItem;
+    
+    float _convLength;
+    float _pointsInterval;
     
    
 private:

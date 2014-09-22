@@ -167,6 +167,7 @@ void GameController::setUpInit(bool isStart) {
                                        );
     }
     _itemsPool->resetForNewRound(_nRound, _itemIdlePos, _mainCource);
+    _itemsPool->setConveyorLength(_convLegth);
     
 }
 

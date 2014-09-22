@@ -74,6 +74,10 @@ void ItemsPool::resetForNewRound(int aRoundNumber, cocos2d::Vec2 aStartPos, Dish
 
     _nRound = aRoundNumber;
     _startItemPos = Point(aStartPos.x, aStartPos.y);
+    
+    _pointsInterval = (_convLength / 4.0f) - (_convLength / 4.0f) *_nRound * 0.1f;
+//    _arbitraryItemInterval = 10.0f - 7.0f * _nRound * 0.1f ;
+
     this->updateRequredItems(aDish);
 
 }
@@ -140,17 +144,23 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
     int suitableItemType = -1;
     int cycleTerminator = 3;
     int startID = -1;
+    float recentDistace = 0.0f;
     
     _elapsedRoundTime += dt;
     _requiredItemsInterval -= dt;
     _bonusItemsInterval -= dt;
     _arbitraryItemInterval -= dt;
     
-    if(_recentPulledItem &&
-       (_recentPulledItem->getPosition().x + _recentPulledItem->getContentSize().width) > _startItemPos.x)
+    // check min interval between items
+    if(_recentPulledItem)
+        recentDistace = _startItemPos.x - (_recentPulledItem->getPosition().x + _recentPulledItem->getContentSize().width);
+    else
+        recentDistace = _convLength;
+    
+    if(_recentPulledItem && recentDistace < 0.0f)
         return nullptr;
     
-    _recentPulledItem = nullptr;
+    //_recentPulledItem = nullptr;
     // one of level complication technique:
     // for harder level start pulling required item closer to a round end.
     // i.e. inital value of _requiredItemsInterval should be multipied by complication factor
@@ -206,7 +216,7 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
         _bonusItemsInterval = (anEffectiveRoundTime -  this->_elapsedRoundTime) / this->getCurrenTotalBonuses();
     }
 
-    if(suitableItemId < 0 && _arbitraryItemInterval < 0.0f){
+    if(suitableItemId < 0 && _pointsInterval < recentDistace){ //_arbitraryItemInterval < 0.0f
         
         int rndFood = 0;
         int rndGarg = 0;
@@ -281,7 +291,8 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
             }
         }
         
-        _arbitraryItemInterval = 10.0f - 7.0f * _nRound * 0.1f ;
+        //_pointsInterval =
+        //_arbitraryItemInterval = 10.0f - 7.0f * _nRound * 0.1f ;
     }
     
     return this->getItemByType(anItemList,
@@ -320,6 +331,12 @@ void ItemsPool::decreaseBonusCount(int aBonusItemId)
             it->second--;
         }
     }
+}
+
+void ItemsPool::setConveyorLength(float aConveyorLength)
+{
+    _convLength = aConveyorLength;
+    _pointsInterval = _convLength / 4.0f;
 }
 
 
