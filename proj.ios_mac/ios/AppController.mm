@@ -29,6 +29,7 @@
 #import "RootViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "AdmobController.h"
+#import "UserDataProvider.h"
 
 //#import "GameCenterManager.h"
 //#import "GameCenterDelegate.h"
@@ -127,16 +128,24 @@ static AppDelegate s_sharedApplication;
     
     //save last visit time
     
-    UILocalNotification *notification=[[UILocalNotification alloc] init];
-    if (notification!=nil) {//
-        notification.fireDate=[NSDate dateWithTimeIntervalSinceNow:15];
-        notification.repeatInterval=0;//
-        notification.timeZone=[NSTimeZone defaultTimeZone];
-        notification.alertBody=@"Your lives is full! Back to game!";//
-        notification.applicationIconBadgeNumber=1; //
-        notification.soundName= UILocalNotificationDefaultSoundName;//
-        notification.alertAction = NSLocalizedString(@"", nil);  //
-        [[UIApplication sharedApplication]   scheduleLocalNotification:notification];
+    bool isAvailableNotification = UserDataProvider::getInstance()->isNotificationOn();
+    bool isLivesPass = UserDataProvider::getInstance()->getUserLives() != 10;
+    
+    if (false) { //isAvailableNotification && isLivesPass) {
+        long sec = UserDataProvider::getInstance()->getLiveTimeoutAsSec();
+        if (sec > 0) {
+            UILocalNotification *notification=[[UILocalNotification alloc] init];
+            if (notification!=nil) {//
+                notification.fireDate=[NSDate dateWithTimeIntervalSinceNow:sec];
+                notification.repeatInterval=0;//
+                notification.timeZone=[NSTimeZone defaultTimeZone];
+                notification.alertBody=@"Your lives is full! Back to game!";//
+                notification.applicationIconBadgeNumber=1; //
+                notification.soundName= UILocalNotificationDefaultSoundName;//
+                notification.alertAction = NSLocalizedString(@"", nil);  //
+                [[UIApplication sharedApplication]   scheduleLocalNotification:notification];
+            }
+        }
     }
     cocos2d::Application::getInstance()->applicationDidEnterBackground();
 }

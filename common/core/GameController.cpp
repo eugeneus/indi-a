@@ -441,11 +441,13 @@ void GameController::update(float dt)
    _idxRotated = (_idxRotated + 1) < _items.size() ? (_idxRotated + 1) : 0;
     _gameCycleInd->nextStep(dt);
     
-    if (_gameCycleInd->getGameTime() - _currGameTime < 8 && _gameCycleInd->getGameTime() - _currGameTime > 7) {
+    if (!_isTimerBeforeEnd && _gameCycleInd->getGameTime() - _currGameTime < 8 && _gameCycleInd->getGameTime() - _currGameTime > 7) {
+        _isTimerBeforeEnd = true;
         CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(SOUND_TIMER_BEFORE);
     } else
     
-    if (_gameCycleInd->getGameTime() - _currGameTime < 4 && _gameCycleInd->getGameTime() - _currGameTime > 3) {
+    if (!_isTimerEnd && _gameCycleInd->getGameTime() - _currGameTime < 4 && _gameCycleInd->getGameTime() - _currGameTime > 3) {
+        _isTimerEnd = true;
         CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(SOUND_TIMER_END);
     }
     
