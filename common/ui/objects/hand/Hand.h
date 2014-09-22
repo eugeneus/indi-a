@@ -33,6 +33,8 @@ public:
    Item* tossItem();
    
    bool isHandBusy();
+    
+    bool isHandIdle();
    
    bool isCanGrabItem(Item* anItem);
    

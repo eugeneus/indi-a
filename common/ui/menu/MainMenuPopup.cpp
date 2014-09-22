@@ -70,6 +70,9 @@ void MainMenuPopup::menuSocialCallback(Ref* pSender) {
 }
 
 void MainMenuPopup::menuGameCallback(Ref* pSender) {
+    Scene *newScene = GameMenu::createScene();
+    this->changeScene(newScene);
+
     if (UserDataProvider::getInstance()->getUserLives() > 0) {
         Scene *newScene = GameMenu::createScene();
         this->changeScene(newScene);

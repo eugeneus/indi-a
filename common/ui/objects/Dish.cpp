@@ -34,12 +34,30 @@ bool Dish::init(std::string anImageFileName, std::vector<int> anIngridientIDsLis
 
 std::string Dish::getImageName()
 {
-    return nullptr;
+    return _imageFileName;
 }
 
 std::vector<int> Dish::getIngridientIDs()
 {
     return _ingridientIDs;
+}
+
+bool Dish::checkAllRequiredExist(std::vector<int> itemsIds) {
+
+    bool isOk = true;
+    for (int nid : _ingridientIDs) {
+        if (std::find(itemsIds.begin(), itemsIds.end(), nid) == itemsIds.end()) {
+            isOk = false;
+        }
+    }
+    return isOk;
+}
+
+
+
+bool Dish::isRequiredItem(int anItemId) {
+    
+    return (std::find(_ingridientIDs.begin(), _ingridientIDs.end(), anItemId) != _ingridientIDs.end());
 }
 
 

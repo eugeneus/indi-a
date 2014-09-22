@@ -154,11 +154,16 @@ Item* Hand::tossItem()
 
 bool Hand::isHandBusy()
 {
-   //Point currHandPos = this->getPosition();
-   //Point handPos = Point((_handRect.origin.x + _handRect.size.width / 2.0f), (_handRect.origin.y + _handRect.size.height / 2.0f));
-   //((handPos.x != currHandPos.x) || (handPos.y != currHandPos.y)) &&
-   bool isHandBusy = ((_catchItem) &&
-   (this->getNumberOfRunningActions() > 0));
+    Point currHandPos = this->getPosition();
+    Point handPos = _handRect.origin; //Point((_handRect.origin.x + _handRect.size.width / 2.0f), (_handRect.origin.y + _handRect.size.height / 2.0f));
+    //((handPos.x != currHandPos.x) || (handPos.y != currHandPos.y));
+    
+   bool isHandBusy = (((int)handPos.x) != ((int)currHandPos.x)) || (((int)handPos.y) != ((int)currHandPos.y));
+//    if (isHandBusy) {
+//        CCLOG("handby");
+//    }
+   //bool isHandBusy = ((_catchItem) &&
+   //(this->getNumberOfRunningActions() > 0));
    return isHandBusy;
 }
 
@@ -254,7 +259,7 @@ bool Hand::isCanGrabItem(Item* anItem)
    if(this->isIgnoredItem(anItem))
       return false;
    
-   float grabDistance = _handRect.origin.x + (_handRect.size.width / 2.0f);
+   float grabDistance = _handRect.origin.x + (_handRect.size.width / 3.0f);
    float itemPosX = anItem->getPosition().x;
 
    return ( (itemPosX > _handRect.origin.x) && (itemPosX < grabDistance));
@@ -295,5 +300,14 @@ void Hand::restart() {
     this->stopAllActions();
     this->setPosition(_handRect.origin);
     this->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("hand_left_1.png"));
+}
+
+bool Hand::isHandIdle()
+{
+    Point p = this->getPosition();
+    bool h1 = !this->isHandBusy();
+    bool h2 = p.y == this->_handRect.origin.y;
+    bool h3 = this->getNumberOfRunningActions() == 0;
+    return h1 && h3;
 }
 

@@ -160,7 +160,6 @@ Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
       }
       _leftHand->upItem();
    }
-    
    else if(_leftHand->isHandBusy() && !_leftHand->isCaughtItem(anItem)){
       
       _leftHand->setIgnoredItem(anItem);
@@ -183,6 +182,9 @@ Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
       
       _rightHand->upItem();
       
+   }
+   else if(_rightHand->isHandBusy() && !_rightHand->isCaughtItem(anItem)){
+       _rightHand->setIgnoredItem(anItem);
    }
    else if(this->isHandShouldGrabItem(_rightHand, anItem)) {
       
@@ -246,6 +248,13 @@ void Chef::setConveyorVelocity(float aConveyorVelocity)
 void Chef::restartChef() {
     _leftHand->restart();
     _rightHand->restart();
+    _chef->stopAllActions();
+    this->startChefBodyAnimation();
+}
+
+bool Chef::isChefIdle()
+{
+    return _leftHand->isHandIdle() && _rightHand->isHandIdle();
 }
 
 

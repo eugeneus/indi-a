@@ -92,6 +92,9 @@ protected:
     void processBonusState(float dt);
     void useActiveBonus();
     void resetActiveBonus();
+    
+    void updatePerformanceMetrics();
+    
     // model
     std::vector<Item*> _items;
     cocos2d::Vector<ControlPointDef*>* _cntPoints;
@@ -125,7 +128,7 @@ protected:
     Multiplier* _multiplier;
     GameCycleIndicator* _gameCycleInd;
     Conveyor* _conv;
-    MindCloudTips* cloudTips;
+    MindCloudTips* _cloudTips;
     Sprite* bg;
     BonusMenu* _bonusMenu;
     ItemsPool* _itemsPool;
@@ -136,6 +139,39 @@ protected:
     std::vector<int> _caughtItemsIds;
     
     float _bonusTimer; // if _bonusTimer > 0, the game using active bonus from bonus menu;
+    
+    bool _isControllerWaitingStop;
+    
+    cocos2d::Point _cloudTipsPos;
+    
+    // round/hard/waves support
+    int _nRound;
+    // default metrics
+    int _maxBandVelosity;
+    
+    int _maxRepeatIngridients;
+    
+    int _maxRepeatBonus1;
+    
+    int _maxRepeatBonus2;
+    
+    int _maxRepeatBonus3;
+    
+    float _maxGarbagePct;
+    
+    // active mentics
+    int _bandVelosity;
+    
+    int _repeatIngridients;
+    
+    int _repeatBonus1;
+    
+    int _repeatBonus2;
+    
+    int _repeatBonus3;
+    
+    float _garbagePct;
+    
     
 private:
    
