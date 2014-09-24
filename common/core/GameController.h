@@ -54,8 +54,6 @@ public:
 
    bool initWithLayer(cocos2d::Layer* aGameLayer);
    
-   void startGame();
-   
    void stopGame();
     void restartGame();
    
@@ -67,11 +65,16 @@ public:
 
 protected:
     
-    void releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
+    void resetCompletedRound();
+    
+    void setupNewRound();
     void setUpInit(bool isStart);
    
+    void createScene();
+    void arrangeSceneForRect(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
     void arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
-   
+
+    
     void runItemConveyorAction(Item *anItem);
     void putItemOnConveyour(float dt);
    
@@ -93,7 +96,9 @@ protected:
     void useActiveBonus();
     void resetActiveBonus();
     
-    void updatePerformanceMetrics();
+    //void updatePerformanceMetrics();
+    
+    
     
     // model
     std::vector<Item*> _items;

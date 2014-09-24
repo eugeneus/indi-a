@@ -13,6 +13,7 @@ bool Item::init(string spriteFrameName, const char* framesPattern, int spriteCou
    _defaultScale = 1.0;
     _itemType = -1;
     _itemId = -1;
+    _speedFactor = 1.0f;
    
    _bumpSoundFileName = SOUND_FALL_ITEM;
     _hitPotSoundFileName = SOUND_POT_FALL_ITEM;
@@ -269,3 +270,5 @@ int Item::getItemId()
 {
     return this->_itemId;
 }
+
+

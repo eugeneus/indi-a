@@ -220,6 +220,7 @@
 		E035A38919C61F7B0009F87E /* dishes.plist in Resources */ = {isa = PBXBuildFile; fileRef = E035A38819C61F7B0009F87E /* dishes.plist */; };
 		E072E1A1196932F5002E4C04 /* ImageLabelMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E072E19D196932F5002E4C04 /* ImageLabelMenuItem.cpp */; };
 		E0A6366519B965F7002CB469 /* ItemsPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0A6366319B965F7002CB469 /* ItemsPool.cpp */; };
+		E0AAECF419D20F4E001999B9 /* PerformanceMetrics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0AAECF219D20F4E001999B9 /* PerformanceMetrics.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -672,6 +673,8 @@
 		E072E19E196932F5002E4C04 /* ImageLabelMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLabelMenuItem.h; sourceTree = "<group>"; };
 		E0A6366319B965F7002CB469 /* ItemsPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ItemsPool.cpp; sourceTree = "<group>"; };
 		E0A6366419B965F7002CB469 /* ItemsPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsPool.h; sourceTree = "<group>"; };
+		E0AAECF219D20F4E001999B9 /* PerformanceMetrics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerformanceMetrics.cpp; sourceTree = "<group>"; };
+		E0AAECF319D20F4E001999B9 /* PerformanceMetrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerformanceMetrics.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1380,6 +1383,8 @@
 				AA7E7101197E53BE0019CBDD /* TouchController.cpp */,
 				AA7E7102197E53BE0019CBDD /* TouchController.h */,
 				AAB10A2019B8ECAA00919961 /* SoundsConstants.h */,
+				E0AAECF219D20F4E001999B9 /* PerformanceMetrics.cpp */,
+				E0AAECF319D20F4E001999B9 /* PerformanceMetrics.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1740,6 +1745,7 @@
 				AA616A7219B6612700413E99 /* ScoreDataSource.cpp in Sources */,
 				AA616A7519B6649700413E99 /* ScoreDto.cpp in Sources */,
 				AA8710011963250E0028A4EA /* Item.cpp in Sources */,
+				E0AAECF419D20F4E001999B9 /* PerformanceMetrics.cpp in Sources */,
 				AA87100D196329770028A4EA /* GarbageFactory.cpp in Sources */,
 				AAB58E501966E90C00C48611 /* MindCloudTips.cpp in Sources */,
 				AAB4CA5A19C7072300EFBDFA /* FBHWrapperCpp.mm in Sources */,

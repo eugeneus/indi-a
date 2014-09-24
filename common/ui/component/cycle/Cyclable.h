@@ -23,6 +23,9 @@ public:
     
     static Cyclable* create(const char* bgSpriteFrameName, float speed, float length);
     
+    void setSpeed(float aSpeed);
+    void setLength(float aLength);
+    
     void stopCycling();
     void startCycling();
     void changeCyclingSpeed(float speed);

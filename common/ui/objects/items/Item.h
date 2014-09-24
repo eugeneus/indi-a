@@ -42,15 +42,23 @@ public:
     std::string getSpriteFrameName();
     
     int getItemId();
+    
+    //float getSpeedFactor();
    
+    //virtual void update(float dt);
+    
    float _weightRatio;
    float _bounceRatio;
    cocos2d::Point _idleItemPosition;
    cocos2d::Point _currentTargetPoint;
+    //cocos2d::Point _recentPos;
    int _currentTargetType;
     
     int _itemType;
     int _itemId;
+    
+    //float _speedFactor;
+    
     
 protected:
    cocos2d::ccBezierConfig bezierConfigBouncePathToEndPoint(cocos2d::Point anEndPoint,

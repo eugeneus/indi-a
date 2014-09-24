@@ -79,13 +79,25 @@ bool Cyclable::init(const char* bgSpriteFrameName, float pSpeed, float pLength) 
         super::addChild(bg);
     }
 */
-    actionLength = endPoint;
-    actionDuration = actionLength/cyclingSpeed;
+    //actionLength = endPoint;
+    //actionDuration = actionLength/cyclingSpeed;
    
-    this->startCycling();
+    //this->startCycling();
     
     return true;
 }
+
+void Cyclable::setSpeed(float aSpeed)
+{
+    cyclingSpeed = aSpeed;
+}
+
+void Cyclable::setLength(float aLength)
+{
+    endPoint = aLength;
+    actionLength = endPoint;
+}
+
 
 void Cyclable::stopCycling() {
    
@@ -95,6 +107,7 @@ void Cyclable::stopCycling() {
 
 void Cyclable::startCycling() {
    // Check for double restart (action runs twise)
+   actionDuration = actionLength/cyclingSpeed;
    FiniteTimeAction* actionMoveBy = nullptr;
    FiniteTimeAction* actionPlase = nullptr;
    Vec2 v;
