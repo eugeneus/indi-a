@@ -58,6 +58,7 @@ public:
     bool isNotificationOn();
     void setNotificationOn(bool isNotificationOn);
     
+    long getLiveTimeoutAsSec();
     std::string getLiveTimeout(int index);
     void updateLiveTimeout(int index, std::string count);
 };

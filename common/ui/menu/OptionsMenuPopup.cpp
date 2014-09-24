@@ -115,5 +115,7 @@ void OptionsMenuPopup::menuSoundCallback(cocos2d::Ref* pSender) {
 }
 
 void OptionsMenuPopup::menuNotificationsCallback(cocos2d::Ref* pSender) {
+    bool value = UserDataProvider::getInstance()->isNotificationOn();
+    UserDataProvider::getInstance()->setNotificationOn(!value);
     this->toggleMenuItemByTag(2, BTN_OPTION_NOTIF, true);
 }

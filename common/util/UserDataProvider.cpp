@@ -64,12 +64,28 @@ bool UserDataProvider::getBoolValue(const char* key) {
     return UserDefault::getInstance()->getBoolForKey(key);
 }
 
+static inline long millisecondNow()
+{
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    return tv.tv_sec * 1000 + tv.tv_usec / 1000;
+}
+
+long UserDataProvider::getLiveTimeoutAsSec() {
+    std::string str = UserDefault::getInstance()->getStringForKey("lives0");
+    long mlsec = atol(str.c_str());
+    if (mlsec == 0) return 0;
+    long now = millisecondNow();
+    return (10 * 60 - roundl((now - mlsec) * 1.0 / 1000.0));
+}
+
+
 std::string UserDataProvider::getLiveTimeout(int index) {
-    return UserDefault::getInstance()->getStringForKey(CCString::createWithFormat("lives%i", index)->getCString());
+    return UserDefault::getInstance()->getStringForKey("lives0");
 }
 
 void UserDataProvider::updateLiveTimeout(int index, std::string count) {
-    UserDefault::getInstance()->setStringForKey(CCString::createWithFormat("lives%i", index)->getCString(), count);
+    UserDefault::getInstance()->setStringForKey("lives0", count);
     UserDefault::getInstance()->flush();
 }
 

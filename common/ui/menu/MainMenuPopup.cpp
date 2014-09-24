@@ -29,13 +29,12 @@ MainMenuPopup* MainMenuPopup::create()
 void MainMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItems, cocos2d::Vec2 origin, cocos2d::Size visibleSize) {
     
     UserDataProvider* userData = UserDataProvider::getInstance();
-    if (userData->isFirstLaunch()) {
-        userData->updateFirstLaunch(false);
+    if (!userData->isFirstLaunch()) {
+        userData->updateFirstLaunch(true);
         userData->updateUserLives(10);
         
-        for (int i = 1; i < 11; i ++) {
-            userData->updateLiveTimeout(i, CCString::createWithFormat("%i", i)->getCString());
-        }
+
+        userData->updateLiveTimeout(0, CCString::createWithFormat("%i", 0)->getCString());
     }
     
     initMenuItem(menuItems, BTN_MAIN_PLAY, CC_CALLBACK_1(MainMenuPopup::menuGameCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 180));

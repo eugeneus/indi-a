@@ -89,9 +89,10 @@ bool GameOverPopup::init() {
     int lives = userData->getUserLives();
     
     lives--;
+    long now = millisecondNow();
+    userData->updateLiveTimeout(0, CCString::createWithFormat("%li", now)->getCString());
+    
     if (lives == 0) {
-        long now = millisecondNow();
-        userData->updateLiveTimeout(0, CCString::createWithFormat("%li", now)->getCString());
         this->scheduleUpdate();
     }
     userData->updateUserLives(lives);

@@ -125,6 +125,8 @@ protected:
     Pot* _thePot;
     Chef* _theChef;
     float _currGameTime;
+    bool _isTimerBeforeEnd = false;
+    bool _isTimerEnd = false;
     LevelProvider* _levelInfo;
     //UserDataProvider* _userData;
     ScoreLayer* _scoreLayer;
