@@ -215,6 +215,18 @@
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		E0050DE31967D0FC009E7BA1 /* MovementController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0050DE11967D0FC009E7BA1 /* MovementController.cpp */; };
 		E0050DE61967F31B009E7BA1 /* GameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0050DE41967F31B009E7BA1 /* GameController.cpp */; };
+		E0091A2F19D3680300FF882A /* cloud-beef-mushrooms.png in Resources */ = {isa = PBXBuildFile; fileRef = E0091A2319D3680300FF882A /* cloud-beef-mushrooms.png */; };
+		E0091A3019D3680300FF882A /* cloud-beefburger.png in Resources */ = {isa = PBXBuildFile; fileRef = E0091A2419D3680300FF882A /* cloud-beefburger.png */; };
+		E0091A3119D3680300FF882A /* cloud-chicken-burger.png in Resources */ = {isa = PBXBuildFile; fileRef = E0091A2519D3680300FF882A /* cloud-chicken-burger.png */; };
+		E0091A3219D3680300FF882A /* cloud-chicken-potato-dumpling.png in Resources */ = {isa = PBXBuildFile; fileRef = E0091A2619D3680300FF882A /* cloud-chicken-potato-dumpling.png */; };
+		E0091A3319D3680300FF882A /* cloud-chicken-salad.png in Resources */ = {isa = PBXBuildFile; fileRef = E0091A2719D3680300FF882A /* cloud-chicken-salad.png */; };
+		E0091A3419D3680300FF882A /* cloud-chicken-schnitzel.png in Resources */ = {isa = PBXBuildFile; fileRef = E0091A2819D3680300FF882A /* cloud-chicken-schnitzel.png */; };
+		E0091A3519D3680300FF882A /* cloud-mashed-potato.png in Resources */ = {isa = PBXBuildFile; fileRef = E0091A2919D3680300FF882A /* cloud-mashed-potato.png */; };
+		E0091A3619D3680300FF882A /* cloud-omlette.png in Resources */ = {isa = PBXBuildFile; fileRef = E0091A2A19D3680300FF882A /* cloud-omlette.png */; };
+		E0091A3719D3680300FF882A /* cloud-pasta.png in Resources */ = {isa = PBXBuildFile; fileRef = E0091A2B19D3680300FF882A /* cloud-pasta.png */; };
+		E0091A3819D3680300FF882A /* cloud-tomato-pizza.png in Resources */ = {isa = PBXBuildFile; fileRef = E0091A2C19D3680300FF882A /* cloud-tomato-pizza.png */; };
+		E0091A3919D3680300FF882A /* cloud-vegan-egg-rolls.png in Resources */ = {isa = PBXBuildFile; fileRef = E0091A2D19D3680300FF882A /* cloud-vegan-egg-rolls.png */; };
+		E0091A3A19D3680300FF882A /* cloud-vegetable-cutlet.png in Resources */ = {isa = PBXBuildFile; fileRef = E0091A2E19D3680300FF882A /* cloud-vegetable-cutlet.png */; };
 		E035A38219C618660009F87E /* Dish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E035A38019C618660009F87E /* Dish.cpp */; };
 		E035A38719C618880009F87E /* DishFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E035A38519C618880009F87E /* DishFactory.cpp */; };
 		E035A38919C61F7B0009F87E /* dishes.plist in Resources */ = {isa = PBXBuildFile; fileRef = E035A38819C61F7B0009F87E /* dishes.plist */; };
@@ -664,6 +676,18 @@
 		E0050DE21967D0FC009E7BA1 /* MovementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovementController.h; sourceTree = "<group>"; };
 		E0050DE41967F31B009E7BA1 /* GameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameController.cpp; sourceTree = "<group>"; };
 		E0050DE51967F31B009E7BA1 /* GameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameController.h; sourceTree = "<group>"; };
+		E0091A2319D3680300FF882A /* cloud-beef-mushrooms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-beef-mushrooms.png"; sourceTree = "<group>"; };
+		E0091A2419D3680300FF882A /* cloud-beefburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-beefburger.png"; sourceTree = "<group>"; };
+		E0091A2519D3680300FF882A /* cloud-chicken-burger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-chicken-burger.png"; sourceTree = "<group>"; };
+		E0091A2619D3680300FF882A /* cloud-chicken-potato-dumpling.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-chicken-potato-dumpling.png"; sourceTree = "<group>"; };
+		E0091A2719D3680300FF882A /* cloud-chicken-salad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-chicken-salad.png"; sourceTree = "<group>"; };
+		E0091A2819D3680300FF882A /* cloud-chicken-schnitzel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-chicken-schnitzel.png"; sourceTree = "<group>"; };
+		E0091A2919D3680300FF882A /* cloud-mashed-potato.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-mashed-potato.png"; sourceTree = "<group>"; };
+		E0091A2A19D3680300FF882A /* cloud-omlette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-omlette.png"; sourceTree = "<group>"; };
+		E0091A2B19D3680300FF882A /* cloud-pasta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-pasta.png"; sourceTree = "<group>"; };
+		E0091A2C19D3680300FF882A /* cloud-tomato-pizza.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-tomato-pizza.png"; sourceTree = "<group>"; };
+		E0091A2D19D3680300FF882A /* cloud-vegan-egg-rolls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-vegan-egg-rolls.png"; sourceTree = "<group>"; };
+		E0091A2E19D3680300FF882A /* cloud-vegetable-cutlet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-vegetable-cutlet.png"; sourceTree = "<group>"; };
 		E035A38019C618660009F87E /* Dish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dish.cpp; sourceTree = "<group>"; };
 		E035A38119C618660009F87E /* Dish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dish.h; sourceTree = "<group>"; };
 		E035A38519C618880009F87E /* DishFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DishFactory.cpp; sourceTree = "<group>"; };
@@ -888,6 +912,18 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E0091A2319D3680300FF882A /* cloud-beef-mushrooms.png */,
+				E0091A2419D3680300FF882A /* cloud-beefburger.png */,
+				E0091A2519D3680300FF882A /* cloud-chicken-burger.png */,
+				E0091A2619D3680300FF882A /* cloud-chicken-potato-dumpling.png */,
+				E0091A2719D3680300FF882A /* cloud-chicken-salad.png */,
+				E0091A2819D3680300FF882A /* cloud-chicken-schnitzel.png */,
+				E0091A2919D3680300FF882A /* cloud-mashed-potato.png */,
+				E0091A2A19D3680300FF882A /* cloud-omlette.png */,
+				E0091A2B19D3680300FF882A /* cloud-pasta.png */,
+				E0091A2C19D3680300FF882A /* cloud-tomato-pizza.png */,
+				E0091A2D19D3680300FF882A /* cloud-vegan-egg-rolls.png */,
+				E0091A2E19D3680300FF882A /* cloud-vegetable-cutlet.png */,
 				AAB109BB19B8DF5000919961 /* sound */,
 				AAEF481D199A594D0045F40C /* crystal radio kit.ttf */,
 				AACAB437198AC41F00F8AE01 /* level_1.plist */,
@@ -1580,13 +1616,16 @@
 				AAB109F319B8DF5000919961 /* cracking egg.mp3 in Resources */,
 				AAB10A0119B8DF5000919961 /* light itemland.mp3 in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				E0091A2F19D3680300FF882A /* cloud-beef-mushrooms.png in Resources */,
 				AA96A225195DB25500C22BC9 /* images.plist in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				AAB109F519B8DF5000919961 /* divine lemon activate.mp3 in Resources */,
 				AACAB438198AC41F00F8AE01 /* level_1.plist in Resources */,
 				AAB10A1319B8DF5000919961 /* splat6.mp3 in Resources */,
 				AAB10A0F19B8DF5000919961 /* splat2.mp3 in Resources */,
+				E0091A3119D3680300FF882A /* cloud-chicken-burger.png in Resources */,
 				AAB109F219B8DF5000919961 /* click.mp3 in Resources */,
+				E0091A3019D3680300FF882A /* cloud-beefburger.png in Resources */,
 				AAB10A1A19B8DF5000919961 /* swish5.mp3 in Resources */,
 				AAB10A0219B8DF5000919961 /* meat land 2.mp3 in Resources */,
 				AAB109FF19B8DF5000919961 /* lettuce land.mp3 in Resources */,
@@ -1597,17 +1636,21 @@
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				AAB109F819B8DF5000919961 /* glass.mp3 in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
+				E0091A3A19D3680300FF882A /* cloud-vegetable-cutlet.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				AAB10A1D19B8DF5000919961 /* Timer Finish.mp3 in Resources */,
 				AAB10A0919B8DF5000919961 /* potatoland.mp3 in Resources */,
+				E0091A3719D3680300FF882A /* cloud-pasta.png in Resources */,
 				AAB109F019B8DF5000919961 /* bounce2.mp3 in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				AA3424831960CB230067B032 /* RioGrande.ttf in Resources */,
 				AAB10A0D19B8DF5000919961 /* slowmotion start.mp3 in Resources */,
+				E0091A3519D3680300FF882A /* cloud-mashed-potato.png in Resources */,
 				AAB109F419B8DF5000919961 /* divine lemon activate 2.mp3 in Resources */,
 				AAB10A0A19B8DF5000919961 /* pressbutton.caf in Resources */,
 				AAB109F719B8DF5000919961 /* garbage in pot.mp3 in Resources */,
+				E0091A3619D3680300FF882A /* cloud-omlette.png in Resources */,
 				AAB109F119B8DF5000919961 /* bowlingballdrop.mp3 in Resources */,
 				AA96A1FB195DB09200C22BC9 /* images.png in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
@@ -1630,9 +1673,14 @@
 				AA66A9BA19A9E31A00CB7806 /* level_2.plist in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				AAB10A0C19B8DF5000919961 /* slow motion end.mp3 in Resources */,
+				E0091A3919D3680300FF882A /* cloud-vegan-egg-rolls.png in Resources */,
 				AAB10A1719B8DF5000919961 /* swish.mp3 in Resources */,
+				E0091A3419D3680300FF882A /* cloud-chicken-schnitzel.png in Resources */,
 				AAB10A0B19B8DF5000919961 /* siwsh3.mp3 in Resources */,
 				AAB109FE19B8DF5000919961 /* KITCHEN AMBIENT NOISE.mp3 in Resources */,
+				E0091A3319D3680300FF882A /* cloud-chicken-salad.png in Resources */,
+				E0091A3219D3680300FF882A /* cloud-chicken-potato-dumpling.png in Resources */,
+				E0091A3819D3680300FF882A /* cloud-tomato-pizza.png in Resources */,
 				AAB10A1219B8DF5000919961 /* splat5.mp3 in Resources */,
 				AAB109FC19B8DF5000919961 /* item_fall.caf in Resources */,
 				AAB10A0319B8DF5000919961 /* meat land.mp3 in Resources */,
