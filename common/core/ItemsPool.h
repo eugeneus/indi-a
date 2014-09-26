@@ -26,6 +26,10 @@ public:
                              );
     
     void setConveyorLength(float aConveyorLength);
+    
+    void setItemDensityFactor(float aDensityFactor);
+    void setBandVelosity(float aBandVelosity);
+    void setGarbagePct(float aGarbagePct);
 
     Item* getItemFromPool(std::vector<Item*>* anItemList,
                           float dt,
@@ -35,7 +39,7 @@ public:
     
     void updateRequredItems(Dish* aDish);
     
-    void resetForNewRound(int aRoundNumber, cocos2d::Vec2 aStartPos, Dish* aDish);
+    void resetForNewRound(int aRoundNumber, cocos2d::Vec2 aStartPos, Dish* aDish, LevelProvider* aLevelInfo);
     
 protected:
     
@@ -69,6 +73,7 @@ protected:
     float _garbagePerFood;
     float _minItemInterval;
     
+    
     int _maxRepeatIngridients;
     
     int _maxRepeatBonus1;
@@ -78,6 +83,8 @@ protected:
     int _maxRepeatBonus3;
     
     float _maxGarbagePct;
+    
+    float _densityFactor;
     
     // active mentics
     int _bandVelosity;

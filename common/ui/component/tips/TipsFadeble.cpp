@@ -29,12 +29,18 @@ bool TipsFadeble::init(const std::string& bgFrameName, const std::string& tipsIm
     this->setOpacity(0.0);
     this->setScale(0.5);
     
-    bg = Sprite::createWithSpriteFrameName(bgFrameName);
+    if(SpriteFrameCache::getInstance()->getSpriteFrameByName(tipsImgFrameName)){
+        bg = Sprite::createWithSpriteFrameName(tipsImgFrameName);
+        img = Sprite::createWithSpriteFrameName(tipsImgFrameName);
+    }
+    else{
+        bg = Sprite::create(tipsImgFrameName);
+        img = Sprite::create(tipsImgFrameName);
+    }
+       
     bg->setOpacity(0.0);
     this->addChild(bg, 0);
     
-    
-    img = Sprite::createWithSpriteFrameName(tipsImgFrameName);
     img->setOpacity(0.0);
     this->addChild(img, 1);
     
@@ -73,7 +79,11 @@ void TipsFadeble::toggleTip() {
 void TipsFadeble::changeTip(const std::string& tipsImgFrameName) {
     //this->toggleTip();
     cocos2d::SpriteFrame* sp= SpriteFrameCache::getInstance()->getSpriteFrameByName(tipsImgFrameName);
-    img->setSpriteFrame(sp);
+    if(sp)
+        img->setSpriteFrame(sp);
+    else
+        img = Sprite::create(tipsImgFrameName);
+    
     //this->toggleTip();
     
     this->setOpacity(0);

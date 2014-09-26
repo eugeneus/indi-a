@@ -49,7 +49,7 @@ bool Spritable::initWithSpriteAndPos(string spriteFrameName, const char* framesP
     
     this->createWalkAnimFrames(frames, 1, spriteCount, framesPattern, deleayTime);
     this->animateSpriteFrames(frames, deleayTime);
-        
+    
     return true;
 }
 
@@ -120,6 +120,30 @@ void Spritable::setSpriteSize(Size aSize)
    this->setContentSize(_defaultContentSize);
    this->setContentSize(_defaultContentSize);
 }
+
+/*
+void Spritable::update(float delta)
+{
+    cocos2d::Point currentPos = this->getPosition();
+    
+    if (currentPos.y > (_recentPos.y + 1.0f) && _recentPos.y > 0.0f && _speedFactor >= 1.0) {
+        _speedFactor = 1.5f;
+        //_speedFactor = ((int)_speedFactor) == 0 ? 1.0 : _speedFactor;
+    }
+    else if(currentPos.y < (_recentPos.y - 1.0f) && _recentPos.y > 0.0f  && _speedFactor <= 1.0) {
+        _speedFactor = 0.5f;
+        //_speedFactor = ((int)_speedFactor) >= 3 ? 1.0 : _speedFactor;
+    }
+    _recentPos = currentPos;
+    
+}
+*/
+
+float Spritable::getSpeedFactor()
+{
+    return _speedFactor;
+}
+
 
 void Spritable::testDraw()
 {

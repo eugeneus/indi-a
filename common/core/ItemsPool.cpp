@@ -48,9 +48,6 @@ ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo,
     pRet->_startItemPos = Point(0.0f,0.0f);
     pRet->_recentPulledItem = nullptr;
     
-    pRet->_requiredItemsInterval =  aLevelInfo->getRoundTime() / pRet->_repeatIngridients;
-    pRet->_requiredItemsInterval =  (pRet->_requiredItemsInterval/pRet->_repeatIngridients) / 3.0f;
-    
     std::vector<int> itemTypes1 = aLevelInfo->getAllowedFoodItems();
     for (int i = 0; i < itemTypes1.size(); i++){
         pRet->_foodItemsCounter.insert(std::pair<int,int>(itemTypes1.at(i),0));
@@ -61,26 +58,28 @@ ItemsPool* ItemsPool::create(LevelProvider* aLevelInfo,
         pRet->_garbageItemsCounter.insert(std::pair<int,int>(itemTypes2.at(i),0));
     }
     
-    pRet->_bonusItemsCounter = aLevelInfo->getBonusItems();
-    pRet->_bonusItemsInterval = (aLevelInfo->getRoundTime() - pRet->_elapsedRoundTime) / pRet->getCurrenTotalBonuses();
     
     return pRet;
 }
 
-void ItemsPool::resetForNewRound(int aRoundNumber, cocos2d::Vec2 aStartPos, Dish* aDish)
+void ItemsPool::resetForNewRound(int aRoundNumber, cocos2d::Vec2 aStartPos, Dish* aDish, LevelProvider* aLevelInfo)
 {
+    _requiredItemsInterval =  aLevelInfo->getRoundTime() / _repeatIngridients;
+    _requiredItemsInterval =  (_requiredItemsInterval/_repeatIngridients) / 3.0f;
+
+    _bonusItemsCounter = aLevelInfo->getBonusItems();
+    _bonusItemsInterval = (aLevelInfo->getRoundTime() - _elapsedRoundTime) / this->getCurrenTotalBonuses();
+    
     _elapsedRoundTime = 0.0f;
     _recentPulledItem = nullptr;
 
     _nRound = aRoundNumber;
     _startItemPos = Point(aStartPos.x, aStartPos.y);
     
-    _pointsInterval = (_convLength / 4.0f) - (_convLength / 4.0f) *_nRound * 0.1f;
+    _pointsInterval = (_convLength / 4.0f);// - (_convLength / 4.0f) *_nRound * 0.1f;
     
     _pulledGarbageCount = 1;
     _pulledFoodCount = 1;
-    _garbagePerFood = _nRound%7 * 0.1f; // 0.7% max
-
 
     this->updateRequredItems(aDish);
 
@@ -222,19 +221,8 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
         _bonusItemsInterval = (anEffectiveRoundTime -  this->_elapsedRoundTime) / this->getCurrenTotalBonuses();
     }
 
-    if(suitableItemId < 0 && _pointsInterval < recentDistace){ //_arbitraryItemInterval < 0.0f
+    if(suitableItemId < 0 && (_pointsInterval - _pointsInterval * _densityFactor) < recentDistace){ //_arbitraryItemInterval < 0.0f
         
-/*
-        int rndFood = 0;
-        int rndGarg = 0;
-        int rnd = rand()%2;
-        if (rnd) {
-            rndGarg = 1;
-        }
-        else{
-            rndFood = 1;
-        }
-*/
         float pct = ((float)(_pulledGarbageCount))/((float)(_pulledFoodCount + _pulledGarbageCount));
         
         if(_garbagePerFood < pct){
@@ -292,45 +280,9 @@ Item* ItemsPool::getItemFromPool(std::vector<Item*>* anItemList,
                     _pulledGarbageCount += 1;
                 }
             }
-        
+            
         }
-/*
-        if (!rnd) {
-        }
-        else{
-            if (_nRound > 1) {
-                cycleTerminator = 2;
-                std::map<int,int>::iterator rnd = _garbageItemsCounter.begin();
-                std::advance(rnd, rand() % _garbageItemsCounter.size());
-                startID = rnd->first;
-                
-                while (suitableItemId < 0 && cycleTerminator > 0) {
-                    if(rnd == _garbageItemsCounter.end()){
-                        cycleTerminator--;
-                        rnd = _garbageItemsCounter.begin();
-                    }else if (rnd->second < 3) {
-                        suitableItemId = rnd->first;
-                        suitableItemType = 1;
-                        rnd->second += 1;
-                        _pulledGarbageCount += 1;
-                    }
-                    else{
-                        ++rnd;
-                    }
-                }
-                
-                if (suitableItemId < 0) {
-                    suitableItemId = startID;
-                    suitableItemType = 1;
-                    _pulledGarbageCount += 1;
-                }
-            }
-        }
-*/
-        //_pointsInterval =
-        //_arbitraryItemInterval = 10.0f - 7.0f * _nRound * 0.1f ;
     }
-    
     return this->getItemByType(anItemList,
                                suitableItemId,
                                suitableItemType,
@@ -374,5 +326,21 @@ void ItemsPool::setConveyorLength(float aConveyorLength)
     _convLength = aConveyorLength;
     _pointsInterval = _convLength / 4.0f;
 }
+
+void ItemsPool::setItemDensityFactor(float aDensityFactor)
+{
+    _densityFactor = aDensityFactor;
+}
+
+void ItemsPool::setBandVelosity(float aBandVelosity)
+{
+    _bandVelosity = aBandVelosity;
+}
+
+void ItemsPool::setGarbagePct(float aGarbagePct)
+{
+    _garbagePerFood = aGarbagePct;
+}
+
 
 

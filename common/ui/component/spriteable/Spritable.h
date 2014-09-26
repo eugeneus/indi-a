@@ -34,6 +34,13 @@ public:
    void setDefaultSize();
    void applyDefaultScale();
    
+    cocos2d::Point _recentPos;
+    float _speedFactor;
+    
+    float getSpeedFactor();
+    
+    //virtual void update(float delta);
+
 
    static Spritable* create(string spriteFrameName, const char* framesPattern, int spriteCount, float deleayTime);
 };

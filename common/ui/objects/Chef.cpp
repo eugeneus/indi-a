@@ -32,7 +32,7 @@ Chef* Chef::create(cocos2d::Layer* aLayer, int aZOrder)
 
 bool Chef::init(cocos2d::Layer* aLayer, int aZOrder) {
    
-   _szWatchSector = Size(10.0f,140.0f);
+   _szWatchSector = Size(5.0f,145.0f);
    _sleepCounter = 0;
    
    Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -76,11 +76,11 @@ void Chef::setOrigin(cocos2d::Point anOrigin)
 
    _chefRect.origin.x = anOrigin.x;
    _chefRect.origin.y = anOrigin.y;
-   float xOffset = (_leftHand->getContentSize().width*0.7)*0.5;
-   _rightHandRect.origin.x = anOrigin.x + xOffset;
+    float xOffset = (_leftHand->getContentSize().width*0.7)*0.2;
+    _rightHandRect.origin.x = anOrigin.x + xOffset;
    _rightHandRect.origin.y = anOrigin.y;
 
-   float xPos = anOrigin.x + _chefRect.size.width - xOffset;
+    float xPos = anOrigin.x + _chefRect.size.width - xOffset;
    _leftHandRect.origin.x = xPos;
    _leftHandRect.origin.y = anOrigin.y;
 
@@ -136,16 +136,25 @@ bool Chef::isRequiredItem(Item* anItem)
 bool Chef::isItemAccesible(Item* anItem)
 {
    float minX = _chefRect.origin.x;
-   float maxX = _chefRect.origin.x + _chefRect.size.width;
+   float maxX = _chefRect.origin.x + _chefRect.size.width + _leftHandRect.size.width;
    float itemPosX = anItem->getPosition().x;
    
    return (itemPosX >= minX && itemPosX <= maxX) && anItem->getLocalZOrder() == 20;
 }
 
+/*
+void Chef::resetHands()
+{
+    _leftHand->getNumberOfRunningActions() == 0
+    //this->setDisplayFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("egg_1.png"));
+}
+*/
 // chef entry point
 Item* Chef::looksForItem(Item* anItem, float aConveyourVelocity)
 {
    // initially ignore long distance items
+    
+   
    if (!this->isItemAccesible(anItem)) {
       return nullptr;
    }

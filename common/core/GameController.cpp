@@ -25,6 +25,7 @@
 #include "ItemsPool.h"
 #include "DishFactory.h"
 #include "Dish.h"
+#include "PerformanceMetrics.h"
 
 #include "time.h"
 
@@ -62,6 +63,7 @@ GameController::GameController()
     _cloudTips = nullptr;
     _isControllerWaitingStop = false;
     _nRound = 1;
+    _perfMetric = nullptr;
 
     _maxBandVelosity = 100;
     
@@ -99,43 +101,145 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
 {
    _gameLayer = aGameLayer;
    
-   
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(SOUND_BG, true);
-   
-    this->setUpInit(true);
+    
+    _perfMetric = PerformanceMetrics::create();
+    
+    cocos2d::Size visibleSize = Director::getInstance()->getVisibleSize();
+    cocos2d::Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    this->arrangeBackground(origin, visibleSize);
+
+    this->setupNewRound();
     
    return true;
 }
 
-void GameController::setUpInit(bool isStart) {
-    cocos2d::Size visibleSize;
-    cocos2d::Vec2 origin;
+void GameController::createScene()
+{
+    SpriteFrameCache* cache = SpriteFrameCache::getInstance();
+    cache->addSpriteFramesWithFile("images.plist");
     
-    visibleSize = Director::getInstance()->getVisibleSize();
-    origin = Director::getInstance()->getVisibleOrigin();
+    bg = Sprite::createWithSpriteFrameName("level_1_bg.png");
+    _gameLayer->addChild(bg, kWallZO);
     
-    int level = 1;
-    /*
-    if(!isStart) {
-        level = _levelInfo->getLevelId() + 1;
-        // TODO: remove next lines
-        if (level > 3) level = 1;
+    int levelID = 1;// TODO: get rid of level info as long as we do not use "level strategy", but round instead
+    _levelInfo = LevelProvider::createForLevel(levelID);
+
+    _bonusMenu = BonusMenu::create(this->_levelInfo);
+    _gameLayer->addChild(_bonusMenu, kWallZO);
+    
+    _theChef = Chef::create(_gameLayer, kChefZO);
+    
+    _conv = Conveyor::create(_bandVelosity, _convLegth); // TODO remove parameters, add setVel, setLen to use in
+    _gameLayer->addChild(_conv, kConveyurZO);
+
+    _thePot = Pot::create(_gameLayer,kPotFrontZO,kPotBackZO);
+
+    _scoreLayer = ScoreLayer::create(0);
+    _gameLayer->addChild(_scoreLayer, kCloudZO);
+    
+    _multiplier = Multiplier::create();
+    _gameLayer->addChild(_multiplier, kCloudZO);
+    
+    _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getRoundTime());
+    _gameLayer->addChild(_gameCycleInd, kCloudZO);
+
+    _cntPoints->pushBack(ControlPointDef::create(Point(470.0f,300.0f),kControlPointTypePotMargin)); // left floor
+    _cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // right floor
+    _cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // right floor
+    _cntPoints->pushBack(ControlPointDef::create(Point(145.0f,300.0f),kControlPointTypePotMargin)); // margin
+    _cntPoints->pushBack(ControlPointDef::create(Point(280.0f,0.0f),kControlPointTypePotCenter)); // center
+    _cntPoints->pushBack(ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter)); // center
+    _cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
+    _cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
+    
+}
+
+void GameController::arrangeSceneForRect(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
+{
+    bg->setPosition(Vec2(aVisibleSize.width/2 + anOrigin.x, aVisibleSize.height/2 + anOrigin.y));
+
+    _bonusMenu->setPosition(Vec2(_bonusMenu->getPosition().x - (aVisibleSize.width/2 + anOrigin.x) + 140, aVisibleSize.height/2 + anOrigin.y - 80));
+
+    float yOffsetConveyer = 615;
+    
+    Size chefSize = _theChef->getSize();
+    Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer);
+    _theChef->setOrigin(chefOrigin);
+
+    _cloudTipsPos = Vec2(140, yOffsetConveyer + 100);
+
+    _convY = yOffsetConveyer - 102;
+    _convLegth = aVisibleSize.width;
+    _conv->setPosition(Vec2(0, _convY));
+    _conv->setLength(_convLegth);
+
+    Size sz = _thePot->getFrontRect().size;
+    Point potOrigin = Point(0,0);//Point(aVisibleSize.width/2.0f - sz.width/2.0f, 0.0f);
+    _thePot->setOriginPos(potOrigin);
+    
+    _scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
+
+    _multiplier->setPosition(Vec2(450, aVisibleSize.height + anOrigin.y - 60));
+    
+    _gameCycleInd->setPosition(Vec2(0, _convY - 40));
+    
+    _itemIdlePos = Vec2(aVisibleSize.width + 40.0f, _convY + 70.0f);
+}
+
+void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
+{
+    this->createScene();
+    this->arrangeSceneForRect(anOrigin, aVisibleSize);
+}
+
+void GameController::resetCompletedRound()
+{
+    _bonusMenu->resetActiveBonus();
+    
+    for(Item* nitem : _items){
+        nitem->removeFromParentAndCleanup(true);
     }
-    */
     
-    _levelInfo = LevelProvider::createForLevel(level);
+    _caughtItemsIds.clear();
+    _items.clear();
     
-    //std::vector<int> requiredFroodItems = _levelInfo->getRequiredItems();
-    //std::vector<int> allowedFoodItems = _levelInfo->getAllowedFoodItems();
-    //std::vector<int> allowedGarbageItems = _levelInfo->getAllowedGarbageItems();
-    _currGameTime = 0.0;
+}
+
+void GameController::setupNewRound()
+{
     
-    if (isStart)
-        this->arrangeBackground(origin,visibleSize);
-    else
-        releaseAll(origin,visibleSize);
+    this->resetCompletedRound();
     
-    _itemIdlePos = Vec2(visibleSize.width + 40.0f, _convY + 70.0f);
+    std::string bgFrameName = _levelInfo->getBgSpriteFrameName();
+    bg->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(bgFrameName));
+    
+    _gameCycleInd->setGameTime(_levelInfo->getRoundTime());
+    
+
+    // set defaults for teh first loop
+    _bandVelosity = _bandVelosity < 50.0 ? 50: _bandVelosity;
+    _garbagePct = _garbagePct < 0.1 ? 0.1: _garbagePct;
+    _densityFactor = _densityFactor < 0.1 ? 0.1 : _densityFactor;
+    
+    int metricType = _perfMetric->getNextMetricType();
+    switch (metricType) {
+        case 0:  // velosity
+            _bandVelosity = _maxBandVelosity * _perfMetric->getNextMetricValue(0) + 50.0f;
+            break;
+        case 1: // garbagepercent
+            _garbagePct = _maxGarbagePct * _perfMetric->getNextMetricValue(1);
+            break;
+        case 2: // density
+            _densityFactor = _perfMetric->getNextMetricValue(2);
+            break;
+        default:
+            break;
+    }
+    
+    _conv->changeCyclingSpeed(_bandVelosity);
+    _gameCycleInd->restart();
+    _theChef->restartChef();
     
     if (!_dishFactory) {
         _dishFactory = DishFactory::create("dishes.plist");
@@ -146,6 +250,8 @@ void GameController::setUpInit(bool isStart) {
         
     }
     _mainCource = _dishFactory->getRandomDish();
+    
+    //TODO: read and apply metrics
     
     if (!_cloudTips) {
         const std::string& str = _mainCource->getImageName();
@@ -166,98 +272,24 @@ void GameController::setUpInit(bool isStart) {
                                        _maxRepeatBonus3
                                        );
     }
-    _itemsPool->resetForNewRound(_nRound, _itemIdlePos, _mainCource);
+    
     _itemsPool->setConveyorLength(_convLegth);
+    _itemsPool->setItemDensityFactor(_densityFactor);
+    _itemsPool->setBandVelosity(_bandVelosity);
+    _itemsPool->setGarbagePct(_garbagePct);
+    
+    _itemsPool->resetForNewRound(_nRound, _itemIdlePos, _mainCource, _levelInfo);
+    
     
 }
 
-void GameController::releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize) {
-    
-    std::string bgFrameName = _levelInfo->getBgSpriteFrameName();
-    bg->setSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(bgFrameName));
-    
-    const std::string& str = _mainCource->getImageName();
-    _cloudTips->changeTip(str);
-    
-    float yOffsetConveyer = 615;
-    
-    _convY = yOffsetConveyer - 102;
-    //_bandVelosity = 100;
-    _convLegth = aVisibleSize.width;
-    
-    _bonusMenu->resetActiveBonus();
-    _gameCycleInd->setGameTime(_levelInfo->getRoundTime());
-    _gameCycleInd->restart();
-
-    _theChef->restartChef();
-    _conv->changeCyclingSpeed(_bandVelosity);
-    
-    for(Item* nitem : _items){
-        nitem->removeFromParentAndCleanup(true);
-    }
-    
-    _caughtItemsIds.clear();
-    _items.clear();
-}
-
-void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
-{
-   this->updatePerformanceMetrics();
-    
-   SpriteFrameCache* cache = SpriteFrameCache::getInstance();
-   cache->addSpriteFramesWithFile("images.plist");
-
-   bg = Sprite::createWithSpriteFrameName("level_1_bg.png");
-   bg->setPosition(Vec2(aVisibleSize.width/2 + anOrigin.x, aVisibleSize.height/2 + anOrigin.y));
-   _gameLayer->addChild(bg, kWallZO);
-   
-    _bonusMenu = BonusMenu::create(this->_levelInfo);
-    _bonusMenu->setPosition(Vec2(_bonusMenu->getPosition().x - (aVisibleSize.width/2 + anOrigin.x) + 140, aVisibleSize.height/2 + anOrigin.y - 80));
-    _gameLayer->addChild(_bonusMenu, kWallZO);
-    
-    float yOffsetConveyer = 615;
-    
-   _theChef = Chef::create(_gameLayer, kChefZO);
-   Size chefSize = _theChef->getSize();
-   Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer);
-   _theChef->setOrigin(chefOrigin);
-   
-    _cloudTipsPos = Vec2(140, yOffsetConveyer + 100);
-    
-    _convY = yOffsetConveyer - 102;
-    _convLegth = aVisibleSize.width;
-    
-    _conv = Conveyor::create(_bandVelosity, _convLegth);
-    _conv->setPosition(Vec2(0, _convY));
-    _gameLayer->addChild(_conv, kConveyurZO);
-    
-    _thePot = Pot::create(_gameLayer,kPotFrontZO,kPotBackZO);
-   Size sz = _thePot->getFrontRect().size;
-   Point potOrigin = Point(0,0);//Point(aVisibleSize.width/2.0f - sz.width/2.0f, 0.0f);
-   _thePot->setOriginPos(potOrigin);
-    
-    _scoreLayer = ScoreLayer::create(0); 
-    _scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
-    _gameLayer->addChild(_scoreLayer, kCloudZO);
-
-    _multiplier = Multiplier::create();
-    _multiplier->setPosition(Vec2(450, aVisibleSize.height + anOrigin.y - 60));
-    _gameLayer->addChild(_multiplier, kCloudZO);
-    
-    _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getRoundTime());
-    _gameCycleInd->setPosition(Vec2(0, _convY - 40));
-    _gameLayer->addChild(_gameCycleInd, kCloudZO);
-    
-    _theChef->startChefBodyAnimation();
-   
-   _cntPoints->pushBack(ControlPointDef::create(Point(470.0f,300.0f),kControlPointTypePotMargin)); // left floor
-   _cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // right floor
-   _cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // right floor
-   _cntPoints->pushBack(ControlPointDef::create(Point(145.0f,300.0f),kControlPointTypePotMargin)); // margin
-   _cntPoints->pushBack(ControlPointDef::create(Point(280.0f,0.0f),kControlPointTypePotCenter)); // center
-   _cntPoints->pushBack(ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter)); // center
-   _cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
-   _cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
+void GameController::restartGame() {
+    _isControllerWaitingStop = false;
+    this->setupNewRound();
+    _gameLayer->resume();
+    _cloudTips->toggleTip();
+    _conv->resumeConv();
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(SOUND_BG, true);
 }
 
 int getRandomNumber(int from ,int to) {
@@ -272,19 +304,6 @@ float getRandomFloat(float from ,float to) {
 
 }
 
-void startGame()
-{
-
-}
-
-void GameController::restartGame() {
-    _isControllerWaitingStop = false;
-    this->setUpInit(false);
-    _gameLayer->resume();
-    _cloudTips->toggleTip();
-    _conv->resumeConv();
-    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(SOUND_BG, true);
-}
 
 void GameController::stopGame()
 {
@@ -349,10 +368,12 @@ void GameController::runTossActionWithScale(Item* anItem, ControlPointDef* aPoin
    float scaleFactor = this->getScaleFactor(aPointDef->_controlPoint,aPointDef->_controlPointType);
    
    ScaleTo* scaleAction = ScaleTo::create(aDuration, scaleFactor);
-   Spawn* cobinedAction = Spawn::create(itemAction, scaleAction, NULL);
+   Spawn* combinedAction = Spawn::create(itemAction, scaleAction, NULL);
    anItem->setLocalZOrder(kItemZO2);
-
-   anItem->runAction(cobinedAction);
+   
+    //Speed* speedUpCombinedAction = Speed::create(combinedAction, anItem->getSpeedFactor());
+    
+   anItem->runAction(combinedAction);
 }
 
 void GameController::tossItem(Item* anItem, Vec2 anImpulse)
@@ -360,7 +381,7 @@ void GameController::tossItem(Item* anItem, Vec2 anImpulse)
     //Point impulse
     ControlPointDef* collisionEndPointDef = nullptr;
     if (_cntPoints->size() > 0) {
-        int randomPointIdx = getRandomNumber(0,(_cntPoints->size()-1));
+        int randomPointIdx = getRandomNumber(0,(_cntPoints->size()-1.0));
         collisionEndPointDef = _cntPoints->at(randomPointIdx);
     }
     float totalActionDuration = 1.5f;
@@ -385,6 +406,7 @@ void GameController::runBumpAction(Item* anItem)
       
       ScaleTo* scaleAction = ScaleTo::create(actionDuration, scaleFactor);
       Spawn* cobinedPotBump = Spawn::create(itemAction, scaleAction, NULL);
+    
       anItem->setLocalZOrder(kItemZO2);
       anItem->runAction(cobinedPotBump);
        
@@ -517,7 +539,7 @@ void GameController::update(float dt)
         if(_theChef->isChefIdle()){
             this->stopGame();
             this->_nRound++;
-            this->updatePerformanceMetrics();
+            //this->updatePerformanceMetrics();
             this->restartGame();
             _isControllerWaitingStop = false;
         }
@@ -678,7 +700,7 @@ float GameController::getActualRoundTime()
 {
     return _gameCycleInd->getGameTime();
 }
-
+/*
 void GameController::updatePerformanceMetrics()
 {
     
@@ -701,7 +723,7 @@ void GameController::updatePerformanceMetrics()
     
 
     
-/*
+
     _maxBandVelosity = 100;
     
     _maxRepeatIngridients = 3;
@@ -713,8 +735,10 @@ void GameController::updatePerformanceMetrics()
     _maxRepeatBonus3 = 3;
     
     _maxGarbagePct = 0.7;
-*/
+
 }
+*/ 
+
 
 
 

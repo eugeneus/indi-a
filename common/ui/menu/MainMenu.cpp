@@ -42,6 +42,7 @@ void MainMenu::initializeMenu() {
     SpriteBatchNode *spriteBatch = SpriteBatchNode::create(fileImage);
     this->addChild(spriteBatch);
     
+    
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(SOUND_CLICK);
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(SOUND_FALL_ITEM);
     

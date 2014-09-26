@@ -25,6 +25,8 @@ protected:
     
     std::vector<int> _ingridientIDs;
     std::string _imageFileName;
+    std::string _name;
+    int _ingridients;
 
 private:
 

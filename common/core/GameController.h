@@ -20,6 +20,7 @@ class BonusMenu;
 class ItemsPool;
 class DishFactory;
 class Dish;
+class PerformanceMetrics;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -54,8 +55,6 @@ public:
 
    bool initWithLayer(cocos2d::Layer* aGameLayer);
    
-   void startGame();
-   
    void stopGame();
     void restartGame();
    
@@ -67,11 +66,16 @@ public:
 
 protected:
     
-    void releaseAll(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
+    void resetCompletedRound();
+    
+    void setupNewRound();
     void setUpInit(bool isStart);
    
+    void createScene();
+    void arrangeSceneForRect(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
     void arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize);
-   
+
+    
     void runItemConveyorAction(Item *anItem);
     void putItemOnConveyour(float dt);
    
@@ -93,7 +97,9 @@ protected:
     void useActiveBonus();
     void resetActiveBonus();
     
-    void updatePerformanceMetrics();
+    //void updatePerformanceMetrics();
+    
+    
     
     // model
     std::vector<Item*> _items;
@@ -136,6 +142,8 @@ protected:
     Dish* _mainCource;
     int _levelCounter;
     
+    PerformanceMetrics* _perfMetric;
+    
     std::vector<int> _caughtItemsIds;
     
     float _bonusTimer; // if _bonusTimer > 0, the game using active bonus from bonus menu;
@@ -171,6 +179,8 @@ protected:
     int _repeatBonus3;
     
     float _garbagePct;
+    
+    float _densityFactor;
     
     
 private:
