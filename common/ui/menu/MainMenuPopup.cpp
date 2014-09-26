@@ -1,12 +1,14 @@
 #include "MainMenuPopup.h"
 #include "OptionsMenu.h"
 #include "UserDataProvider.h"
+#include "ResourcesManager.h"
 
 #include "GameMenu.h"
 #include "SocialMenu.h"
 #include "ScoreMenu.h"
 
 #include "Health.h"
+#include "PurchaseManager.h"
 
 USING_NS_CC;
 
@@ -37,12 +39,14 @@ void MainMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItem
         userData->updateLiveTimeout(0, CCString::createWithFormat("%i", 0)->getCString());
     }
     
-    initMenuItem(menuItems, BTN_MAIN_PLAY, CC_CALLBACK_1(MainMenuPopup::menuGameCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 180));
-    initMenuItem(menuItems, BTN_MAIN_STORE, CC_CALLBACK_1(MainMenuPopup::menuStoreCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 400));
-    initMenuItem(menuItems, BTN_MAIN_SCORE, CC_CALLBACK_1(MainMenuPopup::menuScoreCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 550));
-    initMenuItem(menuItems, BTN_MAIN_OPTION, CC_CALLBACK_1(MainMenuPopup::menuOptionsCallback, this), Vec2(visibleSize.width/2 + origin.x - 100, visibleSize.height + origin.y - 700));
-    initMenuItem(menuItems, BTN_MAIN_SOCIAL, CC_CALLBACK_1(MainMenuPopup::menuSocialCallback, this), Vec2(visibleSize.width/2 + origin.x + 100, visibleSize.height + origin.y - 700));
-    initMenuItem(menuItems, BTN_MAIN_EXIT, CC_CALLBACK_1(MainMenuPopup::menuExitCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 820));
+    float bottomOffset = ResourcesManager::getInstance()->getBottomOffset();
+    
+    initMenuItem(menuItems, BTN_MAIN_PLAY, CC_CALLBACK_1(MainMenuPopup::menuGameCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 180 - bottomOffset/2));
+    initMenuItem(menuItems, BTN_MAIN_STORE, CC_CALLBACK_1(MainMenuPopup::menuStoreCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 400 - bottomOffset/2));
+    initMenuItem(menuItems, BTN_MAIN_SCORE, CC_CALLBACK_1(MainMenuPopup::menuScoreCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 550 - bottomOffset/2));
+    initMenuItem(menuItems, BTN_MAIN_OPTION, CC_CALLBACK_1(MainMenuPopup::menuOptionsCallback, this), Vec2(visibleSize.width/2 + origin.x - 100, visibleSize.height + origin.y - 700 - bottomOffset/2));
+    initMenuItem(menuItems, BTN_MAIN_SOCIAL, CC_CALLBACK_1(MainMenuPopup::menuSocialCallback, this), Vec2(visibleSize.width/2 + origin.x + 100, visibleSize.height + origin.y - 700 - bottomOffset/2));
+    initMenuItem(menuItems, BTN_MAIN_EXIT, CC_CALLBACK_1(MainMenuPopup::menuExitCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 820 - bottomOffset/2));
     
     Health *health = Health::create(userData->getUserLives());
     health->setPosition(Vec2(0, visibleSize.height + origin.y));
@@ -55,8 +59,17 @@ void MainMenuPopup::menuOptionsCallback(Ref* pSender) {
 }
 
 void MainMenuPopup::menuStoreCallback(Ref* pSender) {
-    Scene *newScene = OptionsMenu::createScene();
-    this->changeScene(newScene);
+    //if (!SettingsManager::prefsById(settingsSaveImage)) {
+    //    GalleryUtility::saveImage();
+    //} else {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    //PurchaseManager::startPurchase("dsf");
+    [PurchaseManager startPurchase:1];
+#endif
+   // }
+
+//    Scene *newScene = OptionsMenu::createScene();
+//    this->changeScene(newScene);
 }
 
 void MainMenuPopup::menuScoreCallback(Ref* pSender) {

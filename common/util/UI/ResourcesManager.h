@@ -9,6 +9,7 @@ class ResourcesManager : public cocos2d::Ref {
 private:
     float _resolutionWidth;
     float _resolutionHeight;
+    float _bottomOffset;
     ResolutionPolicy _resolutionPolicy;
     std::string _plist;
     std::string _images;
@@ -34,6 +35,7 @@ public:
     float getResolutionWidth();
     float getResolutionHeight();
     ResolutionPolicy getResolutionPolicy();
+    float getBottomOffset();
     
 };
 

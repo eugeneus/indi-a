@@ -1,5 +1,6 @@
 
 #include "BaseGamePopup.h"
+#include "ResourcesManager.h"
 
 USING_NS_CC;
 
@@ -28,6 +29,10 @@ bool BaseGamePopup::init() {
     mainMenu->alignItemsHorizontallyWithPadding(10);
     mainMenu->setPosition(Vec2(visibleSize.width/2 + origin.x, origin.y + 150));
     this->addChild(mainMenu, 1);
+    
+    float bottomOffset = ResourcesManager::getInstance()->getBottomOffset();
+    
+    this->setPosition(Vec2(this->getPosition().x, this->getPosition().y + bottomOffset/2));
 
     return true;
 }

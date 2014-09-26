@@ -3,6 +3,7 @@
 #include "MainMenu.h"
 #include "SimpleAudioEngine.h"
 #include "UserDataProvider.h"
+#include "ResourcesManager.h"
 
 USING_NS_CC;
 
@@ -23,17 +24,20 @@ OptionsMenuPopup* OptionsMenuPopup::create()
 }
 
 void OptionsMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItems, cocos2d::Vec2 origin, cocos2d::Size visibleSize) {
-    initMenuItem(menuItems, BTN_OPTION_MUSIC, CC_CALLBACK_1(OptionsMenuPopup::menuMusicCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 250));
-    initMenuItemTrigger(menuItems, BTN_OPTION_MUSIC, CC_CALLBACK_1(OptionsMenuPopup::menuMusicCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 250), 0);
     
-    initMenuItem(menuItems, BTN_OPTION_SOUND, CC_CALLBACK_1(OptionsMenuPopup::menuSoundCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 400));
-    initMenuItemTrigger(menuItems, BTN_OPTION_SOUND, CC_CALLBACK_1(OptionsMenuPopup::menuSoundCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 400), 1);
+    float bottomOffset = ResourcesManager::getInstance()->getBottomOffset();
+    
+    initMenuItem(menuItems, BTN_OPTION_MUSIC, CC_CALLBACK_1(OptionsMenuPopup::menuMusicCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 250 - bottomOffset/2));
+    initMenuItemTrigger(menuItems, BTN_OPTION_MUSIC, CC_CALLBACK_1(OptionsMenuPopup::menuMusicCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 250 - bottomOffset/2), 0);
+    
+    initMenuItem(menuItems, BTN_OPTION_SOUND, CC_CALLBACK_1(OptionsMenuPopup::menuSoundCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 400 - bottomOffset/2));
+    initMenuItemTrigger(menuItems, BTN_OPTION_SOUND, CC_CALLBACK_1(OptionsMenuPopup::menuSoundCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 400 - bottomOffset/2), 1);
     
     
-    initMenuItem(menuItems, BTN_OPTION_NOTIF, CC_CALLBACK_1(OptionsMenuPopup::menuNotificationsCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 550));
-    initMenuItemTrigger(menuItems, BTN_OPTION_NOTIF, CC_CALLBACK_1(OptionsMenuPopup::menuNotificationsCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 550), 2);
+    initMenuItem(menuItems, BTN_OPTION_NOTIF, CC_CALLBACK_1(OptionsMenuPopup::menuNotificationsCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 550 - bottomOffset/2));
+    initMenuItemTrigger(menuItems, BTN_OPTION_NOTIF, CC_CALLBACK_1(OptionsMenuPopup::menuNotificationsCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 550 - bottomOffset/2), 2);
     
-    initMenuItem(menuItems, BTN_ALL_BACK, CC_CALLBACK_1(OptionsMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800));
+    initMenuItem(menuItems, BTN_ALL_BACK, CC_CALLBACK_1(OptionsMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800 - bottomOffset/2));
 }
 
 bool isNeedRevertButtons(int tag) {

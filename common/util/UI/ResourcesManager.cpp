@@ -61,7 +61,13 @@ ResolutionPolicy ResourcesManager::getResolutionPolicy() {
     return _resolutionPolicy;
 }
 
+float ResourcesManager::getBottomOffset() {
+    return _bottomOffset;
+}
+
 void ResourcesManager::initializeData() {
+    
+    _bottomOffset = 0;
     
     if (2048 == _size.width || 2048 == _size.height) {
         _resolutionPolicy = ResolutionPolicy::NO_BORDER;
@@ -81,11 +87,20 @@ void ResourcesManager::initializeData() {
         _resolutionWidth = 640;
         _images = "images640x1136.png";
         _plist = "images640x1136.plist";
+        
+        _bottomOffset = 176;
+        
     } else if (960 == _size.width || 960 == _size.height) {
         _resolutionPolicy = ResolutionPolicy::NO_BORDER;
         _resolutionHeight = 960;
         _resolutionWidth = 640;
         _images = "images.png";
         _plist = "images.plist";
+    } else if (480 == _size.width || 480 == _size.height) {
+        _resolutionPolicy = ResolutionPolicy::SHOW_ALL;
+        _resolutionHeight = 480;
+        _resolutionWidth = 320;
+        _images = "images320x480.png";
+        _plist = "images320x480.plist";
     }
 }

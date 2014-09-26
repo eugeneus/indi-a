@@ -26,6 +26,7 @@
 #include "DishFactory.h"
 #include "Dish.h"
 #include "PerformanceMetrics.h"
+#include "ResourcesManager.h"
 
 #include "time.h"
 
@@ -114,10 +115,17 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
    return true;
 }
 
+void updatePosition(Node* node) {
+    Vec2 pos = node->getPosition();
+    node->setPosition(Vec2(pos.x, pos.y + ResourcesManager::getInstance()->getBottomOffset()));
+}
+
 void GameController::createScene()
 {
     SpriteFrameCache* cache = SpriteFrameCache::getInstance();
     cache->addSpriteFramesWithFile("images.plist");
+    
+    ResourcesManager *res = ResourcesManager::getInstance();
     
     bg = Sprite::createWithSpriteFrameName("level_1_bg.png");
     _gameLayer->addChild(bg, kWallZO);
@@ -132,9 +140,9 @@ void GameController::createScene()
     
     _conv = Conveyor::create(_bandVelosity, _convLegth); // TODO remove parameters, add setVel, setLen to use in
     _gameLayer->addChild(_conv, kConveyurZO);
-
+    
     _thePot = Pot::create(_gameLayer,kPotFrontZO,kPotBackZO);
-
+    
     _scoreLayer = ScoreLayer::create(0);
     _gameLayer->addChild(_scoreLayer, kCloudZO);
     
@@ -143,6 +151,7 @@ void GameController::createScene()
     
     _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getRoundTime());
     _gameLayer->addChild(_gameCycleInd, kCloudZO);
+    
 
     _cntPoints->pushBack(ControlPointDef::create(Point(470.0f,300.0f),kControlPointTypePotMargin)); // left floor
     _cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // right floor
@@ -157,6 +166,8 @@ void GameController::createScene()
 
 void GameController::arrangeSceneForRect(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)
 {
+    float bottomOffset = ResourcesManager::getInstance()->getBottomOffset();
+    
     bg->setPosition(Vec2(aVisibleSize.width/2 + anOrigin.x, aVisibleSize.height/2 + anOrigin.y));
 
     _bonusMenu->setPosition(Vec2(_bonusMenu->getPosition().x - (aVisibleSize.width/2 + anOrigin.x) + 140, aVisibleSize.height/2 + anOrigin.y - 80));
@@ -164,18 +175,18 @@ void GameController::arrangeSceneForRect(cocos2d::Vec2 anOrigin, cocos2d::Size a
     float yOffsetConveyer = 615;
     
     Size chefSize = _theChef->getSize();
-    Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer);
+    Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer + bottomOffset);
     _theChef->setOrigin(chefOrigin);
 
-    _cloudTipsPos = Vec2(140, yOffsetConveyer + 100);
+    _cloudTipsPos = Vec2(140, yOffsetConveyer + 100 + bottomOffset);
 
-    _convY = yOffsetConveyer - 102;
+    _convY = yOffsetConveyer - 102 + bottomOffset;
     _convLegth = aVisibleSize.width;
     _conv->setPosition(Vec2(0, _convY));
     _conv->setLength(_convLegth);
 
     Size sz = _thePot->getFrontRect().size;
-    Point potOrigin = Point(0,0);//Point(aVisibleSize.width/2.0f - sz.width/2.0f, 0.0f);
+    Point potOrigin = Point(0,0 + bottomOffset/2);//Point(aVisibleSize.width/2.0f - sz.width/2.0f, 0.0f);
     _thePot->setOriginPos(potOrigin);
     
     _scoreLayer->setPosition(Vec2(500, aVisibleSize.height + anOrigin.y - 100));
@@ -185,6 +196,7 @@ void GameController::arrangeSceneForRect(cocos2d::Vec2 anOrigin, cocos2d::Size a
     _gameCycleInd->setPosition(Vec2(0, _convY - 40));
     
     _itemIdlePos = Vec2(aVisibleSize.width + 40.0f, _convY + 70.0f);
+    
 }
 
 void GameController::arrangeBackground(cocos2d::Vec2 anOrigin, cocos2d::Size aVisibleSize)

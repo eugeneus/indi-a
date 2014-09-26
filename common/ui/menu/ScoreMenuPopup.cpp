@@ -3,6 +3,7 @@
 #include "MainMenu.h"
 #include "FacebookProvider.h"
 #include "Overview.h"
+#include "ResourcesManager.h"
 
 #include "score/ScoreDataSource.h"
 #include "score/lb/ScoreLBDataSource.h"
@@ -41,6 +42,8 @@ void ScoreMenuPopup::initSlidingLayer() {
 void ScoreMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItems, cocos2d::Vec2 origin, cocos2d::Size visibleSize) {
     isFriendsTab = false;
     
+    float bottomOffset = ResourcesManager::getInstance()->getBottomOffset();
+    
     Sprite* tabImg = Sprite::createWithSpriteFrameName("btn_score_global_sel.png");
     //tabImg->setScale(0.9);
     
@@ -50,7 +53,7 @@ void ScoreMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuIte
 
     reinitTabs(menuItems, tabs);
     
-    initMenuItem(menuItems, BTN_ALL_BACK, CC_CALLBACK_1(ScoreMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800));
+    initMenuItem(menuItems, BTN_ALL_BACK, CC_CALLBACK_1(ScoreMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800 - bottomOffset/2));
     
     
     Sprite* bg = Sprite::createWithSpriteFrameName("bg_score_table.png");
