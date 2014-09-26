@@ -28,7 +28,7 @@ Hand* Hand::create(const std::string &aSpriteFrameName)
    Size imgSize = pRet->getContentSize();
    pRet->_handRect = Rect(0.0f, 0.0f, imgSize.width, imgSize.height);
    pRet->setAnchorPoint(Point(0.5f,0.5f));
-   pRet->setScale(0.7);
+   pRet->setScale(0.6);
    pRet->_grabPoint = pRet->getPosition();
    pRet->_tossPoint = Point(pRet->_grabPoint.x, pRet->_grabPoint.y + pRet->_handRect.size.height / 2.0f);
    
@@ -158,12 +158,13 @@ bool Hand::isHandBusy()
     Point handPos = _handRect.origin; //Point((_handRect.origin.x + _handRect.size.width / 2.0f), (_handRect.origin.y + _handRect.size.height / 2.0f));
     //((handPos.x != currHandPos.x) || (handPos.y != currHandPos.y));
     
+    
    bool isHandBusy = (((int)handPos.x) != ((int)currHandPos.x)) || (((int)handPos.y) != ((int)currHandPos.y));
-//    if (isHandBusy) {
-//        CCLOG("handby");
-//    }
-   //bool isHandBusy = ((_catchItem) &&
-   //(this->getNumberOfRunningActions() > 0));
+
+    if (isHandBusy && this->getNumberOfRunningActions() == 0) {
+        this->setPosition(_handRect.origin);
+    }
+//(this->getNumberOfRunningActions() > 0));
    return isHandBusy;
 }
 

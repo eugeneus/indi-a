@@ -52,14 +52,19 @@ int PerformanceMetrics::getNextIngridientRepeats()
 int PerformanceMetrics::getNextMetricType()
 {
     std::vector<bool>::iterator it = _metricUsage.begin();
-    std::vector<bool>::iterator end = _metricUsage.end();
+    //std::vector<bool>::iterator end = _metricUsage.end();
     //std::vector<bool>::iterator end = _metricUsage.end();
     
-    it = std::find(_metricUsage.begin(), _metricUsage.end(), false);
+    it = std::find(_metricUsage.begin(), _metricUsage.end(), 0);
+    
+    //bool usage = *it;
     
     if(it == _metricUsage.end()){
-        std::fill(_metricUsage.begin(), _metricUsage.end(), false);
+        std::fill(_metricUsage.begin(), _metricUsage.end(), 0);
         it = _metricUsage.begin();
+    }
+    else{
+        *it = true;
     }
     
     return std::distance(_metricUsage.begin(), it);
@@ -68,10 +73,12 @@ int PerformanceMetrics::getNextMetricType()
 
 float PerformanceMetrics::getNextMetricValue(int anIndex)
 {
+    float metricVal = _metricValue[anIndex];
     if(_metricValue[anIndex] > 1.0f){
         _metricValue[anIndex] = 0.1f;
     }
-    return  _metricValue[anIndex]++;
+    _metricValue[anIndex] += 0.1f;
+    return  _metricValue[anIndex];
 }
 
 

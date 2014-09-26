@@ -32,7 +32,7 @@ bool DishFactory::init(const char* aFileName)
 Dish* DishFactory::getRandomDish()
 {
     cocos2d::ValueMap::iterator rnd = _dishesMap.begin();
-    std::advance(rnd, rand() % _dishesMap.size());
+    std::advance(rnd, rand() % 1); // TODO: set 2 for test only _dishesMap.size());
     if(rnd == _dishesMap.end()){
         rnd = _dishesMap.begin();
     }

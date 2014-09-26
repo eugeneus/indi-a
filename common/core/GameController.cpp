@@ -25,6 +25,7 @@
 #include "ItemsPool.h"
 #include "DishFactory.h"
 #include "Dish.h"
+#include "PerformanceMetrics.h"
 
 #include "time.h"
 
@@ -62,6 +63,7 @@ GameController::GameController()
     _cloudTips = nullptr;
     _isControllerWaitingStop = false;
     _nRound = 1;
+    _perfMetric = nullptr;
 
     _maxBandVelosity = 100;
     
@@ -100,7 +102,9 @@ bool GameController::initWithLayer(cocos2d::Layer* aGameLayer)
    _gameLayer = aGameLayer;
    
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(SOUND_BG, true);
-   
+    
+    _perfMetric = PerformanceMetrics::create();
+    
     cocos2d::Size visibleSize = Director::getInstance()->getVisibleSize();
     cocos2d::Vec2 origin = Director::getInstance()->getVisibleOrigin();
     this->arrangeBackground(origin, visibleSize);
@@ -212,15 +216,29 @@ void GameController::setupNewRound()
     
     _gameCycleInd->setGameTime(_levelInfo->getRoundTime());
     
-    //TODO: velosity
-    _bandVelosity = 50;
+
+    // set defaults for teh first loop
+    _bandVelosity = _bandVelosity < 50.0 ? 50: _bandVelosity;
+    _garbagePct = _garbagePct < 0.1 ? 0.1: _garbagePct;
+    _densityFactor = _densityFactor < 0.1 ? 0.1 : _densityFactor;
     
+    int metricType = _perfMetric->getNextMetricType();
+    switch (metricType) {
+        case 0:  // velosity
+            _bandVelosity = _maxBandVelosity * _perfMetric->getNextMetricValue(0) + 50.0f;
+            break;
+        case 1: // garbagepercent
+            _garbagePct = _maxGarbagePct * _perfMetric->getNextMetricValue(1);
+            break;
+        case 2: // density
+            _densityFactor = _perfMetric->getNextMetricValue(2);
+            break;
+        default:
+            break;
+    }
     
     _conv->changeCyclingSpeed(_bandVelosity);
-    
-    
     _gameCycleInd->restart();
-    
     _theChef->restartChef();
     
     if (!_dishFactory) {
@@ -254,8 +272,14 @@ void GameController::setupNewRound()
                                        _maxRepeatBonus3
                                        );
     }
-    _itemsPool->resetForNewRound(_nRound, _itemIdlePos, _mainCource);
+    
     _itemsPool->setConveyorLength(_convLegth);
+    _itemsPool->setItemDensityFactor(_densityFactor);
+    _itemsPool->setBandVelosity(_bandVelosity);
+    _itemsPool->setGarbagePct(_garbagePct);
+    
+    _itemsPool->resetForNewRound(_nRound, _itemIdlePos, _mainCource, _levelInfo);
+    
     
 }
 

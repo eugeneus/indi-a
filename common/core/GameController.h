@@ -20,6 +20,7 @@ class BonusMenu;
 class ItemsPool;
 class DishFactory;
 class Dish;
+class PerformanceMetrics;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -141,6 +142,8 @@ protected:
     Dish* _mainCource;
     int _levelCounter;
     
+    PerformanceMetrics* _perfMetric;
+    
     std::vector<int> _caughtItemsIds;
     
     float _bonusTimer; // if _bonusTimer > 0, the game using active bonus from bonus menu;
@@ -176,6 +179,8 @@ protected:
     int _repeatBonus3;
     
     float _garbagePct;
+    
+    float _densityFactor;
     
     
 private:

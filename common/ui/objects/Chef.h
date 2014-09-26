@@ -46,6 +46,8 @@ protected:
    bool isHandCanGrab(Hand* aHand, Item* anItem);
     bool isHandShouldGrabItem(Hand* aHand, Item *anItem);
    void updateBounceImpulse();
+    
+    //void resetHands();
    
 private:
    //typedef cocos2d::Ref super;
