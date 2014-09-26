@@ -152,7 +152,11 @@ void GameOverPopup::checkLives() {
         std::string timeout = UserDataProvider::getInstance()->getLiveTimeout(0);
         long t = atol(timeout.c_str());
         if (t != 0 && now - t > 10 * 60 * 1000) { // 10 min
-            livesCount ++;
+            int count = (int)round ((now - t) / 10.0 * 60 * 1000);
+            if (count < 0 || count == 0) count = 1;
+            livesCount += count;
+            if (livesCount > 10) livesCount = 10;
+            
             UserDataProvider::getInstance()->updateLiveTimeout(0, CCString::createWithFormat("%li", now)->getCString());
             UserDataProvider::getInstance()->updateUserLives(livesCount);
             Label* lbl = (Label *)bg->getChildByTag(100);

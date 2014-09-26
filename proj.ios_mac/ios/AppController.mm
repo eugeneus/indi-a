@@ -131,7 +131,7 @@ static AppDelegate s_sharedApplication;
     bool isAvailableNotification = UserDataProvider::getInstance()->isNotificationOn();
     bool isLivesPass = UserDataProvider::getInstance()->getUserLives() != 10;
     
-    if (false) { //isAvailableNotification && isLivesPass) {
+    if (isAvailableNotification && isLivesPass) {
         long sec = UserDataProvider::getInstance()->getLiveTimeoutAsSec();
         if (sec > 0) {
             UILocalNotification *notification=[[UILocalNotification alloc] init];

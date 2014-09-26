@@ -21,7 +21,7 @@ void FBHWrapperCpp::retrieveTopTenAllTimeGlobalScores(std::string catagory){
 void FBHWrapperCpp::setDelegate(FBHDelegate* delegate){
     
     FacebookHelper *helper = [FacebookHelper sharedHelper];
-    [helper setDelegate:this];
+    [helper setDelegate:delegate];
     
 }
 

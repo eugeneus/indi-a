@@ -62,8 +62,8 @@ void ScoreMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuIte
     
     table = new Overview();
     //ScoreLBDataSource* dataSource = ScoreLBDataSource::create(); //ScoreDataSource::create(FacebookProvider::create())
-    //ScoreFBDataSource* dataSource = ScoreFBDataSource::create();
-    ScoreDataSource* dataSource = ScoreDataSource::create();
+    ScoreFBDataSource* dataSource = ScoreFBDataSource::create();
+    //ScoreDataSource* dataSource = ScoreDataSource::create();
     table->init(dataSource, ScoreTableRenderer::create(), Size(bg->getContentSize().width - 100, bg->getContentSize().height - 300));
     table->setPosition(Vec2(100 + visibleSize.width/2 + origin.x - table->getContentSize().width/2, visibleSize.height/2 + origin.y - 200));
     this->addChild(table, 100);

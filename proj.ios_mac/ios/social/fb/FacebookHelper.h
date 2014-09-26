@@ -25,7 +25,7 @@
 
 -(void) retrieveTopTenAllTimeGlobalScoresForCatagory:(NSString*)catagory;
 //delegate
--(void)setDelegate:(FBHWrapperCpp*) fbDelegate;
+-(void)setDelegate:(FBHDelegate*) fbDelegate;
 
 
 //C++/Objective-C type converters

@@ -1,7 +1,7 @@
 #include "AppDelegate.h"
 #include "MainMenu.h"
 #include "GKHWrapperCpp.h"
-
+#include "ResourcesManager.h"
 
 USING_NS_CC;
 
@@ -32,22 +32,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
     
     auto screenSize = glview->getFrameSize();
-    
-    if (2048 == screenSize.width || 2048 == screenSize.height) {
-        log("-- res = 2048");
-        glview->setDesignResolutionSize(1536, 2048, ResolutionPolicy::NO_BORDER);
-    } else if (1024 == screenSize.width || 1024 == screenSize.height) {
-        log("-- res = 1024");
-        glview->setDesignResolutionSize(768, 1024, ResolutionPolicy::NO_BORDER);
-    } else if (1136 == screenSize.width || 1136 == screenSize.height) {
-        log("-- res = 1136");
-        glview->setDesignResolutionSize(640, 960, ResolutionPolicy::SHOW_ALL);
-    } else if (960 == screenSize.width || 960 == screenSize.height) {
-        log("-- res = 960");
-        glview->setDesignResolutionSize(640, 960, ResolutionPolicy::NO_BORDER);
-    }
-
-   // glview->setDesignResolutionSize(960, 640, ResolutionPolicy::NO_BORDER);
+    ResourcesManager *res = ResourcesManager::getInstance();
+    res->setScreenSize(screenSize);
+    glview->setDesignResolutionSize(res->getResolutionWidth(), res->getResolutionHeight(), res->getResolutionPolicy());
     
     // create a scene. it's an autorelease object
     auto scene = MainMenu::createScene();

@@ -4,6 +4,7 @@
 #include "SimpleAudioEngine.h"
 #include "SoundsConstants.h"
 #include "UserDataProvider.h"
+#include "ResourcesManager.h"
 
 USING_NS_CC;
 
@@ -34,8 +35,11 @@ Scene* MainMenu::createScene()
 void MainMenu::initializeMenu() {
     
     CCLOG("Main Menu");
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("images.plist");
-    SpriteBatchNode *spriteBatch = SpriteBatchNode::create("images.png");
+    std::string pszPlist = ResourcesManager::getInstance()->getResourcesPlistFileName();
+    std::string fileImage = ResourcesManager::getInstance()->getResourcesImagesFileName();
+    
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile(pszPlist);
+    SpriteBatchNode *spriteBatch = SpriteBatchNode::create(fileImage);
     this->addChild(spriteBatch);
     
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(SOUND_CLICK);

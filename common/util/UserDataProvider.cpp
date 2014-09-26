@@ -73,10 +73,11 @@ static inline long millisecondNow()
 
 long UserDataProvider::getLiveTimeoutAsSec() {
     std::string str = UserDefault::getInstance()->getStringForKey("lives0");
+    int lives = this->getUserLives();
     long mlsec = atol(str.c_str());
     if (mlsec == 0) return 0;
     long now = millisecondNow();
-    return (10 * 60 - roundl((now - mlsec) * 1.0 / 1000.0));
+    return (10 * 60 * (10 - lives) - roundl((now - mlsec) * 1.0 / 1000.0));
 }
 
 

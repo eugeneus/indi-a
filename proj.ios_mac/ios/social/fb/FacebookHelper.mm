@@ -1,6 +1,8 @@
 
 #include "FacebookHelper.h"
 #include "ScoreFBDataSource.h"
+#include "ScoreMenu.h"
+#include "AppDelegate.h"
 
 @interface FacebookHelper (Private)
 -(void) setLastError:(NSError*)error;
@@ -8,7 +10,7 @@
 
 @implementation FacebookHelper{
     
-    FBHWrapperCpp *_gkhDelegate;
+    __block FBHDelegate *_gkhDelegate;
     
 }
 
@@ -92,7 +94,27 @@ static FacebookHelper *instanceOfHelper;
 -(void) retrieveTopTenAllTimeGlobalScoresForCatagory:(NSString*)catagory
 {
     
-    __block FBHWrapperCpp* tmpDelegate = _gkhDelegate;//new ScoreFBDataSource(*(ScoreFBDataSource*) _gkhDelegate);
+    __block std::vector<GKScoreCpp> scores;
+    __block FBHDelegate &test = *_gkhDelegate;
+    dispatch_group_t downloadGroup = dispatch_group_create();
+    
+    dispatch_apply(1, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(size_t i) {
+    
+    
+   // __block FBHWrapperCpp* tmpDelegate = _gkhDelegate;//new ScoreFBDataSource(*(ScoreFBDataSource*) _gkhDelegate);
+ 
+ //   dispatch_async(dispatch_get_main_queue(), ^{
+  
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ // 1
+        
+       // __block NSError *error;
+     //   dispatch_group_t downloadGroup = dispatch_group_create(); // 2
+    
+       
+//    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+
+    
+    dispatch_group_enter(downloadGroup);
 	[FBRequestConnection startWithGraphPath:@"/1511878459049707/scores"
                                  parameters:nil
                                  HTTPMethod:@"GET"
@@ -127,22 +149,40 @@ static FacebookHelper *instanceOfHelper;
      
      
         }
-        std::vector<GKScoreCpp> scores;
+       // std::vector<GKScoreCpp> scores;
        // _gkhDelegate->onScoresReceived(scores);
      
      } else {
-                                        std::vector<GKScoreCpp> scores;
+                //                        std::vector<GKScoreCpp> scores;
         //tmpDelegate->onScoresReceived(scores);
          //[ScoreRequestDelegate
-         tmpDelegate->onScoresReceived(scores);
+        // _gkhDelegate->onScoresReceived(scores);
      }
+                              //dispatch_semaphore_signal(sema);
+                              
+                              
+                             dispatch_group_leave(downloadGroup); // 4
      
      }];
+     
+    });
+    
+    dispatch_group_notify(downloadGroup, dispatch_get_main_queue(), ^{
+    
+        
+    //dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    //dispatch_release(sema);
+      //   dispatch_group_wait(downloadGroup, DISPATCH_TIME_FOREVER); // 5
+      //  dispatch_async(dispatch_get_main_queue(), ^{ // 6
+            //_gkhDelegate->onScoresReceived(scores);
+      //  test.onScoresReceived(scores);
+        });
+   // });
 }
 
 #pragma mark Delegate
 
--(void)setDelegate:(FBHWrapperCpp*)gkhDelegate{
+-(void)setDelegate:(FBHDelegate*)gkhDelegate{
     
     _gkhDelegate = gkhDelegate;
     
