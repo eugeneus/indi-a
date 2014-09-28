@@ -35,10 +35,10 @@ void ScoreLBDataSource::requestData() {
 }
 
 void ScoreLBDataSource::onScoresReceived(std::vector<GKScoreCpp> scores) {
-    std::vector<Ref *> data;
+    /*std::vector<Ref *> data;
     for (GKScoreCpp sc : scores) {
         data.push_back(ScoreDto::create(sc.playerID, sc.formattedValue, sc.rank));
     }
     
-    this->dataRequestComplete(data);
+    this->dataRequestComplete(data);*/
 }

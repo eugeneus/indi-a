@@ -7,7 +7,7 @@ USING_NS_CC_EXT;
 using namespace ui;
 
 Overview::Overview() {}
-Overview::~Overview() {}
+Overview::~Overview() {CCLOG("-------end------");}
 
 bool Overview::init(SlidingDataSource *dataSource, SlidingItemRenderer* renderer, cocos2d::Size viewSize)
 {
@@ -38,7 +38,17 @@ bool Overview::init(SlidingDataSource *dataSource, SlidingItemRenderer* renderer
         _loadingAction = RepeatForever::create(RotateBy::create(5.0, 360));
         _loading->runAction(_loadingAction);
         
+        
+        SEL_CallFuncO func1 = callfuncO_selector(Overview::onComplete);
+        NotificationCenter::getInstance()->addObserver(this, func1, "table_score_complete", nullptr);
+        
+        SEL_CallFuncO func2 = callfuncO_selector(Overview::onError);
+        NotificationCenter::getInstance()->addObserver(this, func2, "table_score_error", nullptr);
+        
+        
         _dataSource->requestData(this);
+        
+        
         
         bRet = true;
     }while(0);
@@ -50,9 +60,9 @@ void Overview::tableCellTouched(cocos2d::extension::TableView *table, cocos2d::e
     log("cell touched at index %zd", cell->getIdx());
 }
 
-Size Overview::tableCellSizeForIndex(cocos2d::extension::TableView *table, ssize_t idx)
+cocos2d::Size Overview::tableCellSizeForIndex(cocos2d::extension::TableView *table, ssize_t idx)
 {
-    return Size(winSize.width,winSize.height/6);
+    return cocos2d::Size(winSize.width,winSize.height/6);
 }
 
 TableViewCell* Overview::tableCellAtIndex(cocos2d::extension::TableView *table, ssize_t idx)
@@ -92,4 +102,13 @@ void Overview::toggleLoading() {
     }
     _loading->setVisible(visibility);
     _loadingBg->setVisible(visibility);
+}
+
+void Overview::onComplete(Ref *pSender) {
+    CCLOG("fdsfsd");
+    this->requestDataComplete();
+}
+
+void Overview::onError(Ref *pSender) {
+
 }

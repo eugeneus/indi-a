@@ -23,18 +23,12 @@ ScoreDataSource* ScoreDataSource::create()
 
 ScoreDataSource::ScoreDataSource() {}
 ScoreDataSource::~ScoreDataSource() {}
-ScoreDataSource::ScoreDataSource(ScoreDataSource const& copy):_dataProvider(copy._dataProvider) {}
-
 
 bool ScoreDataSource::init() {
-    _dataProvider = new FBHWrapperCpp();
-    ScoreRequestDelegate::getInstance()._currentDataSource = *this;
-    _dataProvider->setDelegate(nullptr);
+   // _dataProvider = new FBHWrapperCpp();
+   // ScoreRequestDelegate::getInstance()._currentDataSource = *this;
+   // _dataProvider->setDelegate(nullptr);
     return true;
-}
-
-void ScoreDataSource::requestData() {
-    _dataProvider->retrieveTopTenAllTimeGlobalScores("");
 }
 
 void ScoreDataSource::completeReadScores(std::vector<GKScoreCpp> score) {
@@ -43,11 +37,15 @@ void ScoreDataSource::completeReadScores(std::vector<GKScoreCpp> score) {
         data.push_back(ScoreDto::create(sc.playerID, sc.formattedValue, sc.rank));
     }
     
-    this->dataRequestComplete(data);
+ //   this->dataRequestComplete(data);
+}
+
+void ScoreDataSource::requestData() {
+
 }
 
 void ScoreDataSource::error() {
     std::vector<Ref *> data;
-    this->dataRequestComplete(data);
+ //   this->dataRequestComplete(data);
 }
 

@@ -1,6 +1,6 @@
 
 #include "ScoreTableRenderer.h"
-#include "ScoreDto.h"
+#include "ScoreUserEntity.h"
 
 USING_NS_CC;
 
@@ -38,7 +38,7 @@ Label* createLabel(std::string text, TTFConfig ttf, Color3B color) {
 Layer* ScoreTableRenderer::create(Ref* data) {
     if (!data) return Layer::create();
     
-    ScoreDto* dto = (ScoreDto *) data;
+    ScoreUserEntity* dto = (ScoreUserEntity *) data;
     
     TTFConfig ttf32;
     ttf32.fontSize = 32;

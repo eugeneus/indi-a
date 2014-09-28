@@ -9,10 +9,10 @@
 
 USING_NS_CC;
 
-class ScoreFBDataSource : public SlidingDataSource, public FBHDelegate
+class ScoreFBDataSource : public SlidingDataSource
 {
 private:
-    FBHWrapperCpp* _dataProvider;
+    typedef SlidingDataSource super;
 protected:
     
 public:
@@ -20,12 +20,14 @@ public:
     static ScoreFBDataSource* create();
     virtual bool init();
     ScoreFBDataSource();
-    ScoreFBDataSource(const ScoreFBDataSource& other);
     virtual ~ScoreFBDataSource();
-    FBHDelegate* copy();
+
     
     void requestData();
     virtual void onScoresReceived(std::vector<GKScoreCpp> scores);
+    
+    void onScoresReceived0(Ref *pSender);
+    void onScoresReceived1();
 };
 
 #endif /* defined(__BlindChef__ScoreFBDataSource__) */
