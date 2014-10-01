@@ -12,7 +12,10 @@ enum
     kGarbageDuck,
     kGarbagePants,
     kGarbageCap,
-    kGarbageMobile
+    kGarbageMobile,
+    kGarbageSocks,  //TODO: add
+    kGarbageGlasses, //TODO: ADD
+    kGarbageHairbrush //TODO: add
 };
 
 class GarbageFactory {

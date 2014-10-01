@@ -21,7 +21,9 @@ enum
     kFoodBeef,     //12
     kFoodLemon,    //13
     kFoodSalt,     //14
-    kFoodSpice     //15
+    kFoodSpice,     //15
+    kNoodles,        //16 TODO: add this food
+    kCelery         //17 TODO: add this food
 };
 
 class FoodFactory {

@@ -1935,8 +1935,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1973,8 +1973,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mikhail Smarshchok (3ENUU6GK3H)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
