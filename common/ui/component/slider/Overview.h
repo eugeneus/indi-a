@@ -43,8 +43,11 @@ public:
     
 //    void addMenuTouchEvent(const menuCallBack& callback);//回调函数
     
-    Size winSize;
+    cocos2d::Size winSize;
     cocos2d::Ref* _pSender;
+    
+    void onComplete(Ref *pSender);
+    void onError(Ref *pSender);
 };
 
 #endif /* defined(__BlindChef__Overview__) */

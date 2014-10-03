@@ -1,14 +1,15 @@
 
 #include "ScoreMenuPopup.h"
 #include "MainMenu.h"
-#include "FacebookProvider.h"
-#include "Overview.h"
+//#include "FacebookProvider.h"
+//#include "Overview.h"
 #include "ResourcesManager.h"
+#include "FBScoreTable.h"
 
-#include "score/ScoreDataSource.h"
-#include "score/lb/ScoreLBDataSource.h"
-#include "score/fb/ScoreFBDataSource.h"
-#include "score/ScoreTableRenderer.h"
+//#include "score/ScoreDataSource.h"
+//#include "score/lb/ScoreLBDataSource.h"
+//#include "score/fb/ScoreFBDataSource.h"
+//#include "score/ScoreTableRenderer.h"
 
 USING_NS_CC;
 
@@ -63,13 +64,13 @@ void ScoreMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuIte
   //  this->addChild(layer, 1);
     
     
-    table = new Overview();
+    table = new FBScoreTable();
     //ScoreLBDataSource* dataSource = ScoreLBDataSource::create(); //ScoreDataSource::create(FacebookProvider::create())
-    ScoreFBDataSource* dataSource = ScoreFBDataSource::create();
+    // ScoreFBDataSource* dataSource = ScoreFBDataSource::create();
     //ScoreDataSource* dataSource = ScoreDataSource::create();
-    table->init(dataSource, ScoreTableRenderer::create(), Size(bg->getContentSize().width - 100, bg->getContentSize().height - 300));
+    table->init(cocos2d::Size(bg->getContentSize().width - 150, bg->getContentSize().height - 300));
     table->setPosition(Vec2(100 + visibleSize.width/2 + origin.x - table->getContentSize().width/2, visibleSize.height/2 + origin.y - 200));
-    this->addChild(table, 100);
+    this->addChild(table, 1002);
     
  //   initSlidingLayer();
     

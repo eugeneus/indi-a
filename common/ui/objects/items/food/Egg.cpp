@@ -65,9 +65,9 @@ cocos2d::FiniteTimeAction* Egg::getFloorBumpAction(float aDuration, cocos2d::Poi
    SpriteFrame* animFrame = nullptr;
 
     
-   for(int i = 1; i < 3; i++)
+   for(int i = 2; i < 11; i++)
    {
-      sprintf(frameName, "egg_crash_%1d.png", i);
+      sprintf(frameName, "egg_%d.png", i);
       animFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
       animateFrames.pushBack(animFrame);
    }
@@ -76,7 +76,7 @@ cocos2d::FiniteTimeAction* Egg::getFloorBumpAction(float aDuration, cocos2d::Poi
     //animFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
     //animateFrames.pushBack(animFrame);
     
-   Animation* animation = Animation::createWithSpriteFrames(animateFrames, 0.7f);
+   Animation* animation = Animation::createWithSpriteFrames(animateFrames, 0.1f);
    return Animate::create(animation);
    
 }

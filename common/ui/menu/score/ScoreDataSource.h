@@ -13,7 +13,7 @@ USING_NS_CC;
 class ScoreDataSource : public SlidingDataSource
 {
 private:
-    FBHWrapperCpp* _dataProvider;
+    
 protected:
     
 public:
@@ -22,7 +22,6 @@ public:
     virtual bool init();
     ScoreDataSource();
     virtual ~ScoreDataSource();
-    ScoreDataSource(ScoreDataSource const& copy);
     
     void requestData();
     

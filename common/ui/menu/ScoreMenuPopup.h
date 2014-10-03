@@ -4,14 +4,14 @@
 
 #include "cocos2d.h"
 #include "BaseMenuPopup.h"
-#include "Overview.h"
+#include "FBScoreTable.h"
 
 class ScoreMenuPopup : public BaseMenuPopup
 {
 private:
     bool isFriendsTab;
     cocos2d::Vector<cocos2d::MenuItemSprite *> tabs;
-    Overview* table;
+    FBScoreTable* table;
 public:
     static ScoreMenuPopup* create();
     

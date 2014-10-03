@@ -1,5 +1,8 @@
 #include "ScoreFBDataSource.h"
 #include "ScoreDto.h"
+#include "FBManager.h"
+#include "UserScoreResult.h"
+#include "ScoreUserEntity.h"
 
 USING_NS_CC;
 
@@ -22,31 +25,43 @@ ScoreFBDataSource* ScoreFBDataSource::create()
 ScoreFBDataSource::ScoreFBDataSource() {}
 ScoreFBDataSource::~ScoreFBDataSource() {}
 
-ScoreFBDataSource::ScoreFBDataSource(const ScoreFBDataSource& other) : SlidingDataSource(other), FBHDelegate(other), _dataProvider(other._dataProvider) {
-    CCLOG("............ jopaaa copied");
-    std::cout << "\n........bab.ab.ab.a.b.ab....b.a.ba.b.ab..";
-}
-
 bool ScoreFBDataSource::init() {
-    _dataProvider = new FBHWrapperCpp();
-    _dataProvider->setDelegate(this);
     return true;
 }
 
 void ScoreFBDataSource::requestData() {
+    SEL_CallFuncO func1 = callfuncO_selector(ScoreFBDataSource::onScoresReceived0);
+    NotificationCenter::getInstance()->addObserver(this, func1, "score_complete", nullptr);
     
-    _dataProvider->retrieveTopTenAllTimeGlobalScores("fsdfsdf");
+    SEL_CallFuncO func2 = callfuncO_selector(ScoreFBDataSource::onScoresReceived0);
+    NotificationCenter::getInstance()->addObserver(this, func2, "score_error", nullptr);
+    
+    [FBManager getScoreList];
 }
 
 void ScoreFBDataSource::onScoresReceived(std::vector<GKScoreCpp> scores) {
-    std::vector<Ref *> data;
-    for (GKScoreCpp sc : scores) {
-        data.push_back(ScoreDto::create(sc.playerID, sc.formattedValue, sc.rank));
-    }
-    
-    this->dataRequestComplete(data);
+   
 }
 
-FBHDelegate* ScoreFBDataSource::copy() {
-    return new ScoreFBDataSource(*this);
+void ScoreFBDataSource::onScoresReceived0(Ref *pSender) {
+    CCLOG("sdfdsf");
+    cocos2d::Vector<Ref *> data;
+    
+    if (pSender != nullptr) {
+        UserScoreResult *result = (UserScoreResult *) pSender;
+        cocos2d::Vector<ScoreUserEntity *> userData = result->getData();
+        for (ScoreUserEntity *user : userData) {
+            data.pushBack(user);
+        }
+    }
+    
+    _data.pushBack(data);
+    //SlidingDataSourceCallback *callbakc = super::getCallback();
+    //callbakc->requestDataComplete();
+    NotificationCenter::getInstance()->postNotification("table_score_complete", pSender);
+   // super::dataRequestComplete(data);
+}
+
+void ScoreFBDataSource::onScoresReceived1() {
+    CCLOG("sdfdsf");
 }

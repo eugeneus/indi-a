@@ -10,20 +10,21 @@ USING_NS_CC;
 class SlidingDataSource : public cocos2d::Ref
 {
 private:
-    std::vector<Ref *> _data;
     SlidingDataSourceCallback *_callback;
+protected:
+    cocos2d::Vector<Ref *> _data;
 public:
     SlidingDataSource();
-    SlidingDataSource(const SlidingDataSource& other);
     virtual ~SlidingDataSource();
     
     ssize_t getDataSize();
-    std::vector<Ref *> getData();
+    cocos2d::Vector<Ref *> getData();
     
     void requestData(SlidingDataSourceCallback *callback);
-    void dataRequestComplete(std::vector<Ref *> data);
+    void dataRequestComplete(cocos2d::Vector<Ref *> data);
     
     virtual void requestData() = 0;
+    SlidingDataSourceCallback *getCallback();
     //virtual void requestComplete();
 };
 

@@ -32,3 +32,22 @@ bool Beef::init() {
     _crashSoundFile = SOUND_FALL_MEAT;
     return true;
 }
+
+cocos2d::FiniteTimeAction* Beef::getFloorBumpAction(float aDuration, cocos2d::Point anImpulse)
+{
+    Vector<SpriteFrame*> animateFrames(3);
+    char frameName[100] = {0};
+    SpriteFrame* animFrame = nullptr;
+    
+    
+    for(int i = 1; i < 9; i++)
+    {
+        sprintf(frameName, "beef_%d.png", i);
+        animFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
+        animateFrames.pushBack(animFrame);
+    }
+    
+    Animation* animation = Animation::createWithSpriteFrames(animateFrames, 0.1f);
+    return Animate::create(animation);
+    
+}

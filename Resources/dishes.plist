@@ -2,25 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>dish1</key>
+	<key>beef-mushrooms</key>
 	<dict>
 		<key>ImageFileName</key>
-		<string>tips_level_1.png</string>
+		<string>cloud-beef-mushrooms.png</string>
 		<key>ingridients</key>
 		<array>
-			<integer>3</integer>
-			<integer>11</integer>
-		</array>
-	</dict>
-	<key>dish2</key>
-	<dict>
-		<key>ImageFileName</key>
-		<string>tips_level_2.png</string>
-		<key>ingridients</key>
-		<array>
-			<integer>0</integer>
-			<integer>3</integer>
-			<integer>11</integer>
+			<integer>12</integer>
+			<integer>9</integer>
 		</array>
 	</dict>
 </dict>
