@@ -100,6 +100,7 @@
 		AA8D6B9B1998BD6C00484E65 /* OptionsMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B991998BD6C00484E65 /* OptionsMenuPopup.cpp */; };
 		AA8D6B9E1999001900484E65 /* SocialMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B9C1999001900484E65 /* SocialMenu.cpp */; };
 		AA8D6BA11999009000484E65 /* SocialMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B9F1999009000484E65 /* SocialMenuPopup.cpp */; };
+		AA92DB5819D8C08500067E77 /* GCScoreTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA92DB5619D8C08500067E77 /* GCScoreTable.cpp */; };
 		AA96A1FB195DB09200C22BC9 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = AA96A1FA195DB09200C22BC9 /* images.png */; };
 		AA96A21D195DB16C00C22BC9 /* BaseMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A209195DB16C00C22BC9 /* BaseMenu.cpp */; };
 		AA96A220195DB16C00C22BC9 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A211195DB16C00C22BC9 /* MainMenu.cpp */; };
@@ -519,6 +520,8 @@
 		AA8D6B9D1999001900484E65 /* SocialMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMenu.h; sourceTree = "<group>"; };
 		AA8D6B9F1999009000484E65 /* SocialMenuPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocialMenuPopup.cpp; sourceTree = "<group>"; };
 		AA8D6BA01999009000484E65 /* SocialMenuPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMenuPopup.h; sourceTree = "<group>"; };
+		AA92DB5619D8C08500067E77 /* GCScoreTable.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GCScoreTable.cpp; sourceTree = "<group>"; };
+		AA92DB5719D8C08500067E77 /* GCScoreTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCScoreTable.h; sourceTree = "<group>"; };
 		AA96A1FA195DB09200C22BC9 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		AA96A209195DB16C00C22BC9 /* BaseMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseMenu.cpp; sourceTree = "<group>"; };
 		AA96A20A195DB16C00C22BC9 /* BaseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMenu.h; sourceTree = "<group>"; };
@@ -1074,6 +1077,8 @@
 			children = (
 				AA5CA86F19C6E435006E62C6 /* ScoreLBDataSource.cpp */,
 				AA5CA87019C6E435006E62C6 /* ScoreLBDataSource.h */,
+				AA92DB5619D8C08500067E77 /* GCScoreTable.cpp */,
+				AA92DB5719D8C08500067E77 /* GCScoreTable.h */,
 			);
 			path = lb;
 			sourceTree = "<group>";
@@ -1836,6 +1841,7 @@
 				AA96A22C195DB76F00C22BC9 /* Spritable.cpp in Sources */,
 				AAD6D7E319D5B591003390F7 /* PurchaseManager.mm in Sources */,
 				AAD6D7EB19D5B84A003390F7 /* Reachability.m in Sources */,
+				AA92DB5819D8C08500067E77 /* GCScoreTable.cpp in Sources */,
 				AA8968831997DC28005F8946 /* Onion.cpp in Sources */,
 				AA8D6B9B1998BD6C00484E65 /* OptionsMenuPopup.cpp in Sources */,
 				AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */,

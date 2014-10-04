@@ -64,14 +64,20 @@ void ScoreMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuIte
   //  this->addChild(layer, 1);
     
     
-    table = new FBScoreTable();
+/*    table = new FBScoreTable();
     //ScoreLBDataSource* dataSource = ScoreLBDataSource::create(); //ScoreDataSource::create(FacebookProvider::create())
     // ScoreFBDataSource* dataSource = ScoreFBDataSource::create();
     //ScoreDataSource* dataSource = ScoreDataSource::create();
     table->init(cocos2d::Size(bg->getContentSize().width - 150, bg->getContentSize().height - 300));
     table->setPosition(Vec2(100 + visibleSize.width/2 + origin.x - table->getContentSize().width/2, visibleSize.height/2 + origin.y - 200));
     this->addChild(table, 1002);
+ */
     
+    gcTable = new GCScoreTable();
+    gcTable->init(cocos2d::Size(bg->getContentSize().width - 150, bg->getContentSize().height - 300));
+    gcTable->setPosition(Vec2(100 + visibleSize.width/2 + origin.x - gcTable->getContentSize().width/2, visibleSize.height/2 + origin.y - 200));
+    this->addChild(gcTable, 1002);
+
  //   initSlidingLayer();
     
 }
