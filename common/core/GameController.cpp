@@ -175,7 +175,7 @@ void GameController::arrangeSceneForRect(cocos2d::Vec2 anOrigin, cocos2d::Size a
     float yOffsetConveyer = 615;
     
     Size chefSize = _theChef->getSize();
-    Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer + bottomOffset);
+    Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer + bottomOffset - 20.0f);
     _theChef->setOrigin(chefOrigin);
 
     _cloudTipsPos = Vec2(140, yOffsetConveyer + 100 + bottomOffset);
@@ -268,7 +268,7 @@ void GameController::setupNewRound()
     if (!_cloudTips) {
         const std::string& str = _mainCource->getImageName();
         _cloudTips = MindCloudTips::create(str);
-        _gameLayer->addChild(_cloudTips, kCloudZO);
+        _gameLayer->addChild(_cloudTips, 2);
         _cloudTips->toggleTip();
     }
     const std::string& str = _mainCource->getImageName();

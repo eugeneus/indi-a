@@ -40,15 +40,22 @@ bool Chef::init(cocos2d::Layer* aLayer, int aZOrder) {
    
    _chef = Sprite::createWithSpriteFrameName("chef_1.png");
    _chef->setAnchorPoint(Point(0,0));
-   aLayer->addChild(_chef,aZOrder - 10);
+   aLayer->addChild(_chef,4);
+    
+    _head = Sprite::createWithSpriteFrameName("head_idle_1.png");
+    _head->setAnchorPoint(Point(0,0));
+    
+    aLayer->addChild(_head,4);
    
    // just temporary scale
-   float scaleFactor = 0.5f;
+   float scaleFactor = 0.65f;
    _chef->setScale(scaleFactor);
+    //_head->setScale(scaleFactor);
    Size chefSize = _chef->getContentSize();
    Point chefOrigin = Point((visibleSize.width - (chefSize.width*scaleFactor))/2.0f, 0.0f);
    _chef->setPosition(chefOrigin);
    _chefRect = Rect(chefOrigin.x,chefOrigin.y,chefSize.width*scaleFactor,chefSize.height*scaleFactor);
+   _head->setPosition(Vec2(_chefRect.origin.x + _chefRect.size.width/2.0,_chefRect.origin.y + _chefRect.size.height));
    
    // positions will be adjusted by setOrigin
    _rightHand = Hand::create("hand_left_1.png");
@@ -78,13 +85,17 @@ void Chef::setOrigin(cocos2d::Point anOrigin)
    _chefRect.origin.y = anOrigin.y;
     float xOffset = (_leftHand->getContentSize().width*0.7)*0.2;
     _rightHandRect.origin.x = anOrigin.x + xOffset;
-   _rightHandRect.origin.y = anOrigin.y;
+   _rightHandRect.origin.y = anOrigin.y + 20.0f;
 
     float xPos = anOrigin.x + _chefRect.size.width - xOffset;
    _leftHandRect.origin.x = xPos;
-   _leftHandRect.origin.y = anOrigin.y;
+   _leftHandRect.origin.y = anOrigin.y + 20.0f;
 
    _chef->setPosition(_chefRect.origin);
+    Size headSize = _head->getContentSize();
+   _head->setPosition(Vec2(_chefRect.origin.x + _chefRect.size.width/2.0 - headSize.width / 2.0f,
+                           _chefRect.origin.y + _chefRect.size.height - 30.0f));
+
    _leftHand->setInitialPosition(_leftHandRect.origin);
    _rightHand->setInitialPosition(_rightHandRect.origin);
 
@@ -209,17 +220,37 @@ void  Chef::startChefBodyAnimation()
    Vector<SpriteFrame*> animFrames(15);
    char imageFileName[100] = {0};
    auto cache = SpriteFrameCache::getInstance();
-   for(int i = 1; i < 5; i++)
+   for(int i = 1; i < 11; i++)
    {
       sprintf(imageFileName, "chef_%d.png", i);
       SpriteFrame* frame = cache->getSpriteFrameByName(imageFileName);
       animFrames.pushBack(frame);
    }
    
-   Animation* animation = Animation::createWithSpriteFrames(animFrames, 2.5);
+   Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.3);
 
    _chef->runAction(RepeatForever::create(Animate::create(animation)));
+    
+    this->startChefHeadIdleAnimation();
    
+}
+
+void  Chef::startChefHeadIdleAnimation()
+{
+    Vector<SpriteFrame*> animFrames(15);
+    char imageFileName[100] = {0};
+    auto cache = SpriteFrameCache::getInstance();
+    for(int i = 2; i < 23; i++)
+    {
+        sprintf(imageFileName, "head_idle_%d.png", i);
+        SpriteFrame* frame = cache->getSpriteFrameByName(imageFileName);
+        animFrames.pushBack(frame);
+    }
+    
+    Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.3);
+    
+    _head->runAction(RepeatForever::create(Animate::create(animation)));
+    
 }
 
 void Chef::updateBounceImpulse()
@@ -258,6 +289,7 @@ void Chef::restartChef() {
     _leftHand->restart();
     _rightHand->restart();
     _chef->stopAllActions();
+    _head->stopAllActions();
     this->startChefBodyAnimation();
 }
 
