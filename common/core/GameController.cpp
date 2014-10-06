@@ -658,11 +658,6 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
     
     if (itemPos.x <= sx && itemPos.x + itemSize.width >= sx &&
         itemPos.y <= sy && itemPos.y + itemSize.height >= sx) {
-        // tap event should toss item UP
-        // toss it
-        // check nearest endPoint
-        // move down to that endPOint
-        CCLOG("TAP");
         anItem->stopAllActions();
         ControlPointDef* aPointDef = ControlPointDef::create(anItem->_currentTargetPoint,
                                                              anItem->_currentTargetType);
@@ -671,11 +666,6 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
     }
     else if(itemPos.y > sy &&
             (itemPos.x <= sx && itemPos.x + itemSize.width >= sx)){
-        // swipe item upward
-        // toss it
-        // check nearest endPoint
-        // move down to that endPOint
-        CCLOG("UPWARD");
         anItem->stopAllActions();
         ControlPointDef* aPointDef = ControlPointDef::create(anItem->_currentTargetPoint,
                                                              anItem->_currentTargetType);
@@ -687,11 +677,24 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
     }
     // identify vertical direction
     if (itemPos.y >= sy) { // like a bounce away
-        if (itemPos.x > sx) {
+        if (itemPos.x < sx) {
             CCLOG("LEFT AWAY");
+            anItem->stopAllActions();
+    //_cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // left floor
+    //_cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // left floor
+
+            ControlPointDef* aPointDef = ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor);
+            this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
+
         }
         else{
             CCLOG("RIGHT AWAY");
+            anItem->stopAllActions();
+            ControlPointDef* aPointDef = ControlPointDef::ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor);
+        //_cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
+        // _cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
+
+            this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
         }
     }
     else{ // in case swipe direction some kind top->down
