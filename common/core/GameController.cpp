@@ -714,9 +714,31 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
         
         if (yInter > collisionMargin.y) {
             CCLOG("AWAY");
+            if (itemPos.x < sx) {
+                CCLOG("LEFT AWAY");
+                anItem->stopAllActions();
+                //_cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // left floor
+                //_cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // left floor
+                
+                ControlPointDef* aPointDef = ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor);
+                this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
+                
+            }
+            else{
+                CCLOG("RIGHT AWAY");
+                anItem->stopAllActions();
+                ControlPointDef* aPointDef = ControlPointDef::ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor);
+                //_cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
+                // _cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
+                
+                this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
+            }
         }
         else{
             CCLOG("INTO");
+            anItem->stopAllActions();
+            ControlPointDef* aPointDef = ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter); // center
+            this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.2));
         }
     
     }
