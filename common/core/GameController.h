@@ -21,6 +21,7 @@ class ItemsPool;
 class DishFactory;
 class Dish;
 class PerformanceMetrics;
+class Stickers;
 
 class ControlPointDef : public cocos2d::Ref {
    
@@ -130,6 +131,7 @@ protected:
     bool _isTimerEnd = false;
     LevelProvider* _levelInfo;
     //UserDataProvider* _userData;
+    Stickers *_stickers;
     ScoreLayer* _scoreLayer;
     Multiplier* _multiplier;
     GameCycleIndicator* _gameCycleInd;
@@ -139,6 +141,7 @@ protected:
     BonusMenu* _bonusMenu;
     ItemsPool* _itemsPool;
     DishFactory* _dishFactory;
+    std::vector<Dish *> _dishesQueue;
     Dish* _mainCource;
     int _levelCounter;
     

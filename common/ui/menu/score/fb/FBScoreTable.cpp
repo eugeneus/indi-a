@@ -16,7 +16,7 @@ FBScoreTable::FBScoreTable() {
 }
 FBScoreTable::~FBScoreTable() {CCLOG("-------end------");}
 
-bool FBScoreTable::init(cocos2d::Size viewSize)
+bool FBScoreTable::init(cocos2d::Size viewSize, bool loadOnStart)
 {
     bool bRet = false;
     do {
@@ -42,11 +42,17 @@ bool FBScoreTable::init(cocos2d::Size viewSize)
         NotificationCenter::getInstance()->addObserver(this, func2, "score_error", nullptr);
         
         
-        [FBManager getScoreList];
+        if (loadOnStart) {
+            this->reload();
+        }
         
         bRet = true;
     }while(0);
     return bRet;
+}
+
+void FBScoreTable::reload() {
+    [FBManager getScoreList];
 }
 
 void FBScoreTable::tableCellTouched(cocos2d::extension::TableView *table, cocos2d::extension::TableViewCell *cell)
@@ -115,11 +121,11 @@ Layer* FBScoreTable::createCell(Ref* data, int index) {
     
     TTFConfig ttf32;
     ttf32.fontSize = 32;
-    ttf32.fontFilePath = "crystal radio kit.ttf";
+    ttf32.fontFilePath = "BrownBagLunch.ttf";
     
     TTFConfig ttf18;
     ttf18.fontSize = 18;
-    ttf18.fontFilePath = "crystal radio kit.ttf";
+    ttf18.fontFilePath = "BrownBagLunch.ttf";
     
     const cocos2d::Color3B& colorWhite = Color3B(255, 255, 255);
     

@@ -6,6 +6,7 @@
 #include "Item.h"
 #include "SoundsConstants.h"
 #include "UserDataProvider.h"
+#include "PurchaseManager.h"
 
 USING_NS_CC;
 
@@ -123,6 +124,7 @@ void BonusMenu::bonus1Callback(Ref* pSender) {
         }
     } else {
         //show store
+        [PurchaseManager purchaseBonus];
     }
 }
 
@@ -138,6 +140,7 @@ void BonusMenu::bonus2Callback(Ref* pSender) {
 
     } else {
         //show store
+        [PurchaseManager purchaseBonus];
     }
 }
 
@@ -154,6 +157,7 @@ void BonusMenu::bonus3Callback(Ref* pSender) {
         //run
     } else {
         //show store
+        [PurchaseManager purchaseBonus];
     }
 }
 

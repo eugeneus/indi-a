@@ -28,8 +28,8 @@ public:
     GCScoreTable();
     ~GCScoreTable();
     
-    bool init(cocos2d::Size viewSize);
-    
+    bool init(cocos2d::Size viewSize, bool loadOnStart);
+    void reload();
     void onComplete(Ref *pSender);
     void onError(Ref *pSender);
     void onImageDownLoaded(cocos2d::network::HttpClient* pSender, cocos2d::network::HttpResponse* pResponse);

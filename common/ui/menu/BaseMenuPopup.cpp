@@ -9,10 +9,15 @@ void BaseMenuPopup::initMenuItem(cocos2d::Vector<cocos2d::MenuItem*>& menuItems,
     std::string spriteSelectedFrameName = BTN_NAME_SELECTED(name);
     if (!isFrameNameExist(spriteSelectedFrameName)) spriteSelectedFrameName = BTN_NAME(name);
     Sprite* normal = Sprite::createWithSpriteFrameName(spriteNormalFrameName);
+    //normal->setAnchorPoint(Vec2(0.5, 0.5));
     Sprite* selected = Sprite::createWithSpriteFrameName(spriteSelectedFrameName);
+    //selected->setAnchorPoint(Vec2(0.5, 0.5));
     MenuItemSprite *menuItem = MenuItemSprite::create(normal, selected, callback);//MenuItemFont::create(name, callback);
     menuItem->setPosition(pos);
+    //menuItem->setAnchorPoint(Vec2(0.5, 0.5));
     menuItems.pushBack(menuItem);
+    
+    
 }
 
 bool BaseMenuPopup::init()

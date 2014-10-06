@@ -326,7 +326,7 @@ static GameKitHelper *instanceOfGameKitHelper;
          {
              if (error) {
                  [self setLastError:error];
-                 cocos2d::NotificationCenter::getInstance()->postNotification("score_error");
+                 cocos2d::NotificationCenter::getInstance()->postNotification("score_gc_error");
              } else {
                  cocos2d::Vector<ScoreUserEntity *> data;
                  for (GKScore *gkScore : scores) {
@@ -337,7 +337,7 @@ static GameKitHelper *instanceOfGameKitHelper;
              
                  UserScoreResult *result = UserScoreResult::create();
                  result->addData(data);
-                 cocos2d::NotificationCenter::getInstance()->postNotification("score_complete", result);
+                 cocos2d::NotificationCenter::getInstance()->postNotification("score_gc_complete", result);
              }
          }];
 	}

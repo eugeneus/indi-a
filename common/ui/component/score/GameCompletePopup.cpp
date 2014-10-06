@@ -41,11 +41,11 @@ bool GameCompletePopup::init() {
     
     TTFConfig ttf32;
     ttf32.fontSize = 32;
-    ttf32.fontFilePath = "crystal radio kit.ttf";
+    ttf32.fontFilePath = "BrownBagLunch.ttf";
     
     TTFConfig ttf48;
     ttf48.fontSize = 48;
-    ttf48.fontFilePath = "crystal radio kit.ttf";
+    ttf48.fontFilePath = "BrownBagLunch.ttf";
     
     const cocos2d::Color3B& colorYellow = Color3B(255, 240, 104);
     const cocos2d::Color3B& colorWhite = Color3B(255, 255, 255);

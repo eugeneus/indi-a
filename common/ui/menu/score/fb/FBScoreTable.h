@@ -27,7 +27,8 @@ public:
     FBScoreTable();
     ~FBScoreTable();
     
-    bool init(cocos2d::Size viewSize);
+    bool init(cocos2d::Size viewSize, bool loadOnStart);
+    void reload();
     
     void onComplete(Ref *pSender);
     void onError(Ref *pSender);

@@ -17,7 +17,7 @@ GCScoreTable::GCScoreTable() {
 }
 GCScoreTable::~GCScoreTable() {CCLOG("-------end------");}
 
-bool GCScoreTable::init(cocos2d::Size viewSize)
+bool GCScoreTable::init(cocos2d::Size viewSize, bool loadOnStart)
 {
     bool bRet = false;
     do {
@@ -37,17 +37,23 @@ bool GCScoreTable::init(cocos2d::Size viewSize)
         this->setTouchEnabled(true);
         
         SEL_CallFuncO func1 = callfuncO_selector(GCScoreTable::onComplete);
-        NotificationCenter::getInstance()->addObserver(this, func1, "score_complete", nullptr);
+        NotificationCenter::getInstance()->addObserver(this, func1, "score_gc_complete", nullptr);
         
         SEL_CallFuncO func2 = callfuncO_selector(GCScoreTable::onError);
-        NotificationCenter::getInstance()->addObserver(this, func2, "score_error", nullptr);
+        NotificationCenter::getInstance()->addObserver(this, func2, "score_gc_error", nullptr);
         
-        [[GameKitHelper sharedGameKitHelper] retrieveTopTenAllTimeGlobalScoresForCatagory:@"bc_score_top"];
-      //  [FBManager getScoreList];
+        
+        if (loadOnStart)
+            this->reload();
+        
         
         bRet = true;
     }while(0);
     return bRet;
+}
+
+void GCScoreTable::reload() {
+    [[GameKitHelper sharedGameKitHelper] retrieveTopTenAllTimeGlobalScoresForCatagory:@"bc_scores_top"];
 }
 
 void GCScoreTable::tableCellTouched(cocos2d::extension::TableView *table, cocos2d::extension::TableViewCell *cell)
@@ -116,11 +122,11 @@ Layer* GCScoreTable::createCell(Ref* data, int index) {
     
     TTFConfig ttf32;
     ttf32.fontSize = 32;
-    ttf32.fontFilePath = "crystal radio kit.ttf";
+    ttf32.fontFilePath = "BrownBagLunch.ttf";
     
     TTFConfig ttf18;
     ttf18.fontSize = 18;
-    ttf18.fontFilePath = "crystal radio kit.ttf";
+    ttf18.fontFilePath = "BrownBagLunch.ttf";
     
     const cocos2d::Color3B& colorWhite = Color3B(255, 255, 255);
     

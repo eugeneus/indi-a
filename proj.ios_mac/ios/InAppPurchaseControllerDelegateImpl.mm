@@ -13,6 +13,15 @@ USING_NS_CC;
 
 - (void)startPurchase {
     //Director::getInstance()->getEventDispatcher()-> pauseEventListenersForTarget(<#cocos2d::Node *target#>)  g etTouchDispatcher()->setDispatchEvents(false);
+    Director::getInstance()->pause();
+    /*ActivityIndicator
+    
+    
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.color = [UIColor orangeColor];
+    spinner.hidesWhenStopped = YES;
+    Director::getInstance()->getView()->addSubview(spinner);// ->getOpenGLView()->addSubview(spinner);
+    [spinner startAnimating];*/
 }
 
 - (void)purchaseController:(InAppPurchaseController *)pController didLoadInfo:(SKProduct *)pProduct {
@@ -20,10 +29,11 @@ USING_NS_CC;
 }
 
 - (void)purchaseController:(InAppPurchaseController *)pController didFailLoadProductInfo:(NSError *)pError {
-    
+    [self endPurchase];
 }
 
 - (void)purchaseController:(InAppPurchaseController *)pController didFinishPaymentTransaction:(SKPaymentTransaction *)pTransaction count:(int)pCount index:(int)pIndex {
+    [self endPurchase];
 }
 
 - (void)purchaseController:(InAppPurchaseController *)pController didFailPaymentTransactionWithError:(NSError *)pError {
@@ -35,6 +45,7 @@ USING_NS_CC;
 
 - (void)endPurchase {
     //CCDirector::sharedDirector()->getTouchDispatcher()->setDispatchEvents(true);
+    Director::getInstance()->resume();
 }
 
 
