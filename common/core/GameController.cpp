@@ -647,6 +647,70 @@ void GameController::changeItemPath(Item *anItem, float angle, cocos2d::Vec2 anI
    runTossActionWithScale(anItem, collisionEndPointDef, actionDuration, anImpulse);
 }
 
+void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
+{
+    Point itemPos = anItem->getPosition();
+    Size itemSize = anItem->getContentSize();
+    Rect potRect = _thePot->getFrontRect(); // TODO: pot rect is incorrect, use hardcode value now
+    
+    float sx = aStartSwipePoint.x;
+    float sy = aStartSwipePoint.y;
+    
+    if (itemPos.x <= sx && itemPos.x + itemSize.width >= sx &&
+        itemPos.y <= sy && itemPos.y + itemSize.height >= sx) {
+        // tap event should toss item UP
+        // toss it
+        // check nearest endPoint
+        // move down to that endPOint
+        CCLOG("TAP");
+    }
+    else if(itemPos.y > sy &&
+            (itemPos.x <= sx && itemPos.x + itemSize.width >= sx)){
+        // swipe item upward
+        // toss it
+        // check nearest endPoint
+        // move down to that endPOint
+        CCLOG("UPWARD");
+    }
+    // do not process any other swipes in case item under pot's top margin
+    if (itemPos.y <= potRect.origin.y +potRect.size.height) {
+        return;
+    }
+    // identify vertical direction
+    if (itemPos.y >= sy) { // like a bounce away
+        if (itemPos.x > sx) {
+            CCLOG("LEFT AWAY");
+        }
+        else{
+            CCLOG("RIGHT AWAY");
+        }
+    }
+    else{ // in case swipe direction some kind top->down
+          // check intersections to identify AWAY or INTO
+        Point collisionMargin;
+        //y=kx+b
+        if (itemPos.x <= sx) {
+            collisionMargin = Point(145.0f, potRect.origin.y + potRect.size.height - 40.0f);
+        }
+        else{
+            collisionMargin = Point(470.0f,
+                                    potRect.origin.y + potRect.size.height - 40.0f);
+        }
+        float k = (itemPos.y - sy)/(itemPos.x - sx);
+        float b = sy - sx * k;
+        float yInter = k * collisionMargin.x + b;
+        
+        if (yInter > collisionMargin.y) {
+            CCLOG("AWAY");
+        }
+        else{
+            CCLOG("INTO");
+        }
+    
+    }
+    
+}
+            
 float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPointType)
 {
    //float visibleHeight = Director::getInstance()->getVisibleSize().height;

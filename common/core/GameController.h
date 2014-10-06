@@ -61,6 +61,7 @@ public:
    void update(float dt);
     
     void changeItemPath(Item* anItem, float angle, Vec2 anImpulse);
+    void swipeItem(Item* anItem, Vec2 aStartSwipePoint);
     
     float getActualRoundTime();
 

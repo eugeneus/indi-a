@@ -8,7 +8,7 @@ Pot* Pot::create(cocos2d::Layer* aGameLayer, int aFrontZO, int aBackZO)
     Pot *pRet = new Pot();
     if (pRet && pRet->init(aGameLayer, aFrontZO, aBackZO))
     {
-        pRet->autorelease();
+        //pRet->autorelease();
         return pRet;
     }
     else
@@ -46,7 +46,7 @@ Sprite* Pot::getFront() {
 Sprite* Pot::getBack() {
     return _back;
 }
-
+//TODO: pot size/origins incorrect due to provided image
 Rect Pot::getFrontRect()
 {
    Point origin = Point(_front->getPosition());
