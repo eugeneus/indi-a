@@ -11,6 +11,8 @@ public:
     
     bool init();
     
+    virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aDuration, cocos2d::Point anImpulse) override;
+    
 private:
     typedef Food super;
     

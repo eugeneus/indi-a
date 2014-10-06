@@ -127,7 +127,10 @@ void TouchController::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches
                             log("item detected angle: %f", angle);
                             
                             GameController* gameController = ((GameMenu *)_gameLayer)->getGameController();
-                            gameController->changeItemPath(frontItem, angle, Vec2(0.8, 0.3));
+                            //gameController->changeItemPath(frontItem, angle, Vec2(0.8, 0.3));
+                            
+                            gameController->swipeItem(frontItem, Vec2(_startPos.x,_startPos.y));
+
                         }
                     }
                 }

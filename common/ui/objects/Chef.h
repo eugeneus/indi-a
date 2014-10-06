@@ -26,6 +26,7 @@ public:
    cocos2d::Vec2 getBounceImpulse();
    
    void startChefBodyAnimation();
+    void startChefHeadIdleAnimation();
    
    Item* looksForItem(Item* anItem, float aConveyourVelocity);
    void setZOrder(int aZOrder);
@@ -59,6 +60,7 @@ private:
    
    cocos2d::Layer* _layer;
    cocos2d::Sprite* _chef;
+    cocos2d::Sprite* _head;
    Hand* _leftHand;
    Hand* _rightHand;
    

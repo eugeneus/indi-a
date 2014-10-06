@@ -23,26 +23,6 @@ class Dish;
 class PerformanceMetrics;
 class Stickers;
 
-class ControlPointDef : public cocos2d::Ref {
-   
-public:
-   ControlPointDef(cocos2d::Point aControlPoint, int aControlPointType)
-   {
-      _controlPoint = Point(aControlPoint);
-      _controlPointType = aControlPointType;
-   };
-   
-   static ControlPointDef* create(cocos2d::Point aControlPoint, int aControlPointType)
-   {
-      return new ControlPointDef(aControlPoint, aControlPointType);
-   }
-   
-   ~ControlPointDef(){};
-   
-   Point _controlPoint;
-   int _controlPointType;
-};
-
 
 class GameController : public cocos2d::Ref {
 
@@ -62,6 +42,7 @@ public:
    void update(float dt);
     
     void changeItemPath(Item* anItem, float angle, Vec2 anImpulse);
+    void swipeItem(Item* anItem, Vec2 aStartSwipePoint);
     
     float getActualRoundTime();
 
@@ -184,6 +165,8 @@ protected:
     float _garbagePct;
     
     float _densityFactor;
+    
+    
     
     
 private:

@@ -30,3 +30,22 @@ bool Garglic::init() {
     _itemId = 2;
     return true;
 }
+
+cocos2d::FiniteTimeAction* Garglic::getFloorBumpAction(float aDuration, cocos2d::Point anImpulse)
+{
+    Vector<SpriteFrame*> animateFrames(3);
+    char frameName[100] = {0};
+    SpriteFrame* animFrame = nullptr;
+    
+    
+    for(int i = 2; i < 9; i++)
+    {
+        sprintf(frameName, "garglic_%d.png", i);
+        animFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
+        animateFrames.pushBack(animFrame);
+    }
+    
+    Animation* animation = Animation::createWithSpriteFrames(animateFrames, 0.1f);
+    return Animate::create(animation);
+    
+}

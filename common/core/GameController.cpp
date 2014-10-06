@@ -178,7 +178,7 @@ void GameController::arrangeSceneForRect(cocos2d::Vec2 anOrigin, cocos2d::Size a
     float yOffsetConveyer = 615;
     
     Size chefSize = _theChef->getSize();
-    Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer + bottomOffset);
+    Point chefOrigin = Point((aVisibleSize.width - (chefSize.width))/2.0f, yOffsetConveyer + bottomOffset - 20.0f);
     _theChef->setOrigin(chefOrigin);
 
     _cloudTipsPos = Vec2(140, yOffsetConveyer + 100 + bottomOffset);
@@ -292,7 +292,7 @@ void GameController::setupNewRound()
     if (!_cloudTips) {
         const std::string& str = _mainCource->getImageName();
         _cloudTips = MindCloudTips::create(str);
-        _gameLayer->addChild(_cloudTips, kCloudZO);
+        _gameLayer->addChild(_cloudTips, 2);
         _cloudTips->toggleTip();
     }
     const std::string& str = _mainCource->getImageName();
@@ -670,6 +670,104 @@ void GameController::changeItemPath(Item *anItem, float angle, cocos2d::Vec2 anI
    runTossActionWithScale(anItem, collisionEndPointDef, actionDuration, anImpulse);
 }
 
+void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
+{
+    Point itemPos = anItem->getPosition();
+    Size itemSize = anItem->getContentSize();
+    Rect potRect = _thePot->getFrontRect(); // TODO: pot rect is incorrect, use hardcode value now
+    
+    float sx = aStartSwipePoint.x;
+    float sy = aStartSwipePoint.y;
+    
+    if (itemPos.x <= sx && itemPos.x + itemSize.width >= sx &&
+        itemPos.y <= sy && itemPos.y + itemSize.height >= sx) {
+        anItem->stopAllActions();
+        ControlPointDef* aPointDef = ControlPointDef::create(anItem->_currentTargetPoint,
+                                                             anItem->_currentTargetType);
+        this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.4));
+        
+    }
+    else if(itemPos.y > sy &&
+            (itemPos.x <= sx && itemPos.x + itemSize.width >= sx)){
+        anItem->stopAllActions();
+        ControlPointDef* aPointDef = ControlPointDef::create(anItem->_currentTargetPoint,
+                                                             anItem->_currentTargetType);
+        this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.9));
+    }
+    // do not process any other swipes in case item under pot's top margin
+    if (itemPos.y <= potRect.origin.y +potRect.size.height) {
+        return;
+    }
+    // identify vertical direction
+    if (itemPos.y >= sy) { // like a bounce away
+        if (itemPos.x < sx) {
+            CCLOG("LEFT AWAY");
+            anItem->stopAllActions();
+    //_cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // left floor
+    //_cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // left floor
+
+            ControlPointDef* aPointDef = ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor);
+            this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
+
+        }
+        else{
+            CCLOG("RIGHT AWAY");
+            anItem->stopAllActions();
+            ControlPointDef* aPointDef = ControlPointDef::ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor);
+        //_cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
+        // _cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
+
+            this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
+        }
+    }
+    else{ // in case swipe direction some kind top->down
+          // check intersections to identify AWAY or INTO
+        Point collisionMargin;
+        //y=kx+b
+        if (itemPos.x <= sx) {
+            collisionMargin = Point(145.0f, potRect.origin.y + potRect.size.height - 40.0f);
+        }
+        else{
+            collisionMargin = Point(470.0f,
+                                    potRect.origin.y + potRect.size.height - 40.0f);
+        }
+        float k = (itemPos.y - sy)/(itemPos.x - sx);
+        float b = sy - sx * k;
+        float yInter = k * collisionMargin.x + b;
+        
+        if (yInter > collisionMargin.y) {
+            CCLOG("AWAY");
+            if (itemPos.x < sx) {
+                CCLOG("LEFT AWAY");
+                anItem->stopAllActions();
+                //_cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // left floor
+                //_cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // left floor
+                
+                ControlPointDef* aPointDef = ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor);
+                this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
+                
+            }
+            else{
+                CCLOG("RIGHT AWAY");
+                anItem->stopAllActions();
+                ControlPointDef* aPointDef = ControlPointDef::ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor);
+                //_cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
+                // _cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
+                
+                this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
+            }
+        }
+        else{
+            CCLOG("INTO");
+            anItem->stopAllActions();
+            ControlPointDef* aPointDef = ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter); // center
+            this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.2));
+        }
+    
+    }
+    
+}
+            
 float GameController::getScaleFactor(cocos2d::Point anEndPoint, int aControlPointType)
 {
    //float visibleHeight = Director::getInstance()->getVisibleSize().height;

@@ -180,12 +180,13 @@ cocos2d::FiniteTimeAction* Item::getVanishAction(float aDuration, cocos2d::Point
    _currentTargetPoint = _idleItemPosition;
    _currentTargetType = 0;
    
-   //FiniteTimeAction* actionDelay = DelayTime::create(2);
+   FiniteTimeAction* actionDelay = DelayTime::create(0.5);
    FiniteTimeAction* actionPlase = Place::create(_idleItemPosition);
    FiniteTimeAction* actionFadeOut = FadeOut::create(2);
    FiniteTimeAction* actionFadeIn = FadeIn::create(2);
    
-   FiniteTimeAction* fullAction = Sequence::create(actionFadeOut, //actionDelay,
+   FiniteTimeAction* fullAction = Sequence::create(actionDelay,
+                                                   actionFadeOut, //
                                                    actionPlase,
                                                    actionFadeIn,
                                                    NULL);
