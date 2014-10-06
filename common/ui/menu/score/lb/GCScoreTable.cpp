@@ -124,20 +124,18 @@ Layer* GCScoreTable::createCell(Ref* data, int index) {
     ttf32.fontSize = 32;
     ttf32.fontFilePath = "BrownBagLunch.ttf";
     
-    TTFConfig ttf18;
-    ttf18.fontSize = 18;
-    ttf18.fontFilePath = "BrownBagLunch.ttf";
+    const cocos2d::Color3B& colorBlack = Color3B(0, 0, 0);
     
-    const cocos2d::Color3B& colorWhite = Color3B(255, 255, 255);
-    
-    Label* label = createLabel(dto->getName(), ttf32, colorWhite);
-    label->setPosition(Vec2(label->getPosition().x + 120, label->getPosition().y));
+    Label* label = createLabel(dto->getName(), ttf32, colorBlack);
+    label->setPosition(Vec2(label->getPosition().x, label->getPosition().y));
+    label->setOpacity(140);
     //label->setPosition(Vec2());
     
-    Label* labelScore = createLabel(CCString::createWithFormat("%i", dto->getScore())->getCString(), ttf18, colorWhite);
-    labelScore->setPosition(Vec2(labelScore->getPosition().x + 120, labelScore->getPosition().y  - 30));
-    const char *url = CCString::createWithFormat("https://graph.facebook.com/%s/picture?type=square", dto->getImageUrl().c_str())->getCString();
-    CCLOG("----- %s", url);
+    Label* labelScore = createLabel(CCString::createWithFormat("%i", dto->getScore())->getCString(), ttf32, colorBlack);
+    labelScore->setPosition(Vec2(labelScore->getPosition().x + 400, labelScore->getPosition().y));
+    labelScore->setOpacity(140);
+    //const char *url = CCString::createWithFormat("https://graph.facebook.com/%s/picture?type=square", dto->getImageUrl().c_str())->getCString();
+ //   CCLOG("----- %s", url);
   /*  cocos2d::network::HttpRequest *request = new cocos2d::network::HttpRequest();
     request->setUrl(url);
     request->setRequestType(cocos2d::network::HttpRequest::Type::GET);
@@ -146,15 +144,17 @@ Layer* GCScoreTable::createCell(Ref* data, int index) {
     cocos2d::network::HttpClient::getInstance()->send(request);
     request->release();
     */
-    Sprite *logo = Sprite::create("no_img.png"); //SpriteFrameName("again_btn.png");
+    
+    
+    /*Sprite *logo = Sprite::create("no_img.png"); //SpriteFrameName("again_btn.png");
     logo->setPosition(Vec2(logo->getPosition().x + 50, logo->getPosition().y));
     logo->setTag(index);
-    _sprites.pushBack(logo);
+    _sprites.pushBack(logo);*/
     
     Layer *result = Layer::create();
     result->addChild(label);
     result->addChild(labelScore);
-    result->addChild(logo);
+   // result->addChild(logo);
     
     return result;
 }
