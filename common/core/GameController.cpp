@@ -663,6 +663,11 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
         // check nearest endPoint
         // move down to that endPOint
         CCLOG("TAP");
+        anItem->stopAllActions();
+        ControlPointDef* aPointDef = ControlPointDef::create(anItem->_currentTargetPoint,
+                                                             anItem->_currentTargetType);
+        this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.4));
+        
     }
     else if(itemPos.y > sy &&
             (itemPos.x <= sx && itemPos.x + itemSize.width >= sx)){
@@ -671,6 +676,10 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
         // check nearest endPoint
         // move down to that endPOint
         CCLOG("UPWARD");
+        anItem->stopAllActions();
+        ControlPointDef* aPointDef = ControlPointDef::create(anItem->_currentTargetPoint,
+                                                             anItem->_currentTargetType);
+        this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.9));
     }
     // do not process any other swipes in case item under pot's top margin
     if (itemPos.y <= potRect.origin.y +potRect.size.height) {

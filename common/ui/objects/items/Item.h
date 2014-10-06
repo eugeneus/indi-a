@@ -4,6 +4,29 @@
 
 #include "cocos2d.h"
 #include "Spritable.h"
+USING_NS_CC;
+
+class ControlPointDef : public cocos2d::Ref {
+    
+public:
+    ControlPointDef(cocos2d::Point aControlPoint, int aControlPointType)
+    {
+        _controlPoint = cocos2d::Point(aControlPoint);
+        _controlPointType = aControlPointType;
+    };
+    
+    static ControlPointDef* create(cocos2d::Point aControlPoint, int aControlPointType)
+    {
+        return new ControlPointDef(aControlPoint, aControlPointType);
+    }
+    
+    ~ControlPointDef(){};
+    
+    cocos2d::Point _controlPoint;
+    int _controlPointType;
+};
+
+
 
 class Item : public Spritable {
 public:

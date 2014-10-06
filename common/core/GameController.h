@@ -21,26 +21,7 @@ class ItemsPool;
 class DishFactory;
 class Dish;
 class PerformanceMetrics;
-
-class ControlPointDef : public cocos2d::Ref {
-   
-public:
-   ControlPointDef(cocos2d::Point aControlPoint, int aControlPointType)
-   {
-      _controlPoint = Point(aControlPoint);
-      _controlPointType = aControlPointType;
-   };
-   
-   static ControlPointDef* create(cocos2d::Point aControlPoint, int aControlPointType)
-   {
-      return new ControlPointDef(aControlPoint, aControlPointType);
-   }
-   
-   ~ControlPointDef(){};
-   
-   Point _controlPoint;
-   int _controlPointType;
-};
+class ControlPointDef;
 
 
 class GameController : public cocos2d::Ref {
@@ -182,6 +163,8 @@ protected:
     float _garbagePct;
     
     float _densityFactor;
+    
+    
     
     
 private:
