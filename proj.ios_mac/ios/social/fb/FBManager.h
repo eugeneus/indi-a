@@ -5,4 +5,6 @@
 
 + (void)getScoreList;
 
++ (void)postBestResult:(int) result;
+
 @end

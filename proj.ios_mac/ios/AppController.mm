@@ -31,6 +31,8 @@
 #import "AdmobController.h"
 #import "UserDataProvider.h"
 
+#import "GameKitHelper.h"
+
 //#import "GameCenterManager.h"
 //#import "GameCenterDelegate.h"
 
@@ -69,6 +71,7 @@ static AppDelegate s_sharedApplication;
     _viewController.wantsFullScreenLayout = YES;
     _viewController.view = eaglView;
 
+    [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
    // GameCenterDelegate* gcDelegate = [[GameCenterDelegate alloc] init];
    // [GameCenterManager init];
    // [[GameCenterManager instance] setDelegate:gcDelegate];

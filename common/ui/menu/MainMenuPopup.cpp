@@ -41,15 +41,15 @@ void MainMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuItem
     
     float bottomOffset = ResourcesManager::getInstance()->getBottomOffset();
     
-    initMenuItem(menuItems, BTN_MAIN_PLAY, CC_CALLBACK_1(MainMenuPopup::menuGameCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 180 - bottomOffset/2));
-    initMenuItem(menuItems, BTN_MAIN_STORE, CC_CALLBACK_1(MainMenuPopup::menuStoreCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 400 - bottomOffset/2));
-    initMenuItem(menuItems, BTN_MAIN_SCORE, CC_CALLBACK_1(MainMenuPopup::menuScoreCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 550 - bottomOffset/2));
-    initMenuItem(menuItems, BTN_MAIN_OPTION, CC_CALLBACK_1(MainMenuPopup::menuOptionsCallback, this), Vec2(visibleSize.width/2 + origin.x - 100, visibleSize.height + origin.y - 700 - bottomOffset/2));
-    initMenuItem(menuItems, BTN_MAIN_SOCIAL, CC_CALLBACK_1(MainMenuPopup::menuSocialCallback, this), Vec2(visibleSize.width/2 + origin.x + 100, visibleSize.height + origin.y - 700 - bottomOffset/2));
+    initMenuItem(menuItems, BTN_MAIN_PLAY, CC_CALLBACK_1(MainMenuPopup::menuGameCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 260 - bottomOffset/2));
+    initMenuItem(menuItems, BTN_MAIN_STORE, CC_CALLBACK_1(MainMenuPopup::menuStoreCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 380 - bottomOffset/2));
+    initMenuItem(menuItems, BTN_MAIN_SCORE, CC_CALLBACK_1(MainMenuPopup::menuScoreCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 490 - bottomOffset/2));
+    initMenuItem(menuItems, BTN_MAIN_OPTION, CC_CALLBACK_1(MainMenuPopup::menuOptionsCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 600 - bottomOffset/2));
+    initMenuItem(menuItems, BTN_MAIN_SOCIAL, CC_CALLBACK_1(MainMenuPopup::menuSocialCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 710 - bottomOffset/2));
     initMenuItem(menuItems, BTN_MAIN_EXIT, CC_CALLBACK_1(MainMenuPopup::menuExitCallback, this), Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 820 - bottomOffset/2));
     
     Health *health = Health::create(userData->getUserLives());
-    health->setPosition(Vec2(0, visibleSize.height + origin.y));
+    health->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 160 - bottomOffset/2));
     this->addChild(health);
 }
 
@@ -64,7 +64,7 @@ void MainMenuPopup::menuStoreCallback(Ref* pSender) {
     //} else {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     //PurchaseManager::startPurchase("dsf");
-    [PurchaseManager startPurchase:1];
+    //[PurchaseManager startPurchase:1];
 #endif
    // }
 

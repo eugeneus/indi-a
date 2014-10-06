@@ -9,6 +9,7 @@
 #define BTN_GAME_OVER_PLAY "btn_game_over_play"
 #define BTN_GAME_OVER_EXIT "btn_game_over_quit"
 #define BTN_GAME_OVER_STORE "btn_game_over_store"
+#define BTN_GAME_OVER_SOC "btn_game_over_soc"
 
 #define BTN_MAIN_EXIT "btn_main_exit"
 #define BTN_MAIN_OPTION "btn_main_opt"

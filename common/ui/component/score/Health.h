@@ -18,6 +18,7 @@ public:
     static Health* create(int count);
     bool init(int count);
     void update(float dt);
+    void payLivesCallback(cocos2d::Ref *pSender);
 };
 
 #endif /* defined(__BlindChef__Health__) */

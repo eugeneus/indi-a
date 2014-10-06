@@ -2,6 +2,7 @@
 #include "Health.h"
 #include "UserDataProvider.h"
 #include "SoundsConstants.h"
+#include "PurchaseManager.h"
 
 USING_NS_CC;
 
@@ -36,14 +37,21 @@ bool Health::init(int pCount) {
     
     TTFConfig ttf32;
     ttf32.fontSize = 32;
-    ttf32.fontFilePath = "crystal radio kit.ttf";
+    ttf32.fontFilePath = "BrownBagLunch.ttf";
+    ttf32.outlineSize = 1;
     
     const cocos2d::Color3B& colorYellow = Color3B(255, 240, 104);
     label = Label::createWithTTF(ttf32, CCString::createWithFormat("x%i", count)->getCString());
     //label->setAnchorPoint(Vec2(0,40));
-    label->setPosition(Vec2(health->getPosition().x + health->getContentSize().width, health->getPosition().y));
+    //label->setPosition(Vec2(health->getPosition().x + health->getContentSize().width, health->getPosition().y));
     label->setColor(colorYellow);
-    this->addChild(label);
+    //this->addChild(label);
+    
+    
+    MenuItemLabel *itemLabel = MenuItemLabel::create(label, CC_CALLBACK_1(Health::payLivesCallback, this));
+    Menu *menu = Menu::create(itemLabel, NULL);
+    menu->setPosition(Vec2(health->getPosition().x + health->getContentSize().width, health->getPosition().y));
+    this->addChild(menu);
     
     this->checkLives();
     
@@ -89,4 +97,10 @@ void Health::checkLives() {
             }
        // }
     }
+}
+
+void Health::payLivesCallback(cocos2d::Ref *pSender) {
+    CCLOG("---------------pay----");
+    int lives = UserDataProvider::getInstance()->getUserLives();
+    [PurchaseManager purchaseLives: lives];
 }

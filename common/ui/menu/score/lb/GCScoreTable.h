@@ -1,5 +1,6 @@
-#ifndef __BlindChef__FBScoreTable__
-#define __BlindChef__FBScoreTable__
+
+#ifndef __BlindChef__GCScoreTable__
+#define __BlindChef__GCScoreTable__
 
 #include "cocos2d.h"
 #include <extensions/cocos-ext.h>
@@ -8,7 +9,7 @@
 
 #include "UserScoreResult.h"
 
-class FBScoreTable :  public cocos2d::Layer, public cocos2d::extension::TableViewDataSource, public cocos2d::extension::TableViewDelegate {
+class GCScoreTable :  public cocos2d::Layer, public cocos2d::extension::TableViewDataSource, public cocos2d::extension::TableViewDelegate {
 private:
     cocos2d::extension::TableView* _tableView;
     cocos2d::Size _winSize;
@@ -24,15 +25,14 @@ private:
     cocos2d::Layer* createCell(cocos2d::Ref* data, int index);
     cocos2d::Label* createLabel(std::string text, cocos2d::TTFConfig ttf, cocos2d::Color3B color);
 public:
-    FBScoreTable();
-    ~FBScoreTable();
+    GCScoreTable();
+    ~GCScoreTable();
     
     bool init(cocos2d::Size viewSize, bool loadOnStart);
     void reload();
-    
     void onComplete(Ref *pSender);
     void onError(Ref *pSender);
     void onImageDownLoaded(cocos2d::network::HttpClient* pSender, cocos2d::network::HttpResponse* pResponse);
 };
 
-#endif /* defined(__BlindChef__FBScoreTable__) */
+#endif /* defined(__BlindChef__GCScoreTable__) */

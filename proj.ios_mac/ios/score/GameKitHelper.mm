@@ -23,6 +23,8 @@
  */
 
 #import "GameKitHelper.h"
+#import "UserScoreResult.h"
+#import "ScoreUserEntity.h"
 
 static NSString* kCachedAchievementsFile = @"CachedAchievements.archive";
 
@@ -165,9 +167,9 @@ static GameKitHelper *instanceOfGameKitHelper;
              
              if (error == nil)
              {
-                 [self initMatchInvitationHandler]; //are not using achievements so commented out these three lines
-                 [self reportCachedAchievements];
-                 [self loadAchievements];
+               //  [self initMatchInvitationHandler]; //are not using achievements so commented out these three lines
+               //  [self reportCachedAchievements];
+               //  [self loadAchievements];
              }
          }];
 		
@@ -322,11 +324,20 @@ static GameKitHelper *instanceOfGameKitHelper;
 		leaderboard.range = range;
 		[leaderboard loadScoresWithCompletionHandler:^(NSArray* scores, NSError* error)
          {
-             [self setLastError:error];
-             //[delegate onScoresReceived:scores];
-             if (_gkhDelegate != nullptr) {
-                 std::vector<GKScoreCpp> result = [self convertNSArrayOfGKScoresToCppVector:scores];
-                 _gkhDelegate->onScoresReceived(result);
+             if (error) {
+                 [self setLastError:error];
+                 cocos2d::NotificationCenter::getInstance()->postNotification("score_gc_error");
+             } else {
+                 cocos2d::Vector<ScoreUserEntity *> data;
+                 for (GKScore *gkScore : scores) {
+                     ScoreUserEntity *user = ScoreUserEntity::create(gkScore.playerID.UTF8String, gkScore.playerID.UTF8String, gkScore.value);
+                 
+                     data.pushBack(user);
+                 }
+             
+                 UserScoreResult *result = UserScoreResult::create();
+                 result->addData(data);
+                 cocos2d::NotificationCenter::getInstance()->postNotification("score_gc_complete", result);
              }
          }];
 	}

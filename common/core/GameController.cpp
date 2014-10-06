@@ -23,6 +23,7 @@
 #include "FoodFactory.h"
 #include "SoundsConstants.h"
 #include "ItemsPool.h"
+#include "Stickers.h"
 #include "DishFactory.h"
 #include "Dish.h"
 #include "PerformanceMetrics.h"
@@ -152,6 +153,8 @@ void GameController::createScene()
     _gameCycleInd = GameCycleIndicator::createWithGameTime(_levelInfo->getRoundTime());
     _gameLayer->addChild(_gameCycleInd, kCloudZO);
     
+    _stickers = Stickers::create();
+    _gameLayer->addChild(_stickers, kCloudZO);
 
     _cntPoints->pushBack(ControlPointDef::create(Point(470.0f,300.0f),kControlPointTypePotMargin)); // left floor
     _cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // right floor
@@ -193,7 +196,9 @@ void GameController::arrangeSceneForRect(cocos2d::Vec2 anOrigin, cocos2d::Size a
 
     _multiplier->setPosition(Vec2(450, aVisibleSize.height + anOrigin.y - 60));
     
-    _gameCycleInd->setPosition(Vec2(0, _convY - 40));
+    _gameCycleInd->setPosition(Vec2(0, _convY - 5));
+    
+    _stickers->setPosition(Vec2(0, _convY - 60));
     
     _itemIdlePos = Vec2(aVisibleSize.width + 40.0f, _convY + 70.0f);
     
@@ -256,12 +261,31 @@ void GameController::setupNewRound()
     if (!_dishFactory) {
         _dishFactory = DishFactory::create("dishes.plist");
     }
+    
     if (_mainCource) {
         delete _mainCource;
         _mainCource = nullptr;
         
     }
-    _mainCource = _dishFactory->getRandomDish();
+    
+    if (_dishesQueue.size() == 0) {
+        _mainCource = _dishFactory->getRandomDish();
+        
+        _dishesQueue.push_back(_mainCource);
+        
+        for (int i = 0; i < 3; i ++) {
+            Dish *dish = _dishFactory->getRandomDish();
+            _dishesQueue.push_back(dish);
+        }
+    } else {
+        _dishesQueue.pop_back();
+        _mainCource = _dishesQueue.front();
+        
+        Dish *lastDish = _dishFactory->getRandomDish();
+        _dishesQueue.push_back(lastDish);
+    }
+    
+    _stickers->setupQueue(_dishesQueue);
     
     //TODO: read and apply metrics
     
@@ -532,7 +556,6 @@ void GameController::update(float dt)
         _isTimerEnd = true;
         CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(SOUND_TIMER_END);
     }
-    
     
     if (_gameCycleInd->isComplete()) {
         this->stopGame();

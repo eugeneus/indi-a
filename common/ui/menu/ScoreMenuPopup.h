@@ -5,13 +5,15 @@
 #include "cocos2d.h"
 #include "BaseMenuPopup.h"
 #include "FBScoreTable.h"
+#include "GCScoreTable.h"
 
 class ScoreMenuPopup : public BaseMenuPopup
 {
 private:
     bool isFriendsTab;
     cocos2d::Vector<cocos2d::MenuItemSprite *> tabs;
-    FBScoreTable* table;
+    FBScoreTable* fbTable;
+    GCScoreTable *gcTable;
 public:
     static ScoreMenuPopup* create();
     

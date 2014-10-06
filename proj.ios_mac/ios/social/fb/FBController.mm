@@ -131,4 +131,42 @@
     
 }
 
+- (void) doPostScore:(int) score {
+    NSString *scoreStr = [NSString stringWithFormat:@"%i", score];
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   scoreStr, @"score",
+                                   nil];
+    
+    [FBRequestConnection startWithGraphPath:@"me/scores"
+                                 parameters:params
+                                 HTTPMethod:@"POST"
+                          completionHandler:
+     ^(FBRequestConnection *connection, id result, NSError *error) {
+         if (error) {
+             NSLog(@"score posted with error");
+         } else
+             NSLog(@"score posted successfuly");
+         
+     }];
+}
+
+- (void) postScore:(int) score {
+    if (!FBSession.activeSession.isOpen) {
+        
+        [FBSession.activeSession openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+            if (error) {
+                if ([self doInitSession]) {
+                    [self doPostScore:score];
+                } else {
+                    //[delegate onError];
+                }
+            } else {
+                [self doPostScore:score];
+            }
+        }];
+    } else  {
+        [self doPostScore:score];
+    }
+}
+
 @end

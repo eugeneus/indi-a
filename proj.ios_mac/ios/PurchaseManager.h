@@ -1,10 +1,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PurchaseManager : NSObject
+@interface PurchaseManager : NSObject<UIAlertViewDelegate>
 
 + (void)confirmRemoveAds;
 
-+ (void)startPurchase:(int)pPurchaseId;
++ (void)startPurchase:(NSString *)key;
+
++ (void)purchaseLives:(int)pCurrentLivesCount;
+
++ (void)purchaseBonus;
 
 @end

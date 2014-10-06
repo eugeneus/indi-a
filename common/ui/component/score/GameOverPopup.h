@@ -24,6 +24,7 @@ public:
     
     void menuMainMenu(cocos2d::Ref* pSender);
     void menuStoreMenu(cocos2d::Ref* pSender);
+    void menuSocMenu(cocos2d::Ref* pSender);
     void playAgainMenu(cocos2d::Ref* pSender);
     
     cocos2d::Node* createScoreLabel();

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:BlindChef.xcodeproj">
+      location = "self:Blind Chef.xcodeproj">
    </FileRef>
 </Workspace>

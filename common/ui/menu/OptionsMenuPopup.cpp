@@ -37,7 +37,7 @@ void OptionsMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuI
     initMenuItem(menuItems, BTN_OPTION_NOTIF, CC_CALLBACK_1(OptionsMenuPopup::menuNotificationsCallback, this), Vec2(visibleSize.width/2 + origin.x - 50, visibleSize.height + origin.y - 550 - bottomOffset/2));
     initMenuItemTrigger(menuItems, BTN_OPTION_NOTIF, CC_CALLBACK_1(OptionsMenuPopup::menuNotificationsCallback, this), Vec2(visibleSize.width/2 + origin.x + 190, visibleSize.height + origin.y - 550 - bottomOffset/2), 2);
     
-    initMenuItem(menuItems, BTN_ALL_BACK, CC_CALLBACK_1(OptionsMenuPopup::menuBackCallback, this), Vec2(origin.x + 100, visibleSize.height + origin.y - 800 - bottomOffset/2));
+    initMenuItem(menuItems, BTN_ALL_BACK, CC_CALLBACK_1(OptionsMenuPopup::menuBackCallback, this), Vec2(origin.x + visibleSize.width/2, visibleSize.height + origin.y - 800 - bottomOffset/2));
 }
 
 bool isNeedRevertButtons(int tag) {
@@ -121,5 +121,5 @@ void OptionsMenuPopup::menuSoundCallback(cocos2d::Ref* pSender) {
 void OptionsMenuPopup::menuNotificationsCallback(cocos2d::Ref* pSender) {
     bool value = UserDataProvider::getInstance()->isNotificationOn();
     UserDataProvider::getInstance()->setNotificationOn(!value);
-    this->toggleMenuItemByTag(2, BTN_OPTION_NOTIF, true);
+    this->toggleMenuItemByTag(2, BTN_OPTION_NOTIF, !value);
 }

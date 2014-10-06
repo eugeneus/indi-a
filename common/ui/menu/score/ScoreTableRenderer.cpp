@@ -42,7 +42,7 @@ Layer* ScoreTableRenderer::create(Ref* data) {
     
     TTFConfig ttf32;
     ttf32.fontSize = 32;
-    ttf32.fontFilePath = "crystal radio kit.ttf";
+    ttf32.fontFilePath = "BrownBagLunch.ttf";
     
     const cocos2d::Color3B& colorWhite = Color3B(255, 255, 255);
     

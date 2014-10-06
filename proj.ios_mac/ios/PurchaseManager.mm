@@ -21,16 +21,50 @@ static InAppPurchaseController *inAppPurchaseController;
 //    }
 }
 
++ (void)purchaseBonus {
+    [PurchaseManager startPurchase:@"bc_purchase_bonus"];
+}
 
-+ (void)startPurchase:(int)pPurchaseId {
-    char const *purchaseKey = "sdf";//SettingsManager::keyById(pPurchaseId)->getCString();
-    NSString *key = [[[NSString alloc] initWithUTF8String:purchaseKey] autorelease];
++ (void)startPurchase:(NSString *)key {
     if (inAppPurchaseController == NULL) {
         InAppPurchaseControllerDelegateImpl *delegate = [[[InAppPurchaseControllerDelegateImpl alloc] init] autorelease];
         inAppPurchaseController = [[InAppPurchaseController alloc] initWithDelegate:delegate];
     }
     [inAppPurchaseController setPurchaseId:key];
     [inAppPurchaseController loadProductsInfo];
+}
+
++ (void)purchaseLives:(int)pCurrentLivesCount {
+    if (pCurrentLivesCount < 10) {
+        
+        [PurchaseManager startPurchase:@"bc_purchase_live"];
+        
+        /*int toRestore = 10 - pCurrentLivesCount;
+        
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Restore Lives."
+                                                         message:@"Bla bla bla bla bla ."
+                                                        delegate:self
+                                               cancelButtonTitle:@"Cancel"
+                                               otherButtonTitles:nil] autorelease];
+        if (toRestore > 1) {
+            [alert addButtonWithTitle:@"Buy one"];
+            [alert addButtonWithTitle:@"Buy all"];
+        } else {
+            [alert addButtonWithTitle:@"Buy one"];
+        }
+        [alert show];
+        //[alert release];*/
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == [alertView cancelButtonIndex]){
+        CCLOG("cancel");
+    } else if (buttonIndex == 1) {
+        CCLOG("one");
+    } else if (buttonIndex == 2) {
+        CCLOG("all");
+    }
 }
 
 @end

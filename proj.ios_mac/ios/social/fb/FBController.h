@@ -13,4 +13,6 @@
 
 - (void) getScoreList;
 
+- (void) postScore:(int) score;
+
 @end

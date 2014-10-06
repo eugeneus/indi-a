@@ -3,6 +3,7 @@
 #import <GameKit/GameKit.h>
 #import "GKHDelegate.h"
 #import "GKHWrapperCPP.h"
+#import "cocos2d.h"
 
 @protocol GameKitHelperProtocol
 

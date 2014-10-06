@@ -20,7 +20,6 @@
 		1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */; };
 		1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B916D35E4900DB1158 /* CloseNormal.png */; };
 		1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */; };
-		1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
@@ -33,7 +32,6 @@
 		503AE11B17EB9C5A00D1A890 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503AE11A17EB9C5A00D1A890 /* IOKit.framework */; };
 		5087E75317EB910900C73F5D /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B916D35E4900DB1158 /* CloseNormal.png */; };
 		5087E75417EB910900C73F5D /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */; };
-		5087E75517EB910900C73F5D /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */; };
 		5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */; };
 		5087E76317EB910900C73F5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		5087E76517EB910900C73F5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
@@ -100,6 +98,7 @@
 		AA8D6B9B1998BD6C00484E65 /* OptionsMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B991998BD6C00484E65 /* OptionsMenuPopup.cpp */; };
 		AA8D6B9E1999001900484E65 /* SocialMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B9C1999001900484E65 /* SocialMenu.cpp */; };
 		AA8D6BA11999009000484E65 /* SocialMenuPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D6B9F1999009000484E65 /* SocialMenuPopup.cpp */; };
+		AA92DB5819D8C08500067E77 /* GCScoreTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA92DB5619D8C08500067E77 /* GCScoreTable.cpp */; };
 		AA96A1FB195DB09200C22BC9 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = AA96A1FA195DB09200C22BC9 /* images.png */; };
 		AA96A21D195DB16C00C22BC9 /* BaseMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A209195DB16C00C22BC9 /* BaseMenu.cpp */; };
 		AA96A220195DB16C00C22BC9 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA96A211195DB16C00C22BC9 /* MainMenu.cpp */; };
@@ -178,6 +177,13 @@
 		AAB5F69519AA298600756B29 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69419AA298600756B29 /* MessageUI.framework */; };
 		AAB5F69719AA299600756B29 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69619AA299600756B29 /* StoreKit.framework */; };
 		AAB5F69919AA29A500756B29 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB5F69819AA29A500756B29 /* SystemConfiguration.framework */; };
+		AABBCE7E19E2CD9E0044E2D1 /* Stickers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABBCE7C19E2CD9E0044E2D1 /* Stickers.cpp */; };
+		AABBCE8619E2CED30044E2D1 /* sticker_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AABBCE8119E2CED30044E2D1 /* sticker_1.png */; };
+		AABBCE8719E2CED30044E2D1 /* sticker_2.png in Resources */ = {isa = PBXBuildFile; fileRef = AABBCE8219E2CED30044E2D1 /* sticker_2.png */; };
+		AABBCE8819E2CED30044E2D1 /* sticker_3.png in Resources */ = {isa = PBXBuildFile; fileRef = AABBCE8319E2CED30044E2D1 /* sticker_3.png */; };
+		AABBCE8919E2CED30044E2D1 /* sticker_4.png in Resources */ = {isa = PBXBuildFile; fileRef = AABBCE8419E2CED30044E2D1 /* sticker_4.png */; };
+		AABBCE8A19E2CED30044E2D1 /* sticker_5.png in Resources */ = {isa = PBXBuildFile; fileRef = AABBCE8519E2CED30044E2D1 /* sticker_5.png */; };
+		AABBCE8D19E3011F0044E2D1 /* BrownBagLunch.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AABBCE8C19E3011F0044E2D1 /* BrownBagLunch.ttf */; };
 		AABDB9D719AB2A7D004533D0 /* Lemon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABDB9D519AB2A7D004533D0 /* Lemon.cpp */; };
 		AABDB9DA19AB2BEF004533D0 /* Salt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABDB9D819AB2BEF004533D0 /* Salt.cpp */; };
 		AABDB9DD19AB2CA5004533D0 /* Spice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABDB9DB19AB2CA5004533D0 /* Spice.cpp */; };
@@ -401,9 +407,8 @@
 		1AFAF8B416D35DE700DB1158 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
 		1AFAF8B916D35E4900DB1158 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
-		1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* BlindChef iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BlindChef iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Blind Chef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blind Chef.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
@@ -418,7 +423,7 @@
 		503AE10417EB98FF00D1A890 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = mac/Prefix.pch; sourceTree = "<group>"; };
 		503AE11117EB99EE00D1A890 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
 		503AE11A17EB9C5A00D1A890 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		5087E76F17EB910900C73F5D /* BlindChef Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BlindChef Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5087E76F17EB910900C73F5D /* Blind Chef Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blind Chef Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5087E77517EB970100C73F5D /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-114.png"; sourceTree = "<group>"; };
 		5087E77617EB970100C73F5D /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = "<group>"; };
 		5087E77717EB970100C73F5D /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = "<group>"; };
@@ -519,6 +524,8 @@
 		AA8D6B9D1999001900484E65 /* SocialMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMenu.h; sourceTree = "<group>"; };
 		AA8D6B9F1999009000484E65 /* SocialMenuPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocialMenuPopup.cpp; sourceTree = "<group>"; };
 		AA8D6BA01999009000484E65 /* SocialMenuPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMenuPopup.h; sourceTree = "<group>"; };
+		AA92DB5619D8C08500067E77 /* GCScoreTable.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GCScoreTable.cpp; sourceTree = "<group>"; };
+		AA92DB5719D8C08500067E77 /* GCScoreTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCScoreTable.h; sourceTree = "<group>"; };
 		AA96A1FA195DB09200C22BC9 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		AA96A209195DB16C00C22BC9 /* BaseMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseMenu.cpp; sourceTree = "<group>"; };
 		AA96A20A195DB16C00C22BC9 /* BaseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMenu.h; sourceTree = "<group>"; };
@@ -592,7 +599,7 @@
 		AAB109EC19B8DF5000919961 /* Timer Finish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Timer Finish.mp3"; sourceTree = "<group>"; };
 		AAB10A2019B8ECAA00919961 /* SoundsConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundsConstants.h; sourceTree = "<group>"; };
 		AAB114F019BA105600791163 /* ButtonConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonConstants.h; sourceTree = "<group>"; };
-		AAB114F119BA26E600791163 /* Health.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Health.cpp; sourceTree = "<group>"; };
+		AAB114F119BA26E600791163 /* Health.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Health.cpp; sourceTree = "<group>"; };
 		AAB114F219BA26E600791163 /* Health.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Health.h; sourceTree = "<group>"; };
 		AAB2F30719C806FC006063EB /* ScoreRequestDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScoreRequestDelegate.cpp; sourceTree = "<group>"; };
 		AAB2F30819C806FC006063EB /* ScoreRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreRequestDelegate.h; sourceTree = "<group>"; };
@@ -606,7 +613,7 @@
 		AAB4CA5C19C7084800EFBDFA /* FacebookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookHelper.h; sourceTree = "<group>"; };
 		AAB58E3B1966BBA600C48611 /* BowlingBall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BowlingBall.cpp; sourceTree = "<group>"; };
 		AAB58E3C1966BBA600C48611 /* BowlingBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlingBall.h; sourceTree = "<group>"; };
-		AAB58E441966CF4900C48611 /* BonusMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BonusMenu.cpp; sourceTree = "<group>"; };
+		AAB58E441966CF4900C48611 /* BonusMenu.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = BonusMenu.cpp; sourceTree = "<group>"; };
 		AAB58E451966CF4900C48611 /* BonusMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusMenu.h; sourceTree = "<group>"; };
 		AAB58E4B1966E64B00C48611 /* TipsFadeble.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TipsFadeble.cpp; sourceTree = "<group>"; };
 		AAB58E4C1966E64B00C48611 /* TipsFadeble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsFadeble.h; sourceTree = "<group>"; };
@@ -632,6 +639,14 @@
 		AAB5F69419AA298600756B29 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
 		AAB5F69619AA299600756B29 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		AAB5F69819AA29A500756B29 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		AABBCE7C19E2CD9E0044E2D1 /* Stickers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stickers.cpp; sourceTree = "<group>"; };
+		AABBCE7D19E2CD9E0044E2D1 /* Stickers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stickers.h; sourceTree = "<group>"; };
+		AABBCE8119E2CED30044E2D1 /* sticker_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sticker_1.png; sourceTree = "<group>"; };
+		AABBCE8219E2CED30044E2D1 /* sticker_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sticker_2.png; sourceTree = "<group>"; };
+		AABBCE8319E2CED30044E2D1 /* sticker_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sticker_3.png; sourceTree = "<group>"; };
+		AABBCE8419E2CED30044E2D1 /* sticker_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sticker_4.png; sourceTree = "<group>"; };
+		AABBCE8519E2CED30044E2D1 /* sticker_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sticker_5.png; sourceTree = "<group>"; };
+		AABBCE8C19E3011F0044E2D1 /* BrownBagLunch.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = BrownBagLunch.ttf; path = fonts/BrownBagLunch.ttf; sourceTree = "<group>"; };
 		AABDB9D519AB2A7D004533D0 /* Lemon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lemon.cpp; sourceTree = "<group>"; };
 		AABDB9D619AB2A7D004533D0 /* Lemon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lemon.h; sourceTree = "<group>"; };
 		AABDB9D819AB2BEF004533D0 /* Salt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Salt.cpp; sourceTree = "<group>"; };
@@ -659,7 +674,7 @@
 		AAC4D9AF19AA605E00A42D0A /* FacebookWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookWrap.h; sourceTree = SOURCE_ROOT; };
 		AAC4D9B119AA649B00A42D0A /* FacebookProvider.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = FacebookProvider.cpp; sourceTree = "<group>"; };
 		AAC4D9B219AA649B00A42D0A /* FacebookProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookProvider.h; sourceTree = "<group>"; };
-		AAC70ED619975327007D0537 /* GameOverPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverPopup.cpp; sourceTree = "<group>"; };
+		AAC70ED619975327007D0537 /* GameOverPopup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GameOverPopup.cpp; sourceTree = "<group>"; };
 		AAC70ED719975327007D0537 /* GameOverPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverPopup.h; sourceTree = "<group>"; };
 		AAC70ED919975374007D0537 /* BaseGamePopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseGamePopup.cpp; sourceTree = "<group>"; };
 		AAC70EDA19975374007D0537 /* BaseGamePopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseGamePopup.h; sourceTree = "<group>"; };
@@ -850,8 +865,8 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* BlindChef iOS.app */,
-				5087E76F17EB910900C73F5D /* BlindChef Mac.app */,
+				1D6058910D05DD3D006BFB54 /* Blind Chef.app */,
+				5087E76F17EB910900C73F5D /* Blind Chef Mac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -966,6 +981,12 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AABBCE8C19E3011F0044E2D1 /* BrownBagLunch.ttf */,
+				AABBCE8119E2CED30044E2D1 /* sticker_1.png */,
+				AABBCE8219E2CED30044E2D1 /* sticker_2.png */,
+				AABBCE8319E2CED30044E2D1 /* sticker_3.png */,
+				AABBCE8419E2CED30044E2D1 /* sticker_4.png */,
+				AABBCE8519E2CED30044E2D1 /* sticker_5.png */,
 				AAD877D619D898C700530130 /* no_img.png */,
 				AAD6D7DB19D5ACB7003390F7 /* images320x640.plist */,
 				AAD6D7DC19D5ACB7003390F7 /* images320x640.png */,
@@ -993,7 +1014,6 @@
 				AA96A1FA195DB09200C22BC9 /* images.png */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
-				1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */,
 				E035A38819C61F7B0009F87E /* dishes.plist */,
 			);
 			name = Resources;
@@ -1075,6 +1095,8 @@
 			children = (
 				AA5CA86F19C6E435006E62C6 /* ScoreLBDataSource.cpp */,
 				AA5CA87019C6E435006E62C6 /* ScoreLBDataSource.h */,
+				AA92DB5619D8C08500067E77 /* GCScoreTable.cpp */,
+				AA92DB5719D8C08500067E77 /* GCScoreTable.h */,
 			);
 			path = lb;
 			sourceTree = "<group>";
@@ -1292,6 +1314,8 @@
 				E035A38119C618660009F87E /* Dish.h */,
 				E035A38519C618880009F87E /* DishFactory.cpp */,
 				E035A38619C618880009F87E /* DishFactory.h */,
+				AABBCE7C19E2CD9E0044E2D1 /* Stickers.cpp */,
+				AABBCE7D19E2CD9E0044E2D1 /* Stickers.h */,
 			);
 			path = objects;
 			sourceTree = "<group>";
@@ -1529,9 +1553,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* BlindChef iOS */ = {
+		1D6058900D05DD3D006BFB54 /* Blind Chef */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "BlindChef iOS" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Blind Chef" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -1546,14 +1570,14 @@
 				1AC6FB2B180E99E1004C840B /* PBXTargetDependency */,
 				1AC6FB2D180E99E1004C840B /* PBXTargetDependency */,
 			);
-			name = "BlindChef iOS";
+			name = "Blind Chef";
 			productName = iphone;
-			productReference = 1D6058910D05DD3D006BFB54 /* BlindChef iOS.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Blind Chef.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5087E73D17EB910900C73F5D /* BlindChef Mac */ = {
+		5087E73D17EB910900C73F5D /* Blind Chef Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5087E76C17EB910900C73F5D /* Build configuration list for PBXNativeTarget "BlindChef Mac" */;
+			buildConfigurationList = 5087E76C17EB910900C73F5D /* Build configuration list for PBXNativeTarget "Blind Chef Mac" */;
 			buildPhases = (
 				5087E74817EB910900C73F5D /* Resources */,
 				5087E75617EB910900C73F5D /* Sources */,
@@ -1568,9 +1592,9 @@
 				1AC6FB1A180E9959004C840B /* PBXTargetDependency */,
 				1AC6FB1C180E9959004C840B /* PBXTargetDependency */,
 			);
-			name = "BlindChef Mac";
+			name = "Blind Chef Mac";
 			productName = iphone;
-			productReference = 5087E76F17EB910900C73F5D /* BlindChef Mac.app */;
+			productReference = 5087E76F17EB910900C73F5D /* Blind Chef Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1586,7 +1610,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "BlindChef" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Blind Chef" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -1606,8 +1630,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* BlindChef iOS */,
-				5087E73D17EB910900C73F5D /* BlindChef Mac */,
+				1D6058900D05DD3D006BFB54 /* Blind Chef */,
+				5087E73D17EB910900C73F5D /* Blind Chef Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -1698,6 +1722,8 @@
 				AAB109EE19B8DF5000919961 /* bonus pickup.mp3 in Resources */,
 				AAB10A1C19B8DF5000919961 /* timer about to finish.mp3 in Resources */,
 				AAB109FD19B8DF5000919961 /* itemland.mp3 in Resources */,
+				AABBCE8919E2CED30044E2D1 /* sticker_4.png in Resources */,
+				AABBCE8719E2CED30044E2D1 /* sticker_2.png in Resources */,
 				AAD6D7D719D59135003390F7 /* images640x1136.plist in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				AAB10A0019B8DF5000919961 /* levelcompleted.caf in Resources */,
@@ -1715,6 +1741,7 @@
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				AAD6D7DD19D5ACB7003390F7 /* images320x640.plist in Resources */,
 				AAB109F519B8DF5000919961 /* divine lemon activate.mp3 in Resources */,
+				AABBCE8D19E3011F0044E2D1 /* BrownBagLunch.ttf in Resources */,
 				AACAB438198AC41F00F8AE01 /* level_1.plist in Resources */,
 				AAB10A1319B8DF5000919961 /* splat6.mp3 in Resources */,
 				AAB10A0F19B8DF5000919961 /* splat2.mp3 in Resources */,
@@ -1725,6 +1752,7 @@
 				AAB10A0219B8DF5000919961 /* meat land 2.mp3 in Resources */,
 				AAB109FF19B8DF5000919961 /* lettuce land.mp3 in Resources */,
 				AAB10A1119B8DF5000919961 /* splat4.mp3 in Resources */,
+				AABBCE8619E2CED30044E2D1 /* sticker_1.png in Resources */,
 				AAB109EF19B8DF5000919961 /* bounce.mp3 in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				AAB10A1019B8DF5000919961 /* splat3.mp3 in Resources */,
@@ -1750,7 +1778,6 @@
 				AAB109F119B8DF5000919961 /* bowlingballdrop.mp3 in Resources */,
 				AAD6D7DE19D5ACB7003390F7 /* images320x640.png in Resources */,
 				AA96A1FB195DB09200C22BC9 /* images.png in Resources */,
-				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				AAB10A1619B8DF5000919961 /* startpuzzle.caf in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				AAB10A0E19B8DF5000919961 /* splat.mp3 in Resources */,
@@ -1758,11 +1785,13 @@
 				AA6ADBA619ACE430008813B2 /* level_3.plist in Resources */,
 				E035A38919C61F7B0009F87E /* dishes.plist in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
+				AABBCE8819E2CED30044E2D1 /* sticker_3.png in Resources */,
 				AAB109ED19B8DF5000919961 /* bgmusic.mp3 in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				AAB109F619B8DF5000919961 /* duckie land.mp3 in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				AAB10A1519B8DF5000919961 /* splat8.mp3 in Resources */,
+				AABBCE8A19E2CED30044E2D1 /* sticker_5.png in Resources */,
 				AAB10A0719B8DF5000919961 /* pen circle.mp3 in Resources */,
 				AAB10A1919B8DF5000919961 /* swish4.mp3 in Resources */,
 				AAB10A1819B8DF5000919961 /* swish2.mp3 in Resources */,
@@ -1793,7 +1822,6 @@
 				5087E75317EB910900C73F5D /* CloseNormal.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				5087E75417EB910900C73F5D /* CloseSelected.png in Resources */,
-				5087E75517EB910900C73F5D /* HelloWorld.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1837,6 +1865,7 @@
 				AA96A22C195DB76F00C22BC9 /* Spritable.cpp in Sources */,
 				AAD6D7E319D5B591003390F7 /* PurchaseManager.mm in Sources */,
 				AAD6D7EB19D5B84A003390F7 /* Reachability.m in Sources */,
+				AA92DB5819D8C08500067E77 /* GCScoreTable.cpp in Sources */,
 				AA8968831997DC28005F8946 /* Onion.cpp in Sources */,
 				AA8D6B9B1998BD6C00484E65 /* OptionsMenuPopup.cpp in Sources */,
 				AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */,
@@ -1856,6 +1885,7 @@
 				AA96A220195DB16C00C22BC9 /* MainMenu.cpp in Sources */,
 				E0050DE31967D0FC009E7BA1 /* MovementController.cpp in Sources */,
 				E072E1A1196932F5002E4C04 /* ImageLabelMenuItem.cpp in Sources */,
+				AABBCE7E19E2CD9E0044E2D1 /* Stickers.cpp in Sources */,
 				AA89687A1997D912005F8946 /* Chicken.cpp in Sources */,
 				AA82AE8A19AFA1420078DDB4 /* ScoreMenu.cpp in Sources */,
 				AA8968801997DB13005F8946 /* Egg.cpp in Sources */,
@@ -1978,8 +2008,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mohammad Boleini (QF563SDQ92)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mohammad Boleini (QF563SDQ92)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2016,8 +2046,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mohammad Boleini (QF563SDQ92)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mohammad Boleini (QF563SDQ92)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2073,6 +2103,7 @@
 				);
 				INFOPLIST_FILE = mac/Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_NAME = "Blind Chef Mac";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -2100,6 +2131,7 @@
 				);
 				INFOPLIST_FILE = mac/Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_NAME = "Blind Chef Mac";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
@@ -2168,7 +2200,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "BlindChef iOS" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Blind Chef" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -2177,7 +2209,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		5087E76C17EB910900C73F5D /* Build configuration list for PBXNativeTarget "BlindChef Mac" */ = {
+		5087E76C17EB910900C73F5D /* Build configuration list for PBXNativeTarget "Blind Chef Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5087E76D17EB910900C73F5D /* Debug */,
@@ -2186,7 +2218,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "BlindChef" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Blind Chef" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
