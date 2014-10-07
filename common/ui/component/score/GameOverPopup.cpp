@@ -7,6 +7,8 @@
 #include "GKHWrapperCpp.h"
 #include "FBManager.h"
 
+#include "ResourcesManager.h"
+
 USING_NS_CC;
 
 GameOverPopup::GameOverPopup(){}
@@ -48,6 +50,8 @@ bool GameOverPopup::init() {
     cocos2d::Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+    float bottomOffset = ResourcesManager::getInstance()->getBottomOffset();
+    
     bg = Sprite::createWithSpriteFrameName("bg_game_over.png");
     bg->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     this->addChild(bg, 0);
@@ -96,7 +100,7 @@ bool GameOverPopup::init() {
     this->addLabelsLine(bg, dishes1, dishes2, posX/2, posY - 250);*/
     
     Node* scoreLabel = this->createScoreLabel();
-    scoreLabel->setPosition(Vec2(posX/2, posY - 180 - scoreLabel->getContentSize().height/2));
+    scoreLabel->setPosition(Vec2(posX/2, posY - 180 - scoreLabel->getContentSize().height/2 - bottomOffset/2));
     bg->addChild(scoreLabel);
     
     Label* score2 = Label::createWithTTF(ttf48, CCString::createWithFormat("%i", score)->getCString());
@@ -104,7 +108,7 @@ bool GameOverPopup::init() {
     //label->setLineBreakWithoutSpace(0);
     score2->setAnchorPoint(Vec2(0,0));
     score2->setColor(colorRed);
-    score2->setPosition(Vec2(posX/2, scoreLabel->getPosition().y - scoreLabel->getContentSize().height/2 - 80));
+    score2->setPosition(Vec2(posX/2, scoreLabel->getPosition().y - scoreLabel->getContentSize().height/2 - 80  - bottomOffset/2));
     score2->setTag(1);
     score2->setOpacity(120);
     

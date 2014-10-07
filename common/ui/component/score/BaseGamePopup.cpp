@@ -24,15 +24,17 @@ bool BaseGamePopup::init() {
 
     this->initMenuItems(menuItems);
 
+    float bottomOffset = ResourcesManager::getInstance()->getBottomOffset();
+    
     Menu *mainMenu = Menu::createWithArray(menuItems);
     mainMenu->alignItemsVerticallyWithPadding(10);
     //mainMenu->alignItemsHorizontallyWithPadding(10);
     mainMenu->setPosition(Vec2(visibleSize.width/2 + origin.x, origin.y + 200));
     this->addChild(mainMenu, 1);
     
-    float bottomOffset = ResourcesManager::getInstance()->getBottomOffset();
     
-    this->setPosition(Vec2(this->getPosition().x, this->getPosition().y + bottomOffset/2));
+    
+    this->setPosition(Vec2(this->getPosition().x, this->getPosition().y));
 
     return true;
 }

@@ -702,7 +702,6 @@
 		AAD877D319D872B600530130 /* FBScoreTable.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = FBScoreTable.cpp; sourceTree = "<group>"; };
 		AAD877D419D872B600530130 /* FBScoreTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBScoreTable.h; sourceTree = "<group>"; };
 		AAD877D619D898C700530130 /* no_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_img.png; sourceTree = "<group>"; };
-		AADB3D2219B20DFC008FB3DD /* Overview.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Overview.cpp; sourceTree = "<group>"; };
 		AADB3D2219B20DFC008FB3DD /* Overview.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Overview.cpp; sourceTree = "<group>"; };
 		AADB3D2319B20DFC008FB3DD /* Overview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Overview.h; sourceTree = "<group>"; };
 		AAEF481D199A594D0045F40C /* crystal radio kit.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "crystal radio kit.ttf"; path = "fonts/crystal radio kit.ttf"; sourceTree = "<group>"; };
@@ -2008,6 +2007,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = armv7;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
 				COMPRESS_PNG_FILES = NO;
@@ -2035,10 +2035,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ios/admob";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c7e97683-7eb5-4b3f-bd0d-16abf3c17585";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -2046,6 +2047,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = armv7;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
 				COMPRESS_PNG_FILES = NO;
@@ -2071,10 +2073,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ios/admob";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c7e97683-7eb5-4b3f-bd0d-16abf3c17585";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = armv7;
+				"VALID_ARCHS[sdk=*]" = armv7;
 			};
 			name = Release;
 		};
@@ -2139,6 +2143,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
@@ -2160,16 +2165,20 @@
 					"$(SRCROOT)/../cocos2d/external",
 					"$(SRCROOT)/../cocos2d/external/chipmunk/include/chipmunk",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "838111ee-f688-4e5f-834f-8cc8fdde6f70";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos8.0;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2189,11 +2198,15 @@
 					"$(SRCROOT)/../cocos2d/external",
 					"$(SRCROOT)/../cocos2d/external/chipmunk/include/chipmunk",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "838111ee-f688-4e5f-834f-8cc8fdde6f70";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos8.0;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
+				"VALID_ARCHS[sdk=*]" = armv7;
 			};
 			name = Release;
 		};

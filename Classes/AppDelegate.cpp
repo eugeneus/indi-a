@@ -5,7 +5,7 @@
 
 USING_NS_CC;
 
-extern "C"{
+/*extern "C"{
     size_t fwrite$UNIX2003( const void *a, size_t b, size_t c, FILE *d )
     {
         return fwrite(a, b, c, d);
@@ -14,7 +14,7 @@ extern "C"{
     {
         return strerror(errnum);
     }
-}
+}*/
 
 AppDelegate::AppDelegate() {
 
