@@ -38,7 +38,7 @@ cocos2d::FiniteTimeAction* Potatoe::getFloorBumpAction(float aDuration, cocos2d:
     SpriteFrame* animFrame = nullptr;
     
     
-    for(int i = 2; i < 9; i++)
+    for(int i = 1; i < 2; i++)
     {
         sprintf(frameName, "potatoe_%d.png", i);
         animFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
