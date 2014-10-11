@@ -59,6 +59,8 @@
 		AA2C671C19B65C6D00AF97D0 /* SlidingItemRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA2C671A19B65C6D00AF97D0 /* SlidingItemRenderer.cpp */; };
 		AA3424811960C74F0067B032 /* ScoreLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA34247F1960C74F0067B032 /* ScoreLayer.cpp */; };
 		AA3424831960CB230067B032 /* RioGrande.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA3424821960CB230067B032 /* RioGrande.ttf */; };
+		AA3B9B2919E99B1C00FFB9C9 /* MyBizeierMoveTo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA3B9B2719E99B1C00FFB9C9 /* MyBizeierMoveTo.cpp */; };
+		AA3B9B2E19E9B41300FFB9C9 /* MyJumpTo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA3B9B2C19E9B41300FFB9C9 /* MyJumpTo.cpp */; };
 		AA4A9D031960227600BB3634 /* Cyclable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA4A9D011960227600BB3634 /* Cyclable.cpp */; };
 		AA4A9D0619605CF400BB3634 /* Conveyor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA4A9D0419605CF400BB3634 /* Conveyor.cpp */; };
 		AA5CA85719C6D319006E62C6 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5CA85619C6D319006E62C6 /* GameKit.framework */; };
@@ -447,6 +449,10 @@
 		AA34247F1960C74F0067B032 /* ScoreLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScoreLayer.cpp; sourceTree = "<group>"; };
 		AA3424801960C74F0067B032 /* ScoreLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreLayer.h; sourceTree = "<group>"; };
 		AA3424821960CB230067B032 /* RioGrande.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = RioGrande.ttf; path = fonts/RioGrande.ttf; sourceTree = "<group>"; };
+		AA3B9B2719E99B1C00FFB9C9 /* MyBizeierMoveTo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyBizeierMoveTo.cpp; sourceTree = "<group>"; };
+		AA3B9B2819E99B1C00FFB9C9 /* MyBizeierMoveTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBizeierMoveTo.h; sourceTree = "<group>"; };
+		AA3B9B2C19E9B41300FFB9C9 /* MyJumpTo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyJumpTo.cpp; sourceTree = "<group>"; };
+		AA3B9B2D19E9B41300FFB9C9 /* MyJumpTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyJumpTo.h; sourceTree = "<group>"; };
 		AA4A9D011960227600BB3634 /* Cyclable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cyclable.cpp; sourceTree = "<group>"; };
 		AA4A9D021960227600BB3634 /* Cyclable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cyclable.h; sourceTree = "<group>"; };
 		AA4A9D0419605CF400BB3634 /* Conveyor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Conveyor.cpp; sourceTree = "<group>"; };
@@ -1125,6 +1131,10 @@
 				AA8710001963250E0028A4EA /* Item.h */,
 				AA8710081963287D0028A4EA /* ItemFactory.cpp */,
 				AA8710091963287D0028A4EA /* ItemFactory.h */,
+				AA3B9B2719E99B1C00FFB9C9 /* MyBizeierMoveTo.cpp */,
+				AA3B9B2819E99B1C00FFB9C9 /* MyBizeierMoveTo.h */,
+				AA3B9B2C19E9B41300FFB9C9 /* MyJumpTo.cpp */,
+				AA3B9B2D19E9B41300FFB9C9 /* MyJumpTo.h */,
 			);
 			path = items;
 			sourceTree = "<group>";
@@ -1869,6 +1879,7 @@
 				AA8D6B9B1998BD6C00484E65 /* OptionsMenuPopup.cpp in Sources */,
 				AA870FFC196324A50028A4EA /* FoodFactory.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				AA3B9B2919E99B1C00FFB9C9 /* MyBizeierMoveTo.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				AAF06220199279EE008563CA /* Multiplier.cpp in Sources */,
 				AA89687D1997D9A0005F8946 /* Pepps.cpp in Sources */,
@@ -1884,6 +1895,7 @@
 				AA96A220195DB16C00C22BC9 /* MainMenu.cpp in Sources */,
 				E0050DE31967D0FC009E7BA1 /* MovementController.cpp in Sources */,
 				E072E1A1196932F5002E4C04 /* ImageLabelMenuItem.cpp in Sources */,
+				AA3B9B2E19E9B41300FFB9C9 /* MyJumpTo.cpp in Sources */,
 				AABBCE7E19E2CD9E0044E2D1 /* Stickers.cpp in Sources */,
 				AA89687A1997D912005F8946 /* Chicken.cpp in Sources */,
 				AA82AE8A19AFA1420078DDB4 /* ScoreMenu.cpp in Sources */,
@@ -2008,8 +2020,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = armv7;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2035,7 +2047,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ios/admob";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "c7e97683-7eb5-4b3f-bd0d-16abf3c17585";
+				PROVISIONING_PROFILE = "0c7efdd7-85e6-4ad4-ac5d-b384f95dd35a";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2048,8 +2060,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = armv7;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2073,7 +2085,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ios/admob";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "c7e97683-7eb5-4b3f-bd0d-16abf3c17585";
+				PROVISIONING_PROFILE = "0c7efdd7-85e6-4ad4-ac5d-b384f95dd35a";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";

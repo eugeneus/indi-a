@@ -1,6 +1,7 @@
 
 #include "Item.h"
 #include "SoundsConstants.h"
+#include "MyJumpTo.h"
 
 USING_NS_CC;
 
@@ -91,7 +92,13 @@ cocos2d::FiniteTimeAction* Item::getTossAction(float aDuration, cocos2d::Point a
    this->_currentTargetType = aCollisionType;
    
    ccBezierConfig bouncePathConfig = this->bezierConfigBouncePathToEndPoint(anEndPoint, anImpulse);
-   BezierTo* bezierBounceAction = BezierTo::create(aDuration, bouncePathConfig);
+   
+    Size visibleSize = Size(Director::getInstance()->getVisibleSize());
+    float height = ((visibleSize.height) * anImpulse.y) + 100 - this->getPosition().y;
+
+    
+    MyJumpTo *bezierBounceAction = MyJumpTo::create(aDuration, anEndPoint, height, 1);
+    //MyBizeierMoveTo* bezierBounceAction = MyBizeierMoveTo::create(aDuration, bouncePathConfig);
    
    RotateTo* r1 = RotateTo::create(aDuration/9.0f, 120.0f);
    RotateTo* r2 = RotateTo::create(aDuration/9.0f, 240.0f);

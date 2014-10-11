@@ -395,6 +395,24 @@ void GameController::setItemIdle(float dt, Item* anItem)
    anItem->setZOrder(kItemZO1);
 }
 
+void GameController::runSwipeActionWithScale(Item* anItem, ControlPointDef* aPointDef, float aDuration, Point anImpulse)
+{
+    FiniteTimeAction* itemAction = anItem->getTossAction(aDuration,
+                                                         aPointDef->_controlPoint,
+                                                         aPointDef->_controlPointType,
+                                                         anImpulse);
+    float scaleFactor = this->getScaleFactor(aPointDef->_controlPoint,aPointDef->_controlPointType);
+    
+    ScaleTo* scaleAction = ScaleTo::create(aDuration, scaleFactor);
+    Spawn* combinedAction = Spawn::create(itemAction, scaleAction, NULL);
+    anItem->setLocalZOrder(kItemZO2);
+    
+    //Speed* speedUpCombinedAction = Speed::create(combinedAction, anItem->getSpeedFactor());
+    Speed *speedAction = Speed::create(combinedAction, 1.0);
+    speedAction->setTag(777);
+    anItem->runAction(speedAction);
+}
+
 void GameController::runTossActionWithScale(Item* anItem, ControlPointDef* aPointDef, float aDuration, Point anImpulse)
 {
    FiniteTimeAction* itemAction = anItem->getTossAction(aDuration,
@@ -408,8 +426,9 @@ void GameController::runTossActionWithScale(Item* anItem, ControlPointDef* aPoin
    anItem->setLocalZOrder(kItemZO2);
    
     //Speed* speedUpCombinedAction = Speed::create(combinedAction, anItem->getSpeedFactor());
-    
-   anItem->runAction(combinedAction);
+    Speed *speedAction = Speed::create(combinedAction, 1.0);
+    speedAction->setTag(666);
+    anItem->runAction(speedAction);
 }
 
 void GameController::tossItem(Item* anItem, Vec2 anImpulse)
@@ -692,7 +711,7 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
         anItem->stopAllActions();
         ControlPointDef* aPointDef = ControlPointDef::create(anItem->_currentTargetPoint,
                                                              anItem->_currentTargetType);
-        this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.9));
+        this->runSwipeActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.9));
     }
     // do not process any other swipes in case item under pot's top margin
     if (itemPos.y <= potRect.origin.y +potRect.size.height) {
@@ -707,7 +726,7 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
     //_cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // left floor
 
             ControlPointDef* aPointDef = ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor);
-            this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
+            this->runSwipeActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
 
         }
         else{
@@ -717,7 +736,7 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
         //_cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
         // _cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
 
-            this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
+            this->runSwipeActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
         }
     }
     else{ // in case swipe direction some kind top->down
@@ -744,7 +763,7 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
                 //_cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // left floor
                 
                 ControlPointDef* aPointDef = ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor);
-                this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
+                this->runSwipeActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
                 
             }
             else{
@@ -754,14 +773,14 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
                 //_cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
                 // _cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
                 
-                this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
+                this->runSwipeActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
             }
         }
         else{
             CCLOG("INTO");
             anItem->stopAllActions();
             ControlPointDef* aPointDef = ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter); // center
-            this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.2));
+            this->runSwipeActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.2));
         }
     
     }

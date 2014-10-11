@@ -65,6 +65,7 @@ protected:
     void setItemIdle(float dt, Item* anItem);
 
     void runTossActionWithScale(Item* anItem, ControlPointDef* aPointDef, float aDuration, cocos2d::Point anImpulse);
+    void runSwipeActionWithScale(Item* anItem, ControlPointDef* aPointDef, float aDuration, cocos2d::Point anImpulse);
 
     void tossItem(Item* anItem, Vec2 anImpulse);
    
