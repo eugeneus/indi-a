@@ -268,8 +268,11 @@ void GameController::setupNewRound()
         
     }
     
+    //_mainCource = _dishFactory->getRandomDish();
+    
     if (_dishesQueue.size() == 0) {
-        _mainCource = _dishFactory->getRandomDish();
+        Dish* dish = _dishFactory->getRandomDish();
+        _mainCource = Dish::create(dish->getImageName(), dish->getIngridientIDs());
         
         _dishesQueue.push_back(_mainCource);
         
@@ -278,11 +281,13 @@ void GameController::setupNewRound()
             _dishesQueue.push_back(dish);
         }
     } else {
+        Dish* dish = _dishesQueue.front();
+        _mainCource = Dish::create(dish->getImageName(), dish->getIngridientIDs());
+
         _dishesQueue.pop_back();
-        _mainCource = _dishesQueue.front();
-        
         Dish *lastDish = _dishFactory->getRandomDish();
         _dishesQueue.push_back(lastDish);
+        
     }
     
     _stickers->setupQueue(_dishesQueue);
@@ -680,6 +685,7 @@ ControlPointDef* GameController::findControlPointDefByAngle(Item* anItem, float 
     }
 }
 
+// obsolete
 void GameController::changeItemPath(Item *anItem, float angle, cocos2d::Vec2 anImpulse)
 {
     
@@ -698,13 +704,13 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
     float sx = aStartSwipePoint.x;
     float sy = aStartSwipePoint.y;
     
-    if (itemPos.x <= sx && itemPos.x + itemSize.width >= sx &&
-        itemPos.y <= sy && itemPos.y + itemSize.height >= sx) {
+    if(itemPos.y < sy &&
+       (itemPos.x <= sx && itemPos.x + itemSize.width >= sx)){
         anItem->stopAllActions();
         ControlPointDef* aPointDef = ControlPointDef::create(anItem->_currentTargetPoint,
                                                              anItem->_currentTargetType);
-        this->runTossActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.4));
-        
+        this->runTossActionWithScale(anItem, aPointDef, 0.3f, Vec2(0.1, 0.0));
+        return;
     }
     else if(itemPos.y > sy &&
             (itemPos.x <= sx && itemPos.x + itemSize.width >= sx)){
@@ -722,8 +728,6 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
         if (itemPos.x < sx) {
             CCLOG("LEFT AWAY");
             anItem->stopAllActions();
-    //_cntPoints->pushBack(ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor)); // left floor
-    //_cntPoints->pushBack(ControlPointDef::create(Point(60.0f,250.0f),kControlPointTypeFloor)); // left floor
 
             ControlPointDef* aPointDef = ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor);
             this->runSwipeActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
@@ -733,8 +737,6 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
             CCLOG("RIGHT AWAY");
             anItem->stopAllActions();
             ControlPointDef* aPointDef = ControlPointDef::ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor);
-        //_cntPoints->pushBack(ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor)); // floor
-        // _cntPoints->pushBack(ControlPointDef::create(Point(520.0f,250.0f),kControlPointTypeFloor)); // floor
 
             this->runSwipeActionWithScale(anItem, aPointDef, 1.5f, Vec2(0.1, 0.5));
         }

@@ -21,8 +21,13 @@ public:
     
 protected:
     
-    cocos2d::ValueMap _dishesMap;
+    void getNextLevel(int aLevel);
+    Dish* createDish(cocos2d::ValueMap aData);
     
+    cocos2d::ValueMap _levelMap;
+    
+    cocos2d::ValueMap _dishesMap;
+    int _nextLevel;
     
 private:
 

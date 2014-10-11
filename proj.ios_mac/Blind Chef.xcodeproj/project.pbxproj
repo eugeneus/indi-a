@@ -2019,6 +2019,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+<<<<<<< HEAD
+				CODE_SIGN_IDENTITY = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
+=======
 				ARCHS = armv7;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
@@ -2059,6 +2063,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+<<<<<<< HEAD
+=======
 				ARCHS = armv7;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mikhail Smarshchok (7M2L4N327U)";
@@ -2180,10 +2186,15 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
+				PROVISIONING_PROFILE = "a97183cf-9757-4b6f-b31b-ab5cf546fb68";
+				SDKROOT = macosx;
+=======
 				PROVISIONING_PROFILE = "838111ee-f688-4e5f-834f-8cc8fdde6f70";
 				SDKROOT = iphoneos8.0;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALID_ARCHS = armv7;
+>>>>>>> c9751ce28f84a4f9924825580996c4bfe51cecce
 			};
 			name = Debug;
 		};
@@ -2213,9 +2224,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
+				PROVISIONING_PROFILE = "a97183cf-9757-4b6f-b31b-ab5cf546fb68";
+				SDKROOT = macosx;
+=======
 				PROVISIONING_PROFILE = "838111ee-f688-4e5f-834f-8cc8fdde6f70";
 				SDKROOT = iphoneos8.0;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+>>>>>>> c9751ce28f84a4f9924825580996c4bfe51cecce
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = armv7;
 				"VALID_ARCHS[sdk=*]" = armv7;
