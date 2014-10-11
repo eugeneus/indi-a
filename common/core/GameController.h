@@ -24,6 +24,7 @@ class PerformanceMetrics;
 class Stickers;
 class ControlPointDef;
 
+
 class GameController : public cocos2d::Ref {
 
 public:

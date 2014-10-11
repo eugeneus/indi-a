@@ -2007,8 +2007,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+<<<<<<< HEAD
 				CODE_SIGN_IDENTITY = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Valery Bartashevich (X9MQAT7BDM)";
+=======
+				ARCHS = armv7;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
+>>>>>>> c9751ce28f84a4f9924825580996c4bfe51cecce
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2034,10 +2040,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ios/admob";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c7e97683-7eb5-4b3f-bd0d-16abf3c17585";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -2045,6 +2052,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+<<<<<<< HEAD
+=======
+				ARCHS = armv7;
+>>>>>>> c9751ce28f84a4f9924825580996c4bfe51cecce
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
 				COMPRESS_PNG_FILES = NO;
@@ -2070,10 +2081,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ios/admob";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c7e97683-7eb5-4b3f-bd0d-16abf3c17585";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = armv7;
+				"VALID_ARCHS[sdk=*]" = armv7;
 			};
 			name = Release;
 		};
@@ -2138,6 +2151,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
@@ -2159,16 +2173,25 @@
 					"$(SRCROOT)/../cocos2d/external",
 					"$(SRCROOT)/../cocos2d/external/chipmunk/include/chipmunk",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "a97183cf-9757-4b6f-b31b-ab5cf546fb68";
 				SDKROOT = macosx;
+=======
+				PROVISIONING_PROFILE = "838111ee-f688-4e5f-834f-8cc8fdde6f70";
+				SDKROOT = iphoneos8.0;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = armv7;
+>>>>>>> c9751ce28f84a4f9924825580996c4bfe51cecce
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2188,11 +2211,20 @@
 					"$(SRCROOT)/../cocos2d/external",
 					"$(SRCROOT)/../cocos2d/external/chipmunk/include/chipmunk",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "a97183cf-9757-4b6f-b31b-ab5cf546fb68";
 				SDKROOT = macosx;
+=======
+				PROVISIONING_PROFILE = "838111ee-f688-4e5f-834f-8cc8fdde6f70";
+				SDKROOT = iphoneos8.0;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+>>>>>>> c9751ce28f84a4f9924825580996c4bfe51cecce
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
+				"VALID_ARCHS[sdk=*]" = armv7;
 			};
 			name = Release;
 		};

@@ -83,12 +83,12 @@ void ScoreMenuPopup::initMenuItems(cocos2d::Vector<cocos2d::MenuItem *> &menuIte
  */
     fbTable = new FBScoreTable();
     fbTable->init(cocos2d::Size(bg->getContentSize().width - 150, bg->getContentSize().height - 300), isFriendsTab);
-    fbTable->setPosition(Vec2(100 + visibleSize.width/2 + origin.x - fbTable->getContentSize().width/2, visibleSize.height/2 + origin.y - 250));
+    fbTable->setPosition(Vec2(100 + visibleSize.width/2 + origin.x - fbTable->getContentSize().width/2, visibleSize.height/2 + origin.y + 0));
     this->addChild(fbTable, 1002);
     
     gcTable = new GCScoreTable();
     gcTable->init(cocos2d::Size(bg->getContentSize().width - 150, bg->getContentSize().height - 300), !isFriendsTab);
-    gcTable->setPosition(Vec2(100 + visibleSize.width/2 + origin.x - gcTable->getContentSize().width/2, visibleSize.height/2 + origin.y - 250));
+    gcTable->setPosition(Vec2(100 + visibleSize.width/2 + origin.x - gcTable->getContentSize().width/2, visibleSize.height/2 + origin.y + 0));
     this->addChild(gcTable, 1002);
 
     if (!isFriendsTab) {
