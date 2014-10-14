@@ -6,7 +6,7 @@ Dish::Dish(){}
 
 Dish::~Dish() {}
 
-Dish* Dish::create(std::string anImageFileName, std::vector<int> anIngridientIDsList)
+Dish* Dish::create(const std::string& anImageFileName, const std::vector<int>& anIngridientIDsList)
 {
     Dish *pRet = new Dish();
     if (pRet && pRet->init(anImageFileName, anIngridientIDsList))
@@ -23,7 +23,7 @@ Dish* Dish::create(std::string anImageFileName, std::vector<int> anIngridientIDs
 
 }
 
-bool Dish::init(std::string anImageFileName, std::vector<int> anIngridientIDsList)
+bool Dish::init(const std::string& anImageFileName, const std::vector<int>& anIngridientIDsList)
 {
 
     _imageFileName = anImageFileName;

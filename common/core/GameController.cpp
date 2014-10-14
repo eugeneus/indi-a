@@ -262,18 +262,16 @@ void GameController::setupNewRound()
         _dishFactory = DishFactory::create("dishes.plist");
     }
     
-    if (_mainCource) {
+   /* if (_mainCource) {
         delete _mainCource;
         _mainCource = nullptr;
         
-    }
+    }*/
     
     //_mainCource = _dishFactory->getRandomDish();
     
     if (_dishesQueue.size() == 0) {
-        Dish* dish = _dishFactory->getRandomDish();
-        _mainCource = Dish::create(dish->getImageName(), dish->getIngridientIDs());
-        
+        _mainCource = _dishFactory->getRandomDish();
         _dishesQueue.push_back(_mainCource);
         
         for (int i = 0; i < 3; i ++) {
@@ -281,12 +279,18 @@ void GameController::setupNewRound()
             _dishesQueue.push_back(dish);
         }
     } else {
-        Dish* dish = _dishesQueue.front();
-        _mainCource = Dish::create(dish->getImageName(), dish->getIngridientIDs());
-
-        _dishesQueue.pop_back();
+        _dishesQueue.pop_front();
         Dish *lastDish = _dishFactory->getRandomDish();
+        if (lastDish)
         _dishesQueue.push_back(lastDish);
+        
+        _mainCource = _dishesQueue.front();
+        /*const std::string& imgName = dish->getImageName();
+        const std::vector<int>& ingrIds = dish->getIngridientIDs();
+        _mainCource = Dish::create(imgName, ingrIds);
+
+        _dishesQueue.pop_front();*/
+        
         
     }
     
@@ -327,6 +331,9 @@ void GameController::setupNewRound()
 void GameController::restartGame() {
     _isControllerWaitingStop = false;
     this->setupNewRound();
+    _currGameTime = 0;
+    _isTimerBeforeEnd = false;
+    _isTimerEnd = false;
     _gameLayer->resume();
     _cloudTips->toggleTip();
     _conv->resumeConv();
@@ -402,7 +409,7 @@ void GameController::setItemIdle(float dt, Item* anItem)
 
 void GameController::runSwipeActionWithScale(Item* anItem, ControlPointDef* aPointDef, float aDuration, Point anImpulse)
 {
-    FiniteTimeAction* itemAction = anItem->getTossAction(aDuration,
+    FiniteTimeAction* itemAction = anItem->getSwipeAction(aDuration,
                                                          aPointDef->_controlPoint,
                                                          aPointDef->_controlPointType,
                                                          anImpulse);
@@ -525,7 +532,7 @@ void GameController::useActiveBonus()
     int activeBonus = _bonusMenu->getActiveBonus();
     switch (activeBonus) {
         case kBonusType1: // set chef blind
-            _theChef->setVision(_levelInfo->getRequiredItems());
+            _theChef->setVision(_mainCource->getIngridientIDs()); //_levelInfo->getRequiredItems());
             _bonusTimer = 20.0f;
             break;
         case kBonusType2:
@@ -705,27 +712,60 @@ void GameController::swipeItem(Item* anItem, Vec2 aStartSwipePoint)
     float sy = aStartSwipePoint.y;
     
     if(itemPos.y < sy &&
-       (itemPos.x <= sx && itemPos.x + itemSize.width >= sx)){
+       (itemPos.x <= sx && itemPos.x + itemSize.width >= sx)){ //top down
         anItem->stopAllActions();
-        ControlPointDef* aPointDef = ControlPointDef::create(anItem->_currentTargetPoint,
-                                                             anItem->_currentTargetType);
-        this->runTossActionWithScale(anItem, aPointDef, 0.3f, Vec2(0.1, 0.0));
+        
+        ControlPointDef* aPointDef = nullptr;
+        
+        if (itemPos.x <= 145.0f) { // floor left
+        
+            aPointDef = ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor);
+        }
+        else if (itemPos.x >= 470.0f) { //floor right
+            aPointDef = ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor);
+        } else { //pot
+            aPointDef = ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter);
+        }
+        
+        this->runSwipeActionWithScale(anItem, aPointDef, 0.3f, Vec2(0.1, 0.0));
         return;
     }
     else if(itemPos.y > sy &&
-            (itemPos.x <= sx && itemPos.x + itemSize.width >= sx)){
+            (itemPos.x <= sx && itemPos.x + itemSize.width >= sx)){ //down top
         anItem->stopAllActions();
-        ControlPointDef* aPointDef = ControlPointDef::create(anItem->_currentTargetPoint,
-                                                             anItem->_currentTargetType);
+        
+        ControlPointDef* aPointDef = nullptr;
+        
+        if (itemPos.x <= 145.0f) { // floor left
+            
+            aPointDef = ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor);
+        }
+        else if (itemPos.x >= 470.0f) { //floor right
+            aPointDef = ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor);
+        } else { //pot
+            aPointDef = ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter);
+        }
+        
         this->runSwipeActionWithScale(anItem, aPointDef, 1.1f, Vec2(0.1, 0.9));
+        return;
     }
     else if (itemPos.x <= sx && itemPos.x + itemSize.width >= sx &&
-        itemPos.y <= sy && itemPos.y + itemSize.height >= sx) {
+        itemPos.y <= sy && itemPos.y + itemSize.height >= sx) { //tap
         anItem->stopAllActions();
-        ControlPointDef* aPointDef = ControlPointDef::create(anItem->_currentTargetPoint,
-                                                             anItem->_currentTargetType);
-        this->runTossActionWithScale(anItem, aPointDef, 0.9f, Vec2(0.1, 0.1));
         
+        ControlPointDef* aPointDef = nullptr;
+        
+        if (itemPos.x <= 145.0f) { // floor left
+            
+            aPointDef = ControlPointDef::create(Point(80.0f,250.0f),kControlPointTypeFloor);
+        }
+        else if (itemPos.x >= 470.0f) { //floor right
+            aPointDef = ControlPointDef::create(Point(540.0f,200.0f),kControlPointTypeFloor);
+        } else { //pot
+            aPointDef = ControlPointDef::create(Point(300.0f,0.0f),kControlPointTypePotCenter);
+        }
+        
+        this->runSwipeActionWithScale(anItem, aPointDef, 0.9f, Vec2(0.1, 0.1));
         return;
         
     }

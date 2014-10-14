@@ -99,20 +99,50 @@ bool GameOverPopup::init() {
     dishes2->setOpacity(120);
     this->addLabelsLine(bg, dishes1, dishes2, posX/2, posY - 250);*/
     
-    Node* scoreLabel = this->createScoreLabel();
-    scoreLabel->setPosition(Vec2(posX/2, posY - 180 - scoreLabel->getContentSize().height/2 - bottomOffset/2));
-    bg->addChild(scoreLabel);
     
-    Label* score2 = Label::createWithTTF(ttf48, CCString::createWithFormat("%i", score)->getCString());
+    if (bestScore < score) {
+        Node* scoreLabel = this->createScoreLabel();
+        scoreLabel->setPosition(Vec2(posX/2, posY - 180 - scoreLabel->getContentSize().height/2 - bottomOffset/2));
+        bg->addChild(scoreLabel);
+    
+        Label* score2 = Label::createWithTTF(ttf48, CCString::createWithFormat("%i", score)->getCString());
     //label->setAlignment(TextHAlignment::LEFT);
     //label->setLineBreakWithoutSpace(0);
-    score2->setAnchorPoint(Vec2(0,0));
-    score2->setColor(colorRed);
-    score2->setPosition(Vec2(posX/2, scoreLabel->getPosition().y - scoreLabel->getContentSize().height/2 - 80  - bottomOffset/2));
-    score2->setTag(1);
-    score2->setOpacity(120);
+        score2->setAnchorPoint(Vec2(0,0));
+        score2->setColor(colorRed);
+        score2->setPosition(Vec2(posX/2, scoreLabel->getPosition().y - scoreLabel->getContentSize().height/2 - 80  - bottomOffset/2));
+        score2->setTag(1);
+        score2->setOpacity(120);
+        bg->addChild(score2);
+    } else {
+        Label* score2 = Label::createWithTTF(ttf48, "Your Score");
+        score2->setAnchorPoint(Vec2(0,0));
+        score2->setColor(colorBlack);
+        score2->setPosition(Vec2(posX/2 - score2->getContentSize().width/2, posY - 180 - score2->getContentSize().height - bottomOffset/2));
+        score2->setOpacity(120);
+        bg->addChild(score2);
     
-    bg->addChild(score2);
+        Label* score3 = Label::createWithTTF(ttf48, CCString::createWithFormat("%i", score)->getCString());
+        score3->setAnchorPoint(Vec2(0,0));
+        score3->setColor(colorRed);
+        score3->setPosition(Vec2(posX/2 - score3->getContentSize().width/2, score2->getPosition().y - 100));
+        score3->setOpacity(120);
+        bg->addChild(score3);
+        
+        Label* score21 = Label::createWithTTF(ttf32, "Previous High Score");
+        score21->setAnchorPoint(Vec2(0,0));
+        score21->setColor(colorBlack);
+        score21->setPosition(Vec2(posX/2 - score21->getContentSize().width/2, score3->getPosition().y - 150));
+        score21->setOpacity(120);
+        bg->addChild(score21);
+        
+        Label* score31 = Label::createWithTTF(ttf32, CCString::createWithFormat("%i", bestScore)->getCString());
+        score31->setAnchorPoint(Vec2(0,0));
+        score31->setColor(colorRed);
+        score31->setPosition(Vec2(100, score21->getPosition().y - 50));
+        score31->setOpacity(120);
+        bg->addChild(score31);
+    }
     
     int lives = userData->getUserLives();
     

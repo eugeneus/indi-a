@@ -12,9 +12,9 @@ public:
 
    ~Dish();
 
-   static Dish* create(std::string anImageFileName, std::vector<int> anIngridientIDsList);
+   static Dish* create(const std::string& anImageFileName, const std::vector<int>& anIngridientIDsList);
 
-   bool init(std::string anImageFileName, std::vector<int> anIngridientIDsList);
+   bool init(const std::string& anImageFileName, const std::vector<int>& anIngridientIDsList);
     
     std::string getImageName();
     std::vector<int> getIngridientIDs();

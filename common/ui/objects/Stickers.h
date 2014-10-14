@@ -12,7 +12,7 @@ public:
     
     bool init();
     
-    void setupQueue(std::vector<Dish *> queue);
+    void setupQueue(std::deque<Dish *> queue);
 private:
     typedef cocos2d::Layer super;
     cocos2d::Sprite* _first;

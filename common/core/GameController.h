@@ -124,7 +124,7 @@ protected:
     BonusMenu* _bonusMenu;
     ItemsPool* _itemsPool;
     DishFactory* _dishFactory;
-    std::vector<Dish *> _dishesQueue;
+    std::deque<Dish *> _dishesQueue;
     Dish* _mainCource;
     int _levelCounter;
     

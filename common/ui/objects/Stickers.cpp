@@ -69,9 +69,23 @@ void reInitSticker(Sprite *spr, const std::string& labelText) {
     }
 }
 
-void Stickers::setupQueue(std::vector<Dish *> queue) {
-    reInitSticker(_first, queue.at(0)->getImageName());
-    reInitSticker(_next1, queue.at(1)->getImageName());
-    reInitSticker(_next2, queue.at(2)->getImageName());
-    reInitSticker(_next3, queue.at(3)->getImageName());
+void reInitSticker(Sprite *spr, Dish *dish) {
+    std::string labelText = dish ? dish->getImageName() : "";
+    reInitSticker(spr, labelText);
+}
+
+void reInitStickers(Sprite *spr, std::deque<Dish *> queue, int index) {
+    Dish *dish = nullptr;
+    if (queue.size() > index) {
+        dish = queue.at(index);
+    }
+    
+    reInitSticker(spr, dish);
+}
+
+void Stickers::setupQueue(std::deque<Dish *> queue) {
+    reInitStickers(_first, queue, 0);
+    reInitStickers(_next1, queue, 1);
+    reInitStickers(_next2, queue, 2);
+    reInitStickers(_next3, queue, 3);
 }

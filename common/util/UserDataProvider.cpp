@@ -105,10 +105,12 @@ void UserDataProvider::updateIntegerValue(const char* key, int value) {
 }
 
 int UserDataProvider::getUserLives() {
-    return this->getIntegerValue("user_lives");
+    int pCount = this->getIntegerValue("user_lives");
+    return pCount > 0 ? pCount : 0;
 }
 
 void UserDataProvider::updateUserLives(int pLives) {
+    if (pLives <0) pLives = 0;
     this->updateIntegerValue("user_lives", pLives);
 }
 
@@ -137,26 +139,32 @@ void UserDataProvider::setNotificationOn(bool isNotificationOn) {
 }
 
 int UserDataProvider::getBonus1Count() {
-    return this->getIntegerValue("bonus1_count");
+    int pCount = this->getIntegerValue("bonus1_count");
+    return pCount > 0 ? pCount : 0;
 }
 
 void UserDataProvider::updateBonus1Count(int pCount) {
+    if (pCount < 0) pCount = 0;
     this->updateIntegerValue("bonus1_count", pCount);
 }
 
 int UserDataProvider::getBonus2Count() {
-    return this->getIntegerValue("bonus2_count");
+    int pCount = this->getIntegerValue("bonus2_count");
+    return pCount > 0 ? pCount : 0;
 }
 
 void UserDataProvider::updateBonus2Count(int pCount) {
+    if (pCount < 0) pCount = 0;
     this->updateIntegerValue("bonus2_count", pCount);
 }
 
 int UserDataProvider::getBonus3Count() {
-    return this->getIntegerValue("bonus3_count");
+    int pCount = this->getIntegerValue("bonus3_count");
+    return pCount > 0 ? pCount : 0;
 }
 
 void UserDataProvider::updateBonus3Count(int pCount) {
+    if (pCount < 0) pCount = 0;
     this->updateIntegerValue("bonus3_count", pCount);
 }
 
@@ -165,5 +173,6 @@ int UserDataProvider::getDishesCount() {
 }
 
 void UserDataProvider::updateDishesCount(int pCount) {
+    if (pCount < 0) pCount = 0;
     this->updateIntegerValue("dishes_count", pCount);
 }

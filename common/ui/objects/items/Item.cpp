@@ -82,6 +82,34 @@ cocos2d::FiniteTimeAction* Item::getConveyourAction(float aDuration, cocos2d::Po
    
 }
 
+cocos2d::FiniteTimeAction* Item::getSwipeAction(float aDuration, cocos2d::Point anEndPoint,
+                                               int aCollisionType, cocos2d::Point anImpulse)
+{
+    this->stopActionByTag(1001);
+    
+    this->_currentTargetPoint = anEndPoint;
+    this->_currentTargetType = aCollisionType;
+    
+    ccBezierConfig bouncePathConfig = this->bezierConfigBouncePathToEndPoint(anEndPoint, anImpulse);
+    
+    BezierTo* bezierBounceAction = BezierTo::create(aDuration, bouncePathConfig);
+    
+    RotateTo* r1 = RotateTo::create(aDuration/9.0f, 120.0f);
+    RotateTo* r2 = RotateTo::create(aDuration/9.0f, 240.0f);
+    RotateTo* r3 = RotateTo::create(aDuration/9.0f, 360.0f);
+    
+    Sequence* rt = Sequence::create(r1, r2, r3, NULL);
+    Repeat* repeated = Repeat::create(rt, 3);
+    
+    FiniteTimeAction* fullAction = NULL;
+    fullAction =  Sequence::create(bezierBounceAction,
+                                   NULL);
+    
+    FiniteTimeAction* combinedAction = Spawn::create(fullAction, repeated, NULL);
+    
+    return combinedAction;
+    
+}
 
 cocos2d::FiniteTimeAction* Item::getTossAction(float aDuration, cocos2d::Point anEndPoint,
                                                int aCollisionType, cocos2d::Point anImpulse)

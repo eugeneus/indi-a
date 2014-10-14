@@ -37,7 +37,9 @@ public:
    
    virtual cocos2d::FiniteTimeAction* getTossAction(float aDuration, cocos2d::Point anEndPoint,
                                                     int aCollisionType, cocos2d::Point anImpulse);
-   
+   virtual cocos2d::FiniteTimeAction* getSwipeAction(float aDuration, cocos2d::Point anEndPoint,
+                                                     int aCollisionType, cocos2d::Point anImpulse);
+    
    virtual cocos2d::FiniteTimeAction* getPotEdgeBumpAction(float aDuration, cocos2d::Point anImpulse);
    
    virtual cocos2d::FiniteTimeAction* getFloorBumpAction(float aDuration, cocos2d::Point anImpulse);

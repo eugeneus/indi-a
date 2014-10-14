@@ -55,6 +55,8 @@ Dish* DishFactory::createDish(cocos2d::ValueMap aData)
     
     return newDish;
 
+}
+
 
 Dish* DishFactory::getRandomDish()
 {
@@ -75,4 +77,4 @@ Dish* DishFactory::getRandomDish()
    Dish* nextDish = this->createDish(rnd->second.asValueMap());
    _levelMap.erase(rnd);
     return nextDish;
-}}
+}
