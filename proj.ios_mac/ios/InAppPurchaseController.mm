@@ -88,6 +88,7 @@
         NSString *strId = product.productIdentifier;
         if ([strId isEqualToString:purchaseId]) {
             [delegate purchaseController:self didLoadInfo:product];
+            [self makePurchase:product];
             return;
         }
     }

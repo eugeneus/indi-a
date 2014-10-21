@@ -194,8 +194,8 @@ void GameOverPopup::menuStoreMenu(Ref* pSender) {
 }
 
 void GameOverPopup::menuSocMenu(Ref* pSender) {
-    int score = UserDataProvider::getInstance()->getUserScore();
-    [FBManager postBestResult: score];
+    //int score = UserDataProvider::getInstance()->getUserScore();
+    //[FBManager postBestResult: score];
 }
 
 void GameOverPopup::menuMainMenu(Ref* pSender) {

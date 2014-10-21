@@ -26,6 +26,8 @@ USING_NS_CC;
 
 - (void)purchaseController:(InAppPurchaseController *)pController didLoadInfo:(SKProduct *)pProduct {
     mController = pController;
+
+    //[self endPurchase];
 }
 
 - (void)purchaseController:(InAppPurchaseController *)pController didFailLoadProductInfo:(NSError *)pError {

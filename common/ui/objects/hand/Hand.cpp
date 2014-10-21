@@ -163,6 +163,7 @@ bool Hand::isHandBusy()
 
     if (isHandBusy && this->getNumberOfRunningActions() == 0) {
         this->setPosition(_handRect.origin);
+        return false;
     }
 //(this->getNumberOfRunningActions() > 0));
    return isHandBusy;

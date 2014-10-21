@@ -2020,8 +2020,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = armv7;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: My Googol Holdings, Inc (LN7LM3BJW2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: My Googol Holdings, Inc (LN7LM3BJW2)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2047,7 +2047,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ios/admob";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "c7e97683-7eb5-4b3f-bd0d-16abf3c17585";
+				PROVISIONING_PROFILE = "058fa871-c73a-49c5-9489-b7c85e01fe05";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2060,8 +2060,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = armv7;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mohammad Boleini (W59G2JR7VM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: My Googol Holdings, Inc (LN7LM3BJW2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: My Googol Holdings, Inc (LN7LM3BJW2)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2085,7 +2085,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ios/admob";
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "c7e97683-7eb5-4b3f-bd0d-16abf3c17585";
+				PROVISIONING_PROFILE = "058fa871-c73a-49c5-9489-b7c85e01fe05";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
